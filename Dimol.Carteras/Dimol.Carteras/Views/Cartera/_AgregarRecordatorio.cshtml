@@ -1,0 +1,58 @@
+﻿@model Dimol.Carteras.Models.AgregarRecordatorioModel
+<style>
+    div.ui-jqgrid-titlebar {
+    height: 16px;
+}
+</style>
+@using Mvc.HtmlHelpers
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmGuardarRecordatorio" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.TipoForm)
+    <fieldset>
+        <legend>BuscarDeudor</legend>
+        <div class="tabla" id="divTablaSitrel">
+            <div id="divRecordatorioTelefono" style="display:none">
+                <div class="fila">
+                    <div class="col" style="width:160px">@Html.LabelFor(model => model.TelefonoRecordatorio)</div>
+                    <div class="col">
+                        @Html.TextBoxFor(model => model.TelefonoRecordatorio, new { @onkeypress = "OnlyNumber(event)" })
+                        @Html.ValidationMessageFor(model => model.TelefonoRecordatorio)
+                    </div>
+                    <div class="col" style="width:60px"></div>
+                    <div class="col" style="width:100px"></div>
+                    <div class="col">
+
+                    </div>
+                    <div class="col" style="float:right"><input type="button" value="Grabar" onclick="fnGuardarRecordatorio();" /></div>
+                </div>
+            </div>
+            <div id="divRecordatorioEmail" style="display:none">
+                <div class="fila">
+                    <div class="col" style="width:160px">@Html.LabelFor(model => model.EmailRecordatorio)</div>
+                    <div class="col">
+                        @Html.TextBoxFor(model => model.EmailRecordatorio, new { @class = "textboxClass" })
+                        @Html.ValidationMessageFor(model => model.EmailRecordatorio)
+                    </div>
+                    <div class="col" style="width:60px"></div>
+                    <div class="col" style="width:100px"></div>
+                    <div class="col">
+
+                    </div>
+                    <div class="col" style="float:right"><input type="button" value="Grabar" onclick="fnGuardarRecordatorio();" /></div>
+                </div>
+            </div>
+
+
+                <div class="fila">
+                    <div class="col" style="width:160px">@Html.LabelFor(model => model.FechaEnvioRecordatorio)</div>
+                    <div class="col">
+                        @Html.JQueryUI().Datepicker("FechaEnvioRecordatorio").ShowButtonPanel(true).ShowWeek(false)
+                        @Html.ValidationMessageFor(model => model.FechaEnvioRecordatorio)
+                    </div>
+                    
+                </div>
+            </div>
+
+    </fieldset>
+}

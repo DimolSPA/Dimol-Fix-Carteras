@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[LOG_ERROR_HIST_1] (
+    [ERROR_ID]          NUMERIC (18)   NOT NULL,
+    [FECHA]             DATETIME       NOT NULL,
+    [EXCEPTION_MESSAGE] TEXT           NOT NULL,
+    [STACKTRACE]        TEXT           NOT NULL,
+    [PAGINA]            VARCHAR (1000) NOT NULL,
+    [USER_ID]           INT            NOT NULL,
+    CONSTRAINT [PK_LOG_ERROR_HIST_1] PRIMARY KEY CLUSTERED ([ERROR_ID] ASC)
+);
+

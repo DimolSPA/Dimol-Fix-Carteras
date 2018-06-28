@@ -1,0 +1,19 @@
+﻿CREATE TABLE [dbo].[tmp_CABACERA_COMPROBANTES_MOTIVOS_CASTIGO] (
+    [CBM_CODEMP] INT          NOT NULL,
+    [CBM_SUCID]  INT          NOT NULL,
+    [CBM_TPCID]  INT          NOT NULL,
+    [CBM_NUMERO] NUMERIC (15) NOT NULL,
+    [CBM_TMCID]  INT          NOT NULL,
+    [CBM_CTCID]  NUMERIC (15) NOT NULL,
+    CONSTRAINT [FK_CABACERA_DEUDORES__DEUDORES] FOREIGN KEY ([CBM_CODEMP], [CBM_CTCID]) REFERENCES [dbo].[DEUDORES] ([CTC_CODEMP], [CTC_CTCID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[tmp_CABACERA_COMPROBANTES_MOTIVOS_CASTIGO]([CBM_CODEMP] ASC, [CBM_SUCID] ASC, [CBM_TPCID] ASC, [CBM_NUMERO] ASC, [CBM_TMCID] ASC, [CBM_CTCID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena los distintos motivos, del castigo', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'tmp_CABACERA_COMPROBANTES_MOTIVOS_CASTIGO';
+

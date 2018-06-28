@@ -1,0 +1,47 @@
+﻿CREATE TABLE [dbo].[ROL_DATOS_REPORTE] (
+    [RDR_CODEMP]  INT             NOT NULL,
+    [RDR_ROLID]   INT             NOT NULL,
+    [RDR_ITEM]    SMALLINT        NOT NULL,
+    [RDR_MATERIA] VARCHAR (200)   NOT NULL,
+    [RDR_RUTDEM]  INT             NOT NULL,
+    [RDR_DVDEM]   VARCHAR (1)     NOT NULL,
+    [RDR_NOMDEM]  VARCHAR (300)   NOT NULL,
+    [RDR_RUTABO]  INT             NOT NULL,
+    [RDR_DVABO]   VARCHAR (1)     NOT NULL,
+    [RDR_NOMABO]  VARCHAR (300)   NOT NULL,
+    [RDR_TELABO]  VARCHAR (10)    NOT NULL,
+    [RDR_MAILABO] VARCHAR (80)    NOT NULL,
+    [RDR_DIRABO]  VARCHAR (300)   NOT NULL,
+    [RDR_RUTDEU]  INT             NOT NULL,
+    [RDR_DVDEU]   VARCHAR (1)     NOT NULL,
+    [RDR_NOMDEU]  VARCHAR (300)   NOT NULL,
+    [RDR_DIRDEU]  VARCHAR (300)   NOT NULL,
+    [RDR_RUTGIR]  INT             NULL,
+    [RDR_DVGIR]   VARCHAR (1)     NULL,
+    [RDR_NOMGIR]  VARCHAR (300)   NULL,
+    [RDR_TIPCPBT] VARCHAR (100)   NOT NULL,
+    [RDR_NUMERO]  VARCHAR (50)    NOT NULL,
+    [RDR_MONTO]   DECIMAL (15, 2) NOT NULL,
+    [RDR_MONEDA]  VARCHAR (20)    NOT NULL,
+    [RDR_FECPRO]  DATETIME        NOT NULL,
+    [RDR_MOTIVO]  VARCHAR (200)   NOT NULL,
+    [RDR_MONESC]  VARCHAR (1000)  NOT NULL,
+    [RDR_TOTDEU]  DECIMAL (15, 2) NOT NULL,
+    [RDR_TOTESC]  VARCHAR (1000)  NOT NULL,
+    [RDR_BANCO]   VARCHAR (300)   NULL,
+    [RDR_REPTEXT] TEXT            NULL,
+    [RDR_SALDO]   DECIMAL (15, 2) NULL,
+    [RDR_FECCPBT] DATETIME        NULL,
+    CONSTRAINT [PK_ROL_DATOS_REPORTE] PRIMARY KEY CLUSTERED ([RDR_CODEMP] ASC, [RDR_ROLID] ASC, [RDR_ITEM] ASC),
+    CONSTRAINT [FK_ROL_DATO_ROL_DATRE_ROL] FOREIGN KEY ([RDR_CODEMP], [RDR_ROLID]) REFERENCES [dbo].[ROL] ([ROL_CODEMP], [ROL_ROLID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[ROL_DATOS_REPORTE]([RDR_CODEMP] ASC, [RDR_ROLID] ASC, [RDR_ITEM] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena una serie de datos referentes a los reportes, para generacion de demandas automaticas y otros', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'ROL_DATOS_REPORTE';
+

@@ -1,0 +1,123 @@
+﻿@model Dimol.Contabilidad.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "TiposDocumentos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    function getTrueFalse() {
+        var data = "true:false";
+        return data;
+    }
+
+</script>
+<br />
+<h2>Tipos Documentos</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("TiposDocumentos")
+    .addColumn(new Column("Codemp").setLabel("Empresa")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+        
+    .addColumn(new Column("TipoComprobante").setLabel("Tipo Comprobante")
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditRules("edithidden:true")
+        .setEditOptions("value:\""+ViewBag.TipoComprobante+"\"")
+        .setWidth(50))
+          
+    .addColumn(new Column("Codigo").setLabel("Codigo")
+        .setSortable(true)
+        .setAlign(Align.center)
+        .setWidth(20))
+   .addColumn(new Column("CodigoNumero").setLabel("Codigo")
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setWidth(25)
+        .setHidden(true)
+        .setEditRules("edithidden:true"))     
+   .addColumn(new Column("Tipo").setLabel("Tipo")
+        .setSortable(true)
+        .setAlign(Align.center)
+        .setWidth(30))
+        
+   .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setSortable(true)
+        .setAlign(Align.left)
+        .setEditable(true)
+        .setWidth(50))
+   
+   .addColumn(new Column("Talonario").setLabel("Talonario")
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setWidth(50)
+        .setHidden(true)
+        .setEditRules("edithidden:true")
+        .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+        .setEditOptions("value:getTrueFalse()"))     
+   
+   .addColumn(new Column("UltimoNumero").setLabel("Ultimo Numero")
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setWidth(25)
+        .setHidden(true)
+        .setEditRules("edithidden:true"))
+        
+   .addColumn(new Column("LineasXReporte").setLabel("Lineas x Reporte")
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setWidth(25)
+        .setHidden(true)
+        .setEditRules("edithidden:true"))
+
+   .addColumn(new Column("TipoDocDigital").setLabel("Tipo Doc. Digital")
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditRules("edithidden:true")
+        .setEditOptions("value:\""+ViewBag.TipoDocDigital+"\"")
+        .setWidth(50))     
+                                          
+   .addColumn(new Column("Id").setLabel("ID")
+   
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(50))
+      
+    // settings
+    
+    .setCaption("TiposDocumentos")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Contabilidad/GetTiposDocumentos/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+      
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Tipo")
+    
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerTiposDocumentos")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Contabilidad/OperTiposDocumentos")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Contabilidad/OperTiposDocumentos")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Contabilidad/OperTiposDocumentos")
+    .setExcelExport("/Contabilidad/ExportToExcel")
+    
+    .Render()
+
+)

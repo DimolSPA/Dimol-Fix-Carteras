@@ -1,0 +1,326 @@
+﻿@model Dimol.Usuario.Models.UsuarioModel
+
+@{
+    ViewBag.Title = "Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Usuarios</h2>
+<br />
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+
+@using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabUsuario" })))
+{
+    t.Tab("Usuarios", "tab1");
+    //t.Tab("Sucursales", "tab2");
+
+    using (t.BeginPanel())
+    {
+        using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmUsuario" }))
+        {
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="width:260px">@Html.LabelFor(model => model.Rut)</div>
+        <div class="col" style="height:23px">@Html.TextBoxFor(model => model.Rut, null, new { @class = "textboxClass" })</div>
+    </div>
+
+    <div class="fila">
+        <div class="col" style="width:260px">@Html.LabelFor(model => model.Nombre)</div>
+        <div class="col" style="height:23px">@Html.TextBoxFor(model => model.Nombre, null, new { @class = "textboxClass" })</div>
+    </div>
+
+    <div class="fila">
+        <div class="col" style="width:260px">@Html.LabelFor(model => model.Usuario)</div>
+        <div class="col" style="height:23px">@Html.TextBox("Usuario", null, new { @class = "textboxRut" })</div>
+    </div>
+
+    <div class="fila">
+        <div class="col" style="width:260px">@Html.LabelFor(model => model.Clave)</div>
+        <div class="col" style="height:23px">@Html.TextBox("Clave", null, new { @class = "textboxRut" })</div>
+    </div>
+
+    <div class="fila">
+        <div class="col" style="width:260px">@Html.LabelFor(model => model.Email)</div>
+        <div class="col" style="height:23px">@Html.TextBox("Email", null, new { @class = "textboxClass" })</div>
+    </div>
+
+    @*<div class="fila">
+            <div class="col" style="width:260px">@Html.LabelFor(model => model.TipoPreguntaSecreta)</div>
+            <div class="col">@Html.DropDownListFor(model => model.TipoPreguntaSecreta, null, new { @class = "ComboboxClass" })</div>
+        </div>
+
+        <div class="fila">
+            <div class="col" style="width:260px">@Html.LabelFor(model => model.Respuesta)</div>
+            <div class="col" style="height:23px">@Html.TextBoxFor(model => model.Respuesta, null, new { @class = "textboxClass" })</div>
+        </div>*@
+
+    <div class="fila">
+        <div class="col" style="width:260px">@Html.LabelFor(model => model.Perfil)</div>
+        <div class="col">@Html.DropDownListFor(model => model.Perfil, null, new { @class = "ComboboxClass" })</div>
+    </div>
+
+    <div class="fila">
+        <div class="col" style="width:260px">@Html.LabelFor(model => model.Permisos)</div>
+        <div class="col">@Html.DropDownListFor(model => model.Permisos, null, new { @class = "ComboboxClass" })</div>
+    </div>
+
+    <div class="fila">
+        <div class="col" style="width:260px">@Html.LabelFor(model => model.Estado)</div>
+        <div class="col">@Html.DropDownListFor(model => model.Estado, null, new { @class = "ComboboxClass" })</div>
+    </div>
+
+    <div class="fila">
+        <div class="col" style="width:260px">@Html.LabelFor(model => model.CambiaPassword)</div>
+        <div class="col">@Html.CheckBoxFor(model => model.CambiaPassword)</div>
+    </div>
+
+    @if (ViewBag.EsEdicion)
+    {
+        <div class="fila">
+            <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaCambioPassword)</div>
+            <div class="col" style="height:23px">@Html.TextBoxFor(model => model.FechaCambioPassword, null, new { @class = "textboxClass", disabled = "disabled" })</div>
+        </div>
+
+        <div class="fila">
+            <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaIngreso)</div>
+            <div class="col" style="height:23px">@Html.TextBoxFor(model => model.FechaIngreso, null, new { @class = "textboxClass", disabled = "disabled" })</div>
+        </div>
+
+        <div class="fila">
+            <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaUltimoIngreso)</div>
+            <div class="col" style="height:23px">@Html.TextBoxFor(model => model.FechaUltimoIngreso, null, new { @class = "textboxClass", disabled = "disabled" })</div>
+        </div>
+
+        <div class="fila">
+            <div class="col" style="width:260px">@Html.LabelFor(model => model.IngresosOK)</div>
+            <div class="col" style="height:23px">@Html.TextBoxFor(model => model.IngresosOK, null, new { @class = "textboxRut", disabled = "disabled" })</div>
+        </div>
+
+        <div class="fila">
+            <div class="col" style="width:260px">@Html.LabelFor(model => model.IngresosMalos)</div>
+            <div class="col" style="height:23px">@Html.TextBoxFor(model => model.IngresosMalos, null, new { @class = "textboxRut", disabled = "disabled" })</div>
+        </div>
+
+        <div class="fila">
+            <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaBloqueo)</div>
+            <div class="col" style="height:23px">@Html.TextBoxFor(model => model.FechaBloqueo, null, new { @class = "textboxClass", disabled = "disabled" })</div>
+        </div>
+    }
+</div>
+        }
+        <br />
+    }
+
+        @*using (t.BeginPanel())
+        {
+               
+<div class="tabla">
+        <div class="fila">
+            <div class="col">
+                @(Html.jqGrid("gridSinAsignar")
+                        
+                .addColumn(new Column("Id").setLabel("Id")
+                    .setHidden(true)
+                    .setEditable(false)
+                    .setWidth(50))
+                .addColumn(new Column("Nombre").setLabel("Nombre")
+                    .setHidden(false)
+                    .setEditable(false)
+                    .setWidth(150))
+                    .addColumn(new Column("sel").setLabel("Seleccione")
+                    .setEditable(true)
+                    .setAlign(Align.center)
+                    .setWidth(20)
+                    //.setHidden(true)
+                    .setEditRules("edithidden:true")
+                    .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+                    .setEditOptions("value:getTrueFalse()")) 
+                          
+
+                // settings
+                .setCaption("No Asignadas").setWidth(400)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Usuario/GetSinAsignar/?id="+ ViewBag.idUsuario)
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setAutoWidth(false)
+                .setRowNum(10)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("esu_nombre")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerGetConfiguracion")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .setNavEdit(ViewBag.Edit)
+                .setEditUrl("/Empresa/OperEmpresaConfiguracion")
+                .setNavAdd(ViewBag.Add)
+                .setAddUrl("/Empresa/OperEmpresaConfiguracion")
+                .setNavDel(ViewBag.Del)
+                .setDelUrl("/Empresa/OperEmpresaConfiguracion")
+                .setExcelExport("/Empresa/ExportToExcelConfiguracion")
+                .Render()
+
+            )
+
+            </div>
+
+            <div class="col">
+                @(Html.jqGrid("gridAsignadas")
+                    .addColumn(new Column("Id").setLabel("Id")
+                    .setHidden(true)
+                    .setEditable(false)
+                    .setWidth(50))
+                .addColumn(new Column("Nombre").setLabel("Nombre")
+                    .setHidden(false)
+                    .setEditable(false)
+                    .setWidth(150))
+                    .addColumn(new Column("sel").setLabel("Seleccione")
+                    .setEditable(true)
+                    .setAlign(Align.center)
+                    .setWidth(20)
+                    //.setHidden(true)
+                    .setEditRules("edithidden:true")
+                    .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+                    .setEditOptions("value:getTrueFalse()")) 
+                          
+
+                // settings
+                .setCaption("Asignadas").setWidth(400)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Usuario/GetAsignados/?id="+ ViewBag.idUsuario)
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setAutoWidth(false)
+                .setRowNum(10)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("esu_nombre")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerGetConfiguracion")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .setNavEdit(ViewBag.Edit)
+                .setEditUrl("/Empresa/OperEmpresaConfiguracion")
+                .setNavAdd(ViewBag.Add)
+                .setAddUrl("/Empresa/OperEmpresaConfiguracion")
+                .setNavDel(ViewBag.Del)
+                .setDelUrl("/Empresa/OperEmpresaConfiguracion")
+                .setExcelExport("/Empresa/ExportToExcelConfiguracion")
+                .Render()
+
+            )
+
+            </div>
+        </div>
+    </div>  
+    <br />
+        }*@
+}
+
+<div class="tabla">
+    <div class="col" style="float:right"><input type="button" value="Guardar" onclick="fnGuardarUsuario();" /></div>
+    <div class="col" style="float:right"><input type="button" value="Volver" onclick="window.location='/Usuario/BuscarUsuario';" /></div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<br />
+<br />
+
+<script>
+    function getTrueFalse() {
+        var data = "true:false";
+        return data;
+    }
+
+    function fnGuardarUsuario() {
+        var newUrl = "/Usuario/GuardarUsuario/?";
+
+        if ($("#Rut").val() != "" && $('#Nombre').val() != "" && $('#Usuario').val() != "" && $('#Clave').val() != "" && $('#Email').val() != "") {
+            newUrl += "rut=" + $("#Rut").val();
+            newUrl += "@{ if (Model != null && Model.IdUsuario != 0) { @Html.Raw("&idUsuario=" + Model.IdUsuario); } }";
+            newUrl += "&nombre=" + $("#Nombre").val();
+            newUrl += "&usuario=" + $("#Usuario").val();
+            newUrl += "&clave=" + $("#Clave").val();
+            newUrl += "&email=" + $("#Email").val();
+            newUrl += "&tipoPregunta=" + $("#TipoPreguntaSecreta").val();
+            newUrl += "&respuesta=" + $("#Respuesta").val();
+            newUrl += "&perfil=" + $("#Perfil").val();
+            newUrl += "&permiso=" + $("#Permisos").val();
+            newUrl += "&estado=" + $("#Estado").val();
+
+            if (typeof $("#CambiaPassword").val() !== "undefined") {
+                newUrl += "&cambiaPassword=" + $("#CambiaPassword").val();
+            }
+
+            if (typeof $("#FechaCambiaPassword").val() !== "undefined") {
+                newUrl += "&fechaCambiaPassword=" + $("#FechaCambiaPassword").val();
+            }
+
+            if (typeof $("#FechaIngreso").val() !== "undefined") {
+                newUrl += "&fechaIngreso=" + $("#FechaIngreso").val();
+            }
+
+            if (typeof $("#IngresosOK").val() !== "undefined") {
+                newUrl += "&ingresosOK=" + $("#IngresosOK").val();
+            }
+
+            if (typeof $("#FechaUltimoIngreso").val() !== "undefined") {
+                newUrl += "&fechaUltimoIngreso=" + $("#FechaUltimoIngreso").val();
+            }
+
+            if (typeof $("#IngresosMalos").val() !== "undefined") {
+                newUrl += "&ingresosMalos=" + $("#IngresosMalos").val();
+            }
+
+            if (typeof $("#FechaBloqueo").val() !== "undefined") {
+                newUrl += "&fechaBloqueo=" + $("#FechaBloqueo").val();
+            }
+            
+            $.ajax({
+                type: 'POST',
+                url: newUrl, // we are calling json method
+                dataType: 'json',
+                async: true,
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Usuario guardado exitosamente.");
+                        location.reload();
+                    }
+                    else {
+                        alert("Error al guardar Usuario.");
+                    }
+                },
+                error: function (ex) {
+                    alert('Error al guardar Usuario.' + ex);
+                }
+
+            });
+        }
+        else {
+            alert('Debe ingresar todos los datos mandatorios.');
+        }
+    }
+
+    function borrarDatos() {
+        $("#Nombre").val("");
+        $("#Usuario").val("");
+        $("#Clave").val("");
+        $("#Email").val("");
+        $("#Respuesta").val("");
+        $("#FechaCambiaPassword").val("");
+        $("#FechaIngreso").val("");
+    }
+</script>

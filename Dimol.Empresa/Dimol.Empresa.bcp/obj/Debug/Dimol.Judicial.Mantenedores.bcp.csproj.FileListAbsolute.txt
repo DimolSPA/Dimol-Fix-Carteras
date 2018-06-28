@@ -1,0 +1,13 @@
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\bin\Debug\Dimol.Judicial.Mantenedores.bcp.dll
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\bin\Debug\Dimol.Judicial.Mantenedores.bcp.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\obj\Debug\Dimol.Judicial.Mantenedores.bcp.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\obj\Debug\Dimol.Judicial.Mantenedores.bcp.dll
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\obj\Debug\Dimol.Judicial.Mantenedores.bcp.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\bin\Debug\Dimol.dto.dll
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\bin\Debug\Dimol.Judicial.Mantenedores.dao.dll
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\bin\Debug\Dimol.Judicial.Mantenedores.dto.dll
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\bin\Debug\Dimol.dao.dll
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\bin\Debug\CYPH.dll
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\bin\Debug\Dimol.Judicial.Mantenedores.dao.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\bin\Debug\Dimol.Judicial.Mantenedores.dto.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores.bcp\bin\Debug\CYPH.xml

@@ -1,0 +1,208 @@
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.Tests.dll.config
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.Tests.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.Tests.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Microsoft.Web.Infrastructure.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Newtonsoft.Json.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Net.Http.Formatting.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Helpers.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Http.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Http.WebHost.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Mvc.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Razor.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.Deployment.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.Razor.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Optimization.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\WebGrease.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Antlr3.Runtime.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Newtonsoft.Json.xml
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Net.Http.Formatting.xml
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Helpers.xml
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Http.xml
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Http.WebHost.xml
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Mvc.xml
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Razor.xml
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.xml
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.Razor.xml
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Net.Http.Formatting.resources.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Helpers.resources.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Http.resources.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Http.WebHost.resources.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Mvc.resources.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Razor.resources.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.WebPages.resources.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Optimization.resources.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\obj\Debug\Dimol.Carteras.Mantenedores.Tests.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\obj\Debug\Dimol.Carteras.Mantenedores.Tests.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\obj\Debug\Dimol.Carteras.Mantenedores.Tests.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Mvc.HtmlHelper.jqGrid.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.dto.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dto.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.bcp.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dto.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.bcp.pdb
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.Tests.dll.config
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.Tests.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.Tests.pdb
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Newtonsoft.Json.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Net.Http.Formatting.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Helpers.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Http.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Http.WebHost.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Mvc.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Razor.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Optimization.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.dto.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Mvc.HtmlHelper.jqGrid.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.bcp.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\WebGrease.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dto.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Antlr3.Runtime.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.pdb
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Newtonsoft.Json.xml
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Net.Http.Formatting.xml
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Helpers.xml
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Http.xml
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Http.WebHost.xml
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Mvc.xml
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Razor.xml
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.xml
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.bcp.pdb
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dto.pdb
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Net.Http.Formatting.resources.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Helpers.resources.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Http.resources.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Http.WebHost.resources.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Mvc.resources.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Razor.resources.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.WebPages.resources.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Optimization.resources.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\obj\Debug\Dimol.Carteras.Mantenedores.Tests.csprojResolveAssemblyReference.cache
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\obj\Debug\Dimol.Carteras.Mantenedores.Tests.dll
+D:\Documents\Visual Studio 2012\Projects\Respaldo\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\obj\Debug\Dimol.Carteras.Mantenedores.Tests.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dao.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.dao.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\CYPH.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dao.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\CYPH.xml
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.PDF.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.PDF.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Core.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\fop.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.XML.API.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.Runtime.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Util.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Security.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Text.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Media.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Beans.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Naming.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.Runtime.JNI.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Management.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.AWT.WinForms.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Charsets.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Misc.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Remoting.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Corba.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.dao.pdb
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.Tests.dll.config
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.Tests.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.Tests.pdb
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\CYPH.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.dao.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.PDF.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Newtonsoft.Json.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Helpers.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Mvc.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Razor.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.Razor.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.dto.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Optimization.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Mvc.HtmlHelper.jqGrid.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.bcp.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dto.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Core.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\fop.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.XML.API.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\WebGrease.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dao.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.Runtime.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Util.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Security.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Text.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Media.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Beans.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Naming.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Antlr3.Runtime.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.Runtime.JNI.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Management.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.AWT.WinForms.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Charsets.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Misc.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Remoting.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\IKVM.OpenJDK.Corba.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.dao.pdb
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.pdb
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.PDF.pdb
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\CYPH.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Newtonsoft.Json.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Helpers.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Mvc.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.Razor.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\System.Web.WebPages.Razor.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.bcp.pdb
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dto.pdb
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.Carteras.Mantenedores.dao.pdb
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Helpers.resources.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Mvc.resources.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Razor.resources.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.WebPages.resources.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\System.Web.Optimization.resources.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\obj\Debug\Dimol.Carteras.Mantenedores.Tests.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\obj\Debug\Dimol.Carteras.Mantenedores.Tests.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\obj\Debug\Dimol.Carteras.Mantenedores.Tests.pdb
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.bcp.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Microsoft.Web.WebPages.OAuth.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\DotNetOpenAuth.AspNet.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\DotNetOpenAuth.Core.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\DotNetOpenAuth.OAuth.Consumer.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\DotNetOpenAuth.OAuth.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\DotNetOpenAuth.OpenId.RelyingParty.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\DotNetOpenAuth.OpenId.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Microsoft.Web.WebPages.OAuth.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\DotNetOpenAuth.AspNet.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\DotNetOpenAuth.Core.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\DotNetOpenAuth.OAuth.Consumer.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\DotNetOpenAuth.OAuth.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\DotNetOpenAuth.OpenId.RelyingParty.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\DotNetOpenAuth.OpenId.xml
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\es\Microsoft.Web.WebPages.OAuth.resources.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\Dimol.dto.pdb
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.Tests\bin\Debug\HtmlAgilityPack.dll

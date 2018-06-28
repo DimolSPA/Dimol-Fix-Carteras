@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Dimol.Service.ConsultaRut" CodeBehind="ConsultaRut.svc.cs" %>

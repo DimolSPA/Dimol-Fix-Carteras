@@ -1,0 +1,63 @@
+﻿@model Dimol.Finanzas.Models.ContratoCarteraModel
+@{
+    ViewBag.Title = "Contratos Cliente Cartera";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Contratos Cliente Cartera</h2>
+<br />
+
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+
+
+                       
+@(Html.jqGrid("ContratosClienteCartera")
+    .addColumn(new Column("cct_cctid").setLabel("ID")
+        .setHidden(true)
+        .setWidth(20))
+    .addColumn(new Column("cct_nombre").setLabel("Nombre")
+        .setWidth(60))
+   .addColumn(new Column("tipo").setLabel("Tipo")
+        .setWidth(40))
+   
+    // settings
+    .setCaption("ContratosClienteCartera")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Finanzas/GetContratosCartera")
+    .setAltRows(true)
+    .setScrollRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setSortName("cct_nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerContratosCartera")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    //.onDblClickRow("fnCargarClausulas(rowid)")    
+    .onSelectRow("fnCargarClausulas(rowid)")
+    .Render()
+
+) 
+
+
+<div class="col" style="float:right"><input type="button" value="Eliminar" onclick="fnEliminarContratoCartera();"/></div>
+<div class="col" style="float:right" id="btnCargarClausulas"><input type="button" value="Editar/Nuevo" /></div>
+
+@using (Html.JQueryUI().Begin(
+    new Dialog().Draggable(true).AutoOpen(false).Modal(true).Title("Clausulas").CloseOnEscape(true).Width(800).Height(450).TriggerClick("#btnCargarClausulas")))
+    {
+        @Html.Partial("Clausulas", Model)
+    }
+
+
+
+
+
+

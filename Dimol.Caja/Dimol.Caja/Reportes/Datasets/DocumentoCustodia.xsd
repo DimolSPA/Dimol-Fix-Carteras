@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DocumentoCustodia" targetNamespace="http://tempuri.org/DocumentoCustodia.xsd" xmlns:mstns="http://tempuri.org/DocumentoCustodia.xsd" xmlns="http://tempuri.org/DocumentoCustodia.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DocumentoCustodia" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DocumentoCustodia" msprop:Generator_UserDSName="DocumentoCustodia">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DocCustodia" msprop:Generator_TableClassName="DocCustodiaDataTable" msprop:Generator_TableVarName="tableDocCustodia" msprop:Generator_TablePropName="DocCustodia" msprop:Generator_RowDeletingName="DocCustodiaRowDeleting" msprop:Generator_RowChangingName="DocCustodiaRowChanging" msprop:Generator_RowEvHandlerName="DocCustodiaRowChangeEventHandler" msprop:Generator_RowDeletedName="DocCustodiaRowDeleted" msprop:Generator_UserTableName="DocCustodia" msprop:Generator_RowChangedName="DocCustodiaRowChanged" msprop:Generator_RowEvArgName="DocCustodiaRowChangeEvent" msprop:Generator_RowClassName="DocCustodiaRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NumDoc" msprop:Generator_ColumnVarNameInTable="columnNumDoc" msprop:Generator_ColumnPropNameInRow="NumDoc" msprop:Generator_ColumnPropNameInTable="NumDocColumn" msprop:Generator_UserColumnName="NumDoc" type="xs:string" minOccurs="0" />
+              <xs:element name="Banco" msprop:Generator_ColumnVarNameInTable="columnBanco" msprop:Generator_ColumnPropNameInRow="Banco" msprop:Generator_ColumnPropNameInTable="BancoColumn" msprop:Generator_UserColumnName="Banco" type="xs:string" minOccurs="0" />
+              <xs:element name="GiradoA" msprop:Generator_ColumnVarNameInTable="columnGiradoA" msprop:Generator_ColumnPropNameInRow="GiradoA" msprop:Generator_ColumnPropNameInTable="GiradoAColumn" msprop:Generator_UserColumnName="GiradoA" type="xs:string" minOccurs="0" />
+              <xs:element name="FechaDoc" msprop:Generator_ColumnVarNameInTable="columnFechaDoc" msprop:Generator_ColumnPropNameInRow="FechaDoc" msprop:Generator_ColumnPropNameInTable="FechaDocColumn" msprop:Generator_UserColumnName="FechaDoc" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="MontoDoc" msprop:Generator_ColumnVarNameInTable="columnMontoDoc" msprop:Generator_ColumnPropNameInRow="MontoDoc" msprop:Generator_ColumnPropNameInTable="MontoDocColumn" msprop:Generator_UserColumnName="MontoDoc" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

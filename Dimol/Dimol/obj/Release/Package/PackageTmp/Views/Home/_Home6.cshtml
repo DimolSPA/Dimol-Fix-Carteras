@@ -1,0 +1,63 @@
+﻿@using Mvc.HtmlHelpers
+Home 6
+@using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabGestion" }).Disabled(new int[] { 2 })))
+{
+    t.Tab("Poder Judicial", "tab1");
+    using (t.BeginPanel())
+    {
+
+
+
+<br />
+
+@(Html.jqGrid("gridEstadosRol")
+    .addColumn(new Column("Id").setLabel("Eliminar")
+        .setSortable(true).setHidden(true)
+        .setWidth(60))
+    .addColumn(new Column("Materia").setLabel("Materia")
+        .setSortable(true)
+        .setWidth(120))
+    .addColumn(new Column("Cuaderno").setLabel("Cuaderno")
+        .setSortable(true)
+        .setWidth(120))
+    .addColumn(new Column("Estado").setLabel("Estado")
+        .setSortable(true)
+        .setWidth(120))
+    .addColumn(new Column("FechaJudicial").setLabel("Fecha")
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(70))
+    .addColumn(new Column("Comentario").setLabel("Comentario")
+        .setSortable(true)
+        .setWidth(275))
+    .addColumn(new Column("Usuario").setLabel("Usuario")
+        .setSortable(true)
+        .setWidth(150))
+    .addColumn(new Column("Archivo").setLabel("Archivo")
+        .setSortable(true)//.setCustomFormatter("fnBotonesArchivo")
+        .setWidth(60))
+
+    // settings
+    .setCaption("Estados").setWidth(950)
+    .setRequestType(RequestType.get)
+    .setUrl("~/Judicial/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("FechaJudicial")
+    .setSortOrder(SortOrder.desc)
+    .setPager("pagerEstados")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setShrinkToFit(true)
+    .Render()
+
+)
+
+
+<br />
+}
+}

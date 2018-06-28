@@ -1,0 +1,32 @@
+﻿CREATE TABLE [dbo].[NOTARIAS] (
+    [NOT_CODEMP]    INT           NOT NULL,
+    [NOT_NOTID]     INT           NOT NULL,
+    [NOT_RUT]       VARCHAR (20)  NOT NULL,
+    [NOT_NOMBRE]    VARCHAR (200) NOT NULL,
+    [NOT_NOMNOT]    VARCHAR (250) NOT NULL,
+    [NOT_COMID]     INT           NOT NULL,
+    [NOT_DIRECCION] VARCHAR (300) NOT NULL,
+    [NOT_TELEFONO1] INT           NULL,
+    [NOT_TELEFONO2] INT           NULL,
+    [NOT_FAX]       INT           NULL,
+    [NOT_CELULAR]   INT           NULL,
+    [NOT_MAIL]      VARCHAR (80)  NULL,
+    CONSTRAINT [PK_NOTARIAS] PRIMARY KEY CLUSTERED ([NOT_CODEMP] ASC, [NOT_NOTID] ASC),
+    CONSTRAINT [FK_NOTARIAS_COMUNA_NO_COMUNA] FOREIGN KEY ([NOT_COMID]) REFERENCES [dbo].[COMUNA] ([COM_COMID]),
+    CONSTRAINT [FK_NOTARIAS_EMPRESA_N_EMPRESA] FOREIGN KEY ([NOT_CODEMP]) REFERENCES [dbo].[EMPRESA] ([EMP_CODEMP])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[NOTARIAS]([NOT_CODEMP] ASC, [NOT_NOTID] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_RUT]
+    ON [dbo].[NOTARIAS]([NOT_CODEMP] ASC, [NOT_RUT] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena las distintas notarias', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'NOTARIAS';
+

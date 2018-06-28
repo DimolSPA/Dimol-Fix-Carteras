@@ -1,0 +1,2 @@
+d:\documents\visual studio 2012\Projects\CYPH\CYPH.Test\obj\Debug\CYPH.Test.Resources.resources
+d:\documents\visual studio 2012\Projects\CYPH\CYPH.Test\obj\Debug\CYPH.Test.vbproj.GenerateResource.Cache

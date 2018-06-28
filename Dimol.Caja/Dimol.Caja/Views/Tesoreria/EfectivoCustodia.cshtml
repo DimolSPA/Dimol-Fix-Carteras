@@ -1,0 +1,240 @@
+﻿@{
+    ViewBag.Title = "Efectivo Custodia";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+}
+
+<br />
+<h2>@ViewBag.Title</h2>
+@using Mvc.HtmlHelpers
+
+<style type="text/css" media="screen">
+    th.ui-th-column div {
+        white-space: normal !important;
+        height: auto !important;
+        padding: 2px;
+    }
+    .rowImputado { background-color: #99ccff; border-color: #00264d; background-image: none; }
+</style>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('#MontoIngreso').keyup(function (event) {
+            if (event.which >= 37 && event.which <= 40) return;
+            $(this).val(function (index, value) {
+                return value
+                .replace(/^0+/, "")
+                .replace(/\D/g, "")
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                ;
+            });
+        });
+    });
+    window.onload = function () {
+        $("#t_gridEfectivoCustodiados").append("<div align='left'><button type='button' onclick='fnAbrirFormularioEfectivoCustodia();' title='Ingresar Efectivo'><i class='fa fa-plus-square' style='font-size:15px;'></i></button></div>");
+
+    }
+</script>
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        <button style="display:none" onclick="fnAbrirFormularioEfectivoCustodia();" title="Ingresar Efectivo">
+            <i class="fa fa-plus-square" style="font-size:19px;"></i>
+        </button>
+        @(Html.jqGrid("gridEfectivoCustodiados")
+                .addColumn(new Column("CustodiaId")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(70))
+                .addColumn(new Column("ConciliacionId")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(70))
+                .addColumn(new Column("Pclid")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(70))
+                .addColumn(new Column("Ctcid")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(70))
+                .addColumn(new Column("NumComprobante").setLabel("Nº Comprobante")
+                .setEditable(false).setCustomFormatter("fnVerComprobanteLiquidacionEfectivo")
+                .setSortable(true)
+                .setWidth(90))
+                .addColumn(new Column("FecDoc").setLabel("Fecha Documento")
+                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setSortable(true)
+                .setWidth(90))
+                .addColumn(new Column("RutCliente").setLabel("RutCliente")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Cliente").setLabel("Cliente")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("RutDeudor").setLabel("Rut Deudor")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Deudor").setLabel("Deudor")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(250))
+                .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Gestor").setLabel("Gestor")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(150))
+                .addColumn(new Column("GiradoA").setLabel("Girado A")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("TipoBanco").setLabel("Tipo Banco")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("NumDocumento").setLabel("Numero Documento")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Estado").setLabel("Estado Conciliación")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Tipoconciliacion").setLabel("Tipo")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("EstadoLiquidacion").setLabel("Estado Liquidación")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("FecProrroga").setLabel("Fecha Prorroga")
+                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setSortable(true).setHidden(true)
+                .setWidth(70))
+                .addColumn(new Column("Pclid").setLabel("Pclid")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(10))
+                .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(10))
+                .addColumn(new Column("GestorId").setLabel("GestorId")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(10))
+                .addColumn(new Column("EstadoId").setLabel("EstadoId")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(10))
+                .addColumn(new Column("EstadoConciliacionId").setLabel("EstadoConciliacionId")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(10))
+                 .addColumn(new Column("Accion").setLabel("Proceso").setCustomFormatter("fnBotonesGridEfectivoConciliar")
+                .setWidth(110)
+                .setAlign(Align.center))
+                // settings
+                        .setCaption("Efectivo en Custodia")
+                        .setAutoWidth(true)
+                        .setMultiSelect(false)
+                        .setRequestType(RequestType.get)
+                        .setUrl("~/Tesoreria/ListarEfectivoCustodiaGrilla/")
+                        .setAltRows(true)
+                        .setAltClass("altGridRows")
+                        .setRowNum(1000)
+                        .setRowList(new int[] { 10, 30, 50 })
+                        .setViewRecords(true)
+                        .setSortName("CustodiaId")
+                        .setSortOrder(SortOrder.asc)
+                        .setPager("pagerDocumentosCustodia")
+                        .setPagerPos(PagerPos.center)
+                        .setPgButtons(true)
+                        .setCellEdit(false)
+                        .setCellSubmit(CellSubmit.clientArray)
+                        .setShrinkToFit(false)
+                        .setScroll(true)
+                        .setHeight(400)
+                        .onDblClickRow("fnDoubleClickEfectivo(rowid)")
+                        .setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+                        .Render()
+
+        )
+    </div>
+</div>
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAddEfectivoCustodia" }).Draggable(true)
+        .AutoOpen(false)
+        .Modal(true)
+        .Title("Efectivo en Custodia")
+        .CloseOnEscape(true)
+        .Width(530)
+        .Height(300)
+        ))
+{
+    @Html.Partial("_AgregarEfectivoCustodia")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppFormLiquidacionDocs" }).Draggable(true)
+.AutoOpen(false)
+.Modal(true)
+.Title("Liquidación Documentos")
+.CloseOnEscape(true)
+.Width(950)
+.Height(700)
+
+))
+{
+    <div id="loadingmessageLiqui" style="display: none" class="progressLoading">
+        <img src="~/Images/ajax-loader.gif" />
+    </div>
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppFormImputacionDocs" }).Draggable(true)
+.AutoOpen(false)
+.Modal(true)
+.Title("Imputación de Documentos")
+.CloseOnEscape(true)
+.Width(950)
+.Height(700)
+))
+{
+    <div id="loadingmessage" style="display: none" class="progressLoading">
+        <img src="~/Images/ajax-loader.gif" />
+    </div>
+}
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppConciliacionEfectivo" }).Draggable(true)
+        .AutoOpen(false)
+        .Modal(true)
+        .Title("Conciliar Efectivo")
+        .CloseOnEscape(true)
+        .Width(620)
+        .Height(500)
+        ))
+{
+    @Html.Partial("_ConciliacionEfectivo")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppDocto" }).Draggable(true)
+.AutoOpen(false)
+.Modal(true)
+.Title("Comprobante")
+.CloseOnEscape(true)
+.Width(900)
+.Height(600)
+                
+))
+{
+}
+@Styles.Render("~/Content/caja")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

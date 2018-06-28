@@ -1,0 +1,15 @@
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Release\Dimol.Convertidor.exe.config
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Release\Dimol.Convertidor.exe
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Release\Dimol.Convertidor.pdb
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Release\Dimol.ConvertidorImagenes.dll
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Release\Dimol.dao.dll
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Release\Dimol.dto.dll
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Release\CYPH.dll
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Release\Dimol.ConvertidorImagenes.pdb
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Release\Dimol.dao.pdb
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Release\Dimol.dto.pdb
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Release\CYPH.pdb
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Release\CYPH.xml
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\obj\Release\Dimol.ConvertidorExe.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\obj\Release\Dimol.Convertidor.exe
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\obj\Release\Dimol.Convertidor.pdb

@@ -1,0 +1,146 @@
+﻿@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+<style>
+    .progressLoading {
+    /*position:relative;*/
+            position: absolute;
+            text-align: center;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 9999999;
+            background-color: #000000;
+            opacity: 0.2;
+        }
+</style>
+<div class="tabla">
+    <div class="fila">
+        <div class="col">
+            <div id="loadingmessage" style="display: none" class="progressLoading">
+                <img src="~/Images/ajax-loader.gif" />
+            </div>
+            <div id="reports">
+                <label>
+                    <input type="checkbox" name="reporte" value="1"> Resumen de Gestiones
+                </label><br>
+                <label>
+                    <input type="checkbox" name="reporte" value="2"> Certificado
+                </label><br>
+                <label>
+                    <input type="checkbox" name="reporte" value="3"> Hoja Tramite
+                </label><br>
+                <label>
+                    <input type="checkbox" name="reporte" value="4"> Sii
+                </label><br>
+                <label>
+                    <input type="checkbox" name="reporte" value="5"> Estampes
+                </label><br>
+            </div>
+        </div>
+        <div class="col" style="float: right">
+            <input type="button" value="Aprobar" class="btn btn-info" onclick="fnAprobarCastigoDevolucionComprobante();" />
+            <input type="button" value="Rechazar" class="btn btn-info" onclick="fnMostrarIngresoMotivoRechazo();" />
+        </div>
+    </div>
+
+</div>
+@Html.Hidden("ComprobanteIdHidden")
+@Html.Hidden("FolioHidden")
+@Html.Hidden("PclidHidden")
+@Html.Hidden("ComprobanteNombreHidden")
+<br />
+@(Html.jqGrid("gridCastigoDevolucionDetalle")
+           .addColumn(new Column("Pclid").setLabel("Pclid")
+                .setSortable(true).setHidden(true)
+                    .setWidth(70))
+            .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                .setSortable(true).setHidden(true)
+                    .setWidth(70))
+            .addColumn(new Column("Ccbid").setLabel("Ccbid")
+                .setSortable(true).setHidden(true)
+                    .setWidth(70))                                 
+            .addColumn(new Column("RutDeudor").setLabel("Rut")
+            .setSortable(true).setHidden(true)
+                .setWidth(70))
+            .addColumn(new Column("Deudor").setLabel("Deudor")
+                .setSortable(true)
+                .setWidth(200))
+            .addColumn(new Column("Tipo").setLabel("Tipo Documento").setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(100))
+            .addColumn(new Column("Numero").setLabel("Número").setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(100))    
+            .addColumn(new Column("FechaAsignacion").setLabel("Fecha Asig.").setAlign(Align.center)
+                .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(72))
+            .addColumn(new Column("FechaVencimiento").setLabel("Fecha Venc.").setAlign(Align.center)
+                .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(72))
+            .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(70))
+            .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(70))
+            .addColumn(new Column("Asignado").setLabel("Asignado").setAlign(Align.right).setFormatter(Formatters.integer)
+                        .setSortable(true).setHidden(true)
+                    .setWidth(70))
+            .addColumn(new Column("UltimoEstado").setLabel("Ultimo Estado").setAlign(Align.center)
+                    .setSortable(true).setHidden(true)
+                .setWidth(100))
+            .addColumn(new Column("Estado").setLabel("Estado")
+                .setSortable(true)
+                .setWidth(100))
+            .addColumn(new Column("Asegurado").setLabel("Asegurado")
+                .setSortable(true)
+                .setWidth(220))
+
+    // settings
+    .setCaption("Detalle Comprobante")
+    .setRequestType(RequestType.get)
+        .setUrl("~/Cartera/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(false)
+    .setRowNum(500)
+    .setRowList(new int[] { 500, 50, 100, 1000 })
+    .setViewRecords(true)
+        .setSortName("Deudor")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDetalleComprobante")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setGrouping(true)
+        .setShrinkToFit(true)
+    .setGroupingView("groupField: ['Deudor'],groupColumnShow: [false], groupText: ['<b>{0} - {1} Documento(s)</b>'], groupCollapse: false, groupOrder: ['asc'],groupDataSorted: true")
+      
+    .Render()
+
+)
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppMotivoRechazoComprobante" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Rechazo")
+    .CloseOnEscape(true)
+    .Width(350)
+    .Height(150)
+    ))
+{
+    <div class="tabla">
+        <div class="fila">
+            <div class="col">@Html.Label("Motivo de Rechazo")</div>
+           
+        </div>
+        <div class="fila">
+            <div class="col" style="width:300px;">@Html.TextArea("MotivoRechazo", null, new { @class = "textboxClass" })</div>
+
+        </div>
+        <div class="fila" style="width:300px;">
+            <div class=" col" style="float:right"><input type="button" value="Aceptar" onclick="fnRechazarComprobanteCastigoDevolucion();" /></div>
+        </div>
+   </div>
+}

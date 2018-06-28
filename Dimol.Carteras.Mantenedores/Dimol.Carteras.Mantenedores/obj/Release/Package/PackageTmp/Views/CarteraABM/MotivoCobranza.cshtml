@@ -1,0 +1,47 @@
+﻿@model Dimol.Carteras.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "MotivoCobranza";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Motivo de Cobranza</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("MotivoCobranza")
+    .addColumn(new Column("Id").setLabel("Id Motivo")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Motivo")
+        .setSortable(true)    
+        .setEditType(EditType.text)
+        .setEditable(true)
+        .setWidth(80))
+    
+    // settings
+    .setCaption("Motivo de Cobranza")
+    .setRequestType(RequestType.get)
+    .setUrl("~/CarteraABM/GetMotivoCobranza/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerMotivoCobranza")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/CarteraABM/OperMotivoCobranza")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/CarteraABM/OperMotivoCobranza")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/CarteraABM/OperMotivoCobranza")
+    .setExcelExport("/CarteraABM/ExportToExcelMotivoCobranza")
+    .Render()
+
+)

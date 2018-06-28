@@ -1,0 +1,12 @@
+D:\_Codigo_Dimol\Dimol\Dimol.bcp\bin\x64\Debug\Dimol.bcp.dll
+D:\_Codigo_Dimol\Dimol\Dimol.bcp\bin\x64\Debug\Dimol.bcp.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.bcp\bin\x64\Debug\CYPH.dll
+D:\_Codigo_Dimol\Dimol\Dimol.bcp\bin\x64\Debug\Dimol.dao.dll
+D:\_Codigo_Dimol\Dimol\Dimol.bcp\bin\x64\Debug\Dimol.dto.dll
+D:\_Codigo_Dimol\Dimol\Dimol.bcp\bin\x64\Debug\HtmlAgilityPack.dll
+D:\_Codigo_Dimol\Dimol\Dimol.bcp\bin\x64\Debug\Dimol.dao.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.bcp\bin\x64\Debug\Dimol.dto.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.bcp\bin\x64\Debug\CYPH.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.bcp\bin\x64\Debug\CYPH.xml
+D:\_Codigo_Dimol\Dimol\Dimol.bcp\obj\x64\Debug\Dimol.bcp.dll
+D:\_Codigo_Dimol\Dimol\Dimol.bcp\obj\x64\Debug\Dimol.bcp.pdb

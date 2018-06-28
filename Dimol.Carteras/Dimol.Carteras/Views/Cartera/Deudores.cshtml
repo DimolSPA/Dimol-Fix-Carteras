@@ -1,0 +1,322 @@
+﻿@model Dimol.Carteras.Models.DeudorModel
+
+@{
+    ViewBag.Title = "Deudores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>@ViewBag.Title</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+@using Mvc.HtmlHelpers
+
+
+
+       @using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabDeudor" }).Disabled(ViewBag.Disable)))
+       {
+           t.Tab("Deudor", "tab1");
+           t.Tab("Teléfonos", "tab2");
+           t.Tab("Email", "tab3");
+           t.Tab("Contactos", "tab4");
+           using (t.BeginPanel())
+           {
+               using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDeudor" }))
+               {
+    @Html.ValidationSummary(true)
+
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.ParticularEmpresa)</div>
+                <div class="col">@Html.DropDownList("ParticularEmpresa", null, new { @class = "ComboboxClass" }) 
+                    @Html.ValidationMessageFor(model => model.ParticularEmpresa) </div>
+            </div>
+            <div class="fila">
+                <div class="col"  style="width:160px">@Html.LabelFor(model => model.Rut)</div>
+                <div class="col"> @Html.JQueryUI().Autocomplete("Ctcid", Url.Action("BuscarRutDeudor"), null, "Rut", null, new { @class = "textboxRut" }).MinLength(13)
+            @Html.ValidationMessageFor(model => model.Rut)</div>
+                <div class="col"  style="width:60px">@Html.LabelFor(model => model.NacionalExtranjero)</div>
+                <div class="col"> @Html.EditorFor(model => model.NacionalExtranjero)
+                    @Html.ValidationMessageFor(model => model.NacionalExtranjero)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Nombre)</div>
+                <div class="col">@Html.TextBox("Nombre", null, new { @class = "textboxClass" })
+            @Html.ValidationMessageFor(model => model.Nombre)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.ApellidoPaterno)</div>
+                <div class="col">@Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "textboxClassM" })
+            @Html.ValidationMessageFor(model => model.ApellidoPaterno)</div>
+                <div class="col">@Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "textboxClassM" })
+            @Html.ValidationMessageFor(model => model.ApellidoMaterno)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.NombreFantasia)</div>
+                <div class="col">@Html.TextBoxFor(model => model.NombreFantasia, new { @class = "textboxClass" })
+            @Html.ValidationMessageFor(model => model.NombreFantasia)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.IdSociedad)</div>
+                <div class="col">@Html.JQueryUI().Autocomplete("IdSociedad", Url.Action("BuscarRutNombreDeudor"), null, "Sociedad", null, new { @class = "textboxClass" ,@value = "0"}).MinLength(5)
+            @Html.ValidationMessageFor(model => model.IdSociedad)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.FechaIngreso)</div>
+                <div class="col">@Html.TextBoxFor(model => model.FechaIngreso, new { @readonly = "readonly" }) 
+            @Html.ValidationMessageFor(model => model.FechaIngreso)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Quiebra)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.Quiebra)
+            @Html.ValidationMessageFor(model => model.Quiebra)</div>
+            </div>
+             <div class="fila">
+                 <div class="col" style="width:160px">@Html.LabelFor(model => model.IdPais)</div>
+                <div class="col"> @Html.DropDownList("IdPais", null, "-- Seleccione País --", new { onchange = "PaisSeleccionado(this,'IdRegion')" })</div>
+                 </div>
+             <div class="fila">
+                 <div class="col" style="width:160px">@Html.LabelFor(model => model.IdRegion)</div>
+                <div class="col"> @Html.DropDownList("IdRegion", null, new { @class = "ComboboxClassL", onchange = "RegionSeleccionada(this,'IdCiudad')" })</div>
+                 </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.IdCiudad)</div>
+                <div class="col"> @Html.DropDownList("IdCiudad", null, new { @class = "ComboboxClass", onchange = "CiudadSeleccionada(this,'IdComuna')" })</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.IdComuna)</div>
+                <div class="col">@Html.DropDownList("IdComuna", null, new { @class = "ComboboxClass" })</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Direccion)</div>
+                <div class="col">@Html.TextBox("Direccion", null, new { @class = "textboxClass" })
+            @Html.ValidationMessageFor(model => model.Direccion)</div>
+                
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.EstadoDireccion)</div>
+                <div class="col">@Html.DropDownListFor(model => model.EstadoDireccion, null)</div>
+                
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.SolicitaQuiebra)</div>
+                <div class="col">
+                    @Html.CheckBoxFor(model => model.SolicitaQuiebra)
+                @Html.ValidationMessageFor(model => model.SolicitaQuiebra)
+                </div>
+                <div class="col" style="float:right"><input type="button" value="Guardar" id="btnGuardarDeudor" onclick="fnGuardarDeudor();" /></div>
+                <div class="col" style="float:right"><input type="submit" value="Limpiar" onclick="fnLimpiarDeudor()" /></div>
+            </div>
+        </div>
+
+               }
+            <br />
+           }
+           using (t.BeginPanel())
+           { 
+               <div class="tabla">
+            <div class="fila">
+                <div class="col">
+               @(Html.jqGrid("gridTelefonos")
+    .addColumn(new Column("Numero").setLabel("Número")
+        .setEditable(true).setEditOptions("size:12")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("TipoTelefono").setLabel("Tipo")
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.TipoTelefono+"\"")
+        .setWidth(80))
+    .addColumn(new Column("EstadoTelefono").setLabel("Estado")
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.EstadoTelefono+"\"")
+        .setWidth(50))
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("Ctcid").setLabel("ctcid")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+        
+    // settings
+    .setCaption("Telefonos").setWidth(400)
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetTelefonoDeudor/?Ctcid="+  ViewBag.Ctcid)
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(false)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Numero, EstadoTelefono")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerTelefonos")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Cartera/OperTelefonoDeudor")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Cartera/OperTelefonoDeudor")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Cartera/OperTelefonoDeudor")
+    .Render()
+
+)
+           </div>
+
+                </div>
+        </div>  
+           
+           }
+           using (t.BeginPanel())
+           {
+               
+        <div class="tabla">
+            <div class="fila">
+                <div class="col">
+            @(Html.jqGrid("gridEmail")
+    .addColumn(new Column("Mail").setLabel("eMail")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(200))
+    .addColumn(new Column("TipoMail").setLabel("Tipo")
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.TipoMail+"\"")
+        .setWidth(50))
+    .addColumn(new Column("Masivo").setLabel("Masivo")
+        .setEditable(true).setAlign(Align.center)
+        .setSortable(true)
+        .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+        .setWidth(80))
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("Ctcid").setLabel("ctcid")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+
+    // settings
+    .setCaption("Emails").setWidth(400)
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetEmailDeudor/?Ctcid="+  ViewBag.Ctcid)
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(false)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("TipoMail, Mail")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerEmails")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Cartera/OperEmailDeudor")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Cartera/OperEmailDeudor")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Cartera/OperEmailDeudor")
+    .Render()
+
+)</div>
+
+                </div>
+        </div>  
+           }
+           using (t.BeginPanel())
+           {
+           
+<div class="tabla">
+            <div class="fila">
+                <div class="col">
+     @(Html.jqGrid("gridContactos")
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("Tipo").setLabel("Tipo")
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.TipoContacto+"\"")
+        .setWidth(80))
+    .addColumn(new Column("EstadoContacto").setLabel("Estado")
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\"A:Activo;D:Desactivado\"")
+        .setWidth(50))
+    .addColumn(new Column("Comuna").setLabel("Comuna")
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.ComunaGrilla+"\"")
+        .setWidth(50))
+    .addColumn(new Column("Direccion").setLabel("Dirección")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("Ctcid").setLabel("ctcid")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("Ddcid").setLabel("ddcid")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+        
+    // settings
+    .setCaption("Contactos").setWidth(900)
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetContactosDeudor/?Ctcid="+  ViewBag.Ctcid)
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(false)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre, Tipo")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerContactos")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Cartera/OperContacto")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Cartera/OperContacto")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Cartera/OperContacto")
+    .Render()
+
+)
+                    </div>
+                </div>
+    </div>
+<br />
+       }
+
+       }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

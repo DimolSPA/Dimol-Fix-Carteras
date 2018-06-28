@@ -1,0 +1,402 @@
+﻿@model Dimol.Carteras.Models.CabeceraComprobanteModel
+
+@{
+    ViewBag.Title = "Comprobante";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var rol = ViewBag.Tipo == "C" ? "block" : "none";
+    var tipoComprobante = Model == null ? "0" : Model.TipoComprobante.ToString();
+    var numero = Model == null ? "0" : Model.CabeceraId.ToString();
+    var totalesC = "block";
+    var anulable = Model.Neto == "0.00" || Model.Neto == "0,00" || string.IsNullOrEmpty( Model.Neto)? "disabled=disabled" : "";
+    var grabar = Model.CabeceraId == 0 ? "style=display:none" : "";
+}
+
+@using Mvc.HtmlHelpers
+<br />
+<h2>Crear Boleta de Receptor</h2>
+
+@using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabGestion" }).Disabled(new int[] { 2 })))
+{
+    t.Tab("Comprobantes", "tab1");
+    using (t.BeginPanel())
+    {
+        <div class="tabla">
+            <div id="divRol" style="display:@rol">
+                <div class="fila">
+                    <div class="col" style="width:120px">@Html.LabelFor(model => model.Tribunal)</div>
+                    <div class="col" style="width:400px">
+                        @Html.JQueryUI().AutocompleteFor(model => model.Tribunal, Url.Action("BuscarTribunal"), "NombreTribunal", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnActualizarFormularioComprobante").OnCreate("fnActualizarFormularioComprobante")
+                        @Html.ValidationMessageFor(model => model.RutCliente)
+                    </div>
+                    @*<div class="col">@Html.DropDownList("Tribunal", null, new { @class = "textboxRutNombre", onchange = "fnActualizarFormularioComprobante()" })</div>*@
+
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:120px">@Html.LabelFor(model => model.Rol)</div>
+                    <div class="col">@Html.DropDownList("TipoRol", null, new { @class = "ComboboxClassS", @onchange = "fnActualizarFormularioComprobante()" })</div>
+                    <div class="col">@Html.TextBox("Rol", null, new { @class = "textboxRut", @onkeypress = "" ,@onchange = "fnActualizarFormularioComprobante()"})</div>@*OnlyNumber(event)*@
+                    <div class="col">@Html.DropDownList("Anio", null, new { @class = "ComboboxClassS", @onchange = "fnActualizarFormularioComprobante()" })</div>
+                    <div class="col"><img id="imgRol" src="~/Images/blank.png" class="" style="float:left" /></div>
+                    @Html.HiddenFor(model=>model.Rolid)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.RutCliente)</div>
+                <div class="col" style="width:400px">
+                    @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "RutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("ActualizaSucursalCliente")
+                @Html.ValidationMessageFor(model => model.RutCliente)
+                </div>
+                <div class="col" style="width:400px;text-align:right">
+                    @if (ViewBag.Prfid == 6 || ViewBag.Prfid == 13 || ViewBag.Prfid == 28 || ViewBag.Prfid == 1)
+                    {<input type="button" value="Eliminar" onclick="fnAnularComprobante();" @anulable />}
+                    <input type="button" value="Grabar" onclick="fnGuardarComprobante();" @grabar id="btnGrabar"/>
+                    <input type="button" value="Nuevo" onclick="fnNuevoComprobante();" />
+                </div>
+            </div>
+            <div class="fila">
+                    <div class="col" style="width:120px">@Html.LabelFor(model => model.Sucursal)</div>
+                    <div class="col">@Html.DropDownList("Sucursal", null, "-- Seleccione --", new {})</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.TipoComprobante)</div>
+                <div class="col"> @Html.DropDownList("TipoComprobante", null, new { @class = "ComboboxClassL", onchange = "ActualizaTipoComprobante()" })</div>
+                @*<div class="col" style="width:120px">@Html.LabelFor(model => model.CabeceraId)</div>
+                <div class="col"> @Html.TextBoxFor(model => model.CabeceraId, new { @onkeypress = "OnlyNumber(event)", @readonly="readonly" })</div>*@
+                @Html.HiddenFor(model=> model.CabeceraId)
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Numero)</div>
+                <div class="col" style="width:250px"> @Html.TextBoxFor(model => model.Numero, new { @style="text-align:right" })</div>
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.FechaDocumento)</div>
+                <div class="col" style="width:120px">
+                    @Html.JQueryUI().Datepicker("FechaDocumento").ShowButtonPanel(true).ShowWeek(false)
+                    @Html.ValidationMessageFor(model => model.FechaDocumento)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.FormaPago)</div>
+                <div class="col"> @Html.DropDownList("FormaPago", null, new { @class = "ComboboxClassL", onchange = "RegionSeleccionada(this, 'Ciudad')" })</div>
+                @*<div class="col" style="width:120px">@Html.LabelFor(model => model.FechaVencimiento)</div>
+                <div class="col" style="width:120px">
+                    @Html.JQueryUI().Datepicker("FechaVencimiento").ShowButtonPanel(true).ShowWeek(false)
+                    @Html.ValidationMessageFor(model => model.FechaVencimiento)
+                </div>*@
+                @Html.HiddenFor(model => model.FechaVencimiento)
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px"><div id="divLblFecEnt" style="display:none">@Html.LabelFor(model => model.FechaEntrega)</div></div>
+                <div class="col" style="width:250px">
+                    <div id="divFecEnt" style="display:none">
+                        @Html.JQueryUI().Datepicker("FechaEntrega").ShowButtonPanel(true).ShowWeek(false)
+                        @Html.ValidationMessageFor(model => model.FechaEntrega)
+                    </div>
+                </div>
+                
+                @*<div id="divLblCont" class="col" style="width:120px">@Html.LabelFor(model => model.FechaContabilizacion)</div>
+                <div id="divDtpCont" class="col" style="width:120px">
+                    @Html.JQueryUI().Datepicker("FechaContabilizacion").ShowButtonPanel(true).ShowWeek(false)
+                    @Html.ValidationMessageFor(model => model.FechaContabilizacion)
+                </div>*@
+                @Html.HiddenFor(model => model.FechaContabilizacion)
+            </div>
+            <div class="fila" id="divOC">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.NumeroOC)</div>
+                <div class="col" style="width:250px"> @Html.TextBoxFor(model => model.NumeroOC, new { @onkeypress = "return CheckNumeric(event);" , @style="text-align:right"})</div>
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.FechaOrdenCompra)</div>
+                <div class="col" style="width:120px">
+                    @Html.JQueryUI().Datepicker("FechaOrdenCompra").ShowButtonPanel(true).ShowWeek(false)
+                    @Html.ValidationMessageFor(model => model.FechaOrdenCompra)
+                </div>
+
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Moneda) </div>
+                <div class="col" style="width:250px">@Html.DropDownListFor(model => model.Moneda, ViewBag.Moneda as List<SelectListItem>, new { @disabled = "disabled" })</div>
+                @*<div class="col" style="width:120px">@Html.LabelFor(model => model.TipoCambio)</div>
+                <div class="col"> @Html.TextBoxFor(model => model.TipoCambio,new { @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);" , @style="text-align:right"})</div>*@
+                @Html.HiddenFor(model => model.TipoCambio)
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.TipoGasto) </div>
+                <div class="col">@Html.DropDownListFor(model => model.TipoGasto, ViewBag.Moneda as List<SelectListItem>, new { @disabled = "disabled" })</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.RutNombreCliente) </div>
+                <div class="col">@Html.TextBoxFor(model => model.RutNombreCliente, null, new { @class = "textboxRutNombre" })</div>
+                @Html.Hidden("PclidRol")
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.RutNombreDeudor) </div>
+                <div class="col">@Html.TextBoxFor(model => model.RutNombreDeudor, null, new { @class = "textboxRutNombre" })</div>
+                @Html.HiddenFor(model => model.Ctcid)
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Asegurados) </div>
+                <div class="col" style="width:250px">@Html.TextAreaFor(m => m.Asegurados, 3, 55, new { })</div>
+
+                @Html.Hidden("Tipcpbtdoc")
+                @Html.Hidden("Tipprod")
+                @Html.Hidden("Costos")
+                @Html.Hidden("Selcpbt")
+                @Html.Hidden("Cartcli")
+                @Html.Hidden("Contable")
+                @Html.Hidden("Selapl")
+                @Html.Hidden("Aplica")
+                @Html.Hidden("Cptoctbl")
+                @Html.Hidden("Findeuda")
+                @Html.Hidden("Cancela")
+                @Html.Hidden("Libcompra")
+                @Html.Hidden("Cambiodoc")
+                @Html.Hidden("Remesa")
+                @Html.Hidden("Forpag")
+                @Html.Hidden("Tipdig")
+                @Html.Hidden("Ordcomp")
+                @Html.Hidden("Clbid")
+                @Html.Hidden("Sinimp")
+
+                @Html.Hidden("Tipo")
+                @Html.Hidden("PJ")
+                @Html.Hidden("Pag")
+            </div>
+            @*<div class="fila">
+                <div class="col" style="width:120px">Estado</div>
+                <div class="col">@Html.DropDownList("Estado", null, new { @class = "ComboboxClass", onchange = "", @disabled="disabled" })</div>
+            </div>*@
+            @Html.HiddenFor(model => model.Estado)
+            @Html.HiddenFor(model => model.Glosa)
+        </div>
+
+
+    <div class="tabla">
+        
+    </div>
+    <br />
+    <div class="tabla">
+        <div class="fila">
+            <div class="col"><button class="search" id="btnAgregarCabeceraDetalle" onclick="fnAgregarCabeceraDetalle();" style="vertical-align:middle"><img src="~/Images/botones/Add20.png" width="20px" height="20px" title="Agregar" alt="Agregar" /></button>Agregar </div>
+        </div>
+    </div>
+
+    @(Html.jqGrid("gridItemC")
+        .addColumn(new Column("Codigo").setLabel("Codigo").setAlign(Align.right).setHidden(true)
+        .setSortable(true)
+        .setWidth(50))
+        .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setSortable(true)
+        .setWidth(150))
+        .addColumn(new Column("Precio").setLabel("Precio").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(60))
+                .addColumn(new Column("Cantidad").setLabel("Cantidad").setAlign(Align.right).setFormatter(Formatters.number)
+                .setSortable(true).setHidden(true)
+                .setWidth(50))
+        .addColumn(new Column("Neto").setLabel("Total Bruto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(60))
+        .addColumn(new Column("Retenido").setLabel("Imp. Ret.").setAlign(Align.right)
+        .setSortable(true)
+        .setWidth(40))
+        //.addColumn(new Column("Impuesto").setLabel("Impuesto").setAlign(Align.right).setFormatter(Formatters.number)
+        //.setSortable(true)
+        //.setWidth(60))
+    .addColumn(new Column("Total").setLabel("Total Imp.").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("TotalNeto").setLabel("Total Neto").setAlign(Align.right).setFormatter(Formatters.number).setHidden(true)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Abreviado").setLabel("Abreviado").setAlign(Align.right).setHidden(true)
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("ArchivoEstampe").setLabel("Archivo").setAlign(Align.left)
+        .setSortable(true)
+        .setWidth(125))
+    .addColumn(new Column("NombreArchivo").setLabel("Nombre Archivo").setAlign(Align.left)
+        .setSortable(true).setHidden(true)
+        .setWidth(125))
+    .addColumn(new Column("FecJud").setLabel("Fecha Accion Judicial").setAlign(Align.left).setDateFmt("d-m-Y")
+        .setSortable(true).setHidden(true)
+        .setWidth(125))
+
+    // settings
+    .setCaption("Detalle")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDetalleCompra/?tcp=" + tipoComprobante + "&numero=" + numero)
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Item")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerItemC")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setExcelExport("/Mantenedor/ExportToExcel")
+    .onSelectRow("DetalleCompraSeleccionado(rowid,status)")
+    .Render()
+
+    )
+    <div style="display:none">
+        @(Html.jqGrid("Documentos")
+    .addColumn(new Column("Ccbid").setLabel("Ccbid")
+        .setSortable(true).setHidden(true)
+        .setWidth(60))
+    .addColumn(new Column("TipoCpbtNombre").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(60))
+    .addColumn(new Column("NumeroCpbt").setLabel("Numero")
+        .setSortable(true)
+        .setWidth(53))
+    .addColumn(new Column("NumeroEspecial").setLabel("Negocio")
+        .setSortable(true)
+        .setWidth(55))
+    .addColumn(new Column("CodigoCargaNombre").setLabel("Carga")
+        .setSortable(true)
+        .setWidth(55))
+    .addColumn(new Column("FechaIngreso").setLabel("Asig.").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+    .addColumn(new Column("FechaDocumento").setLabel("Doc.").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+    .addColumn(new Column("FechaVencimiento").setLabel("Venc.").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+    .addColumn(new Column("DiasVencido").setLabel("Dias Venc.").setAlign(Align.right).addClass("redFont")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("FechaPlazo").setLabel("Plazo").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+    .addColumn(new Column("FechaCalculoInteres").setLabel("Cong. Int.").setAlign(Align.center).setHidden(true)
+        .setSortable(true)
+        .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+    .addColumn(new Column("FechaUltimaGestion").setLabel("Ult. Gest.").setAlign(Align.center).setHidden(true)
+        .setSortable(true)
+        .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+    .addColumn(new Column("EstadoCartera").setLabel("Estado")
+        .setSortable(true)
+        .setWidth(80))
+    .addColumn(new Column("Moneda").setLabel("Moneda")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Compromiso").setLabel("Compromiso").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Intereses").setLabel("Interes").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Honorarios").setLabel("Honorarios").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("GastoOtros").setLabel("Gast. Pre.").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("GastoJudicial").setLabel("Gast. Jud.").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("TotalDeuda").setLabel("Total").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("SubcarteraNombre").setLabel("Asegurado").setHidden(true)
+        .setSortable(true)
+        .setWidth(20))
+    .addColumn(new Column("Comentario").setLabel("Comentario").setHidden(true)
+        .setSortable(true)
+        .setWidth(100))
+
+    // settings
+    .setCaption("Comprobantes")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetCpbt")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("FechaVencimiento")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDocumentos")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setExcelExport("/Mantenedor/ExportToExcel")
+    .Render()
+
+        )
+    </div>
+    }//end panel
+
+    <div class="tabla">
+        <div id="divTotalesC" style="display:@totalesC">
+            <div class="fila">
+                <div class="col_label_total">@Html.LabelFor(model => model.Subtotal, new { @style = "" })</div>
+                <div class="col">@Html.TextBoxFor(model => model.Subtotal, null, new { @class = "col_textbox_total", @readonly = "readonly" })</div>
+                @Html.HiddenFor(model => model.Descuento)
+                @Html.HiddenFor(model => model.Neto)
+                @Html.HiddenFor(model => model.Impuestos)
+            </div>
+            @*<div class="fila">
+                <div class="col_label_total">@Html.LabelFor(model => model.Descuento)</div>
+                <div class="col">@Html.TextBoxFor(model => model.Descuento, null, new { @class = "col_textbox_total", @readonly = "readonly" })</div>
+            </div>
+            <div class="fila">
+                <div class="col_label_total">@Html.LabelFor(model => model.Neto)</div>
+                <div class="col">@Html.TextBoxFor(model => model.Neto, null, new { @class = "col_textbox_total", @readonly = "readonly" })</div>
+            </div>
+            <div class="fila">
+                <div class="col_label_total" >@Html.LabelFor(model => model.Impuestos)</div>
+                <div class="col">@Html.TextBoxFor(model => model.Impuestos, null, new { @class = "col_textbox_total", @readonly = "readonly" })</div>
+            </div>*@
+            <div class="fila">
+                <div class="col_label_total">@Html.LabelFor(model => model.Retenido)</div>
+                <div class="col">@Html.TextBoxFor(model => model.Retenido, null, new { @class = "col_textbox_total", @readonly = "readonly" })</div>
+            </div>
+            <div class="fila">
+                <div class="col_label_total">@Html.LabelFor(model => model.Total)</div>
+                <div class="col">@Html.TextBoxFor(model => model.Total, null, new { @class = "col_textbox_total", @readonly = "readonly" })</div>
+            </div>
+        </div>
+    </div>
+}   
+<br />
+
+
+
+    @using (Html.JQueryUI().Begin(new Dialog(new { id = "ppCabeceraDetalleCompra" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Agregar Detalle")
+    .CloseOnEscape(true)
+    .Width(700)
+    .Height(200)
+        //.TriggerClick("#btnBuscarDeudor")
+    .OnOpen("ActualizarDetalleC")
+    ))
+    {
+        @Html.Partial("_AgregarCabeceraDetalleC")
+    }
+
+
+    @section Scripts {
+        <script>
+            window.onload = function () {
+                ActualizaSucursalCliente();
+                ActualizaTipoComprobante();
+            }
+        </script>
+    }
+
+

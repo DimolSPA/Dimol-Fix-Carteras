@@ -1,0 +1,1741 @@
+﻿@{
+    ViewBag.Title = "Gestionar Cartera";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewBag.UserName == "Benjamin Arce")
+    {
+        ViewBag.CategoriaEnable = "";
+    }
+}
+@using Mvc.HtmlHelpers
+<h2>Gestionar Cartera</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/slider/elastislide.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/slider/style.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/nav.css" />
+
+<script src="~/Scripts/slider/gallery.js"></script>
+<script src="~/Scripts/slider/jquery.easing.1.3.js"></script>
+<script src="~/Scripts/slider/jquery.elastislide.js"></script>
+<script src="~/Scripts/slider/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+<style>
+    .es-carousel ul {
+        display: block;
+    }
+
+    .ui-jqgrid tr.myfootrow td {
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        height: 21px;
+        padding: 0 2px 0 2px;
+        border-top-width: 1px;
+        border-top-color: inherit;
+        border-top-style: solid;
+    }
+
+    .ui-jqgrid tr.myfootrow-ltr td {
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        height: 21px;
+        padding: 0 2px 0 2px;
+        border-top-width: 1px;
+        border-top-color: inherit;
+        border-top-style: solid;
+    }
+
+    .ui-jqgrid tr.footrow-ltr td {
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        height: 21px;
+        padding: 0 2px 0 2px;
+        border-top-width: 1px;
+        border-top-color: inherit;
+        border-top-style: solid;
+    }
+
+    .mails-lbl {
+	    display:inline-block;
+        color:#222;
+        margin: 2px 5px;
+        overflow:hidden;
+        border:1px solid #b9b9b9;
+        background-color:#f5f5f5;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+        padding:5px;
+        font-family:arial,sans-serif;
+        font-size:small;
+    }
+
+    .mails-lbl:hover {
+        border-color:#666666;
+    }
+
+  /*.ui-widget-header {
+            background: #cedc98;
+            border: 1px solid #DDDDDD;
+            color: #333333;
+            font-weight: bold;
+         }*/
+ 
+</style>
+
+<script id="img-wrapper-tmpl" type="text/x-jquery-tmpl">
+    <div class="rg-image-wrapper">
+        {{if itemsCount > 1}}
+        <div class="rg-image-nav">
+            <a href="#" class="rg-image-nav-prev">Previous Image</a>
+            <a href="#" class="rg-image-nav-next">Next Image</a>
+        </div>
+        {{/if}}
+        <div class="rg-caption-wrapper">
+            <div class="rg-caption" style="display:none;">
+                <p></p>
+            </div>
+        </div>
+        <div class="rg-image" oncontextmenu="return false"></div>
+        <div class="rg-loading"></div>
+
+    </div>
+</script>
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["orgchart"] });
+    $(window).load(function () {
+        if ($("#Cli").val() == "") {
+            setTimeout(CargarDeudorRut, 2000);
+        }
+        else {
+            setTimeout(CargarDeudorRutCliente, 2000);
+        }
+        
+        //if ($("#Pclid").val() == 522) {
+        //    $("#divDirecciones").show();
+        //} else {
+        //    $("#divDirecciones").hide();
+        //}
+    })
+
+    window.onload = function () {
+        fnCochaOnCreate();
+        document.getElementById('frmCargaImagen').onsubmit = function () {
+            var formdata = new FormData(); //FormData object
+            var fileInput = document.getElementById('subirArchivo');
+            //Iterating through each files selected in fileInput
+            for (i = 0; i < fileInput.files.length; i++) {
+                //Appending each file to FormData object
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+            //Creating an XMLHttpRequest and sending
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/Cartera/Upload/?tipo=CargaImagenCpbtdoc' + "&Ctcid=" + $("#Ctcid").val() + "&Pclid=" + $("#Pclid").val() + "&rut=" + $("#ListaCpbt").val());
+            xhr.send(formdata);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    $('#Archivo').val(xhr.responseText.replace(/\"/g, ''))
+                    if (xhr.responseText == '""') {
+                        alert("Error al subir el archivo al servidor");
+                        $("#imgSubirArchivo").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+                    } else {
+                        alert("Archivo listo para ser procesado");
+                        $("#imgSubirArchivo").removeClass("error").addClass("ok");
+                        $("#btnCargar").removeAttr("disabled");
+                        $("#btnSubmit").attr("disabled", "disabled");
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
+    jQuery(document).ready(function ($) {
+        SelectGalleryFotos =  function () {
+            SelectRgGallery("#rg-gallery");
+        }
+        SelectGalleryFotosVisita = function () {
+            SelectRgGallery("#rg-gallery-visita");
+        }
+
+        $("#frmContactoTelefono input[id=Telefono]").rules("add", {
+            required: true,
+            minlength: 9,
+            maxlength: 9,
+            digits: true,
+            messages: {
+                required: "este campo es requerido",
+                minlength: "este campo debe tener al menos 9 dígitos",
+                maxlength: "este campo debe tener al menos 9 dígitos",
+                digits: "este campo debe contener sólo números"
+            }
+        });
+    });
+</script>
+@if (ViewBag.ClienteAsociado == 0)
+                                {
+@Html.Partial("../Shared/_ReportBanner")
+                                }
+else
+{
+    <input type="hidden" id="FlagCliente" value="true" />
+}
+<input type="hidden" id="Tipo" value="@ViewBag.Tipo" />
+<input type="hidden" id="Ctcid" value="" />
+<input type="hidden" id="Pag" name="Pag" value="@ViewBag.Pag" />
+<input type="hidden" id="Prf" name="Prf" value="@ViewBag.Prf" />
+<input type="hidden" id="Cli" name="Cli" value="@ViewBag.Cli" />
+@using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabGestion" }).Disabled(ViewBag.ClienteAsociado == 0 ? new int[] { 4, 5 } : new int[] { 2, 4, 5 })))
+{
+    t.Tab("Gestionar", "tab1");
+    t.Tab("Judicial", "tab2");
+    t.Tab("Observaciones &nbsp;&nbsp; <span id='notObservacion' class=''></span>", "tab3");
+    t.Tab("Terceros &nbsp;&nbsp; <span id='notTerceros' class=''></span>", "tab4");
+    t.Tab("Dctos. Custodia", "tab5");
+    t.Tab("Pagos", "tab6");
+    using (t.BeginPanel())
+    {
+        <div class="tabla">
+            <div class="fila">
+                <div class="col">Cliente @Html.TextBox("Cliente", null, new { @class = "textboxClass", @disabled = "disabled" })</div>
+                <div class="col">
+                    RUT  @Html.TextBox("Rut", null, new { @class = "textboxRut", onkeypress = "CargarDeudorRutEvento(event);" })
+                    @*@Html.JQueryUI().Autocomplete("Ctcid",Url.Action("BuscarRutDeudor"),null,"Rut",null,new { @class= "textboxRut", onkeypress="CargarDeudorRutEvento(event);"}).MinLength(15)*@
+                </div>
+                <div class="col">Nombre @Html.TextBox("Nombre", null, new { @class = "textboxClass" })</div>
+                <div class="col"><button class="search" id="btnBuscarDeudor" onclick="$('#ppBuscar').dialog('open');"><img src="~/Images/botones/Search.png" width="20px" height="20px" title="Buscar" alt="Buscar" /> </button></div>
+                <div class="col" style="float:right; position: absolute; right:70px">
+                    <button class="search" id="btnEnviarEmail" onclick="fnBtnEnviarEmail(); return false;" title="EnviarEmail" style="display:none"><img src="~/Images/botones/Email.png" width="40px" height="38px" title="Enviar Email" alt="EnviarEmail" /> </button>
+                    <button class="search" id="btnEnviarEmailMutual" onclick="fnBtnTipoMailMutual(); return false;" title="EnviarEmailMutual" style="display:none"><img src="~/Images/botones/Email.png" width="40px" height="38px" title="Enviar Email Mutual" alt="EnviarEmailMutual" /> </button>
+                    <button class="search" id="btnEnviarEmailCoopeuch" onclick="fnBtnEnviarEmailCoopeuch(); return false;" title="EnviarEmailCoopeuch" style="display:none"><img src="~/Images/botones/Email.png" width="40px" height="38px" title="Enviar Email Coopeuch" alt="EnviarEmailCoopeuch" /> </button>
+                </div>
+                <div class="col" style="float:right; position: absolute; right:15px">
+                    @if (ViewBag.ClienteAsociado == 0) {
+                    <button class="search" id="btnRelacionados" onclick="fnBtnAsociados(); return false;" title="Asociados"><img src="~/Images/botones/related40.png" width="40px" height="38px" title="Asociados" alt="Asociados" /> </button>
+                    } 
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col">País @Html.DropDownList("Pais", null, "-- Seleccione País --", new { onchange = "PaisSeleccionado(this, 'Region' )" })</div>
+                <div class="col">Región @Html.DropDownList("Region", null, "-- Seleccione Region --", new { @class = "ComboboxClassL", onchange = "RegionSeleccionada(this, 'Ciudad')" })</div>
+                <div class="col">Ciudad @Html.DropDownList("Ciudad", null, "-- Seleccione Ciudad --", new { @class = "ComboboxClass", onchange = "CiudadSeleccionada(this, 'Comuna')" })</div>
+            </div>
+            <div class="fila">
+                <div class="col">Comuna @Html.DropDownList("Comuna", null, "-- Seleccione Comuna --", new { @class = "ComboboxClass" })</div>
+                <div class="col">Dirección @Html.TextBox("Direccion", null, new { @class = "textboxClass" })</div>
+                <div class="col">Estado @Html.DropDownList("EstadoDireccion")</div>
+            </div>
+            <div class="fila">
+                <div class="col">Gestor @Html.TextBox("Gestor", null, new { @class = "textboxClass" })<input type="hidden" id="Gesid" value="" /> </div>
+                @if (ViewBag.ClienteAsociado == 0)
+                {<div class="col">Categoria @(string.IsNullOrEmpty(ViewBag.CategoriaEnable) ? @Html.DropDownList("Categoria", null, new { @onchange = "fnGrabarCategoria();" }) : @Html.DropDownList("Categoria", null, new { @disabled = "disabled", @onchange = "fnGrabarCategoria();" }))</div>}
+                <div class="col">@Html.Label(" ", new { id = "lblQuiebra", style = "font-weight:bold;color:#FF0033" })@Html.Label(" ", new { id = "lblPreQuiebra", style = "font-weight:bold;color:#FF8000" })</div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="tabla">
+            <div class="fila">
+                <div class="col">Estado @Html.DropDownList("EstadoCpbt", null, new { @class = "ComboboxClass", onchange = "fnBuscarCpbtDeudor()" })</div>
+                <div class="col">Grupo @Html.DropDownList("GrupoCpbt", null, new { @class = "ComboboxClass", onchange = "" })</div>
+            </div>
+        </div>
+
+        @(Html.jqGrid("Documentos")
+    .addColumn(new Column("Ccbid").setLabel("Ccbid")
+        .setSortable(true).setHidden(true)
+        .setWidth(60))
+    .addColumn(new Column("TipoCpbtNombre").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(60))
+    .addColumn(new Column("NumeroCpbt").setLabel("Número")
+        .setSortable(true)
+        .setWidth(53))
+    .addColumn(new Column("NumeroEspecial").setLabel("Negocio")
+        .setSortable(true)
+        .setWidth(55))
+    .addColumn(new Column("CodigoCargaNombre").setLabel("Carga")
+        .setSortable(true)
+        .setWidth(55))
+    .addColumn(new Column("FechaIngreso").setLabel("Asig.").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+    .addColumn(new Column("FechaDocumento").setLabel("Doc.").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+    .addColumn(new Column("FechaVencimiento").setLabel("Venc.").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+    .addColumn(new Column("DiasVencido").setLabel("Dias Venc.").setAlign(Align.right).addClass("redFont")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("FechaPlazo").setLabel("Plazo").setAlign(Align.center)
+        .setSortable(true)
+            .setWidth(55).setFormatter(Formatters.date))
+    .addColumn(new Column("FechaCalculoInteres").setLabel("Cong. Int.").setAlign(Align.center).setHidden(true)
+        .setSortable(true)
+        .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+    .addColumn(new Column("FechaUltimaGestion").setLabel("Ult. Gest.").setAlign(Align.center).setHidden(true)
+        .setSortable(true)
+        .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+    .addColumn(new Column("EstadoCartera").setLabel("Estado")
+        .setSortable(true)
+        .setWidth(80))
+    .addColumn(new Column("EstadoJudicial").setLabel("Estado Judicial")
+        .setSortable(true)
+        .setWidth(90))
+    .addColumn(new Column("Moneda").setLabel("Moneda")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Compromiso").setLabel("Compromiso").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Intereses").setLabel("Interes").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Honorarios").setLabel("Honorarios").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("GastoOtros").setLabel("Gast. Pre.").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("GastoJudicial").setLabel("Gast. Jud.").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("TotalDeuda").setLabel("Total").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("SubcarteraNombre").setLabel("Asegurado").setHidden(false)
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("Comentario").setLabel("Comentario").setHidden(true)
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("DemandaPendiente").setLabel("Demanda Pendiente").setHidden(true)
+            .setSortable(true)
+            .setWidth(100))
+
+    // settings
+    .setCaption("Comprobantes")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetCpbt")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("FechaVencimiento")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDocumentos")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setExcelExport("/Mantenedor/ExportToExcel")
+    .setShrinkToFit(false)
+    .setFooterRow(true)
+    .setMultiSelect(true)
+    .onLoadComplete("var $this = $(this), " +
+        "sum = $this.jqGrid('getCol', 'Monto', false, 'sum')," +
+        "$footerRow = $(this.grid.sDiv).find('tr.footrow')," +
+        "localData = $this.jqGrid('getGridParam', 'data')," +
+        "totalRows = localData.length," +
+        "totalSum = 0," +
+        "$newFooterRow," +
+        "i;" +
+        "MostrarColumnaEstadoJudicial();" +
+        "CargarCpbtTotal();" +
+        "CargarCpbtTotalMoneda();" +
+
+            "$newFooterRow = $(this.grid.sDiv).find('tr.myfootrow');" +
+            "if ($newFooterRow.length === 0) {" +
+                "/* add second row of the footer if it's not exist*/" +
+                "$newFooterRow = $footerRow.clone();" +
+                "$newFooterRow.removeClass('footrow')" +
+                    ".addClass('myfootrow ui-widget-content');" +
+                "$newFooterRow.children('td').each(function () {" +
+                    "this.style.width = ''; /* remove width from inline CSS*/" +
+                "});" +
+                "$newFooterRow.insertAfter($footerRow);" +
+            "}" +
+            "var totales = JSON.parse($('#hddTotales').val());" +
+            "var totalesMoneda = JSON.parse($('#hddTotalesMoneda').val());" +
+            "$this.jqGrid('footerData', 'set', {Moneda: 'Total:', Monto: totales.Monto, Saldo : totales.Saldo, Compromiso: totales.Compromiso,Intereses: totales.Intereses, Honorarios: totales.Honorarios,GastoOtros:totales.GastoOtros, GastoJudicial: totales.GastoJudicial,  TotalDeuda:totales.TotalDeuda  });" +
+
+    //"// calculate the value for the second footer row"+
+            //"for (i = 0; i < totalRows; i++) {"+
+            //"totalSum += parseInt(localData[i].amount, 10);"+
+            //"}"+
+    "$newFooterRow.find('>td[aria-describedby=' + this.id + '_Monto]').text('');" +
+    "$newFooterRow.find('>td[aria-describedby=' + this.id + '_Monto]').text( formatThousands(totalesMoneda.Monto, 2));" +
+    "$newFooterRow.find('>td[aria-describedby=' + this.id + '_Saldo]').text( formatThousands(totalesMoneda.Saldo, 2));" +
+    "$newFooterRow.find('>td[aria-describedby=' + this.id + '_Compromiso]').text( formatThousands(totalesMoneda.Compromiso, 2));" +
+    "$newFooterRow.find('>td[aria-describedby=' + this.id + '_Intereses]').text( formatThousands(totalesMoneda.Intereses, 2));" +
+    "$newFooterRow.find('>td[aria-describedby=' + this.id + '_Honorarios]').text( formatThousands(totalesMoneda.Honorarios, 2));" +
+    "$newFooterRow.find('>td[aria-describedby=' + this.id + '_GastoOtros]').text( formatThousands(totalesMoneda.GastoOtros, 2));" +
+    "$newFooterRow.find('>td[aria-describedby=' + this.id + '_GastoJudicial]').text( formatThousands(totalesMoneda.GastoJudicial, 2));" +
+    "$newFooterRow.find('>td[aria-describedby=' + this.id + '_TotalDeuda]').text( formatThousands(totalesMoneda.TotalDeuda, 2));" +
+    "var totRows = $('#Documentos').jqGrid('getRowData').length;var rows = $('#Documentos').jqGrid('getRowData');" +
+    "if (totRows > 0) {for (var i = 0; i < totRows; i++) {if (rows[i].DemandaPendiente == '1') { jQuery('#jqg_Documentos_'+rows[i].Ccbid).attr('checked', 'checked');}}}" +
+                "if($('#Prf').val() != 1 && $('#Prf').val() != 6 && $('#Prf').val() != 8 && $('#Prf').val() != 9 ) {for (var i = 0; i < totRows; i++) {jQuery('#jqg_Documentos_'+rows[i].Ccbid).attr('disabled', 'disabled');}}" +
+                    "$('#cb_Documentos').attr('disabled', 'disabled');"
+            )
+        .onBeforeSelectRow("SelectDemandaPendiente(rowid,e)")
+    .Render()
+
+        )
+        <br />
+        <input type="hidden" id="hddTotales" value="0" />
+        <input type="hidden" id="hddTotalesMoneda" value="0" />
+
+        if (ViewBag.ClienteAsociado != 90)
+        {
+            using (var u = Html.JQueryUI().Begin(new Tabs(new { id = "tabDetallesDeudor" }).Disabled(ViewBag.ClienteAsociado == 86 ? new int[] { 1 } : new int[] { 2 })))
+            {
+                if (ViewBag.ClienteAsociado != 86)
+                {
+                    u.Tab("Historial", "tab1");
+                }
+                u.Tab("SII &nbsp;&nbsp; <img src='/Images/yellow-ex.png' id='idImgSii' width='25px' height='25px' style='margin-top:-10px;top:-2px;margin-left:-8px;position:absolute;' />", "tab2");
+                u.Tab("Causas &nbsp;&nbsp; <span id='notCausas' class=''></span>", "tab3");
+                if (ViewBag.ClienteAsociado != 86)
+                { 
+                    u.Tab("Contactos", "tab4"); 
+                }
+                u.Tab("Terreno &nbsp;&nbsp; <span id='ColorTerreno' class=''></span>", "tab5");
+                u.Tab("Documentos", "tab6");
+                if (ViewBag.ClienteAsociado != 86)
+                {
+                    u.Tab("Imágenes", "tab7");
+                    u.Tab("Configuración", "tab8");
+                }
+                if (ViewBag.ClienteAsociado != 86)
+                {
+                    using (u.BeginPanel())
+                    {
+                        if (ViewBag.ClienteAsociado == 0)
+                        {
+                        <div class="tabla">
+                            <div class="fila">
+                                <div class="col"><button class="search" id="btnAgregarHistorial" onclick="fnFormularioGestion();" style="vertical-align:middle"><img src="~/Images/botones/Add20.png" width="20px" height="20px" title="Agregar" alt="Agregar" /></button>Agregar </div>
+                                <div class="col" style="width:85%; text-align :right"> @Html.DropDownList("TipoHistorial", null, null, new { onchange = "fnBuscarHistorialDeudor()" })</div>
+                            </div>
+                        </div> }
+                        @(Html.jqGrid("gridHistorial")
+                        .addColumn(new Column("Fecha").setLabel("Fecha").setAlign(Align.center)
+                            .setSortable(true)
+                            .setWidth(65).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+                        .addColumn(new Column("Tipo").setLabel("Tipo")
+                            .setSortable(true)
+                            .setWidth(150))
+                        .addColumn(new Column("NombreUsuario").setLabel("Usuario")
+                            .setSortable(true)
+                            .setWidth(150))
+                        .addColumn(new Column("Comentario").setLabel("Comentario")
+                            .setSortable(true)
+                            .setWidth(300))
+                        .addColumn(new Column("TipoContacto").setLabel("Tip. Cont.")
+                            .setSortable(true)
+                            .setWidth(150))
+                        .addColumn(new Column("NombreContacto").setLabel("Contacto")
+                            .setSortable(true)
+                            .setWidth(60))
+                        .addColumn(new Column("Telefono").setLabel("Teléfono")
+                            .setSortable(true)
+                            .setWidth(60))
+
+                        // settings
+                        .setCaption("Historial")
+                        .setRequestType(RequestType.get)
+                        .setUrl("~/Cartera/GetDummy")
+                        .setAltRows(true)
+                        .setAltClass("altGridRows")
+                        .setAutoWidth(false)
+                        .setRowNum(30)
+                        .setRowList(new int[] { 10, 30, 50 })
+                        .setViewRecords(true)
+                        .setSortName("Fecha")
+                        .setSortOrder(SortOrder.desc)
+                        .setPager("pagerHistorial")
+                        .setPagerPos(PagerPos.center)
+                        .setPgButtons(true)
+                        .setCellEdit(false)
+                        .setCellSubmit(CellSubmit.clientArray)
+                        .setNavEdit(true)
+                        .setEditUrl("/Cartera/EditDummy")
+                        .setAddUrl("/Cartera/EditDummy")
+                        .setExcelExport("/Mantenedor/ExportToExcel")
+                        .setShrinkToFit(false)
+                        .setWidth(900)
+                        .Render()
+
+                        )
+                    }
+                }
+                using (u.BeginPanel())
+                {
+                    <div id="tblSii">
+
+                    </div>
+
+                }
+                using (u.BeginPanel())
+                {
+                    <label style="font-weight:bold;color:#FF0033">"Esta informacion no se encuentra completamente actualizada, por lo tanto el deudor puede tener mas demandas de las que aparecen aca."</label><br />
+                    @(Html.jqGrid("gridCausas")
+                     .addColumn(new Column("Rol").setLabel("Rol").setAlign(Align.center)
+                                    .setSortable(true).setCustomFormatter("fnLinkPJ")
+                            .setWidth(100))
+                    .addColumn(new Column("Fecha").setLabel("Fecha").setAlign(Align.center)
+                        .setSortable(true)
+                        .setWidth(65).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+                    .addColumn(new Column("Caratulado").setLabel("Caratulado")
+                        .setSortable(true)
+                        .setWidth(350))
+                    .addColumn(new Column("Tribunal").setLabel("Tribunal")
+                        .setSortable(true)
+                        .setWidth(300))
+                    .addColumn(new Column("RutaDemanda").setLabel("Demanda")
+                        .setSortable(true).setCustomFormatter("fnBotonesArchivo")
+                        .setWidth(60))
+
+                    // settings
+                    .setCaption("Causas Externas")
+                    .setRequestType(RequestType.get)
+                    .setUrl("~/Cartera/GetDummy")
+                    .setAltRows(true)
+                    .setAltClass("altGridRows")
+                    .setAutoWidth(false)
+                    .setRowNum(10)
+                    .setRowList(new int[] { 10, 30, 50 })
+                    .setViewRecords(true)
+                    .setSortName("Fecha")
+                    .setSortOrder(SortOrder.desc)
+                        .setPager("pagerCausas")
+                    .setPagerPos(PagerPos.center)
+                    .setPgButtons(true)
+                    .setCellEdit(false)
+                    .setCellSubmit(CellSubmit.clientArray)
+                    .setNavEdit(true)
+                    .setEditUrl("/Cartera/EditDummy")
+                    .setAddUrl("/Cartera/EditDummy")
+                    .setExcelExport("/Mantenedor/ExportToExcel")
+                    .setShrinkToFit(false)
+                    .setWidth(900)
+                    .onGridComplete("fnNotifCausasDeudor()")
+                    .Render()
+
+                    )
+                }
+                if (ViewBag.ClienteAsociado != 86)
+                {
+                using (u.BeginPanel())
+                {
+                    <div class="tabla">
+                        <div class="fila">
+                            <div class="col">
+                                @if (ViewBag.ClienteAsociado == 0)
+                                {
+                                    <div class="tabla">
+                                        <div class="fila">
+                                            <div class="col"><button class="search" id="btnAgregarContactoTelefono" onclick="fnFormularioContactos('T');" style="vertical-align:middle"><img src="~/Images/botones/Add20.png" width="20px" height="20px" title="Agregar" alt="Agregar" /></button>Agregar </div>
+                                        </div>
+                                    </div> }
+                                @(Html.jqGrid("gridTelefonos")
+                                        .addColumn(new Column("CodigoArea").setLabel("Codigo")
+                                    .setEditable(false)
+                                            .setSortable(true)
+                                            .setWidth(50))
+                                        .addColumn(new Column("Numero").setLabel("Número")
+                                    .setEditable(false)
+                                            .setSortable(true)
+                                            .setWidth(50))
+                                        .addColumn(new Column("DescEstado").setLabel("Estado")
+                                            .setSortable(true)
+                                            .setWidth(50))
+                                        .addColumn(new Column("TipoContacto").setLabel("Tip. Cont.")
+                                    .setEditable(false)
+                                            .setSortable(true)
+                                            .setEditType(EditType.select)
+                                            .setEditOptions("value:\"" + ViewBag.TipoContacto + "\"")
+                                            .setWidth(80))
+                                        .addColumn(new Column("NombreContacto").setLabel("Contacto")
+                                    .setEditable(false)
+                                            .setSortable(true)
+                                            .setWidth(80))
+                                        .addColumn(new Column("ctcid").setLabel(" ")
+                                            .setHidden(false)
+                                            .setEditable(false).setCustomFormatter("fnBotonesContactoTelefono")
+                                            .setWidth(50))
+
+                                        // settings
+                                        .setCaption("Telefonos").setWidth(450)
+                                        .setRequestType(RequestType.get)
+                                        .setUrl("~/Cartera/GetDummy")
+                                        .setAltRows(true)
+                                        .setAltClass("altGridRows")
+                                        .setAutoWidth(false)
+                                        .setRowNum(10)
+                                        .setRowList(new int[] { 10, 30, 50 })
+                                        .setViewRecords(true)
+                                        .setSortName("DescEstado, Numero")
+                                        .setSortOrder(SortOrder.asc)
+                                        .setPager("pagerTelefonos")
+                                        .setPagerPos(PagerPos.center)
+                                        .setPgButtons(true)
+                                        .setCellEdit(false)
+                                        .setCellSubmit(CellSubmit.clientArray)
+                        //.setNavEdit(ViewBag.Edit)
+                        //.setEditUrl("/Cartera/OperTelefono")
+                        //.setNavAdd(ViewBag.Add)
+                        //.setAddUrl("/Cartera/OperTelefono")
+                        //.setNavDel(ViewBag.Del)
+                        //.setDelUrl("/Cartera/OperTelefono")
+                        //.setExcelExport("/Mantenedor/ExportToExcel")
+                                        .Render()
+
+                                )
+                            </div>
+                            <div class="col">
+                                @if (ViewBag.ClienteAsociado == 0)
+                                {
+                                    <div class="tabla">
+                                        <div class="fila">
+                                            <div class="col"><button class="search" id="btnAgregarContactoEmail" onclick="fnFormularioContactos('E');" style="vertical-align:middle"><img src="~/Images/botones/Add20.png" width="20px" height="20px" title="Agregar" alt="Agregar" /></button>Agregar </div>
+                                        </div>
+                                    </div> }
+                                @(Html.jqGrid("gridEmail")
+                                        .addColumn(new Column("Mail").setLabel("eMail")
+                                    .setEditable(false)
+                                            .setSortable(true)
+                                            .setWidth(100))
+                                        .addColumn(new Column("DescTipo").setLabel("Tipo")
+                                    .setEditable(false)
+                                            .setSortable(true)
+                                            .setWidth(50))
+                                        .addColumn(new Column("TipoContacto").setLabel("Tip. Cont.")
+                                    .setEditable(false)
+                                            .setSortable(true)
+                                            .setEditType(EditType.select)
+                                            .setEditOptions("value:\"" + ViewBag.TipoContacto + "\"")
+                                            .setWidth(80))
+                                        .addColumn(new Column("NombreContacto").setLabel("Contacto")
+                                    .setEditable(false)
+                                            .setSortable(true)
+                                            .setWidth(80))
+                                        .addColumn(new Column("ddcid").setLabel("")
+                                            .setHidden(false)
+                                            .setEditable(false).setCustomFormatter("fnBotonesContactoEmail")
+                                            .setWidth(60))
+
+                                        // settings
+                                        .setCaption("Emails").setWidth(450)
+                                        .setRequestType(RequestType.get)
+                                        .setUrl("~/Cartera/GetDummy")
+                                        .setAltRows(true)
+                                        .setAltClass("altGridRows")
+                                        .setAutoWidth(false)
+                                        .setRowNum(10)
+                                        .setRowList(new int[] { 10, 30, 50 })
+                                        .setViewRecords(true)
+                                        .setSortName("TipoEmail, Mail")
+                                        .setSortOrder(SortOrder.asc)
+                                        .setPager("pagerEmails")
+                                        .setPagerPos(PagerPos.center)
+                                        .setPgButtons(true)
+                                        .setCellEdit(false)
+                                        .setCellSubmit(CellSubmit.clientArray)
+                                        .setNavEdit(ViewBag.Edit)
+                        //.setEditUrl("/Cartera/OperEmail")
+                        //.setNavAdd(ViewBag.Add)
+                        //.setAddUrl("/Cartera/OperEmail")
+                        //.setNavDel(ViewBag.Del)
+                        //.setDelUrl("/Cartera/OperEmail")
+                        //.setExcelExport("/Mantenedor/ExportToExcel")
+                                        .Render()
+
+                                )
+                            </div>
+                        </div>
+                        <div class="fila" id="divDirecciones">
+                            <div class="col">
+                                @if (ViewBag.ClienteAsociado == 0)
+                                {
+                                    <div class="tabla">
+                                        <div class="fila">
+                                            <div class="col"><button class="search" id="btnAgregarContactoDireccion" onclick="fnFormularioContactos('D');" style="vertical-align:middle"><img src="~/Images/botones/Add20.png" width="20px" height="20px" title="Agregar" alt="Agregar" /></button>Agregar </div>
+                                            
+                                        </div>
+                                    </div> }
+                                @(Html.jqGrid("gridDireccion")
+                                .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                                    .setEditable(false).setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(100))
+                                .addColumn(new Column("TipoDireccion").setLabel("Tipo")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setWidth(100))
+                                .addColumn(new Column("Calle").setLabel("Direccion")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setWidth(400))
+                                .addColumn(new Column("Comuna").setLabel("Comuna")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setWidth(300))
+                                .addColumn(new Column("Visita").setLabel(" ")
+                                    .setHidden(false)
+                                    .setEditable(false).setCustomFormatter("fnBotonesSolicitudVisita")
+                                    .setWidth(50)
+                                    .setAlign(Align.center))
+                                .addColumn(new Column("Region").setLabel("Region")
+                                    .setSortable(true).setHidden(true)
+                                    .setWidth(60))
+                                .addColumn(new Column("Ciudad").setLabel("Ciudad")
+                                    .setSortable(true).setHidden(true)
+                                    .setWidth(60))
+                                .addColumn(new Column("IdComuna").setLabel("IdComuna")
+                                    .setSortable(true).setHidden(true)
+                                    .setWidth(60))
+
+                                //.addColumn(new Column("ddcid").setLabel("")
+                        //    .setHidden(false)
+                        //    .setEditable(false).setCustomFormatter("fnBotonesContactoEmail")
+                        //    .setWidth(60))
+
+                                // settings
+                                .setCaption("Direcciones").setWidth(900)
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Cartera/GetDummy")
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setAutoWidth(false)
+                                .setRowNum(10)
+                                .setRowList(new int[] { 10, 30, 50 })
+                                .setViewRecords(true)
+                                .setSortName("TipoDireccion, Calle")
+                                .setSortOrder(SortOrder.asc)
+                                .setPager("pagerDDirecciones")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .setNavEdit(ViewBag.Edit)
+                                .onLoadComplete("MostrarColumnaTipoDireccion();")
+                                .Render())
+                            </div>
+                        </div>
+
+                        <div class="fila" id="divRecordatorios" style="display:none">
+                            <div class="col">
+                                @if (ViewBag.ClienteAsociado == 0)
+                                {
+                                    <div class="tabla">
+                                        <div class="fila">
+                                            <div class="col"><button class="search" id="btnAgregarSMS" onclick="fnFormularioRecordatorio('SMS');" style="vertical-align:middle"><img src="~/Images/botones/Add20.png" width="20px" height="20px" title="Agregar" alt="Agregar" /></button>Agregar </div>
+                                        </div>
+                                    </div> }
+                                @(Html.jqGrid("gridSMS")
+                                .addColumn(new Column("Telefono").setLabel("Número")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setWidth(50))
+                                .addColumn(new Column("FechaEnvio").setLabel("Fecha Envio").setAlign(Align.center)
+                                    .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+                                .addColumn(new Column("Estado").setLabel("Estado")
+                                    .setSortable(true)
+                                    .setWidth(50))
+                                .addColumn(new Column("FechaModificacion").setLabel("FechaModificacion").setAlign(Align.center).setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+                                .addColumn(new Column("UruarioModificacion").setLabel("Usuario")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setWidth(80))
+                                .addColumn(new Column("ctcid").setLabel(" ")
+                                    .setHidden(false)
+                            .setEditable(false).setCustomFormatter("fnBotonesSMSPre")
+                                    .setWidth(50))
+
+                                // settings
+                                .setCaption("Recordatorio SMS").setWidth(450)
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Cartera/GetDummy")
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setAutoWidth(false)
+                                .setRowNum(10)
+                                .setRowList(new int[] { 10, 30, 50 })
+                                .setViewRecords(true)
+                                .setSortName("Estado Desc, Telefono")
+                                .setSortOrder(SortOrder.asc)
+                                .setPager("pagerSMS")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                        //.setNavEdit(ViewBag.Edit)
+                        //.setEditUrl("/Cartera/OperTelefono")
+                        //.setNavAdd(ViewBag.Add)
+                        //.setAddUrl("/Cartera/OperTelefono")
+                        //.setNavDel(ViewBag.Del)
+                        //.setDelUrl("/Cartera/OperTelefono")
+                        //.setExcelExport("/Mantenedor/ExportToExcel")
+                                .Render()
+
+                                )
+                            </div>
+                            <div class="col">
+                                @if (ViewBag.ClienteAsociado == 0)
+                                {
+                                    <div class="tabla">
+                                        <div class="fila">
+                                            <div class="col"><button class="search" id="btnAgregarEmailPredictivo" onclick="fnFormularioRecordatorio('E');" style="vertical-align:middle"><img src="~/Images/botones/Add20.png" width="20px" height="20px" title="Agregar" alt="Agregar" /></button>Agregar </div>
+                                        </div>
+                                    </div> }
+                                @(Html.jqGrid("gridEmailPre")
+                                .addColumn(new Column("Email").setLabel("Email")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setWidth(50))
+                                .addColumn(new Column("FechaEnvio").setLabel("Fecha Envio").setAlign(Align.center)
+                                    .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+                                .addColumn(new Column("Estado").setLabel("Estado")
+                                    .setSortable(true)
+                                    .setWidth(50))
+                                .addColumn(new Column("FechaModificacion").setLabel("FechaModificacion").setAlign(Align.center).setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(55).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+                                .addColumn(new Column("UruarioModificacion").setLabel("Usuario")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setWidth(80))
+                                .addColumn(new Column("ctcid").setLabel(" ")
+                                    .setHidden(false)
+                                    .setEditable(false).setCustomFormatter("fnBotonesEmailPre")
+                                    .setWidth(50))
+
+
+                                    // settings
+                                    .setCaption("Recordatorio Emails").setWidth(450)
+                                    .setRequestType(RequestType.get)
+                                    .setUrl("~/Cartera/GetDummy")
+                                    .setAltRows(true)
+                                    .setAltClass("altGridRows")
+                                    .setAutoWidth(false)
+                                    .setRowNum(10)
+                                    .setRowList(new int[] { 10, 30, 50 })
+                                    .setViewRecords(true)
+                                    .setSortName("Estado Desc, Email")
+                                    .setSortOrder(SortOrder.asc)
+                                    .setPager("pagerEmailPre")
+                                    .setPagerPos(PagerPos.center)
+                                    .setPgButtons(true)
+                                    .setCellEdit(false)
+                                    .setCellSubmit(CellSubmit.clientArray)
+                                    .setNavEdit(ViewBag.Edit)
+                        //.setEditUrl("/Cartera/OperEmail")
+                        //.setNavAdd(ViewBag.Add)
+                        //.setAddUrl("/Cartera/OperEmail")
+                        //.setNavDel(ViewBag.Del)
+                        //.setDelUrl("/Cartera/OperEmail")
+                        //.setExcelExport("/Mantenedor/ExportToExcel")
+                                    .Render()
+
+                                )
+                            </div>
+                        </div>
+                    </div>
+                }
+                }
+                using (u.BeginPanel())
+                {
+                    <div class="tabla">
+                        <div class="fila">
+
+                            <div class="col">
+                                @(Html.jqGrid("gridVisitaTerreno")
+                            .addColumn(new Column("IdVisita").setLabel("IdVisita").setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(100))
+                            .addColumn(new Column("IdVisitaDetalle").setLabel("IdVisitaDetalle").setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(100))
+                            .addColumn(new Column("Ctcid").setLabel("Ctcid").setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(100))
+                            .addColumn(new Column("Direccion").setLabel("Direccion de Visita")
+                            .setSortable(true)
+                            .setWidth(200))
+                            .addColumn(new Column("EstadoVisita").setLabel("Estado de Visita")
+                                    .setSortable(true)
+                                    .setWidth(150))
+                            .addColumn(new Column("Visita").setLabel("Visita")
+                                    .setSortable(true)
+                                    .setWidth(50))
+                            .addColumn(new Column("Comentarios").setLabel("Comentarios")
+                            .setSortable(true)
+                            .setWidth(200))
+                            .addColumn(new Column("Latitud").setLabel("Latitud")
+                            .setEditable(false).setHidden(true)
+                            .setSortable(true)
+                            .setWidth(80))
+                            .addColumn(new Column("Longitud").setLabel("Longitud")
+                            .setEditable(false).setHidden(true)
+                            .setSortable(true)
+                            .setWidth(80))
+                            .addColumn(new Column("Comuna").setLabel("Comuna")
+                            .setEditable(false).setHidden(true)
+                            .setSortable(true)
+                            .setWidth(100))
+                            .addColumn(new Column("FechaEnvio").setLabel("Fecha Visita")
+                            .setFormatter(Formatters.date).setFormatOptions("newformat : 'd-m-Y H:i'").setAlign(Align.center)
+                            .setEditable(false)
+                            .setSortable(true)
+                            .setWidth(100))
+                            .addColumn(new Column("DireccionEnvio").setLabel("Direccion Envío")
+                            .setEditable(false)
+                            .setSortable(true)
+                            .setWidth(100))
+                            .addColumn(new Column("PosicionEnvio").setLabel("PosicionEnvio")
+                            .setEditable(false).setHidden(true)
+                            .setSortable(true)
+                            .setWidth(100))
+                            .addColumn(new Column("Mapa").setLabel("Mapa Visita").setCustomFormatter("VerMapaVisitaTerreno")
+                            .setWidth(80)
+                            .setAlign(Align.right))
+                            .addColumn(new Column("Mapa").setLabel("Mapa envio").setCustomFormatter("VerMapaVisitaTerrenoFormulario")
+                            .setWidth(80)
+                            .setAlign(Align.right))
+                        // settings
+                                .setCaption("Visita Terreno").setWidth(900)
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Cartera/GetDummy")
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setAutoWidth(false)
+                                .setRowNum(10)
+                                .setRowList(new int[] { 10, 30, 50 })
+                                .setViewRecords(true)
+                        //.setSortName("ESTADO_VISITA")
+                        //.setSortOrder(SortOrder.asc)
+                                .setPager("pagerVisitaTerreno")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .onSelectRow("ListarVisitasTerrenoGPS(rowid)")
+                                .Render()
+
+                                )
+                            </div>
+
+
+                        </div>
+                        <div class="fila">
+                            <div class="col">
+                                <br />
+                                @(Html.jqGrid("gridGPS")
+                                    .addColumn(new Column("Latitud").setLabel("Latitud")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setWidth(80))
+                                    .addColumn(new Column("Longitud").setLabel("Longitud")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setWidth(80))
+                                    .addColumn(new Column("Altitud").setLabel("Altitud")
+                                    .setSortable(true)
+                                    .setWidth(50))
+                                    .addColumn(new Column("Direccion").setLabel("Dirección")
+                                    .setSortable(true)
+                                    .setWidth(80))
+                                    .addColumn(new Column("Comuna").setLabel("Comuna")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setWidth(100))
+                                    .addColumn(new Column("Ciudad").setLabel("Ciudad")
+                                    .setHidden(false)
+                                    .setSortable(true)
+                                    .setWidth(100))
+                                    .addColumn(new Column("Mapa").setLabel("").setCustomFormatter("VerMapaVisitasTerrenoGPS")
+                                    .setWidth(30)
+                                    .setAlign(Align.right))
+                                    //.addColumn(new Column("Altitud").setLabel("Ver Mapa")
+                                    //.setSortable(true).setCustomFormatter("VerMapaVisitasTerrenoGPS")
+                                    //.setWidth(60))
+
+                                    // settings
+                                    .setCaption("Nuevas Direcciones").setWidth(800)
+                                    .setRequestType(RequestType.get)
+                                    .setUrl("~/Cartera/GetDummy")
+                                    .setAltRows(true)
+                                    .setAltClass("altGridRows")
+                                    .setAutoWidth(false)
+                                    .setRowNum(10)
+                                    .setRowList(new int[] { 10, 30, 50 })
+                                    .setViewRecords(true)
+                                    .setPager("pagerGPS")
+                                    .setPagerPos(PagerPos.center)
+                                    .setPgButtons(true)
+                                    .setCellEdit(false)
+                                    .setCellSubmit(CellSubmit.clientArray)
+
+                                    .Render()
+                                )
+                            </div>
+                            <div class="col">
+                                <br />
+                                @(Html.jqGrid("gridVisitaDetalleTelefonos")
+                                        .addColumn(new Column("Numero").setLabel("Número")
+                                    .setEditable(false)
+                                            .setSortable(true)
+                                            .setWidth(100))
+
+                                        // settings
+                                        .setCaption("Telefonos").setWidth(300)
+                                        .setRequestType(RequestType.get)
+                                        .setUrl("~/Cartera/GetDummy")
+                                        .setAltRows(true)
+                                        .setAltClass("altGridRows")
+                                        .setAutoWidth(false)
+                                        .setRowNum(10)
+                                        .setRowList(new int[] { 10, 30, 50 })
+                                        .setViewRecords(true)
+                                        .setPager("pagerPhone")
+                                        .setPagerPos(PagerPos.center)
+                                        .setPgButtons(true)
+                                        .setCellEdit(false)
+                                        .setCellSubmit(CellSubmit.clientArray)
+
+                                        .Render()
+
+                                )
+                            </div>
+                        </div>
+                        <div class="fila">
+                            <div class="col">
+                                <div id="rg-gallery-visita" class="rg-gallery">
+                                    <div class="rg-thumbs">
+                                        <!-- Elastislide Carousel Thumbnail Viewer -->
+                                        <div class="es-carousel-wrapper">
+                                            <div class="es-nav">
+                                                <span class="es-nav-prev">Previous</span>
+                                                <span class="es-nav-next">Next</span>
+                                            </div>
+                                            <div class="es-carousel" id="carouselVisitaTerreno">
+                                                <ul style="padding:0px;margin:0px">
+                                                    <li><a href="#"><img src="" data-large="" alt="" data-description="" /></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- End Elastislide Carousel Thumbnail Viewer -->
+                                    </div><!-- rg-thumbs -->
+                                </div><!-- rg-gallery -->
+                            </div>
+                        </div>
+                    </div>
+                }
+                using (u.BeginPanel())
+                {
+                    <div class="tabla">
+                        <div class="fila">
+                            <div class="col">
+                                @(Html.jqGrid("gridDocCliente")
+                                .addColumn(new Column("Ctcid").setLabel("ctcid").setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(100))
+                                .addColumn(new Column("Dcdid").setLabel("dcdid").setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(100))
+                        .addColumn(new Column("TipoDocumento").setLabel("Tipo").setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(100))
+                                .addColumn(new Column("NombreArchivo").setLabel("Archivo")
+                                    .setSortable(true)
+                                    .setWidth(150))
+                                .addColumn(new Column("UrlArchivo").setLabel("Archivo").setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(150))
+                        // settings
+                                .setCaption("Documentos Cliente").setWidth(400)
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Cartera/GetDummy")
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setAutoWidth(false)
+                                .setRowNum(10)
+                                .setRowList(new int[] { 10, 30, 50 })
+                                .setViewRecords(true)
+                                .setSortName("TipoDocumento")
+                                .setSortOrder(SortOrder.asc)
+                                .setPager("pagerDocCliente")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .onSelectRow("fnMuestraDocumentoCliente(rowid)")
+                                .Render()
+
+                                )
+                            </div>
+                            <div class="col" style="width: 50px"></div>
+                            <div class="col">
+                                @(Html.jqGrid("gridDocDeudor")
+                                .addColumn(new Column("Ctcid").setLabel("ctcid").setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(100))
+                                .addColumn(new Column("Dcdid").setLabel("dcdid").setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(100))
+                                .addColumn(new Column("TipoDocumento").setLabel("Tipo")
+                                    .setSortable(true)
+                                    .setWidth(100))
+                                .addColumn(new Column("NombreArchivo").setLabel("Archivo")
+                                    .setSortable(true)
+                                    .setWidth(150))
+                                .addColumn(new Column("UrlArchivo").setLabel("Archivo").setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(150))
+                        // settings
+                                .setCaption("Documentos Deudor").setWidth(400)
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Cartera/GetDummy")
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setAutoWidth(false)
+                                .setRowNum(10)
+                                .setRowList(new int[] { 10, 30, 50 })
+                                .setViewRecords(true)
+                                .setSortName("TipoDocumento")
+                                .setSortOrder(SortOrder.asc)
+                                .setPager("pagerDocDeudor")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .onSelectRow("fnMuestraDocumentoDeudor(rowid)")
+                        // alert($(this).getRowData(rowid).UrlArchivo);
+                                .Render()
+
+                                )
+                            </div>
+                        </div>
+                    </div>
+                }
+                if (ViewBag.ClienteAsociado != 86)
+                {
+                using (u.BeginPanel())
+                {
+
+                    using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCargaImagen" }))
+                    {
+                        @Html.ValidationSummary(true)
+                        <div class="tabla">
+                            <div class="fila">
+                                <div class="col" style="width:183px;height:25px;margin-top: 5px;"> Documentos</div>
+                                <div class="col">@Html.DropDownList("ListaCpbt", null, new { @class = "ComboboxClass", onchange = "" })</div>
+                            </div>
+                            <div class="fila">
+                                <div class="col" style="width:183px;height:25px;margin-top: 5px;"> Tipo de Imagen Documento</div>
+                                <div class="col">@Html.DropDownList("ListaTipoImagenesCpbt", null, new { @class = "ComboboxClass", onchange = "" })</div>
+                            </div>
+                            <div class="fila">
+                                <div class="col" style="width:183px;height:25px;margin-top: 5px;"> Archivo</div>
+                                <div class="col" style="width:300px"><input id="subirArchivo" type="file" style="width:300px"><input type="hidden" name="Archivo" id="Archivo"></div>
+                                <div class="col"><input type="submit" id="btnSubmit" value="Subir Archivo" /></div>
+                                <div class="col"><img id="imgSubirArchivo" src="~/Images/blank.png" class="" style="float:left" /></div>
+                            </div>
+                           
+                            <div class="fila">
+                                                                
+                                <div class="col" style="float:right">
+                                    
+                                    <input type="button" value="Nuevo" onclick="fnLimpiarCargaImagen();" />
+                                    <input type="button" value="Cargar" onclick="GrabarImagenesCpbt();" disabled="disabled" id="btnCargar" />
+                                    
+                                </div>
+                                <div class="col" style="float:right">
+                                   <input type="button" title="Descargar todas las imágenes" class="ui-icon ui-icon-arrowthickstop-1-s" style="height:18px;width:18px" onclick="comprimir();" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div id="rg-gallery" class="rg-gallery">
+                        <div class="rg-thumbs">
+                            <!-- Elastislide Carousel Thumbnail Viewer -->
+                            <div class="es-carousel-wrapper">
+                                <div class="es-nav">
+                                    <span class="es-nav-prev">Previous</span>
+                                    <span class="es-nav-next">Next</span>
+                                </div>
+                                <div class="es-carousel" id="carouselDocumentos">
+                                    <ul style="padding:0px;margin:0px">
+                                        <li><a href="#"><img src="" data-large="" alt="" data-description="" /></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Elastislide Carousel Thumbnail Viewer -->
+                        </div><!-- rg-thumbs -->
+                    </div><!-- rg-gallery -->
+                }
+                using (u.BeginPanel())
+                {
+                    <div class="tabla">
+                        <div class="fila">
+                            <div class="col"> @Html.CheckBox("chkNegocio", true, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Negocio </div>
+                            <div class="col">@Html.CheckBox("chkCarga", true, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Carga </div>
+                            <div class="col">@Html.CheckBox("chkFecIng", true, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Fec. Ingreso </div>
+                            <div class="col">@Html.CheckBox("chkFecDoc", true, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Fec. Documento </div>
+                            <div class="col">@Html.CheckBox("chkFecVenc", true, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Fec. Vencimiento </div>
+                        </div>
+                        <div class="fila">
+                            <div class="col">@Html.CheckBox("chkDiasVenc", true, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Días Vencido </div>
+                            <div class="col">@Html.CheckBox("chkFecPla", true, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Fec. Plazo</div>
+
+                            @if (ViewBag.CongelarInteres == "S")
+                            {
+                                <div class="col">
+                                    @Html.CheckBox("chkCongInt", false, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })
+                                </div><div class="col150">Congelar Int.</div>
+                            }
+                            else
+                            {
+                                <div class="col">
+                                    @Html.CheckBox("chkCongInt", false, new { onclick = "CambioConfiguracionGrillaCpbt(this)", disabled = "disabled" })
+                                </div><div class="col150">Congelar Int.</div>
+                            }
+
+                            <div class="col">@Html.CheckBox("chkFecUltGest", false, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Fec. Ult. Gestión</div>
+                            <div class="col">@Html.CheckBox("chkIntereses", true, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Intereses</div>
+                        </div>
+                        <div class="fila">
+                            <div class="col">@Html.CheckBox("chkHonorarios", true, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Honorarios</div>
+                            <div class="col">@Html.CheckBox("chkGasPrej", true, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Gasto Prej.</div>
+                            <div class="col">@Html.CheckBox("chkGasJud", true, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Gasto Jud.</div>
+                            <div class="col">@Html.CheckBox("chkComentario", false, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Comentario</div>
+                            <div class="col">@Html.CheckBox("chkAsegurado", true, new { onclick = "CambioConfiguracionGrillaCpbt(this)" })</div><div class="col150">Asegurado</div>
+                        </div>
+                    </div>
+                }
+               
+                }
+               
+            }
+
+        }
+
+    }
+    using (t.BeginPanel())
+    {
+        @(Html.jqGrid("gridRol")
+        .addColumn(new Column("Rolid").setLabel("rolid").setHidden(true)
+            .setSortable(true)
+            .setWidth(65))
+        .addColumn(new Column("Cliente").setLabel("Cliente")
+            .setSortable(true)
+            .setWidth(100))
+        .addColumn(new Column("Deudor").setLabel("Deudor")
+            .setSortable(true)
+            .setWidth(100))
+        .addColumn(new Column("NumeroRol").setLabel("Rol")
+            .setSortable(true)
+            .setWidth(50))
+                .addColumn(new Column("Bloqueo").setLabel("Bloqueo")
+                    .setSortable(true).setCustomFormatter("fnInterruptorRol").setAlign(Align.center)
+                .setWidth(50))
+        .addColumn(new Column("Causa").setLabel("Causa")
+            .setSortable(true)
+            .setWidth(80))
+        .addColumn(new Column("Tribunal").setLabel("Tribunal")
+            .setSortable(true)
+            .setWidth(120))
+        .addColumn(new Column("Materia").setLabel("Materia")
+            .setSortable(true)
+            .setWidth(100))
+        .addColumn(new Column("Estado").setLabel("Estado")
+            .setSortable(true)
+            .setWidth(80))
+        .addColumn(new Column("EstAdm").setLabel("Est. Adm.")
+                .setSortable(true)
+                .setWidth(80))
+        .addColumn(new Column("FechaAccion").setLabel("Fec. Acc.")
+                .setSortable(true)
+                .setWidth(60))
+        .addColumn(new Column("AccionJudicial").setLabel("Acc. Judicial")
+                .setSortable(true)
+                .setWidth(100))
+
+        // settings
+        .setCaption("Roles")
+        .setRequestType(RequestType.get)
+        .setUrl("~/Cartera/GetDummy")
+        .setAltRows(true)
+        .setAltClass("altGridRows")
+        .setAutoWidth(false)
+        .setRowNum(10)
+        .setRowList(new int[] { 10, 30, 50 })
+        .setViewRecords(true)
+        .setSortName("NumeroRol")
+        .setSortOrder(SortOrder.desc)
+        .setPager("pagerRol")
+        .setPagerPos(PagerPos.center)
+        .setPgButtons(true)
+        .setCellEdit(false)
+        .setCellSubmit(CellSubmit.clientArray)
+        .onSelectRow("RolSeleccionado(rowid)")
+        .Render()
+
+        )
+        <br />
+        @(Html.jqGrid("gridDocRol")
+        .addColumn(new Column("Tipo").setLabel("Tipo")
+            .setSortable(true)
+            .setWidth(120))
+        .addColumn(new Column("Numero").setLabel("Número")
+            .setSortable(true).setAlign(Align.right)
+            .setWidth(120))
+        .addColumn(new Column("Monto").setLabel("Monto")
+            .setSortable(true).setFormatter(Formatters.number).setAlign(Align.right)
+            .setWidth(120))
+        .addColumn(new Column("Saldo").setLabel("Saldo")
+            .setSortable(true).setFormatter(Formatters.number).setAlign(Align.right)
+            .setWidth(120))
+            // settings
+        .setCaption("Documentos ROL")
+        .setRequestType(RequestType.get)
+        .setUrl("~/Cartera/GetDummy")
+        .setAltRows(true)
+        .setAltClass("altGridRows")
+        .setAutoWidth(true)
+        .setRowNum(10)
+        .setRowList(new int[] { 10, 30, 50 })
+        .setViewRecords(true)
+        .setSortName("Ccbid")
+        .setSortOrder(SortOrder.asc)
+        .setPager("pagerDocRol")
+        .setPagerPos(PagerPos.center)
+        .setPgButtons(true)
+        .setCellEdit(false)
+        .setCellSubmit(CellSubmit.clientArray)
+        .setFooterRow(true)
+        .onLoadComplete("var grid = $('#gridDocRol'); grid.jqGrid('footerData','set', {Tipo: 'Total:', Monto: totalMontoRol , Saldo: totalSaldoRol });")
+        .Render()
+
+        )
+        @Html.Hidden("hddTotalMontoRol", 0)
+        @Html.Hidden("hddTotalSaldoRol", 0)
+
+        <br />
+
+        @(Html.jqGrid("gridEstadosRol")
+        .addColumn(new Column("Id").setLabel("Eliminar")
+            .setSortable(true).setHidden(true)
+            .setWidth(60))
+        .addColumn(new Column("Materia").setLabel("Materia")
+            .setSortable(true)
+            .setWidth(120))
+        .addColumn(new Column("Cuaderno").setLabel("Cuaderno")
+            .setSortable(true)
+            .setWidth(120))
+        .addColumn(new Column("Estado").setLabel("Estado")
+            .setSortable(true)
+            .setWidth(120))
+        .addColumn(new Column("FechaJudicial").setLabel("Fecha")
+            .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+            .setWidth(70))
+        .addColumn(new Column("Comentario").setLabel("Comentario")
+            .setSortable(true)
+            .setWidth(275))
+        .addColumn(new Column("Usuario").setLabel("Usuario")
+            .setSortable(true)
+            .setWidth(150))
+        .addColumn(new Column("Archivo").setLabel("Archivo")
+            .setSortable(true).setCustomFormatter("fnBotonesArchivo")
+            .setWidth(60))
+
+        // settings
+        .setCaption("Estados").setWidth(950)
+        .setRequestType(RequestType.get)
+        .setUrl("~/Cartera/GetDummy")
+        .setAltRows(true)
+        .setAltClass("altGridRows")
+        .setRowNum(10)
+        .setRowList(new int[] { 10, 30, 50 })
+        .setViewRecords(true)
+        .setSortName("FechaJudicial")
+        .setSortOrder(SortOrder.desc)
+        .setPager("pagerEstados")
+        .setPagerPos(PagerPos.center)
+        .setPgButtons(true)
+        .setCellEdit(false)
+        .setCellSubmit(CellSubmit.clientArray)
+        .setShrinkToFit(true)
+        .Render()
+
+        )
+
+
+        <br />
+        @(Html.jqGrid("gridArchivosRol")
+        .addColumn(new Column("Tipo").setLabel("Tipo")
+            .setEditable(true)
+            .setWidth(150))
+        .addColumn(new Column("Archivo").setLabel("Archivo")
+            .setEditable(true)
+            .setWidth(250))
+        .addColumn(new Column("UrlArchivo").setLabel("UrlArchivo")
+            .setSortable(true).setHidden(true)
+            .setWidth(50))
+            // settings
+        .setCaption("Archivos Rol")
+        .setRequestType(RequestType.get)
+        .setUrl("~/cartera/GetDummy")
+        .setAltRows(true)
+        .setAltClass("altGridRows")
+        .setAutoWidth(true)
+        .setRowNum(10)
+        .setRowList(new int[] { 10, 30, 50 })
+        .setViewRecords(true)
+        .setSortName("Tipo")
+        .setSortOrder(SortOrder.asc)
+        .setPager("pagerArchivosRol")
+        .setPagerPos(PagerPos.center)
+        .setPgButtons(true)
+        .setCellEdit(false)
+        .setCellSubmit(CellSubmit.clientArray)
+        .Render()
+
+        )
+        <br />
+    }
+    using (t.BeginPanel())
+    {
+        @(Html.jqGrid("gridObservacion")
+        .addColumn(new Column("Fecha").setLabel("Fecha").setAlign(Align.center)
+            .setSortable(true)
+            .setWidth(65).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+        .addColumn(new Column("Tipo").setLabel("Tipo")
+            .setSortable(true)
+            .setWidth(150))
+        .addColumn(new Column("NombreUsuario").setLabel("Usuario")
+            .setSortable(true)
+            .setWidth(150))
+        .addColumn(new Column("Comentario").setLabel("Comentario")
+            .setSortable(true)
+            .setWidth(300))
+        .addColumn(new Column("TipoContacto").setLabel("Tip. Cont.")
+            .setSortable(true)
+            .setWidth(150))
+        .addColumn(new Column("NombreContacto").setLabel("Contacto")
+            .setSortable(true)
+            .setWidth(60))
+        .addColumn(new Column("Telefono").setLabel("Teléfono")
+            .setSortable(true)
+            .setWidth(60))
+
+        // settings
+        .setCaption("Gestiones Internas")
+        .setRequestType(RequestType.get)
+        .setUrl("~/Cartera/GetDummy")
+        .setAltRows(true)
+        .setAltClass("altGridRows")
+        .setAutoWidth(false)
+        .setRowNum(10)
+        .setRowList(new int[] { 10, 30, 50 })
+        .setViewRecords(true)
+        .setSortName("Fecha")
+        .setSortOrder(SortOrder.desc)
+            .setPager("pagerObservacion")
+        .setPagerPos(PagerPos.center)
+        .setPgButtons(true)
+        .setCellEdit(false)
+        .setCellSubmit(CellSubmit.clientArray)
+        .setNavEdit(true)
+        .setEditUrl("/Cartera/EditDummy")
+        .setAddUrl("/Cartera/EditDummy")
+        .setExcelExport("/Mantenedor/ExportToExcel")
+        .setShrinkToFit(false)
+        .setWidth(900)
+        .onGridComplete("fnNotifObservacionDeudor()")
+        .Render()
+
+        )
+    }
+    using (t.BeginPanel())
+    {
+        @(Html.jqGrid("gridTerceros")
+
+                    .addColumn(new Column("TerceroId").setLabel("TerceroId")
+            .setSortable(true).setHidden(true)
+            .setWidth(50))
+                .addColumn(new Column("Rut").setLabel("Rut")
+            .setSortable(true)
+            .setWidth(100))
+                .addColumn(new Column("Nombre").setLabel("Nombre")
+            .setSortable(true)
+            .setWidth(600))
+        
+
+        // settings
+        .setCaption("Terceros Asociados")
+        .setRequestType(RequestType.get)
+        .setUrl("~/Cartera/GetDummy")
+        .setAltRows(true)
+        .setAltClass("altGridRows")
+        .setAutoWidth(true)
+        .setRowNum(10)
+        .setRowList(new int[] { 10, 30, 50 })
+        .setViewRecords(true)
+            .setSortName("Nombre")
+        .setSortOrder(SortOrder.asc)
+            .setPager("pagerTerceros")
+        .setPagerPos(PagerPos.center)
+        .setPgButtons(true)
+        .setCellEdit(false)
+        .setCellSubmit(CellSubmit.clientArray)
+        .setNavEdit(true)
+        .setEditUrl("/Cartera/EditDummy")
+        .setAddUrl("/Cartera/EditDummy")
+        .setShrinkToFit(false)
+            .setWidth(900).onGridComplete("fnMostrarAlertaercerosDocumentos();")
+        .Render()
+
+        )
+    }
+    using (t.BeginPanel())
+    {
+        <p>Third panel</p>
+        <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed fringilla, felis et blandit posuere, dolor quam interdum eros, vel sodales nisl sapien in velit. Cras vel orci leo. </p>
+    }
+
+    using (t.BeginPanel())
+    {
+        <p>Third panel</p>
+        <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed fringilla, felis et blandit posuere, dolor quam interdum eros, vel sodales nisl sapien in velit. Cras vel orci leo. </p>
+    }
+}
+
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppBuscar" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Buscar Deudor")
+    .CloseOnEscape(true)
+    .Width(600)
+    .Height(450)
+    //.TriggerClick("#btnBuscarDeudor")
+    .OnOpen("LimpiarBuscarDeudor")
+    ))
+{
+    @Html.Partial("_BuscarDeudor")
+}
+
+@using (Html.JQueryUI().Begin(new JQueryUIHelpers.Dialog(new { id = "ppDocto" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Documento Deudor")
+    .CloseOnEscape(true)
+    .Width(900)
+    .Height(600)
+    //.TriggerClick("button")
+    ))
+{
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppHistorial" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Agregar Gestion")
+    .CloseOnEscape(true)
+    .Width(700)
+    .Height(200)
+    //.TriggerClick("#btnBuscarDeudor")
+    .OnOpen("ActualizarGestiones")
+    ))
+{
+    @Html.Partial("_AgregarHistorial")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppContactoTelefono" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Agregar Contacto")
+    .CloseOnEscape(true)
+    .Width(700)
+    .Height(350)
+    //.TriggerClick("#btnBuscarDeudor")
+    .OnOpen("ActualizarContactoTelefono")
+    ))
+{
+    @Html.Partial("_AgregarContacto")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppTipoReporte" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Seleccione Tipo de Reporte")
+    .CloseOnEscape(true)
+    .Width(230)
+    .Height(80)
+    //.TriggerClick("#btnBuscarDeudor")
+    //.OnOpen("ActualizarContactoTelefono")
+    ))
+{
+    <div class="tabla" style="text-align :center;width:100%">
+        <div class="fila">
+            <div class="col" style="width:45%"><button class="search" id="btnRepPDF" onclick="fnGeneraPDF();"><img src="~/Images/botones/pdf40.png" width="40px" height="40px" title="PDF" alt="PDF" /> </button></div>
+            <div class="col" style="width:45%"><button class="search" id="btnRepExcel" onclick="fnGeneraXLS();"><img src="~/Images/botones/excel40.png" width="40px" height="40px" title="Excel" alt="Excel" /> </button></div>
+        </div>
+    </div>
+}
+
+@using (Html.JQueryUI().Begin(new JQueryUIHelpers.Dialog(new { id = "ppAsociados" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Roles Asociados")
+    .CloseOnEscape(true)
+    .Width(900)
+    .Height(600)
+    //.TriggerClick("button")
+    ))
+{
+    @Html.Partial("_Asociados")
+}
+
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppGestionSitrel" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Agregar Gestion")
+    .CloseOnEscape(true)
+    .Width(700)
+    .Height(500)
+    //.TriggerClick("#btnBuscarDeudor")
+    .OnOpen("ActualizarGestionesSitrel")
+    ))
+{
+    @Html.Partial("_AgregarGestionSitrel")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppRecordatorio" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Agregar")
+    .CloseOnEscape(true)
+    .Width(700)
+    .Height(100)
+    //.TriggerClick("#btnBuscarDeudor")
+    //.OnOpen("ActualizarGestionesSitrel")
+    ))
+{
+    @Html.Partial("_AgregarRecordatorio")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppEnvioEmail" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Enviar Email")
+    .CloseOnEscape(true)
+    .Width(1000)
+    .Height(500)
+    //.TriggerClick("#btnBuscarDeudor")
+    //.OnOpen("ActualizarGestionesSitrel")
+    ))
+{
+    @Html.Partial("_EnviarEmail")
+}
+
+
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppGoogleMaps" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Mapa")
+    .CloseOnEscape(true)
+    .Width(650)
+    .Height(650)
+
+    ))
+{
+
+}
+
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppEnvioEmailMutual" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Enviar Email Mutual")
+                .CloseOnEscape(true)
+                .Width(1000)
+                .Height(500)
+                //.TriggerClick("#btnBuscarDeudor")
+                //.OnOpen("ActualizarGestionesSitrel")
+                ))
+{
+    @Html.Partial("_EnviarEmailMutual")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppEnvioEmailMutualPagos" }).Draggable(true)
+                            .AutoOpen(false)
+                            .Modal(true)
+                            .Title("Enviar Email Mutual")
+                            .CloseOnEscape(true)
+                            .Width(1000)
+                            .Height(500)
+                            //.TriggerClick("#btnBuscarDeudor")
+                            //.OnOpen("ActualizarGestionesSitrel")
+                            ))
+{
+    @Html.Partial("_EnviarEmailMutualPagos")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppEnvioEmailCoopeuch" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Enviar Email")
+                .CloseOnEscape(true)
+                .Width(1000)
+                .Height(300)
+                ))
+{
+    @Html.Partial("_EnviarEmailCoopeuch")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppTipoMailMutual" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Seleccione Tipo de Acción")
+                .CloseOnEscape(true)
+                .Width(230)
+                .Height(90)
+                //.TriggerClick("#btnBuscarDeudor")
+                //.OnOpen("ActualizarContactoTelefono")
+                ))
+{
+    <div class="tabla" style="text-align :center;width:100%">
+        <div class="fila">
+            <div class="col" style="width:45%"><button class="search" id="btnMailMutualLiq" onclick="fnBtnEnviarEmailMutual();"><img src="~/Images/botones/sndmail.png" width="40px" height="40px" title="Liquidaciones" alt="Liquidaciones" /> </button></div>
+            <div class="col" style="width:45%"><button class="search" id="btnMailMutualPago" onclick="fnBtnEnviarEmailMutualPagos();"><img src="~/Images/botones/pay.png" width="40px" height="40px" title="Pagos" alt="Pagos" /> </button></div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jszip")
+}

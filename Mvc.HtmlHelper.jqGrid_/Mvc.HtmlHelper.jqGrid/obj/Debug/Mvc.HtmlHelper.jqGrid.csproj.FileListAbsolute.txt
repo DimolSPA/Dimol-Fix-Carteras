@@ -1,0 +1,10 @@
+C:\Users\Felipe\Desktop\Dimol\Mvc.HtmlHelper.jqGrid\Mvc.HtmlHelper.jqGrid\bin\Debug\Mvc.HtmlHelper.jqGrid.dll
+C:\Users\Felipe\Desktop\Dimol\Mvc.HtmlHelper.jqGrid\Mvc.HtmlHelper.jqGrid\bin\Debug\Mvc.HtmlHelper.jqGrid.pdb
+C:\Users\Felipe\Desktop\Dimol\Mvc.HtmlHelper.jqGrid\Mvc.HtmlHelper.jqGrid\obj\Debug\Mvc.HtmlHelper.jqGrid.csprojResolveAssemblyReference.cache
+C:\Users\Felipe\Desktop\Dimol\Mvc.HtmlHelper.jqGrid\Mvc.HtmlHelper.jqGrid\obj\Debug\Mvc.HtmlHelper.jqGrid.dll
+C:\Users\Felipe\Desktop\Dimol\Mvc.HtmlHelper.jqGrid\Mvc.HtmlHelper.jqGrid\obj\Debug\Mvc.HtmlHelper.jqGrid.pdb
+D:\Documents\Visual Studio 2012\Projects\Mvc.HtmlHelper.jqGrid\Mvc.HtmlHelper.jqGrid\bin\Debug\Mvc.HtmlHelper.jqGrid.dll
+D:\Documents\Visual Studio 2012\Projects\Mvc.HtmlHelper.jqGrid\Mvc.HtmlHelper.jqGrid\bin\Debug\Mvc.HtmlHelper.jqGrid.pdb
+D:\Documents\Visual Studio 2012\Projects\Mvc.HtmlHelper.jqGrid\Mvc.HtmlHelper.jqGrid\obj\Debug\Mvc.HtmlHelper.jqGrid.csprojResolveAssemblyReference.cache
+D:\Documents\Visual Studio 2012\Projects\Mvc.HtmlHelper.jqGrid\Mvc.HtmlHelper.jqGrid\obj\Debug\Mvc.HtmlHelper.jqGrid.dll
+D:\Documents\Visual Studio 2012\Projects\Mvc.HtmlHelper.jqGrid\Mvc.HtmlHelper.jqGrid\obj\Debug\Mvc.HtmlHelper.jqGrid.pdb

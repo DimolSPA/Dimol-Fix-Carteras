@@ -1,0 +1,76 @@
+﻿@model Dimol.Carteras.Models.CastigoDevolucionModel
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDocumentosDeudores" }))
+{
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+        <div class="col">
+            @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnBuscarDocsDeudorSelect")
+            @Html.ValidationMessageFor(model => model.NombreRutDeudor)
+            
+        </div>
+    </div>
+</div>
+}
+<br />
+@(Html.jqGrid("gridDocumentosDeudor")
+    .addColumn(new Column("Tipo").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(130))
+    .addColumn(new Column("Moneda").setLabel("Moneda").setAlign(Align.right)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Numero").setLabel("Número").setAlign(Align.right)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("FechaAsignacion").setLabel("Fecha Asig.").setAlign(Align.center)
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(70))
+    .addColumn(new Column("FechaVencimiento").setLabel("Fecha Venc.").setAlign(Align.center)
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(70))    
+    .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Estado").setLabel("Estado")
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("EstadoCpbt").setLabel("EstadoCpbt")
+        .setSortable(true).setHidden(true)
+        .setWidth(100))
+    .addColumn(new Column("Asegurado").setLabel("Asegurado")
+        .setSortable(true)
+        .setWidth(150))
+   .addColumn(new Column("RolNumero").setLabel("Rol Numero").setAlign(Align.center)
+            .setSortable(true)
+            .setWidth(150))
+   .addColumn(new Column("RolId").setLabel("RolId")
+             .setSortable(true).setHidden(true)
+             .setWidth(70))   
+            // settings
+    .setCaption("Documentos")
+    .setRequestType(RequestType.get)
+    .setUrl("~/cartera/GetDocumentosDeudorSelect/?Pclid=0&Ctcid=0&Estado=V")
+    .setAltRows(true)
+    .setMultiSelect(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(100)
+    .setRowList(new int[] { 10, 50, 100, 500 })
+    .setViewRecords(true)
+    .setSortName("Estado")
+    .setSortOrder(SortOrder.desc)
+    .setPager("pagerDocumentosDeudor")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("UpdateIdsOfSelectedRowsDocDeudor(rowid, status)")
+    .onSelectAll("fnOnSelectAllDocDeudor(aRowids, status)")
+    .onLoadComplete("fnOnLoadCompleteDocDeudor(this, xhr)")
+    .Render()
+
+)

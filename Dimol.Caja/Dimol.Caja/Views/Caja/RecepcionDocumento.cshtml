@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "Recepcion de Documentos";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+@using Mvc.HtmlHelpers
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+           
+        fnEventsfrmRecepcionDocumento();
+    });
+    window.onload = function () {
+        $("#t_gridRecepcionDocumentos").append("<div align='right'><button type='button' onclick='fnAgregarDocumento();' title='Ingresar Documento'><i class='fa fa-plus-square' style='font-size:15px;'></i></button></div>");
+        
+    }
+
+</script>
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Documentos</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+
+       
+        <div class="tabla" style="display:none">
+
+            <div class="fila">
+                <div class="col">
+                    @*<button class="search" id="btnAgregarGestor" onclick="fnAgregarGestor();" style="vertical-align:middle"><img src="~/Images/botones/Add20.png" width="20px" height="20px" title="Agregar" alt="Agregar" /></button>Agregar*@
+                    @*<input type="button" value="Ingresar Documento" onclick="fnAgregarDocumento();" />*@
+                    <button onclick="fnAgregarDocumento();" title="Ingresar Documento">
+                        <i class="ui-icon ui-icon-circle-plus" style="font-size:19px;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        @(Html.jqGrid("gridRecepcionDocumentos")
+                .addColumn(new Column("NumeroDocumento").setLabel("Numero")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(50))
+                .addColumn(new Column("RutCliente").setLabel("Rut Cliente")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(70))
+
+                .addColumn(new Column("Cliente").setLabel("Cliente")
+                .setSortable(true).setAlign(Align.left)
+                .setWidth(100))
+
+                .addColumn(new Column("RutDedor").setLabel("Rut Deudor")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(70))
+                .addColumn(new Column("Deudor").setLabel("Deudor")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(150))
+                .addColumn(new Column("RutAsegurado").setLabel("Asegurado")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(70))
+                .addColumn(new Column("Asegurado").setLabel("Asegurado")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("FecIngreso").setLabel("Fec. Ingreso")
+                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Moneda").setLabel("Moneda")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(50))
+                .addColumn(new Column("ValorIngreso").setLabel("Valor").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(90))
+                .addColumn(new Column("MontoIngreso").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(90))
+                .addColumn(new Column("DocumentoId").setLabel(".")
+                .setHidden(false)
+                .setEditable(false).setCustomFormatter("fnBotonesRecepcionDocumentos")
+                .setWidth(40))
+                .addColumn(new Column("pclid").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false)
+                .setWidth(30))
+                .addColumn(new Column("ctcid").setLabel(" ")
+                .setHidden(true)
+                .setEditable(true)
+                .setWidth(30))
+                .addColumn(new Column("sbcid").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false)
+                .setWidth(30))
+                .addColumn(new Column("Codmon").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false)
+                .setWidth(30))
+                .addColumn(new Column("EstatusId").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false)
+                .setWidth(30))
+                // settings
+                .setCaption("Documentos Recepcionados")//.setWidth(800)
+                .setAutoWidth(true)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Caja/ListarCajaIngresoDocumentosGrilla/")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setRowNum(10)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("DocumentoId")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pggridRecepcionDocumentos")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .setScroll(true)
+                .setHeight(300).setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+                .Render()
+
+
+        )
+
+    </div>
+</div>
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppDocumento" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Ingreso de Documento")
+                .CloseOnEscape(true)
+                .Width(600)
+                .Height(300)
+
+                ))
+{
+    @Html.Partial("_AgregarDocumento")
+}
+@Styles.Render("~/Content/caja")

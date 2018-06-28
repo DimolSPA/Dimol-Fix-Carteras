@@ -1,0 +1,61 @@
+﻿@model Dimol.Carteras.Models.BuscarComprobanteModel 
+
+<div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.RutCliente)</div>
+                <div class="col" style="width:400px" >@Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "RutNombreCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("OnSelectClienteComprobante")
+                @Html.ValidationMessageFor(model => model.RutCliente)
+                    @Html.HiddenFor(model => model.RutCliente)@Html.HiddenFor(model => model.NombreCliente)
+                    @Html.HiddenFor(model => model.Tipo)@Html.HiddenFor(model => model.Cartera)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.TipoDocumento)</div>
+                <div class="col">@Html.DropDownList("TipoDocumento", null, new { @class= "ComboboxClassL", @onchange="EstadoSeleccionado"})
+            @Html.ValidationMessageFor(model => model.TipoDocumento)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Numero)</div>
+                <div class="col">@Html.EditorFor(model => model.Numero)
+            @Html.ValidationMessageFor(model => model.Numero)</div>
+            </div>
+            <div class="fila">
+                <div class="col"  style="width:160px">@Html.LabelFor(model => model.Rut)</div>
+                <div class="col"> @Html.JQueryUI().Autocomplete("Ctcid", Url.Action("BuscarRutDeudor"),null,"Rut",null,new { @class= "textboxRut"}).MinLength(3)
+            @Html.ValidationMessageFor(model => model.Rut)</div>
+            </div>
+@*            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Nombre)</div>
+                <div class="col">@Html.TextBox("NombreBuscar",null,new { @class= "textboxClass"})
+            @Html.ValidationMessageFor(model => model.Nombre)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.ApellidoPaterno)</div>
+                <div class="col">@Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "textboxClassM"})
+            @Html.ValidationMessageFor(model => model.ApellidoPaterno)</div>
+                <div class="col">@Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "textboxClassM"})
+            @Html.ValidationMessageFor(model => model.ApellidoMaterno)</div>
+            </div>*@
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.NombreFantasia)</div>
+                <div class="col">@Html.TextBoxFor(model => model.NombreFantasia, new { @class= "textboxClass"})
+            @Html.ValidationMessageFor(model => model.NombreFantasia)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Telefono)</div>
+                <div class="col">@Html.EditorFor(model => model.Telefono)
+            @Html.ValidationMessageFor(model => model.Telefono)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Email)</div>
+                <div class="col">@Html.TextBoxFor(model => model.Email, new { @class= "textboxClass"})
+            @Html.ValidationMessageFor(model => model.Email)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Direccion)</div>
+                <div class="col">@Html.TextBoxFor(model => model.Direccion, new { @class= "textboxClass"})
+            @Html.ValidationMessageFor(model => model.Direccion)</div>
+                <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnBuscarComprobantes();" /></div>
+            </div>
+
+        </div>

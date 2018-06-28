@@ -1,0 +1,170 @@
+﻿@model Dimol.Carteras.Models.DocumentoDeudorModel
+
+@{
+    ViewBag.Title = "Documentos Deudor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  <div class="ui-widget-header ui-corner-all">
+    <span id="ui-dialog-title-dialog" class="ui-dialog-title">Documentos Deudor</span>
+
+   </div>
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDocumentosDeudor" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BuscarDeudor</legend>
+
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnBuscarDocumentosDeudor")
+                @Html.ValidationMessageFor(model => model.NombreRutCliente)
+            </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnBuscarDocumentosDeudor")
+                @Html.ValidationMessageFor(model => model.NombreRutDeudor)
+            </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.TipoDocumento)</div>
+                <div class="col">@Html.DropDownList("TipoDocumento", null, new { @class= "ComboboxClassL", @onchange="fnBuscarDocumentosDeudor()"})
+            @Html.ValidationMessageFor(model => model.TipoDocumento)</div>
+            </div>
+           
+            <div class="fila">
+                <div class="col" style="width: 183px; height: 25px; margin-top: 5px;">@Html.LabelFor(model => model.Archivo)</div>
+                <div class="col" style="width: 300px">
+                    <input id="subirArchivo" type="file" style="width: 300px" multiple="multiple">@Html.HiddenFor(model => model.Archivo)</div>
+                <div class="col">
+                    <input type="submit" id="btnSubmit" value="Grabar Archivos" /></div>
+                <div class="col">
+                    <img id="imgSubirArchivo" src="~/Images/blank.png" class="" style="float: left" /></div>
+            </div>            
+            <div class="fila">
+                <div class="col" style="float:right">
+                    @Html.HiddenFor(model => model.Codemp)
+                    <input type="button" value="Buscar" id="btnBuscar" onclick="fnBuscarDocumentosDeudor();" />
+                    @*<input type="button" value="Grabar" id="btnGrabar" disabled="disabled" onclick="fnGrabarDocumentoDeudor();" />*@
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+}
+<br />
+@(Html.jqGrid("gridDocumentosDeudor")
+    
+    .addColumn(new Column("Pclid").setLabel("Id Cliente")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("Ctcid").setLabel("Ctcid")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("Dcdid").setLabel("Dcdid")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("NombreCliente").setLabel("Cliente")
+        .setSortable(true)
+        .setWidth(110))    
+    .addColumn(new Column("TipoDocumento").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("Archivo").setLabel("Nombre")
+        .setSortable(true)
+        .setWidth(110))
+    
+    // settings
+    .setCaption("Documentos Deudor")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("NombreCliente,TipoDocumento")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDocumentosDeudor")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("MostrarDocumento(rowid)")
+    .Render()
+
+) 
+<br />
+          </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+  <script>
+      window.onload = function () {
+          document.getElementById('frmDocumentosDeudor').onsubmit = function () {
+              if ($("#NombreRutDeudor").val() != '') {
+                  var formdata = new FormData(); //FormData object
+                  var fileInput = document.getElementById('subirArchivo');
+                  //Iterating through each files selected in fileInput
+                  for (i = 0; i < fileInput.files.length; i++) {
+                      //Appending each file to FormData object
+                      formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                  }
+                  //Creating an XMLHttpRequest and sending
+                  var xhr = new XMLHttpRequest();
+                  xhr.open('POST', '/Cartera/Upload/?tipo=Documento&rut=' + $("#NombreRutDeudor").val() + '&Ctcid=' + $("#Ctcid").val() + '&Pclid=' + $("#Pclid").val() + '&TipoDocumento=' + $("#TipoDocumento").val());
+                  xhr.send(formdata);
+                  xhr.onreadystatechange = function () {
+                      if (xhr.readyState == 4 && xhr.status == 200) {
+                          $('#Archivo').val(xhr.responseText.replace(/\"/g, ''))
+                          if (xhr.responseText == '""') {
+                              alert("Error al subir el archivo al servidor.");
+                              $("#imgSubirArchivo").removeClass("ok").addClass("error");
+                              //$("#btnGrabar").attr("disabled", "disabled");
+                              $("#btnSubmit").removeAttr("disabled");
+                          } else if (xhr.responseText == '1') {
+                              alert("Error al subir el archivo al servidor. Este tipo de documento requiere los datos del cliente.");
+                              $("#imgSubirArchivo").removeClass("ok").addClass("error");
+                              //$("#btnGrabar").attr("disabled", "disabled");
+                              //$("#btnSubmit").removeAttr("disabled");
+                          } else {
+                               alert("Archivos guardados con exito.");
+                              $("#imgSubirArchivo").removeClass("error").addClass("ok");
+                              //$("#btnGrabar").removeAttr("disabled");
+                              $("#btnSubmit").attr("disabled", "disabled");
+                              fnBuscarDocumentosDeudor();
+                          }
+                      }
+                  }
+                  return false;
+              } else {
+                  alert("Debe ingresar un deudor.");
+                  return false;
+              }
+          }
+      }
+
+</script>
+}
+
+@using (Html.JQueryUI().Begin(new Dialog().Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Documento Deudor")
+    .CloseOnEscape(true)
+    .Width(900)
+    .Height(600)
+    .TriggerClick("button")
+    ))
+{
+}

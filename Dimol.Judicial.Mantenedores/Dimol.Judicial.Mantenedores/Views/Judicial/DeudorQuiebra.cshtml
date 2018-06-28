@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Deudor Quiebra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Deudores Quiebra</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Gestores</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+
+        <br />
+        <div class="tabla">
+            <div class="fila">
+                <div class="col"><button class="search" id="btnAgregarGestor" onclick="fnAgregarDeudorQuiebra();" style="vertical-align:middle"><img src="~/Images/botones/Add20.png" width="20px" height="20px" title="Agregar" alt="Agregar" /></button>Agregar </div>
+            </div>
+        </div><br />
+        @(Html.jqGrid("gridDeudorQuiebra")
+                .addColumn(new Column("TribunalId").setLabel("TribunalId")
+                        .setSortable(true).setHidden(true)
+                        .setWidth(60))
+                .addColumn(new Column("TipoCausaId").setLabel("TipoCausaId")
+                        .setSortable(true).setHidden(true)
+                        .setWidth(60))
+                .addColumn(new Column("MateriaJodicialId").setLabel("MateriaJodicialId")
+                        .setSortable(true).setHidden(true)
+                        .setWidth(60))                
+                .addColumn(new Column("Rut").setLabel("Rut")
+                        .setEditable(false)
+                        .setSortable(true)
+                        .setWidth(150))
+                .addColumn(new Column("Deudor").setLabel("Deudor")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(200))
+                .addColumn(new Column("RolNumero").setLabel("RolNumero")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(150))
+
+                .addColumn(new Column("Tribunal").setLabel("Tribunal")
+                .setSortable(true).setAlign(Align.center)
+                .setWidth(200))
+
+                .addColumn(new Column("Causa").setLabel("Causa")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(150))
+                .addColumn(new Column("Materia").setLabel("Materia")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(200))
+                        .addColumn(new Column("Rut").setLabel("Accion ")
+                .setHidden(false)
+                .setEditable(false).setCustomFormatter("fnBotonesGridDeudorQuiebra")
+                .setWidth(30))
+                
+                // settings
+                .setCaption("Deudores").setWidth(700)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Judicial/ListarDeudoresQuiebra/")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                        .setAutoWidth(true)
+                .setRowNum(10)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                        .setSortName("Rut")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerGestores")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .Render()
+
+        )
+
+    </div>
+</div>
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppDeudorQuiebra" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Agregar Deudor")
+                .CloseOnEscape(true)
+                .Width(800)
+                .Height(300)
+
+                ))
+{
+    @Html.Partial("_AgregarDeudorQuiebra")
+}

@@ -1,0 +1,264 @@
+﻿@{
+    ViewBag.Title = "Panel de Demandas Masivas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/epoch.js?27"></script>
+@using Mvc.HtmlHelpers
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        Date.prototype.epochConverterGMTString = function () {
+            var locale = window.navigator.userLanguage || window.navigator.language; if (typeof moment === "undefined") { return this.toUTCString(); }
+            moment.locale('en'); var md = moment(this); if (!md.isValid()) { return 'Invalid input.'; }
+            var myLocaleData = moment.localeData(locale); var myFormat = myLocaleData.longDateFormat('LLLL'); if (md.format("SSS") != '000') { myFormat = myFormat.replace(":mm", ":mm:ss.SSS"); } else { myFormat = myFormat.replace(":mm", ":mm:ss"); }
+            return md.utc().format(myFormat);
+        };
+
+        //$('#FechaConfeccion').datepicker().datepicker('setDate', 'today');
+        setTimeout(function () {
+            $('.ui-jqgrid-bdiv').css("height", "455px");
+        }, 300);
+    });
+</script>
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none; height: 580px;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Demandas</span>
+    </div>
+    <div class="col" style="float: right">
+        <input type="button" value="Exportar Excel" onclick="fnExcelPanelDemandasMasivas();" />
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        <br />
+        @(Html.jqGrid("gridPanelDemandas")
+                            .addColumn(new Column("PanelId").setLabel("PanelId")
+                                .setSortable(true).setHidden(true)
+                                .setWidth(60))
+                            //.addColumn(new Column("Responsable").setLabel("Responsable")
+                            //    .setEditable(false).setSearch(false)
+                            //    .setSortable(true)
+                            //    .setWidth(150))
+                            .addColumn(new Column("FechaAsignacion").setLabel("Fec. Asignacion")
+                                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                .setSortable(true).setSearch(false).setHidden(true)
+                                .setWidth(100))
+                            .addColumn(new Column("FechaAprobacionTraspaso").setLabel("Fec. Traspaso")
+                                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                .setSortable(true).setSearch(false).setHidden(true)
+                                .setWidth(100))
+                            .addColumn(new Column("FechaIngresaJudicial").setLabel("Fec. Ingreso Judicial")
+                                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                .setSortable(true)
+                                .setWidth(110))
+                            .addColumn(new Column("Cliente").setLabel("Cliente")
+                                .setAlign(Align.left).setEditable(false)
+                                .setWidth(150))
+                            .addColumn(new Column("RutDeudor").setLabel("Rut Deudor")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(70))
+                            .addColumn(new Column("Deudor").setLabel("Deudor")
+                                .setEditable(false).setSearch(true)
+                                .setSortable(true)
+                                .setWidth(200))
+                            .addColumn(new Column("Asegurado").setLabel("Asegurado")
+                                .setEditable(false).setSearch(true).setHidden(true)
+                                .setSortable(true)
+                                .setWidth(200))
+                            .addColumn(new Column("TipoDocumento").setLabel("Tipo Documento")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(100))
+                            .addColumn(new Column("Comuna").setLabel("Comuna")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setSortType(SortType.TEXT)
+                                .setSearch(true)
+                                .setWidth(150))
+                            .addColumn(new Column("Region").setLabel("Region")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(200))
+                            //.addColumn(new Column("EncargadoCofeccion").setLabel("Encargado Confección")
+                            //    .setEditable(false)
+                            //    .setSortable(true)
+                            //    .setWidth(150))
+                            .addColumn(new Column("FechaEnvioConfeccion").setLabel("Fec. Envio Confección")
+                                .setEditable(false).setFormatter(Formatters.date).setDateFmt("d-m-Y").setAlign(Align.center).setHidden(true)
+                                .setSortable(true)
+                                .setWidth(130))
+                            .addColumn(new Column("FechaEntrega").setLabel("Fec.Entrega").setAlign(Align.center)
+                                .setEditable(false).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                .setSortable(true).setHidden(true)
+                                .setWidth(80))
+                            .addColumn(new Column("FechaIngresoTribunal").setLabel("Fec. Ingreso Tribunal")
+                                .setEditable(false).setFormatter(Formatters.date).setDateFmt("d-m-Y").setAlign(Align.center)
+                                .setSortable(true)
+                                .setWidth(130))
+                            .addColumn(new Column("Correcciones").setLabel("Correcciones").setAlign(Align.center)
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(70))
+                            .addColumn(new Column("CountCorrecciones").setLabel("Cant.").setAlign(Align.left)
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(30))
+                            .addColumn(new Column("Comentarios").setLabel("Comentarios")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(100))
+                            .addColumn(new Column("Procesada").setLabel("Procesada")
+                                .setSortable(true).setHidden(true).setEditable(true)
+                                .setWidth(60))
+                            .addColumn(new Column("Avance").setLabel("").setCustomFormatter("fnBotonesGridPanelDemandasMasivas")
+                                .setWidth(40)
+                                .setAlign(Align.center))
+                            .addColumn(new Column("UsridEncargado").setLabel("UsridEncargado")
+                                .setSortable(true).setHidden(true)
+                                .setWidth(60))
+                            .addColumn(new Column("Pclid").setLabel("Pclid")
+                                .setSortable(true).setHidden(true)
+                                .setWidth(60))
+                            .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                                .setSortable(true).setHidden(true)
+                                .setWidth(60))
+                            .addColumn(new Column("RutCliente").setLabel("RutCliente")
+                                .setSortable(true).setHidden(true)
+                                .setWidth(60))
+                            .addColumn(new Column("CountFechaEntrega").setLabel("CountFechaEntrega")
+                                .setSortable(true).setHidden(true)
+                                .setWidth(60))
+                            .addColumn(new Column("RolNumero").setLabel("Número de rol")
+                                .setSortable(true)
+                                .setWidth(100))
+                            .addColumn(new Column("TribunalNombre").setLabel("Nombre del tribunal")
+                                .setSortable(true)
+                                .setWidth(160))
+                            .addColumn(new Column("Cursodemanda")
+                                .setLabel("Da curso la Demanda?").addClass("redFont").setAlign(Align.center)
+                                .setCustomFormatter("formatCursoDemandaMasiva")
+                                .setWidth(150))
+                            .addColumn(new Column("CountCursodemanda").setLabel("Cant. No curso").setAlign(Align.center)
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(100))
+                            .addColumn(new Column("ConfDemanda").setLabel("Conf. Demanda").setAlign(Align.center).setCustomFormatter("fnBotonesGridConfeccionDemanda")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(100))
+                            //.addColumn(new Column("ConfDemanda").setLabel("Desc. Demanda").setAlign(Align.center).setCustomFormatter("fnBotonesGridDescargarDemanda")
+                            .addColumn(new Column("ConfDemanda").setLabel("Desc. Demanda").setAlign(Align.center).setCustomFormatter("fnBotonesGridDescargarDemanda")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(100))
+                            // settings
+                            .setCaption("Panel de Demandas Masivas")
+                            .setRequestType(RequestType.get)
+                                    .setUrl("~/Judicial/ListarPanelDemandasMasivas/")
+                                    .setAltRows(true)
+                            .setAltClass("altGridRows")
+                            .setAutoWidth(true)
+                            .setRowNum(500)
+                            .setRowList(new int[] { 50, 100, 500 })
+                            .setViewRecords(true)
+                            .setSortName("PanelId")
+                            .setSortOrder(SortOrder.asc)
+                            .setPager("pagerPanelDemandas")
+                            .setPagerPos(PagerPos.center)
+                            .setPgButtons(true)
+                            .setCellEdit(false)
+                            .setCellSubmit(CellSubmit.clientArray)
+                            .setExcelExport("/Judicial/ExportToExcelPanelDemandas")
+                            .setShrinkToFit(false)//.setCustomGrid
+                            .setSubGrid(new Grid("GridSub")
+                                    // columns
+                                    .addColumn(new Column("Numero").setLabel("Número").setAlign(Align.center)
+                                        .setSortable(true)
+                                        .setWidth(100))
+                                    .addColumn(new Column("TipoDocumento").setLabel("Tipo Documento").setAlign(Align.center)
+                                        .setSortable(true)
+                                        .setWidth(100))
+                                    .addColumn(new Column("FechaAsignacion").setLabel("Fecha Asig.").setAlign(Align.center)
+                                        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                        .setWidth(72))
+                                    .addColumn(new Column("FechaVencimiento").setLabel("Fecha Venc.").setAlign(Align.center)
+                                        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                        .setWidth(72))
+                                    .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+                                        .setSortable(true)
+                                        .setWidth(70))
+                                    .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.number)
+                                        .setSortable(true)
+                                        .setWidth(70))
+                                    .addColumn(new Column("Estado").setLabel("Estado").setAlign(Align.center)
+                                        .setSortable(true)
+                                        .setWidth(100))
+                                    .addColumn(new Column("Asegurado").setLabel("Asegurado")
+                                        .setSortable(true)
+                                        .setWidth(220))
+                                // settings
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Judicial/ListarDocumentosMasivosPanelId?panelId='+row_id+'")
+                                //.setSubGridOptions("{plusicon : 'ui-icon-plus', minusicon : 'ui-icon-minus', openicon:'ui-icon-carat-1-sw'}")
+                                .setAutoWidth(false)
+                                .setHeight(100)
+                                .setRowNum(10)
+                                .setRowList(new int[] { 10, 15, 20, 50 })
+                                .setViewRecords(true)
+                                .setSortName("Numero")
+                                .setSortOrder(SortOrder.asc)
+                                .setPager("pagerGridSub")
+                                        .setPgButtons(true).setShrinkToFit(false))
+                            .Render()
+        )
+    </div>
+    @Html.Hidden("IdDM")
+</div>
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAvanceDemanda" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Avance Demanda")
+                .CloseOnEscape(true)
+                .Width(600)
+                .Height(200)
+                .MaxHeight(200)
+
+                ))
+{
+    @Html.Partial("_AgregarAvanceDemandaMasiva")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAgragarRol" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Ingreso Rol")
+                .CloseOnEscape(true)
+                .Width(800)
+                .Height(500)
+
+                ))
+{
+    @Html.Partial("_AgregarAvanceDemandaMasivaRol")
+}
+
+@using (Html.JQueryUI().Begin(new JQueryUIHelpers.Dialog(new { id = "ppBorradoresTipoDemandaMasiva" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Borradores")
+    .CloseOnEscape(true)
+    .Width(900)
+    .Height(770)
+    .OnBeforeClose("MensajeCerrarBorradores")
+))
+{
+    @Html.Partial("_BorradoresTipoDemandaMasiva")
+}
+
+<div id="loading-gif" style="display: none;">
+    <img id="loading-image-gif" src="~/Images/ajax-loader.gif" alt="Descargando..." />
+</div>

@@ -1,0 +1,122 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Ranking de Llamadas";
+}
+<html>
+<head>
+    <style>
+        .monster {
+            border: 2px solid #000066;
+            background: #ffffff;
+            width: 49.8%;
+            height: 300px;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            margin: 2px;
+            float: left;
+            background: rgba(255,255,255,0.9);
+            color: #000066;
+        }
+
+        .imagen {
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            display: block;
+            width: 200px;
+            height: 260px;
+        }
+
+        #divGestores {
+            /*border: 2px solid #aaaaaa;
+            text-align: center;
+            margin: 0px auto;*/
+            width: 100%;
+        }
+
+        body {
+            background-image: url("/Res/logodimol.png");
+            background-size: 1125px 967px;
+            background-repeat: no-repeat;
+            background-position: center top;
+        }
+    </style>
+    <title></title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript">
+        
+        var total=0;
+
+        function cargaGestores()
+        {
+            var newUrl = "/Home/GetRankingGestores/?sucursal=" + @ViewBag.Sucursal;
+            
+            var contador = 0;
+            
+            var url = "/Res/blank-avatar.jpg";
+
+            $.ajax({
+                type: 'POST',
+                url: newUrl, // we are calling json method
+                dataType: 'json',
+                async: true,
+                /////beforeSend: function () { $("body").append('<div id="loading"><img src="http://www.jose-aguilar.com/blog/wp-content/uploads/2012/03/loading.gif"/></div>'); },
+                success: function (data) {
+
+                    //$("body").removeClass("loading");
+                    $('#divGestores > table').remove();
+
+                    $.each(data.rows, function (i, array) {
+                                                
+                        if (parseInt(i/6) == total) $('#divGestores').append('<table class="monster"><tr><td><img src="/Res/empleados/' + array.cell[1] + '.jpg" class="imagen"/></td><td><div style="text-align:center;font-size:48px;font-family:Arial;font-weight:bold;">(' + (i + 1) + ') ' + array.cell[0] + '</div><br/><div style="text-align:center;font-size:36px;font-family:Arial;">' + array.cell[5] + '</div><hr size="6px" color="#FFCC33"><div style="display: inline-block;font-family:Arial;font-size:33px;">Llamadas efectivas: ' + array.cell[2] + '<br/>Total llamadas: ' + array.cell[3] + '</div><div style="display: inline-block; margin-left: 90px;font-family:Arial;font-size:70px;font-weight: bold;">' + array.cell[4] + '%</div></td></tr></table>').hide().fadeIn(1000);
+                        
+                        contador++;
+                        
+                    });
+
+                    total++;
+                    
+                    if(total > parseInt((contador-1)/6)) total = 0;
+                },
+                error: function (ex) {
+                    //alert('Error al enviar correos.' + ex);
+                }
+
+            });
+        }
+
+        cargaGestores();
+
+        function play()
+        {
+            document.getElementById('player').play();
+        }
+
+        function redirige(){
+            window.location.href = "/?s="+ @ViewBag.Sucursal;
+        }
+
+        //setInterval(play, 1785000);
+        //setInterval(cargaGestores, 1800000);
+
+        setInterval(cargaGestores, 20000);
+        setInterval(redirige, 300000);
+    </script>
+
+</head>
+
+<body>
+    
+    <!--<h2>RankingLlamadas</h2>
+    <h2>Total: @ViewBag.Total</h2>-->
+    <div id="divGestores">
+        
+
+    </div>
+
+    <!--<audio id="player" src="https://upload.wikimedia.org/wikipedia/commons/d/da/Timbres.ogg"> </audio>-->
+    <audio id="player" src="~/Res/nba.mp3"> </audio>
+</body>
+</html>
+

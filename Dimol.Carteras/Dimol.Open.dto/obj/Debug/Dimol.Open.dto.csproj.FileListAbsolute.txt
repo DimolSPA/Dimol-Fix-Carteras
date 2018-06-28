@@ -1,0 +1,5 @@
+C:\DimolSoluciones\Dimol.Carteras\Dimol.Open.dto\bin\Debug\Dimol.Open.dto.dll
+C:\DimolSoluciones\Dimol.Carteras\Dimol.Open.dto\bin\Debug\Dimol.Open.dto.pdb
+C:\DimolSoluciones\Dimol.Carteras\Dimol.Open.dto\obj\Debug\Dimol.Open.dto.csproj.CoreCompileInputs.cache
+C:\DimolSoluciones\Dimol.Carteras\Dimol.Open.dto\obj\Debug\Dimol.Open.dto.dll
+C:\DimolSoluciones\Dimol.Carteras\Dimol.Open.dto\obj\Debug\Dimol.Open.dto.pdb

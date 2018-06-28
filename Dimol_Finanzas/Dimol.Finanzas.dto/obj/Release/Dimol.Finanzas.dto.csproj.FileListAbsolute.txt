@@ -1,0 +1,4 @@
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.dto\bin\Release\Dimol.Finanzas.dto.dll
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.dto\bin\Release\Dimol.Finanzas.dto.pdb
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.dto\obj\Release\Dimol.Finanzas.dto.dll
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.dto\obj\Release\Dimol.Finanzas.dto.pdb

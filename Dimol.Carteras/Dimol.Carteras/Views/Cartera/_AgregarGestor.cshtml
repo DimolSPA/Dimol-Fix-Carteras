@@ -1,0 +1,110 @@
+﻿@model Dimol.Carteras.Models.GestorModel
+
+@using Mvc.HtmlHelpers
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmGestor" }))
+        {
+    @Html.ValidationSummary(true)
+    @Html.Hidden("GesId")
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.LstEmpleado)</div>
+            <div class="col">
+                @Html.DropDownList("LstEmpleado", null, new { @class = "ComboboxClass" })
+                @Html.ValidationMessageFor(model => model.LstEmpleado)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Nombre)</div>
+            <div class="col">
+
+               @Html.TextBox("Nombre", null, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.Nombre)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Telefono)</div>
+            <div class="col">
+
+                @Html.TextBox("Telefono", null, new { autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.Telefono)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Email)</div>
+            <div class="col">
+               
+                @Html.TextBox("Email", null, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.LstTipoCartera)</div>
+            <div class="col">
+                @Html.DropDownList("LstTipoCartera", null, new { @class = "ComboboxClass" })
+                @Html.ValidationMessageFor(model => model.LstTipoCartera)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.LstGrupoCobranza)</div>
+            <div class="col">
+                @Html.DropDownList("LstGrupoCobranza", null, new { @class = "ComboboxClass" })
+                @Html.ValidationMessageFor(model => model.LstGrupoCobranza)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.GestorRemoto)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.GestorRemoto)
+                @Html.ValidationMessageFor(model => model.GestorRemoto)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.GestorActivo)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.GestorActivo)
+                @Html.ValidationMessageFor(model => model.GestorActivo)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col">
+                <fieldset>
+                    <legend>Terreno</legend>
+                    <div class="tabla">
+                        <div class="fila">
+                            <div class="col" style="width:160px">@Html.LabelFor(model => model.GestorTerreno)</div>
+                            <div class="col">
+                                @Html.EditorFor(model => model.GestorTerreno)
+                                @Html.ValidationMessageFor(model => model.GestorTerreno)
+                            </div>
+                        </div>
+                        <div class="fila">
+                            <div class="col" style="width:160px">@Html.LabelFor(model => model.TelefonoTerreno)</div>
+                            <div class="col">
+                                @Html.TextBox("TelefonoTerreno", null, new { maxlength = 9, autocomplete = "off" })
+                                @Html.ValidationMessageFor(model => model.TelefonoTerreno)
+                            </div>
+                        </div>
+                        <div class="fila">
+                            <div class="col" style="width:160px">@Html.LabelFor(model => model.TelefonoImei)</div>
+                            <div class="col">
+                                @Html.TextBox("TelefonoImei", null, new { @class = "textboxClass" })
+                                @Html.ValidationMessageFor(model => model.TelefonoImei)
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="float:right">
+                <input type="button" value="Guardar" id="btnGuardar" onclick="fnGuardarGestor();" />
+
+            </div>
+        </div>
+    </div>
+    
+        }
+    @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    }

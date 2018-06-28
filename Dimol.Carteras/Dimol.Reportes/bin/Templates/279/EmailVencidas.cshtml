@@ -1,0 +1,42 @@
+﻿@using RazorEngine
+@using Dimol.Email.dto.MailModels
+@inherits RazorEngine.Templating.TemplateBase<BaseEmailModel<EmailVencidasCoopeuch>>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Test Email</title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p><b>Estimado(a) Señor(a) @Model.Props.Deudor.Nombre .:</b></p>
+        <p>
+            Con el fin de apoyar su gestión, adjunto le hacemos llegar detalle
+            de facturas emitidas hasta la fecha @String.Format("{0:d}", @Model.Props.FechaVencimiento)  (vencidas)
+            de nuestro cliente <b>@Model.Props.Cliente.Nombre</b>
+        </p>
+        <p>
+            Cualquier duda o diferencia respecto al detalle enviado, le solicitamos
+            contactarse con su ejecutivo asignado Señor(a) @Model.Props.Gestor.Nombre, quien lo
+            contactará a la brevedad para cordinar fechas de pago.
+        </p>
+        <p>
+            Saludos cordiales,
+        </p>
+        <p>
+            <b>DIMOL SPA</b><br />
+            @Model.Props.Gestor.Nombre  <br />
+            Ejecutivo Cobranza <br />
+            Teléfono @Model.Props.Gestor.Telefono, E-Mail @Model.Props.Gestor.Email <br />
+
+            [@DateTime.Now] End of message
+        </p>
+    </div>
+</body>
+</html>

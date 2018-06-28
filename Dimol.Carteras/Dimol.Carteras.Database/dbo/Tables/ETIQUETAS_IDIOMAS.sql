@@ -1,0 +1,18 @@
+﻿CREATE TABLE [dbo].[ETIQUETAS_IDIOMAS] (
+    [ETI_ETIID]       INT           NOT NULL,
+    [ETI_IDID]        INT           NOT NULL,
+    [ETI_DESCRIPCION] VARCHAR (400) NOT NULL,
+    CONSTRAINT [PK_ETIQUETAS_IDIOMAS] PRIMARY KEY CLUSTERED ([ETI_ETIID] ASC, [ETI_IDID] ASC),
+    CONSTRAINT [FK_ETIQUETA_ETIQUETAS_ETIQUETA] FOREIGN KEY ([ETI_ETIID]) REFERENCES [dbo].[ETIQUETAS] ([ETQ_ETQID]),
+    CONSTRAINT [FK_ETIQUETA_IDIOMAS_E_IDIOMAS] FOREIGN KEY ([ETI_IDID]) REFERENCES [dbo].[IDIOMAS] ([IDI_IDID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[ETIQUETAS_IDIOMAS]([ETI_ETIID] ASC, [ETI_IDID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena los distintos idiomas para cada etiqueta', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'ETIQUETAS_IDIOMAS';
+

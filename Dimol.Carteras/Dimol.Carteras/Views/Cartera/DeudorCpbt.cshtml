@@ -1,0 +1,409 @@
+﻿@model Dimol.Carteras.Models.ComprobanteModel
+
+@{
+    ViewBag.Title = "DeudorCpbt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<style>
+    .DeudorCpbt_Subtitulo {
+        text-align: center;
+        background-color: #005F9D;
+        font-family: 'PT Sans', sans-serif;
+        color: white;
+        width: 100%;
+    }
+
+    .DeudorCpbt_col-custom {
+        margin: 8px 0 0 0;
+        min-width: 145px;
+    }
+</style>
+
+<h2>Documentos Deudores</h2>
+@using Mvc.HtmlHelpers
+@using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabDocumento" })))
+{
+    t.Tab("Documento", "tab1");
+    t.Tab("Imagenes", "tab2");
+    using (t.BeginPanel())
+    {
+
+        using (Html.BeginForm(null,null, FormMethod.Post, new { id = "frmDeudorCpbt" }))
+        {
+    @Html.ValidationSummary(true)
+<div class="tabla">
+    <div class="fila">
+        <div class="col DeudorCpbt_Subtitulo">Datos Deudor</div>
+    </div>
+    <div class="fila" style="padding-bottom:30px">
+        <div class="col" style="width:145px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+        <div class="col">
+            @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("OnSelectTipoCartera")
+            @Html.ValidationMessageFor(model => model.NombreRutCliente)
+        </div>
+    </div>
+
+    <div class="fila">
+        <div class="col" style="width:145px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+        <div class="col">
+            @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3)
+            @Html.ValidationMessageFor(model => model.NombreRutDeudor)
+        </div>
+    </div>
+    @*<div class="fila">
+            <div class="col" style="width:50px">@Html.LabelFor(model => model.RutCliente)</div>
+            <div class="col" style="width: 90px">
+                @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutCliente"), "RutCliente", null, new { @class = "textboxRut", @style = "float:right" , onkeypress="CargarClienteEvento(event)"}).MinLength(3)
+            @Html.ValidationMessageFor(model => model.RutCliente)
+        </div>
+        <div class="col">
+            @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarNombreCliente"), "NombreCliente", null, new { @class = "textboxClass" }).MinLength(3)
+        @Html.ValidationMessageFor(model => model.NombreCliente)
+        </div>
+        <div class="col" style="width:50px">@Html.LabelFor(model => model.RutDeudor)</div>
+        <div class="col" style="width: 90px;flex-align:end">
+            @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutDeudor"), "RutDeudor", null, new { @class = "textboxRut", @style = "float:right" }).MinLength(3)
+        @Html.ValidationMessageFor(model => model.RutDeudor)
+        </div>
+        <div class="col">
+            @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarNombreCliente"), "NombreFantasia", null, new { @class = "textboxClass" }).MinLength(3)
+        @Html.ValidationMessageFor(model => model.NombreFantasia)
+        </div>
+        </div>*@
+    <div class="fila">
+        <div class="col DeudorCpbt_Subtitulo">Datos Documento</div>
+    </div>
+    <div class="fila" style="padding-bottom:30px">
+        <div class="col" style="width:145px"> @Html.LabelFor(model => model.TipoCartera)</div>
+        <div class="col" style="width:100px">
+            @Html.DropDownListFor(model => model.TipoCartera, ViewBag.TipoCartera as List<SelectListItem>, new { onchange = "OnSelectTipoCartera()" })
+            @Html.ValidationMessageFor(model => model.TipoCartera)
+        </div>
+        <div class="col" style="width:110px">@Html.LabelFor(model => model.TipoDocumento)</div>
+        <div class="col" style="width:355px">
+            @Html.DropDownListFor(model => model.TipoDocumento, ViewBag.TipoDocumentos as List<SelectListItem>)
+            @Html.ValidationMessageFor(model => model.TipoDocumento)
+        </div>
+        <div class="col" style="width:112px">@Html.LabelFor(model => model.Numero)</div>
+        <div class="col">
+            @Html.EditorFor(model => model.Numero)
+            @Html.ValidationMessageFor(model => model.Numero)
+        </div>
+    </div>
+    <div class="fila" style="padding-bottom:30px">
+        <div class="col" style="width:145px">@Html.LabelFor(model => model.FechaIngreso)</div>
+        <div class="col" style="width:100px">
+            @Html.TextBoxFor(model => model.FechaIngreso, null, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.FechaIngreso)
+        </div>
+        <div class="col" style="width:110px">@Html.LabelFor(model => model.FechaDocumento)</div>
+        <div class="col" style="width:355px">
+            @Html.JQueryUI().Datepicker("FechaDocumento").ShowButtonPanel(true).ShowWeek(false)
+            @Html.ValidationMessageFor(model => model.FechaDocumento)
+        </div>
+        <div class="col" style="width:112px">@Html.LabelFor(model => model.FechaVencimiento)</div>
+        <div class="col">
+            @Html.JQueryUI().Datepicker("FechaVencimiento").ShowButtonPanel(true).ShowWeek(false)
+            @Html.ValidationMessageFor(model => model.FechaVencimiento)
+        </div>
+    </div>
+    <div class="fila" style="padding-bottom:30px">
+        <div class="col" style="width:145px">@Html.LabelFor(model => model.EstadoCpbt)</div>
+        <div class="col" style="width:100px">
+            @Html.DropDownListFor(model => model.EstadoCpbt, null, new { @disabled = "disabled" })
+            @Html.HiddenFor(model => model.EstadoCpbt)
+            @Html.ValidationMessageFor(model => model.EstadoCpbt)
+        </div>
+        <div class="col" style="width:110px">@Html.LabelFor(model => model.EstadoCartera)</div>
+        <div class="col" style="width:355px">
+            @Html.DropDownListFor(model => model.EstadoCartera, null, new { @disabled = "disabled" })
+            @Html.HiddenFor(model => model.EstadoCartera)
+            @Html.ValidationMessageFor(model => model.EstadoCartera)
+        </div>
+    </div>
+
+    <div class="fila" style="padding-bottom:30px">
+        <div class="col" style="width:145px">@Html.LabelFor(model => model.CodigoCarga)</div>
+        <div class="col">
+            @Html.DropDownListFor(model => model.CodigoCarga, null, new { })
+            @Html.ValidationMessageFor(model => model.CodigoCarga)
+        </div>
+    </div>
+
+    <div class="fila" style="padding-bottom:30px">
+        <div class="col" style="width:145px">@Html.LabelFor(model => model.Moneda)</div>
+        <div class="col" style="width:100px">
+            @Html.DropDownListFor(model => model.Moneda, null, new { })
+            @Html.ValidationMessageFor(model => model.Moneda)
+        </div>
+        <div class="col" style="width:110px">@Html.LabelFor(model => model.TipoCambio)</div>
+        <div class="col" style="width:355px">
+            @Html.EditorFor(model => model.TipoCambio)
+            @Html.ValidationMessageFor(model => model.TipoCambio)
+        </div>
+    </div>
+    <!--Asegurado-->
+    <div class="fila" style="padding-bottom:30px">
+        <div class="col" style="width:145px">@Html.LabelFor(model => model.Asociado)</div>
+        <div class="col">
+            @Html.JQueryUI().AutocompleteFor(model => model.Sbcid, Url.Action("BuscarRutNombreAsegurado"), "NombreRutAsegurado", null, new { @class = "textboxRutNombre" }).MinLength(3)
+            @Html.ValidationMessageFor(model => model.Asociado)
+        </div>
+    </div>
+
+    <div class="fila" style="padding-bottom:30px">
+        <div class="col" style="width:145px"> @Html.LabelFor(model => model.Contrato)</div>
+        <div class="col" style="width:100px">
+            @Html.DropDownListFor(model => model.Contrato, null, new { })
+            @Html.ValidationMessageFor(model => model.Contrato)
+        </div>
+    </div>
+
+    <div class="fila" style="padding-bottom:30px">
+        <div class="col" style="width:145px">@Html.LabelFor(model => model.MotivoCobranza)</div>
+        <div class="col">
+            @Html.DropDownListFor(model => model.MotivoCobranza, null, new { })
+            @Html.ValidationMessageFor(model => model.MotivoCobranza)
+        </div>
+        <div class="col" style="width:110px">@Html.LabelFor(model => model.NumeroNegocio)</div>
+        <div class="col" style="width:355px">
+            @Html.EditorFor(model => model.NumeroNegocio)
+            @Html.ValidationMessageFor(model => model.NumeroNegocio)
+        </div>
+    </div>
+
+    <div class="fila">
+        <div class="col" style="width:145px">@Html.LabelFor(model => model.NumeroAgrupaEspecial)</div>
+        <div class="col">
+            @Html.EditorFor(model => model.NumeroAgrupaEspecial)
+            @Html.ValidationMessageFor(model => model.NumeroAgrupaEspecial)
+        </div>
+        <div class="col" style="width:110px">@Html.LabelFor(model => model.Originales)</div>
+        <div class="col">
+            @Html.EditorFor(model => model.Originales)
+            @Html.ValidationMessageFor(model => model.Originales)
+        </div>
+        <div class="col">@Html.LabelFor(model => model.Antecedentes)</div>
+        <div class="col">
+            @Html.EditorFor(model => model.Antecedentes)
+            @Html.ValidationMessageFor(model => model.Antecedentes)
+        </div>
+    </div>
+    <div class="fila">
+        <div class="col" style="width:145px;margin-top:10px;">
+            @Html.LabelFor(model => model.RutTercero)
+        </div>
+        <div class="col" style="margin-top:10px;">
+            @Html.EditorFor(model => model.RutTercero)
+            @Html.ValidationMessageFor(model => model.RutTercero)
+        </div>
+    </div>
+    <div class="fila">
+        <div class="col" style="width:145px">
+            @Html.LabelFor(model => model.NombreTercero)
+        </div>
+        <div class="col">
+            @Html.TextBoxFor(model => model.NombreTercero, new { @class = "textboxClass" })
+            @Html.ValidationMessageFor(model => model.NombreTercero)
+        </div>
+    </div>
+    <div class="fila">
+        <div class="col" style="width:145px">
+            @Html.LabelFor(model => model.IdCuenta)
+        </div>
+        <div class="col">
+            @Html.TextBoxFor(model => model.IdCuenta, new { @class = "textboxClass" })
+            @Html.ValidationMessageFor(model => model.IdCuenta)
+        </div>
+    </div>
+    <div class="fila">
+        <div class="col" style="width:145px">
+            @Html.LabelFor(model => model.DescripcionCuenta)
+        </div>
+        <div class="col">
+            @Html.TextBoxFor(model => model.DescripcionCuenta, new { @class = "textboxClass" })
+            @Html.ValidationMessageFor(model => model.DescripcionCuenta)
+        </div>
+    </div>
+
+    @* Datos Documento Previsional *@
+    <div id="DatosPrevisionales" class="fila" style="display: none;">
+        <div class="fila">
+            <div class="col DeudorCpbt_Subtitulo">
+                Datos Documento Previsional
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col DeudorCpbt_col-custom">
+                @Html.LabelFor(model => model.NumResolucion)
+            </div>
+            <div class="col DeudorCpbt_col-custom">
+                @Html.EditorFor(model => model.NumResolucion)
+                @Html.ValidationMessageFor(model => model.NumResolucion)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col DeudorCpbt_col-custom">
+                @Html.LabelFor(model => model.RutRepresentante1)
+            </div>
+            <div class="col DeudorCpbt_col-custom">
+                @Html.EditorFor(model => model.RutRepresentante1)
+                @Html.ValidationMessageFor(model => model.RutRepresentante1)
+            </div>
+            <div class="col DeudorCpbt_col-custom">
+                @Html.LabelFor(model => model.NombreRepresentante1)
+            </div>
+            <div class="col DeudorCpbt_col-custom">
+                @Html.TextBoxFor(model => model.NombreRepresentante1, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.NombreRepresentante1)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col DeudorCpbt_col-custom">
+                @Html.LabelFor(model => model.RutRepresentante2)
+            </div>
+            <div class="col DeudorCpbt_col-custom">
+                @Html.EditorFor(model => model.RutRepresentante2)
+                @Html.ValidationMessageFor(model => model.RutRepresentante2)
+            </div>
+            <div class="col DeudorCpbt_col-custom">
+                @Html.LabelFor(model => model.NombreRepresentante2)
+            </div>
+            <div class="col DeudorCpbt_col-custom">
+                @Html.TextBoxFor(model => model.NombreRepresentante2, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.NombreRepresentante2)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col DeudorCpbt_col-custom">
+                @Html.LabelFor(model => model.RutRepresentante3)
+            </div>
+            <div class="col DeudorCpbt_col-custom">
+                @Html.EditorFor(model => model.RutRepresentante3)
+                @Html.ValidationMessageFor(model => model.RutRepresentante3)
+            </div>
+            <div class="col DeudorCpbt_col-custom">
+                @Html.LabelFor(model => model.NombreRepresentante3)
+            </div>
+            <div class="col DeudorCpbt_col-custom">
+                @Html.TextBoxFor(model => model.NombreRepresentante3, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.NombreRepresentante3)
+            </div>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="col DeudorCpbt_Subtitulo">Montos Documento</div>
+    </div>
+    <div class="fila" style="padding-bottom:30px">
+        <div class="col" style="width:145px">@Html.LabelFor(model => model.Monto)</div>
+        <div class="col" style="width:150px">
+            @if (ViewBag.Save)
+            {
+                @Html.TextBoxFor(model => model.Monto, new { @class = "textboxMonto" })@Html.ValidationMessageFor(model => model.Monto)
+            }
+            else
+            {
+                @Html.TextBoxFor(model => model.Monto, new { @class = "textboxMonto", @readonly = "true" })
+            }
+        </div>
+        <div class="col" style="width:110px">@Html.LabelFor(model => model.MontoDocumento)</div>
+        <div class="col" style="width:150px">
+            @if (ViewBag.Save)
+            {
+                @Html.TextBoxFor(model => model.MontoDocumento, new { @class = "textboxMonto" })@Html.ValidationMessageFor(model => model.MontoDocumento)
+            }
+            else
+            {
+                @Html.TextBoxFor(model => model.MontoDocumento, new { @class = "textboxMonto", @readonly = "true" })
+            }
+
+        </div>
+        <div class="col">@Html.LabelFor(model => model.Saldo)</div>
+        <div class="col">
+            @if (ViewBag.Save)
+            {
+                @Html.TextBoxFor(model => model.Saldo, new { @class = "textboxMonto" }) @Html.ValidationMessageFor(model => model.Saldo)
+            }
+            else
+            {
+                @Html.TextBoxFor(model => model.Saldo, new { @class = "textboxMonto", @readonly = "true" })
+            }
+        </div>
+    </div>
+    <div class="fila" style="padding-bottom:30px">
+        <div class="col" style="width:145px">@Html.LabelFor(model => model.GastoPreJudicial)</div>
+        <div class="col" style="width:150px">
+            @if (ViewBag.Save)
+            {
+                @Html.TextBoxFor(model => model.GastoPreJudicial, new { @class = "textboxMonto" })@Html.ValidationMessageFor(model => model.GastoPreJudicial)
+            }
+            else
+            {
+                @Html.TextBoxFor(model => model.GastoPreJudicial, new { @class = "textboxMonto", @readonly = "true" })
+            }
+        </div>
+        <div class="col" style="width:110px">@Html.LabelFor(model => model.GastoJudicial)</div>
+        <div class="col" style="width:150px">
+            @if (ViewBag.Save)
+            {
+                @Html.TextBoxFor(model => model.GastoJudicial, new { @class = "textboxMonto" })@Html.ValidationMessageFor(model => model.GastoJudicial)
+            }
+            else
+            {
+                @Html.TextBoxFor(model => model.GastoJudicial, new { @class = "textboxMonto", @readonly = "true" })
+            }
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    <div class="fila">
+        <div class="col" style="width:145px">@Html.LabelFor(model => model.Comentario)</div>
+        <div class="col">
+            @Html.TextAreaFor(model => model.Comentario)
+            @Html.ValidationMessageFor(model => model.Comentario)
+        </div>
+        <div class="col" style="float:right">
+            @if (ViewBag.Save)
+            {
+                <input type="button" value="Nuevo" onclick="fnLimpiarCpbt();" />
+                <input type="button" value="Guardar" onclick="fnGuardarCpbt();" />
+            }
+            @if (ViewBag.Del)
+            {
+                <input type="button" value="Eliminar" onclick="fnEliminarCpbt();" />
+            }
+        </div>
+    </div>
+</div>
+  
+
+
+            @Html.HiddenFor(model => model.Ccbid)
+            @Html.HiddenFor(model => model.Honorarios)
+
+
+        }
+    }
+    using (t.BeginPanel())
+    {
+        <p>Third panel</p>
+        <p>Praesent malesuada, sem non euismod blandit, augue est tempor metus, vitae consectetur urna dui at purus. Ut viverra lorem urna. Suspendisse egestas leo id elit consectetur adipiscing vel vel odio. Curabitur ut adipiscing augue. Donec rhoncus eros sed massa posuere aliquam. Cras tincidunt dapibus augue eu congue. Donec ut nunc lorem, eu blandit orci. Quisque ac libero id erat suscipit eleifend non sed nibh. Duis et augue orci, a lacinia dolor. Donec dui enim, sodales sit amet pellentesque ut, placerat vel lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed fringilla, felis et blandit posuere, dolor quam interdum eros, vel sodales nisl sapien in velit. Cras vel orci leo. </p>
+    }
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+    window.onload = function () {
+        //$('input#RutCliente').autocomplete("search");
+        //$('input#RutDeudor').autocomplete("search");
+        $('#Pclid').val(@ViewBag.Pclid);
+        $('#Ctcid').val(@ViewBag.Ctcid);
+        $('#Sbcid').val(@ViewBag.Sbcid);
+        $('#TerceroId').val(@ViewBag.TerceroId);
+    }
+    </script>
+    }

@@ -1,0 +1,88 @@
+﻿@model Dimol.Contabilidad.Mantenedores.Models.GridModel
+
+
+@{
+    ViewBag.Title = "MonedasValores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<h2>Monedas Valores</h2>
+<br /><br />
+
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("MonedasValores")
+    .addColumn(new Column("Codemp").setLabel("Empresa")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+     
+    .addColumn(new Column("nombre").setLabel("Nombre")
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.Nombre+"\"")
+        .setWidth(50))
+    .addColumn(new Column("fecha").setLabel("Fecha")
+        .setSortable(true)
+        .setAlign(Align.center)
+        .setEditable(true)
+        
+        .setSearchType(SearchType.datepicker)
+        .setSearchDateFormat("d-m-Y")
+        //.setEditType(EditType.select)
+        .setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(50))
+    
+    .addColumn(new Column("valor").setLabel("Valor")
+        .setSortable(true)
+        .setEditable(true)
+        .setAlign(Align.right)
+        .setWidth(50))        
+        
+   .addColumn(new Column("codMoneda").setLabel("codMoneda")
+   
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(50))
+        
+   .addColumn(new Column("Id").setLabel("ID")
+   
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(50))
+      
+    // settings
+    
+    .setCaption("MonedasValores")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Contabilidad/GetMonedasValores/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("fecha")
+    
+    .setSortOrder(SortOrder.desc)
+    .setPager("pagerMonedasValores")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Contabilidad/OperMonedaValor")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Contabilidad/OperMonedaValor")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Contabilidad/OperMonedaValor")
+    .setExcelExport("/Contabilidad/ExportToExcel")
+    
+    .Render()
+
+)

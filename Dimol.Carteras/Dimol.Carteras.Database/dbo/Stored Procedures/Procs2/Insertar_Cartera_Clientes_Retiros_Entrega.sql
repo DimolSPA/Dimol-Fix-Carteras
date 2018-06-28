@@ -1,0 +1,37 @@
+﻿
+
+Create Procedure Insertar_Cartera_Clientes_Retiros_Entrega(@cre_codemp integer, @cre_pclid numeric (15), @cre_ctcid numeric (15), @cre_ccbid integer,
+																			@cre_fecha datetime, @cre_treid integer, @cre_horini datetime, @cre_horfin datetime,
+																			@cre_comid integer, @cre_direccion varchar (400), @cre_telefono varchar (80), @cre_contacto varchar (200),
+																			@cre_comentario text, @cre_tipo char (1), @cre_copia char (1)) as
+  INSERT INTO cartera_clientes_retiros_entrega  
+         ( cre_codemp,   
+           cre_pclid,   
+           cre_ctcid,   
+           cre_ccbid,   
+           cre_fecha,   
+           cre_treid,   
+           cre_horini,   
+           cre_horfin,   
+           cre_comid,   
+           cre_direccion,   
+           cre_telefono,   
+           cre_contacto,   
+           cre_comentario,   
+           cre_tipo,   
+           cre_copia )  
+  VALUES ( @cre_codemp,   
+           @cre_pclid,   
+           @cre_ctcid,   
+           @cre_ccbid,   
+           @cre_fecha,   
+           @cre_treid,   
+           @cre_horini,   
+           @cre_horfin,   
+           @cre_comid,   
+           @cre_direccion,   
+           @cre_telefono,   
+           @cre_contacto,   
+           @cre_comentario,   
+           @cre_tipo,   
+           @cre_copia )

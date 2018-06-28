@@ -1,0 +1,8 @@
+d:\documents\visual studio 2012\Projects\CYPH\CYPH\bin\Debug\CYPH.dll
+d:\documents\visual studio 2012\Projects\CYPH\CYPH\bin\Debug\CYPH.pdb
+d:\documents\visual studio 2012\Projects\CYPH\CYPH\bin\Debug\CYPH.xml
+d:\documents\visual studio 2012\Projects\CYPH\CYPH\obj\Debug\CYPH.Resources.resources
+d:\documents\visual studio 2012\Projects\CYPH\CYPH\obj\Debug\CYPH.vbproj.GenerateResource.Cache
+d:\documents\visual studio 2012\Projects\CYPH\CYPH\obj\Debug\CYPH.dll
+d:\documents\visual studio 2012\Projects\CYPH\CYPH\obj\Debug\CYPH.xml
+d:\documents\visual studio 2012\Projects\CYPH\CYPH\obj\Debug\CYPH.pdb

@@ -1,0 +1,84 @@
+﻿@model Dimol.Carteras.Models.GridModel
+@{
+    ViewBag.Title = "Aprobar Carga Masiva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Aprobar Carga Masiva</h2>
+<br />
+@using Mvc.HtmlHelpers
+<div class="tabla">
+            <div class="fila">
+                <div class="col" style="float:right"><input type="button" value="Aprobar" onclick="fnAprobarCarga();" /></div>
+            </div>
+    </div>
+@(Html.jqGrid("gridAprobarCarga")
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("Pclid").setLabel("Pclid")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("Ctcid").setLabel("Ctcid")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("Ccbid").setLabel("Ccbid")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("NombreCliente").setLabel("Nombre Cliente")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(80))
+    .addColumn(new Column("RutDeudor").setLabel("Rut")
+        .setSortable(true).setAlign(Align.right)
+        .setWidth(50))
+    .addColumn(new Column("NombreDeudor").setLabel("Nombre Deudor")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(80))
+    .addColumn(new Column("TipoDocumento").setLabel("Tipo")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(80))
+    .addColumn(new Column("Numero").setLabel("Número")
+        .setSortable(true).setAlign(Align.center)
+        .setWidth(50))
+    .addColumn(new Column("FechaVencimiento").setLabel("Fecha Vencimiento")
+        .setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setSortable(true).setAlign(Align.center)
+        .setWidth(60))
+    .addColumn(new Column("FechaIngreso").setLabel("Fecha Asignación")
+        .setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setSortable(true).setAlign(Align.center)
+        .setWidth(60))
+    .addColumn(new Column("MontoAsignado").setLabel("Asignado")
+        .setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Monto").setLabel("Monto")
+        .setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Saldo").setLabel("Saldo")
+        .setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    
+    // settings
+    .setCaption("Aprobar Carga Masiva").onGridComplete("$('#edit_gridAprobarCarga').hide()")
+    .setRequestType(RequestType.get).setMultiSelect(true)
+    .setUrl("~/Cartera/GetAprobarCarga/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(500)
+    .setRowList(new int[] { 10, 30, 50,100,500, 1000 })
+    .setViewRecords(true)
+    .setSortName("NombreCliente, NombreDeudor")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerAprobarCarga")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setExcelExport("/Cartera/ExportToExcel")
+    .Render()
+
+)

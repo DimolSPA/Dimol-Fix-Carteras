@@ -1,0 +1,47 @@
+﻿@model Dimol.Carteras.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "Tipos Imagenes Documentos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tipo Retiro Entrega</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+     @(Html.jqGrid("TipoImagenDocumento")
+    .addColumn(new Column("Id").setLabel("Id")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Descripcion")
+        .setSortable(true)    
+        .setEditType(EditType.text)
+        .setEditable(true)
+        .setWidth(80))
+         
+    // settings
+    .setCaption("Tipos Imagenes Documentos")
+    .setRequestType(RequestType.get)
+    .setUrl("~/CarteraABM/GetTipoImagenDocumento/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerTipoImagenDocumento")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/CarteraABM/OperTipoImagenDocumento")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/CarteraABM/OperTipoImagenDocumento")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/CarteraABM/OperTipoImagenDocumento")
+    .setExcelExport("/CarteraABM/ExportToExcelTipoImagenDocumento")
+    .Render()
+
+)

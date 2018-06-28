@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{96583C0F-EE55-45AD-9F19-31B4057B2F4F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dimol.Judicial.Mantenedores.bcp</RootNamespace>
+    <AssemblyName>Dimol.Judicial.Mantenedores.bcp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dimol.bcp">
+      <HintPath>..\..\Dimol\Dimol\bin\Dimol.bcp.dll</HintPath>
+    </Reference>
+    <Reference Include="Dimol.Carteras.bcp">
+      <HintPath>..\..\Dimol.Carteras\Dimol.Carteras\bin\Dimol.Carteras.bcp.dll</HintPath>
+    </Reference>
+    <Reference Include="Dimol.Carteras.dto">
+      <HintPath>..\..\Dimol.Carteras\Dimol.Carteras.dto\bin\Debug\Dimol.Carteras.dto.dll</HintPath>
+    </Reference>
+    <Reference Include="Dimol.dto">
+      <HintPath>..\..\DimolAssemblies\Dimol.dto.dll</HintPath>
+    </Reference>
+    <Reference Include="HiQPdf, Version=10.5.0.0, Culture=neutral, PublicKeyToken=acd8b62594985b24, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DimolAssemblies\HiQPdf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accion.cs" />
+    <Compile Include="DeudorQuiebra.cs" />
+    <Compile Include="EnteAsignado.cs" />
+    <Compile Include="EnteJudicial.cs" />
+    <Compile Include="Mandatos.cs" />
+    <Compile Include="MateriaEstado.cs" />
+    <Compile Include="MateriaJudicial.cs" />
+    <Compile Include="Notaria.cs" />
+    <Compile Include="PanelAlerta.cs" />
+    <Compile Include="PanelAvenimiento.cs" />
+    <Compile Include="PanelDemanda.cs" />
+    <Compile Include="PanelDemandaPrevisional.cs" />
+    <Compile Include="PanelMonitoreoDemonio.cs" />
+    <Compile Include="PanelQuiebra.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PanelDemandaMasiva.cs" />
+    <Compile Include="Rol.cs" />
+    <Compile Include="TiposCausa.cs" />
+    <Compile Include="TiposTribunal.cs" />
+    <Compile Include="TransactionScope.cs" />
+    <Compile Include="TraspasoJudicial.cs" />
+    <Compile Include="Tribunal.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dimol.Judicial.Mantenedores.dao\Dimol.Judicial.Mantenedores.dao.csproj">
+      <Project>{efafef0b-774e-4b19-939b-84afc4be4368}</Project>
+      <Name>Dimol.Judicial.Mantenedores.dao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dimol.Judicial.Mantenedores.dto\Dimol.Judicial.Mantenedores.dto.csproj">
+      <Project>{875576e4-6583-4f69-a1ef-b55512a57974}</Project>
+      <Name>Dimol.Judicial.Mantenedores.dto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

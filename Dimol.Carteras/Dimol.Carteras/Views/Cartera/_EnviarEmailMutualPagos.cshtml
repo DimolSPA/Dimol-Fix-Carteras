@@ -1,0 +1,193 @@
+﻿@model Dimol.Carteras.Models.EmailMutualPagosModel
+@{
+    ViewBag.Title = "Envío de Email para Mutual de Seguridad";
+    
+}
+<br />
+<h2>@ViewBag.Title</h2>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+   
+    <div style="height: auto; min-height: 150px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmailMutualPagos" }))
+        {
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>BuscarDeudor</legend>
+
+                <div class="tabla">                                     
+
+                    <div class="fila">
+                        <div class="col" style="width:100px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre", @readonly = "readonly" }).MinLength(3)<!--.OnSelect("fnBuscarDeudoresCpbtCocha")-->
+                            @Html.ValidationMessageFor(model => model.NombreRutCliente)
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:100px;padding-bottom:20px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre", @readonly = "readonly" }).MinLength(3)<!--.OnSelect("fnBuscarDeudoresCpbtCocha")-->
+                            @Html.ValidationMessageFor(model => model.NombreRutDeudor)
+                        </div>
+                    </div>
+
+                    <div class="fila" style="padding-bottom:15px;">
+                        <div class="col" style="text-align:center;background-color:#005F9D;font-family: 'PT Sans', sans-serif; color:white; width: 95%;"></div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:120px"> @Html.LabelFor(model => model.Gestion)</div>
+                        <div class="col" style="width:250px">                            
+                            @Html.DropDownList("Gestion", null, new { @class = "ComboboxClassS", @onchange = "fnMuestraRetiroCheques()" })
+                            @Html.ValidationMessageFor(model => model.Gestion)
+                        </div>
+                    </div>
+
+                    <div id="divBancos">
+                        <div class="fila">
+                            <div class="col" style="width:120px"> @Html.LabelFor(model => model.Banco)</div>
+                            <div class="col" style="width:250px">                                
+                                @Html.DropDownList("TipoBanco", null, new { @class = "ComboboxClassS", @onchange = "fnCuentaBancoSeleccionada(this, 'CuentaBanco', $('#frmEmailMutualPagos input[id=Pclid]').val())" })
+                                @Html.ValidationMessageFor(model => model.Banco)
+                            </div>
+
+                        </div>
+
+                        <div class="fila">
+                            <div class="col" style="width:120px"> @Html.LabelFor(model => model.Cuenta)</div>
+                            <div class="col" style="width:250px">
+                                @Html.DropDownList("CuentaBanco", null, new { @class = "ComboboxClassS" })
+                                @Html.ValidationMessageFor(model => model.Cuenta)
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="fila">
+                        <div class="col" style="width:120px"> @Html.LabelFor(model => model.FechaMail)</div>
+                        <div class="col" style="width:250px">
+                            @Html.JQueryUI().Datepicker("FechaMailMutual").ShowButtonPanel(true).ShowWeek(false).MaxDate(0)
+                            @Html.ValidationMessageFor(model => model.FechaMail)
+                        </div>
+
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:120px"> @Html.LabelFor(model => model.Monto)</div>
+                        <div class="col" style="width:250px">
+                            @Html.TextBoxFor(model => model.Monto, null, new { @onkeyup = "FormatCurrency(this,event);" })
+                            <!--@Html.ValidationMessageFor(model => model.Monto)-->
+                        </div>
+
+                        <div class="col" style="width:120px"> @Html.LabelFor(model => model.Saldo)</div>
+                        <div class="col" style="width:250px">
+                            @Html.TextBoxFor(model => model.Saldo, null, new { @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.Saldo)
+                        </div>
+                    </div>                                                           
+                    
+                    <div class="fila">
+                        
+                        <div id="divComentarioRetiro" style="display:none">                            
+                            <div class="col" style="width:120px">@Html.LabelFor(model => model.ComentarioMail)</div>
+                            <div class="col">
+                                @Html.TextAreaFor(model => model.ComentarioMail, 3, 55, new { })
+                                @Html.ValidationMessageFor(model => model.ComentarioMail)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        
+                        <div class="col" style="float:right">
+                            @Html.Hidden("Codemp")
+                            <input type="button" value="Generar" id="btnGenerar" onclick="fnEnviarEmailMutualPagos();" />
+
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+        }
+
+    </div>
+    <div class="tabla">
+        <div class="fila">
+
+
+            <div class="col" style="width:85%;margin-left:20px">
+                @(Html.jqGrid("gridDeudorCpbtMutualPagos")
+
+    .addColumn(new Column("Pclid").setLabel("Id Cliente")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("Ctcid").setLabel("Ctcid")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("Ccbid").setLabel("Ccbid")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("TipoDocumento").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("Numero").setLabel("Número").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("FechaVencimiento").setLabel("Fec. Venc.").setAlign(Align.right).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)//.setEditable(true)
+        .setWidth(70))
+    .addColumn(new Column("Negocio").setLabel("Negocio")
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Estado").setLabel("Estado Cartera")
+        .setSortable(true)
+        .setWidth(150))
+    .addColumn(new Column("Carga").setLabel("Código Carga")
+        .setSortable(true)
+        .setWidth(150))
+
+    // settings
+    .setCaption("Documentos Pendientes").setMultiSelect(true)
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDeudoresMailMutualPagosCpbt/?Ctcid=10071&Pclid=22")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(500)
+    .setRowList(new int[] { 10, 30, 50, 500 })
+    .setViewRecords(true)
+    .setSortName("NombreFantasia")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDeudorCpbtMutualPagos")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    //.setNavAdd(ViewBag.Add)
+    //.setCellEdit(true)
+    .onSelectRow("UpdateSaldoGenerico(rowid, status, 'gridDeudorCpbtMutualPagos', 'frmEmailMutualPagos', 'Saldo')")
+    .onSelectAll("fnOnSelectAllGenerico(aRowids, status, 'gridDeudorCpbtMutualPagos', 'frmEmailMutualPagos', 'Saldo')")
+    .onLoadComplete("fnOnLoadComplete(this);")
+    //.onSelectRow("DeudorCpbtSeleccionado(rowid)")
+    .Render()
+
+                )
+
+
+
+            </div>
+        </div>
+    </div>
+    <br />
+</div>

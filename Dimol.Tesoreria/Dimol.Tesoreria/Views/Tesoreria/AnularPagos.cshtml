@@ -1,0 +1,109 @@
+﻿@model Dimol.Tesoreria.Models.BuscarCajaModel
+
+@{
+    ViewBag.Title = "Anular Pagos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  <div class="ui-widget-header ui-corner-all">
+    <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Deudor</span>
+
+   </div>
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarDeudor" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BuscarDeudor</legend>
+
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.Tipo)</div>
+                <div class="col">@Html.DropDownList("Tipo", null, new { @class= "ComboboxClassL", @onchange="TipoSeleccionado();"})
+            @Html.ValidationMessageFor(model => model.Tipo)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                @Html.ValidationMessageFor(model => model.NombreRutCliente)
+            </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3)
+            </div>
+            </div>
+           <div class="fila">
+            <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnBuscarAnularPagos();" /></div>
+         </div>
+    </fieldset>
+}
+<br />
+@(Html.jqGrid("gridAnularPagos")
+    .addColumn(new Column("NombreCliente").setLabel("Cliente")
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("NombreDeudor").setLabel("Deudor")
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("TipoDocumento").setLabel("Documento")
+        .setSortable(true)
+        .setWidth(110))
+    .addColumn(new Column("NumeroCuenta").setLabel("Número").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("NumeroDocumento").setLabel("N. Doc.").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Fecha").setLabel("Fec. Canc.")
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(70))
+    .addColumn(new Column("Capital").setLabel("Capital").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("Interes").setLabel("Interes").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("Honorario").setLabel("Honorario").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("GastoPrejudicial").setLabel("Gast. Pre.").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("GastoJudicial").setLabel("Gast. Jud.").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("Total").setLabel("Total").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(100))
+    // settings
+    .setCaption("Anular Pagos Caja")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Tesoreria/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setMultiSelect(true)
+    .setRowNum(200)
+    .setRowList(new int[] { 200 })
+    .setViewRecords(true)
+    .setSortName("TipoDocumento, NumeroCuenta, Fecha")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerAnularPagos")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onLoadComplete("CalculaTotalesAnularPagos(this)")
+    .setFooterRow(true)
+    .Render()
+
+) 
+<br />
+          </div>
+</div>

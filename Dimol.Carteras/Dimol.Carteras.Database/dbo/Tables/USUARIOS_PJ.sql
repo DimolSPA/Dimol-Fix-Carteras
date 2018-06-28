@@ -1,0 +1,16 @@
+﻿CREATE TABLE [dbo].[USUARIOS_PJ] (
+    [USRID]     INT           IDENTITY (1, 1) NOT NULL,
+    [NOMBRE]    VARCHAR (200) NOT NULL,
+    [LOGIN]     VARCHAR (30)  NOT NULL,
+    [PASSWORD]  VARCHAR (100) NOT NULL,
+    [FECING]    DATETIME      NOT NULL,
+    [FECULTLOG] DATETIME      NOT NULL,
+    [PCLID]     INT           NOT NULL,
+    [ACTIVA]    INT           NOT NULL,
+    [ENUSO]     INT           NOT NULL,
+    [IP]        VARCHAR (50)  NULL,
+    [RUTA_IMG]  VARCHAR (300) NULL,
+    [ADM]       VARCHAR (1)   NULL,
+    CONSTRAINT [PK_CONSULTA_PJ] PRIMARY KEY CLUSTERED ([USRID] ASC)
+);
+

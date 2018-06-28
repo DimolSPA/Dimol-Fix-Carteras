@@ -1,0 +1,71 @@
+﻿@model Dimol.Carteras.Models.CargaMasivaModel
+
+@{
+    ViewBag.Title = "CargaMasiva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CargaMasiva</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="width:50px">@Html.LabelFor(model => model.RutCliente)</div>
+            <div class="col" style="width: 90px">@Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutCliente"), "RutCliente", null, new { @class = "textboxRut", @style = "float:right" , onkeypress="CargarClienteEvento(event)"}).MinLength(3)
+                @Html.ValidationMessageFor(model => model.RutCliente)
+            </div>
+            <div class="col">@Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarNombreCliente"), "NombreCliente", null, new { @class = "textboxClass" }).MinLength(3)
+                @Html.ValidationMessageFor(model => model.NombreCliente)
+            </div>
+        </div>
+    </div>
+    <fieldset>
+        <legend>CargaMasivaModel</legend>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TipoCartera)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TipoCartera)
+            @Html.ValidationMessageFor(model => model.TipoCartera)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CodigoCarga)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CodigoCarga)
+            @Html.ValidationMessageFor(model => model.CodigoCarga)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contrato)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contrato)
+            @Html.ValidationMessageFor(model => model.Contrato)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Archivo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Archivo)
+            @Html.ValidationMessageFor(model => model.Archivo)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

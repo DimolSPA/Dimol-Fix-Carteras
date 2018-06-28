@@ -1,0 +1,290 @@
+﻿@model Dimol.Finanzas.Models.ClausulaContratoModel
+
+@{
+    ViewBag.Title = "Clausulas Contrato Cartera";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Clausulas Contrato Cartera</h2>
+<br />
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+  
+@(Html.jqGrid("BuscarClausulasContratoCartera")
+    .addColumn(new Column("clc_clcid").setLabel("ID")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("clc_tipo").setLabel("Tipo")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("TipoPorId").setLabel("TipoPorId")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("TipoAplicacionPorId").setLabel("TipoAplicacionPorId")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("clc_nombre").setLabel("Nombre")
+        .setWidth(70))
+    .addColumn(new Column("tipo").setLabel("Tipo")
+        .setWidth(30))
+    .addColumn(new Column("Area").setLabel("Area")
+        .setWidth(70))
+    .addColumn(new Column("clc_valor").setLabel("Valor")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("clc_rango").setLabel("Rango")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("ValorFijo").setLabel("ValorFijo")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("Capital").setLabel("Capital")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("Interes").setLabel("Interes")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("Honorario").setLabel("Honorario")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("GastoPrejudicial").setLabel("GastoPrejudicial")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("GastoJudicial").setLabel("GastoJudicial")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("AnulaMaximaConvencional").setLabel("AnulaMaximaConvencional")
+        .setHidden(true)
+        .setWidth(70))
+    .addColumn(new Column("tip_rango").setLabel("TipoRango")
+        .setHidden(true)
+        .setWidth(70))
+    // settings
+    .setCaption("ClausulasContratoCartera")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Finanzas/GetClausulasContratoCartera")
+    .setAltRows(true)
+    .setScrollRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setSortName("clc_clcid")
+    .setSortOrder(SortOrder.asc)
+    .onDblClickRow("fnCargarDatos(rowid)")
+    .setPager("pagerCalculoComisiones")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("DeudorSeleccionado(rowid)")
+    .Render()
+
+) 
+<br />
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  <div class="ui-widget-header ui-corner-all">
+    <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Clausula</span>
+
+   </div>
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarClausulasContratoCartera" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>BuscarInsumos</legend>
+
+        <div class="tabla">
+         
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Tipo)</div>
+                <div class="col">@Html.DropDownList("Tipo", null, new { @class= "ComboboxClass",  onchange=""})</div>
+                
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Nombre)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("Nombre", null, new { @class = "textboxClass" })</div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.TipoAplicacion)</div>
+                <div class="col">@Html.DropDownList("TipoAplicacion", null, new { @class= "ComboboxClass",  onchange=""})</div>
+                
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Valor)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("Valor", null, new { @class = "textboxRut" })</div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Area)</div>
+                <div class="col">@Html.DropDownList("Area", null, new { @class= "ComboboxClass",  onchange=""})</div>
+                
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.ValorFijo)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.ValorFijo)</div>
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Capital)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.Capital)</div>
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Interes)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.Interes)</div>
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Honorario)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.Honorario)</div>
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.GastoPrejudicial)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.GastoPrejudicial)</div>
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.GastoJudicial)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.GastoJudicial)</div>
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.AnulaMaximaConvencional)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.AnulaMaximaConvencional)</div>
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Rango)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.Rango)</div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.TipoRango)</div>
+                <div class="col">@Html.DropDownList("TipoRango", null, new { @class= "ComboboxClass",  onchange=""})</div>
+                
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Clonar)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.Clonar)</div>
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.NombreClonar)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("NombreClonar", null, new { @class = "textboxClass" })</div>
+
+            </div>
+
+            <div class="fila" style="visibility:hidden" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.id)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("id", 0, new { @class = "textboxClass" })</div>
+
+            </div>
+
+            <div class="col" style="float:right"><input type="button" value="Guardar" onclick="fnGuardarClausulasContrato();" /></div>
+        </div>
+    </fieldset>
+    
+}
+<br />
+<script>
+    function fnCargarDatos(id) {
+        var row = $("#BuscarClausulasContratoCartera").getRowData(id);
+        var tipo = document.getElementById("Tipo");
+        setSelectedValue(tipo, row.TipoPorId);
+        $("#Nombre").val(row.clc_nombre);
+        var area = document.getElementById("Area");
+        setSelectedValue(area, row.Area);
+        var tipoAplicacion = document.getElementById("TipoAplicacion");
+        setSelectedValue(tipoAplicacion, row.TipoAplicacionPorId);
+        $("#Valor").val(row.clc_valor);
+                
+        if (row.clc_rango != "true") {
+            document.getElementById('Rango').checked = false;
+        }
+        else {
+            document.getElementById('Rango').checked = true;
+        }
+
+        if (row.ValorFijo != "true") {
+            document.getElementById('ValorFijo').checked = false;
+        }
+        else {
+            document.getElementById('ValorFijo').checked = true;
+        }
+
+        if (row.Capital != "true") {
+            document.getElementById('Capital').checked = false;
+        }
+        else {
+            document.getElementById('Capital').checked = true;
+        }
+
+        if (row.Interes != "true") {
+            document.getElementById('Interes').checked = false;
+        }
+        else {
+            document.getElementById('Interes').checked = true;
+        }
+
+        if (row.Honorario != "true") {
+            document.getElementById('Honorario').checked = false;
+        }
+        else {
+            document.getElementById('Honorario').checked = true;
+        }
+
+        if (row.GastoPrejudicial != "true") {
+            document.getElementById('GastoPrejudicial').checked = false;
+        }
+        else {
+            document.getElementById('GastoPrejudicial').checked = true;
+        }
+
+        if (row.GastoJudicial != "true") {
+            document.getElementById('GastoJudicial').checked = false;
+        }
+        else {
+            document.getElementById('GastoJudicial').checked = true;
+        }
+
+        if (row.AnulaMaximaConvencional != "true") {
+            document.getElementById('AnulaMaximaConvencional').checked = false;
+        }
+        else {
+            document.getElementById('AnulaMaximaConvencional').checked = true;
+        }
+
+        if ($("#Clonar").checked == 1) {
+            document.getElementById('Clonar').checked = true;
+        }
+        else {
+            
+            document.getElementById('Clonar').checked = false;
+        }
+        
+        var tipoRango = document.getElementById("TipoRango");
+        setSelectedValue(tipoRango, row.tip_rango);
+        $("#NombreClonar").val(row.NombreClonar);
+        $("#id").val(id);
+    }
+
+    function setSelectedValue(selectObj, valueToSet) {
+        for (var i = 0; i < selectObj.options.length; i++) {
+            if (selectObj.options[i].text == valueToSet) {
+                selectObj.options[i].selected = true;
+                return;
+            }
+        }
+    }
+</script>

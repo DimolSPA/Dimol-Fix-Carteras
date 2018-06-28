@@ -1,0 +1,441 @@
+﻿@model Dimol.Caja.Models.ImputacionPorcentajeModel
+@using Mvc.HtmlHelpers
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+         {
+             Text = "Porcentaje",
+             Value = "1",
+             Selected = true
+         });
+    listItems.Add(new SelectListItem
+         {
+             Text = "Manual",
+             Value = "2",
+
+         });
+ 
+}
+
+
+<script>
+    $(document).on("change", ".qty1", function () {
+        var sum = 0;
+        var supera = 0;
+        var inputsum
+        $(".qty1").each(function () {
+           
+            var monto = $(this).val().replace(/^0+/, "")
+                                            .replace(/\D/g, "")
+                                            .replace(".", "");
+            console.log(monto)
+            sum += +monto;
+            if (sum > parseFloat($("#ISaldoRebajar").val().replace(".", "").replace(",00", "").replace(/^0+/, "").replace(/\D/g, ""))) {
+                supera = 1;
+
+            }
+        });
+        if (supera == 1) {
+            alert("El valor ingresado supera el monto a rebajar")
+        }
+
+        $("#CalculoImputar").val(sum);
+    });
+   
+    jQuery(document).ready(function () {
+        
+        jQuery("#gridDocumentoDeudoresImputacion").jqGrid({
+            altRows: true,
+            altclass: 'altGridRows',
+            autowidth: true,
+            caption: 'Documentos',
+            cellEdit: false,
+            cellsubmit: 'clientArray',
+            datatype: 'json',
+            height: 250,
+            multiselect: true,
+            pager: '#pagerDocumentosDeudoresImp',
+            pagerpos: 'center',
+            pgbuttons: true,
+            mtype: 'post',
+            rowList: [100, 500, 1000],
+            rowNum: 1000,
+            scroll: true,
+            sortname: 'FechaVencimiento',
+            shrinkToFit: false,
+            sortorder: 'asc',
+            url: '/Tesoreria/ListarImputadosDocumentosDeudorGrilla/?montoCapital=' + $("#ICapital").val() + "&montoHonorario=" + $("#IHonorario").val() + "&montoInteres=" + $("#IInteres").val() + "&montoGastoPre=" + $("#IGastoPre").val() + "&montoGastoJud=" + $("#IGastoJud").val(),
+            postData: $("#frmImputacionDocumento").serializeArray(),
+            viewrecords: true,
+            footerrow: true,
+            loadComplete: function (xhr) { fnOnLoadCompleteDocsImputado(this, xhr) },
+            colModel: [
+
+                { name: 'Pclid',  hidden: true, label: 'Pclid', sortable: false, width:20, index:'Pclid', editable: false },
+				{ name: 'Ctcid', hidden: true, label: 'Ctcid', sortable: false, width:20, index:'Pclid', editable: false},
+				{ name: 'Ccbid', hidden: true, label: 'Ccbid', sortable: false, width:20, index:'Pclid', editable: false},
+				{ name: 'Asegurado', label: 'Asegurado', sortable: true, width: 100, index: 'Asegurado', editable: false},
+				{ name: 'TipoDocumento', label: 'Tipo', sortable: false, width:100, index:'TipoDocumento', editable: false},
+				{ name: 'Numero', label: 'Numero', sortable: false, width:80, index:'Numero', editable: false},
+				{ name: 'Estado', label: 'Estado', sortable: false, width:50, index:'Estado', editable: false},
+				{ name: 'FechaVencimiento', formatter: 'date', align: 'center', label: 'Venc.', sortable: false, width:60, index:'FechaVencimiento', datefmt: 'd-m-y', editable: false},
+				{ name: 'Moneda', label: 'Moneda', sortable: false, width: 50, index: 'Moneda', editable: false },
+				{ align: 'right', name:'Monto', formatter: 'integer', label: 'Monto Asignado', sortable: false, width:80, index:'Monto'},
+				{ align: 'right', name:'Saldo', formatter: 'integer', label: 'Saldo', sortable: false, width:80, index:'Saldo'},
+				{ name: 'CapitalDebitado', hidden: true, label: 'CapitalDebitado', sortable: false, width:20, index:'CapitalDebitado', editable: false},
+				{ align: 'right', name:'Intereses', formatter: 'integer', label: 'Interes', sortable: false, width:80, index:'Intereses'},
+				{ name: 'InteresDebitado', hidden: true, label: 'InteresDebitado', sortable: false, width:20, index:'InteresDebitado', editable: false},
+				{ align: 'right', name:'Honorarios', formatter: 'integer', label: 'Honorarios', sortable: false, width:80, index:'Honorarios'},
+				{ name: 'HonorarioDebitado', hidden: true, label: 'HonorarioDebitado', sortable: false, width:20, index:'HonorarioDebitado', editable: false},
+				{ align: 'right', name:'GastoPrejudicial', formatter: 'integer', label: 'Gast. Pre.', sortable: false, width:50, index:'GastoPrejudicial'},
+				{ name: 'PagoPreDebitado', hidden: true, label: 'PagoPreDebitado', sortable: false, width: 20, index: 'PagoPreDebitado', editable: false },
+                { align: 'right', name: 'GastoJudicial', formatter: 'integer', label: 'Gast. Jud.', sortable: false, width: 50, index: 'GastoJudicial' },
+				{ name: 'PagoJudDebitado', hidden: true, label: 'PagoJudDebitado', sortable: false, width: 20, index: 'PagoJudDebitado', editable: false },
+				{ align: 'right', name:'TotalDeuda', formatter: 'integer', label: 'Total', sortable: false, width:80, index:'TotalDeuda'},
+				{ name: 'IndicaImputado', hidden: true, label: 'IndicaImputado', sortable: false, width:20, index:'IndicaImputado', editable: false}
+            ],
+            grouping: true,
+            groupingView : {
+			    groupField : ['Asegurado'],
+			    groupColumnShow : [false],
+			    groupText : ['<b>{0} - {1} Documento(s)</b>'],
+			    groupCollapse : false,
+			    groupOrder: ['desc'],groupDataSorted: true
+			}   	
+			
+        }).navGrid("#pagerDocumentosDeudoresImp", { edit: false, add: false, del: false, search: false });
+
+        
+		
+});
+</script>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmImputacionDocumento" }))
+{
+
+    @Html.HiddenFor(model => model.IpclidLiqui)
+    @Html.HiddenFor(model => model.IConciliacionId)
+    @Html.HiddenFor(model => model.IctcidLiqui)
+    @Html.HiddenFor(model => model.Documentos)
+    @Html.HiddenFor(model => model.IRutCliente)
+    @Html.HiddenFor(model => model.INumComprobante)
+    @Html.HiddenFor(model => model.IRutDeudor)
+    @Html.HiddenFor(model => model.ICliente)
+    @Html.HiddenFor(model => model.IDeudor)
+    @Html.HiddenFor(model => model.IMonto)
+    @Html.HiddenFor(model => model.ISaldo)
+    @Html.HiddenFor(model => model.ISaldoRebajar)
+    @Html.HiddenFor(model => model.DocFinalizar)
+    <div class=" panel panel-primary">
+        <div class="panel-heading">Datos del Pago</div>
+        <div class="panel-body">
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="text-align:center;width:2000px;">
+                        <div class="tabla">
+                            <div class="fila" style="width:100%; overflow-x: auto; white-space: nowrap;">
+                                <div class="col" style="padding-right:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            <b>Nº</b>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.INumComprobante)</label>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%;padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.ICliente)
+                                        </li>
+                                        <li class="list-group-item">
+                                            @Html.DisplayFor(model => model.ICliente)
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.IRutDeudor)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.IRutDeudor)</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.IDeudor)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.IDeudor)</label>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.IMonto)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.IMonto)</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-left:0;">
+                                    <ul class="list-group" style="width:100%; padding-left:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.ISaldo)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.ISaldo)</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-left:0;">
+                                    <ul class="list-group" style="width:100%; padding-left:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.ISaldoRebajar)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.ISaldoRebajar)</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.ICapitalPor)
+                                        </li>
+                                        <li class="list-group-item">
+                                            @Html.TextBoxFor(model => model.ICapitalPor, null, new { @class = "textboxClass qty1", @style = "width: 80px", @disabled = "disabled" })
+                                        </li>
+                                        <li class="list-group-item">
+                                            @Html.TextBoxFor(model => model.ICapital, null, new { @class = "textboxClass", @style = "width: 80px", @disabled = "disabled" })
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.IInteresPor)
+                                        </li>
+                                        <li class="list-group-item">
+                                            @Html.TextBoxFor(model => model.IInteresPor, null, new { @class = "textboxClass qty1", @style = "width: 80px", @disabled = "disabled" })
+                                        </li>
+                                        <li class="list-group-item">
+                                            @Html.TextBoxFor(model => model.IInteres, null, new { @class = "textboxClass", @style = "width: 80px", @disabled = "disabled" })
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.IHonorarioPor)
+                                        </li>
+                                        <li class="list-group-item">
+                                            @Html.TextBoxFor(model => model.IHonorarioPor, null, new { @class = "textboxClass qty1", @style = "width: 80px", @disabled = "disabled" })
+                                        </li>
+                                        <li class="list-group-item">
+                                            @Html.TextBoxFor(model => model.IHonorario, null, new { @class = "textboxClass", @style = "width: 80px", @disabled = "disabled" })
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.IGastoPre)
+                                        </li>
+                                        <li class="list-group-item">
+                                            @Html.TextBoxFor(model => model.IGastoPre, null, new { @class = "textboxClass qty1", @style = "width: 80px", @disabled = "disabled" })
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.IGastoJud)
+                                        </li>
+                                        <li class="list-group-item">
+                                            @Html.TextBoxFor(model => model.IGastoJud, null, new { @class = "textboxClass qty1", @style = "width: 80px", @disabled = "disabled" })
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-left:0;">
+                                    <ul class="list-group" style="width:100%; padding-left:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.ICriterio)
+                                        </li>
+                                        <li class="list-group-item">
+                                            @Html.DropDownListFor(model => model.ICriterio, listItems, new { @class = "ComboboxClass", onchange = "fnCambiarTipoImputacion(this.value)", @style = "width: 80px" })
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            @*<div class="fila" style="width:100%; overflow-x: auto; white-space: nowrap;">
+                                <div class="col" style="padding-right:0">
+                                    
+                                </div>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="float:right">
+           
+            @Html.Hidden("CalculoImputar")
+            <input type="button" value="Previsualizar" id="btnAplicarImputacion" onclick="fnAplicarImputacion();" />
+
+        </div>
+    </div>
+</div>
+<br />
+<div id="divGridImputado">
+    <table id="gridDocumentoDeudoresImputacion"></table>
+    <div id="pagerDocumentosDeudoresImp"></div>
+    @*@(Html.jqGrid("gridDocumentoDeudoresImputacion")
+                .addColumn(new Column("Pclid").setLabel("Pclid")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(20))
+                .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(20))
+                .addColumn(new Column("Ccbid").setLabel("Ccbid")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(20))
+
+                .addColumn(new Column("Asegurado").setLabel("Asegurado")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(100))
+                .addColumn(new Column("TipoDocumento").setLabel("Tipo")
+                .setEditable(false)
+                .setSortable(false)
+                .setWidth(200))
+                .addColumn(new Column("Numero").setLabel("Numero")
+                .setEditable(false)
+                .setSortable(false)
+                .setWidth(150))
+                .addColumn(new Column("Estado").setLabel("Estado")
+                .setEditable(false)
+                .setSortable(false)
+                .setWidth(100))
+                .addColumn(new Column("FechaVencimiento").setLabel("Venc.")
+                .setSortable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(120))
+                .addColumn(new Column("Moneda").setLabel("Moneda")
+                .setEditable(false)
+                .setSortable(false)
+                .setWidth(100))
+                .addColumn(new Column("Monto").setLabel("Monto Asignado").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(false)
+                .setWidth(130))
+                .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(false)
+                .setWidth(130))
+                .addColumn(new Column("CapitalDebitado").setLabel("CapitalDebitado")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(100))
+                .addColumn(new Column("Intereses").setLabel("Interes").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(false)
+                .setWidth(150))
+                .addColumn(new Column("InteresDebitado").setLabel("InteresDebitado")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(100))
+                .addColumn(new Column("Honorarios").setLabel("Honorarios").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(false)
+                .setWidth(150))
+                .addColumn(new Column("HonorarioDebitado").setLabel("HonorarioDebitado")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(100))
+                .addColumn(new Column("GastoJudicial").setLabel("Gast. Jud.").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(false)
+                .setWidth(130))
+                .addColumn(new Column("PagoJudDebitado").setLabel("PagoJudDebitado")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(100))
+                .addColumn(new Column("GastoPrejudicial").setLabel("Gast. Pre.").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(false)
+                .setWidth(130))
+                .addColumn(new Column("PagoPreDebitado").setLabel("PagoPreDebitado")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(100))
+                .addColumn(new Column("TotalDeuda").setLabel("Total").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(false)
+                .setWidth(200))
+                .addColumn(new Column("IndicaImputados").setLabel("IndicaImputado")
+                .setEditable(false).setHidden(true)
+                .setSortable(false)
+                .setWidth(100))
+
+        // settings
+                .setCaption("Documentos")//.setWidth(800)
+                .setAutoWidth(true)
+                .setRequestType(RequestType.post)
+                .setUrl("~/Tesoreria/GetDummy/")
+                //.setUrl("~/Tesoreria/ListarImputadosDocumentosDeudorGrilla/?pclid=" + Model.IpclidLiqui + "&ctcid=" + Model.IctcidLiqui + "&docs=" + Model.Documentos + "&montoHonorario=" + Model.IHonorario + "&montoInteres=" + Model.IInteres + "&montoCapital=" + Model.ICapital + "&montoGastoPre=" + Model.IGastoPre + "&montoGastoJud=" + Model.IGastoJud)
+                //.setUrl("~/Tesoreria/ListarImputadosDocumentosDeudorGrilla/")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setRowNum(1000)
+                .setRowList(new int[] { 50, 100, 500 })
+                .setViewRecords(true)
+                .setSortName("FechaVencimiento")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerDocumentosDeudoresImp")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .setScroll(true)
+                .setHeight(200)
+                .setMultiSelect(true)
+                .onLoadComplete("fnOnLoadCompleteDocsImputado(this)")
+                .setGrouping(true)
+                .setGroupingView("groupField: ['Asegurado'],groupColumnShow: [false], groupText: ['<b>{0} - {1} Documento(s)</b>'], groupCollapse: false, groupOrder: ['desc'],groupDataSorted: true")
+                .Render()
+
+
+    )*@
+</div>
+
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="float:left; width:97%">
+            <table id="list"></table>
+            <div id="pager"></div>
+        </div>
+    </div>
+</div>
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="float:right">
+
+            <input type="button" value="Rebajar Documentos" id="btnGuardarImputacion" onclick="fnGuardarImputacion();" />
+
+        </div>
+    </div>
+</div>
+<br />

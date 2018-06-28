@@ -1,0 +1,32 @@
+﻿CREATE TABLE [dbo].[ROL_AVEDEM] (
+    [RAD_CODEMP]     INT             NOT NULL,
+    [RAD_ROLID]      INT             NOT NULL,
+    [RAD_FECDEM]     DATETIME        NULL,
+    [RAD_CUODEM]     SMALLINT        NULL,
+    [RAD_MONDEM]     DECIMAL (15, 2) DEFAULT ((0)) NULL,
+    [RAD_MONUCOUDEM] DECIMAL (15, 2) DEFAULT ((0)) NULL,
+    [RAD_FECPCOUDEM] DATETIME        NULL,
+    [RAD_FECUCOUDEM] DATETIME        NULL,
+    [RAD_INTDEM]     DECIMAL (5, 3)  DEFAULT ((0)) NULL,
+    [RAD_FECAVE]     DATETIME        NULL,
+    [RAD_CUOAVE]     SMALLINT        NULL,
+    [RAD_MONAVE]     DECIMAL (15, 2) DEFAULT ((0)) NULL,
+    [RAD_MONUCOUAVE] DECIMAL (15, 2) DEFAULT ((0)) NULL,
+    [RAD_FECPCOUAVE] DATETIME        NULL,
+    [RAD_FECUCOUAVE] DATETIME        NULL,
+    [RAD_INTAVE]     DECIMAL (5, 3)  DEFAULT ((0)) NULL,
+    [RAD_MONPCUODEM] DECIMAL (15, 2) NULL,
+    [RAD_MONPCOUAVE] DECIMAL (15, 2) NULL,
+    CONSTRAINT [PK_ROL_AVEDEM] PRIMARY KEY CLUSTERED ([RAD_CODEMP] ASC, [RAD_ROLID] ASC),
+    CONSTRAINT [FK_ROL_AVED_ROL_AVEDE_ROL] FOREIGN KEY ([RAD_CODEMP], [RAD_ROLID]) REFERENCES [dbo].[ROL] ([ROL_CODEMP], [ROL_ROLID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[ROL_AVEDEM]([RAD_CODEMP] ASC, [RAD_ROLID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacen los distintos datos, ya sea para avenimientos o demandas', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'ROL_AVEDEM';
+

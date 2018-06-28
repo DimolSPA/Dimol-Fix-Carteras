@@ -1,0 +1,77 @@
+04-05-2018 17:31:23	Este registro contiene información acerca de la operación de importación de esquema en el proyecto 'Dimol.Carteras.Database' del equipo 'DESKTOP-S1LRI4C' por el usuario 'cesar'.
+04-05-2018 17:31:23	Se inició la importación del esquema de la base de datos.
+04-05-2018 17:31:35	Recopilando opciones de base de datos
+04-05-2018 17:31:35	Recopilando usuarios
+04-05-2018 17:31:35	Recopilando roles
+04-05-2018 17:31:35	Recopilando roles de aplicación
+04-05-2018 17:31:35	Recopilando pertenencias a roles
+04-05-2018 17:31:35	Recopilando grupos de archivos
+04-05-2018 17:31:35	Recopilando catálogos de texto completo
+04-05-2018 17:31:35	Recopilando ensamblados
+04-05-2018 17:31:35	Recopilando certificados
+04-05-2018 17:31:35	Recopilando claves asimétricas
+04-05-2018 17:31:35	Recopilando claves simétricas
+04-05-2018 17:31:35	Recopilando claves simétricas cifradas
+04-05-2018 17:31:35	Recopilando esquemas
+04-05-2018 17:31:35	Recopilando colecciones de esquemas XML
+04-05-2018 17:31:35	Recopilando tipos de datos definidos por el usuario
+04-05-2018 17:31:35	Recopilando tipos definidos por el usuario
+04-05-2018 17:31:35	Recopilando tipos de tabla
+04-05-2018 17:31:35	Recopilando claves únicas para tipos de tabla
+04-05-2018 17:31:35	Recopilando claves principales para tipos de tabla
+04-05-2018 17:31:35	Recopilando índices para tipos de tablas
+04-05-2018 17:31:35	Recopilando restricciones CHECK para tipos de tabla
+04-05-2018 17:31:35	Recopilando restricciones DEFAULT para tipos de tabla
+04-05-2018 17:31:35	Recopilando funciones de partición
+04-05-2018 17:31:35	Recopilando esquemas de partición
+04-05-2018 17:31:35	Recopilando funciones
+04-05-2018 17:31:36	Recopilando funciones cifradas
+04-05-2018 17:31:36	Recopilando agregados
+04-05-2018 17:31:36	Recopilando procedimientos
+04-05-2018 17:31:38	Recopilando procedimientos cifrados
+04-05-2018 17:31:38	Recopilando tablas
+04-05-2018 17:31:39	Recopilando claves principales
+04-05-2018 17:31:40	Recopilando restricciones UNIQUE
+04-05-2018 17:31:40	Recopilando claves externas
+04-05-2018 17:31:40	Recopilando restricciones DEFAULT
+04-05-2018 17:31:40	Recopilando restricciones CHECK
+04-05-2018 17:31:40	Recopilando vistas
+04-05-2018 17:31:40	Recopilando vistas cifradas
+04-05-2018 17:31:40	Recopilando índices
+04-05-2018 17:31:40	Recopilando estadísticas
+04-05-2018 17:31:40	Recopilando listas de palabras irrelevantes de índices de texto completo
+04-05-2018 17:31:40	Recopilando listas de propiedades de búsqueda
+04-05-2018 17:31:40	Recopilando propiedades de búsqueda
+04-05-2018 17:31:40	Recopilando índices de texto completo
+04-05-2018 17:31:40	Recopilando índices de almacenamiento de columnas
+04-05-2018 17:31:40	Recopilando índices espaciales
+04-05-2018 17:31:40	Recopilando índices XML
+04-05-2018 17:31:40	Recopilando índices XML selectivos
+04-05-2018 17:31:40	Recopilando desencadenadores cifrados
+04-05-2018 17:31:40	Recopilando desencadenadores
+04-05-2018 17:31:40	Recopilando DDL triggers cifrados y de CLR
+04-05-2018 17:31:40	Recopilando DDL triggers
+04-05-2018 17:31:40	Recopilando sinónimos
+04-05-2018 17:31:40	Recopilando valores predeterminados
+04-05-2018 17:31:40	Recopilando enlaces UDDT de restricción de datos
+04-05-2018 17:31:40	Recopilando reglas
+04-05-2018 17:31:40	Recopilando enlaces UDDT de restricción de datos
+04-05-2018 17:31:40	Recopilando tipos de mensaje
+04-05-2018 17:31:40	Recopilando colas
+04-05-2018 17:31:40	Recopilando contratos
+04-05-2018 17:31:40	Recopilando servicios
+04-05-2018 17:31:40	Recopilando notificaciones de eventos
+04-05-2018 17:31:40	Recopilando enlaces de servicio remoto
+04-05-2018 17:31:40	Recopilando prioridades de Broker
+04-05-2018 17:31:40	Recopilando firmas
+04-05-2018 17:31:40	Recopilando opciones de compresión de datos
+04-05-2018 17:31:40	Recopilando tipos de secuencia
+04-05-2018 17:31:40	Recopilando propiedades extendidas
+04-05-2018 17:31:41	Recopilando credenciales
+04-05-2018 17:31:41	Recopilando inicios de sesión
+04-05-2018 17:31:42	Recopilando auditorías de servidor
+04-05-2018 17:31:45	Buscando elementos duplicados en el proyecto
+04-05-2018 17:31:45	Ha finalizado el procesamiento de los elementos duplicados
+04-05-2018 17:32:27	Finalizó la importación de la base de datos.
+04-05-2018 17:32:27	Se guardó un resumen de la importación en la siguiente ubicación: C:\FuentesDimol2018\Dimol.Carteras\Dimol.Carteras.Database\Registros de importación de esquemas\Dimol.Carteras.Datab_20180504083123.log
+04-05-2018 17:32:27	Haga clic en Finalizar para continuar...

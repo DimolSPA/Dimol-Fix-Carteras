@@ -1,0 +1,14 @@
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\bin\Release\Dimol.Finanzas.bcp.dll
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\bin\Release\Dimol.Finanzas.bcp.pdb
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\bin\Release\Dimol.dto.dll
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\bin\Release\Dimol.Finanzas.dao.dll
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\bin\Release\Dimol.Finanzas.dto.dll
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\bin\Release\Dimol.dao.dll
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\bin\Release\CYPH.dll
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\bin\Release\Dimol.Finanzas.dao.pdb
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\bin\Release\Dimol.Finanzas.dto.pdb
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\bin\Release\Dimol.dto.pdb
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\bin\Release\CYPH.xml
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\obj\Release\Dimol.Finanzas.bcp.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\obj\Release\Dimol.Finanzas.bcp.dll
+D:\_Codigo_Dimol\Dimol_Finanzas\Dimol.Finanzas.bcp\obj\Release\Dimol.Finanzas.bcp.pdb

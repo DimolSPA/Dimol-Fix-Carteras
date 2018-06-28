@@ -1,0 +1,153 @@
+﻿@model Dimol.Caja.Models.MantenedoresModel
+@{
+    ViewBag.Title = "Criterios de Remesa";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<br />
+<h2></h2>
+@using Mvc.HtmlHelpers
+<style type="text/css" media="screen">
+    th.ui-th-column div {
+        white-space: normal !important;
+        height: auto !important;
+        padding: 2px;
+    }
+  
+</style>
+<script type="text/javascript">
+   
+    window.onload = function () {
+        $("#t_gridCriterioRemesa").append("<div align='right'><button title='Ingresar Criterio' onclick='fnAgregarCriterioRemesa();'> <i class='fa fa-plus-square' style='font-size:15px;'></i> </button></div>");
+    }
+    jQuery(document).ready(function ($) {
+        // rule select
+             
+        $.validator.addMethod("greaterThan", function (value, element, params) {
+            if ($(params[0]).val() != "" && value != "") {
+                if (!/Invalid|NaN/.test(value)) {
+                    return parseInt(value) > parseInt($(params[0]).val());
+                }
+                return isNaN(value) && isNaN($(params[0]).val()) || (Number(value) > Number($(params[0]).val()));
+            }
+            else return true;
+        }, 'Debe ser mayor que {1}.');
+
+        fnRulesCriterioRemesa();
+      
+    });
+</script>
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">@ViewBag.Title</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCriteriosRemesa" }))
+        {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>Criterios de Remesa</legend>
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col" style="width:150px">@Html.LabelFor(model => model.NombreRutCliente) </div>
+                        <div class="col" style="width:250px">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente", "Tesoreria"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                            @Html.ValidationMessageFor(model => model.NombreRutCliente)
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="float: right">
+
+                            <input type="button" value="Buscar" onclick="fnBuscarCriteriosRemesaCliente();" />
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        }
+        <br />
+        @(Html.jqGrid("gridCriterioRemesa")
+
+        .addColumn(new Column("Id").setLabel("Id")
+        .setSortable(true).setHidden(true)
+        .setWidth(60))
+        .addColumn(new Column("SimboloId").setLabel("SimboloId")
+        .setSortable(true).setHidden(true)
+        .setWidth(60))
+        .addColumn(new Column("CodigoCarga").setLabel("CodigoCarga")
+        .setSortable(true).setHidden(true)
+        .setWidth(60))
+        .addColumn(new Column("TipoConciliacionId").setLabel("TipoConciliacionId")
+        .setSortable(true).setHidden(true)
+        .setWidth(60))
+        .addColumn(new Column("ConcicionId").setLabel("ConcicionId")
+        .setSortable(true).setHidden(true)
+        .setWidth(60))
+        .addColumn(new Column("DesdeDiasVencido").setLabel("Desde Dias Vencido").setAlign(Align.right).setFormatter(Formatters.integer)
+        .setSortable(true)
+        .setWidth(80))
+        .addColumn(new Column("HastaDiasVencido").setLabel("Hasta Dias Vencido").setAlign(Align.right).setFormatter(Formatters.integer)
+        .setSortable(true)
+        .setWidth(80))
+        .addColumn(new Column("RegionMetropolitana").setLabel("Region Metropolitana").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(80))
+        .addColumn(new Column("CodigoDeCarga").setLabel("Codigo De Carga")
+        .setSortable(true)
+        .setWidth(80))
+        .addColumn(new Column("TipoCambioCapital").setLabel("Tipo Cambio Capital").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(80))
+        .addColumn(new Column("Capital").setLabel("Capital").setAlign(Align.right).setFormatter(Formatters.integer)
+        .setSortable(true)
+        .setWidth(80))
+        .addColumn(new Column("Interes").setLabel("Interes").setAlign(Align.right).setFormatter(Formatters.integer)
+        .setSortable(true)
+        .setWidth(80))
+        .addColumn(new Column("Honorario").setLabel("Honorario").setAlign(Align.right).setFormatter(Formatters.integer)
+        .setSortable(true)
+        .setWidth(80))
+        .addColumn(new Column("TipoConciliacion").setLabel("Tipo Conciliacion")
+        .setSortable(true)
+        .setWidth(80))
+        .addColumn(new Column("CondicionAnticipo").setLabel("Condicion Anticipo")
+        .setSortable(true)
+        .setWidth(80))
+        .addColumn(new Column("IsAnticipo").setLabel("IsAnticipo")
+        .setSortable(true).setHidden(true)
+        .setWidth(80))
+    // settings
+    .setCaption("Criterios de Remesa")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Tesoreria/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 50, 100 })
+    .setViewRecords(true)
+    .setSortName("Id")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerCriterioRemesa")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+    .onDblClickRow("fnDoubleClickGridRemesa(rowid)")
+    .Render()
+
+        )
+    </div>
+</div>
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAddCriterioRemesa" }).Draggable(true)
+                                    .AutoOpen(false)
+                                    .Modal(true)
+                                    .Title("Criterio Remesa")
+                                    .CloseOnEscape(true)
+                                    .Width(600)
+                                    .Height(350)
+                                    ))
+{
+   @Html.Partial("_CriteriosRemesaEdit")
+}

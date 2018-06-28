@@ -1,0 +1,1 @@
+﻿create procedure Trae_Reporte_Llamadas_Gestor as    Create Table #Llamadas (calldate datetime, dst varchar(50), accountcode varchar(250), billsec integer, src varchar(200), anexo varchar(10), gestor varchar(200), disposition varchar(200))      select * from #Llamadas 

@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master master-name="cover" page-height="5.5in" page-width="8.5in" margin-top="0.25in" margin-bottom="0.25in" margin-left="0.25in" margin-right="0.25in">
+      <fo:region-body margin-top="0.25in" margin-bottom="0.25in" />
+    </fo:simple-page-master>
+    <fo:simple-page-master master-name="default-master" page-height="5.5in" page-width="8.5in" margin-top="0.25in" margin-bottom="0.25in" margin-left="0.25in" margin-right="0.25in">
+      <fo:region-body column-count="1" margin-top="0.1in" margin-bottom="0.25in" />
+      <fo:region-before extent="0.1in" />
+      <fo:region-after extent="0.05in" />
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <fo:page-sequence master-reference="default-master">
+    <fo:static-content flow-name="xsl-region-before">
+      <fo:block />
+    </fo:static-content>
+    <fo:static-content flow-name="xsl-region-after">
+      <fo:table>
+        <fo:table-column column-width="50%" />
+        <fo:table-column column-width="50%" />
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell>
+              <fo:block font-size="6.0pt" font-family="sans-serif" padding-after="2.0pt" space-before="4.0pt" text-align="left">
+			                  Pág.  <fo:page-number /> de <fo:page-number-citation ref-id="UltimaPagina" /></fo:block>
+            </fo:table-cell>
+            <fo:table-cell>
+              <fo:block font-size="6.0pt" font-family="sans-serif" padding-after="2.0pt" space-before="4.0pt" text-align="right">
+			                  FECHA EMISION: 04-06-2015 14:17:46</fo:block>
+            </fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+      </fo:table>
+    </fo:static-content>
+    <fo:flow flow-name="xsl-region-body">
+      <fo:block font-size="8.0pt" font-family="Calibri" padding-after="2.0pt" space-before="2.0pt" text-align="center">
+        <fo:block font-size="10.0pt" font-family="sans-serif" padding-after="2.0pt" space-before="2.0pt" text-align="center">ESTADO DE CUENTA</fo:block>
+        <fo:block font-size="10.0pt" font-family="sans-serif" padding-after="2.0pt" space-before="2.0pt" text-align="center">TURISMO COCHA S.A.</fo:block>
+        <fo:block font-size="9.0pt" font-family="sans-serif" padding-after="2.0pt" text-align="center">RUT:   81.821.100-7</fo:block>
+      </fo:block>
+      <fo:block />
+      <fo:block page-break-inside="auto">
+        <fo:block font-size="8.0pt" font-family="sans-serif" padding-after="2.0pt" space-before="4.0pt" text-align="center">
+          <fo:block font-size="7.0pt" font-family="sans-serif" padding-after="2.0pt" text-align="left" font-weight="bold" white-space="pre">RUT : 96.954.020-7     NOMBRE : ABERCROMBIE AND KENT CHILE S.A.</fo:block>
+          <fo:table font-size="7.0pt">
+            <fo:table-column column-width="33%" />
+            <fo:table-column column-width="33%" />
+            <fo:table-column column-width="34%" />
+            <fo:table-body>
+              <fo:table-row>
+                <fo:table-cell padding="2px" text-align="left">
+                  <fo:block>CIUDAD: SANTIAGO</fo:block>
+                </fo:table-cell>
+                <fo:table-cell padding="2px" text-align="left">
+                  <fo:block>COMUNA: SANTIAGO</fo:block>
+                </fo:table-cell>
+                <fo:table-cell padding="2px" text-align="left">
+                  <fo:block>REGION: REGION  METROPOLITANA</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell padding="2px" text-align="left">
+                  <fo:block>DIRECCION: </fo:block>
+                </fo:table-cell>
+                <fo:table-cell padding="2px" text-align="left">
+                  <fo:block>TELEFONO: </fo:block>
+                </fo:table-cell>
+                <fo:table-cell padding="2px" text-align="left">
+                  <fo:block>COD. POSTAL: 8320000</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell padding="2px" text-align="left">
+                  <fo:block>CELULAR: </fo:block>
+                </fo:table-cell>
+                <fo:table-cell padding="2px" text-align="left">
+                  <fo:block>EMAIL: </fo:block>
+                </fo:table-cell>
+                <fo:table-cell padding="2px" text-align="left">
+                  <fo:block>FAX: </fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row font-weight="bold">
+                <fo:table-cell padding="2px" text-align="left">
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell padding="2px" text-align="left">
+                  <fo:block>FECHA EMISION: 04-06-2015</fo:block>
+                </fo:table-cell>
+                <fo:table-cell padding="2px" text-align="left">
+                  <fo:block>GESTOR: JUAN MARQUEZ</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+            </fo:table-body>
+          </fo:table>
+        </fo:block>
+        <fo:block font-size="7.0pt" font-family="sans-serif" padding-after="2.0pt" font-weight="bold" text-align="center">DETALLE LIQUIDACION</fo:block>
+        <fo:block font-size="7.0pt" font-family="sans-serif" padding-after="2.0pt" font-weight="bold" font-style="italic">PESOS</fo:block>
+        <fo:block font-size="6.0pt" font-family="serif">
+          <fo:table>
+            <fo:table-column column-width="30mm" />
+            <fo:table-column column-width="18%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-header>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">TIPO DOCUMENTO</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">NUMERO</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">FECHA EMISION</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">FECHA VENC.</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">DIAS VENC.</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">MONTO</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">SALDO</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">NEGOCIO</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+            </fo:table-header>
+            <fo:table-body>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2107847</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>03-12-2013</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>02-01-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>518</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>64.140,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>64.140,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>3-C08-192</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row font-size="8.0pt">
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell text-align="center" border-width="1px" padding="2px" number-columns-spanned="4">
+                  <fo:block font-weight="bold" font-style="italic" color="blue">SUB-TOTAL PESOS:</fo:block>
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block font-weight="bold" font-style="italic" color="blue">64.140,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block font-weight="bold" font-style="italic" color="blue">64.140,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block />
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row font-size="8.0pt">
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell text-align="center" border-width="1px" padding="2px" number-columns-spanned="4">
+                  <fo:block font-weight="bold" color="blue">CANTIDAD DOCUMENTOS:</fo:block>
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block font-weight="bold" color="blue">1</fo:block>
+                </fo:table-cell>
+                <fo:table-cell text-align="right">
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block />
+                </fo:table-cell>
+              </fo:table-row>
+            </fo:table-body>
+          </fo:table>
+        </fo:block>
+        <fo:block font-size="7.0pt" font-family="sans-serif" padding-after="2.0pt" font-weight="bold" font-style="italic">DOLAR</fo:block>
+        <fo:block font-size="6.0pt" font-family="serif">
+          <fo:table>
+            <fo:table-column column-width="30mm" />
+            <fo:table-column column-width="18%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-column column-width="8%" />
+            <fo:table-header>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">TIPO DOCUMENTO</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">NUMERO</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">FECHA EMISION</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">FECHA VENC.</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">DIAS VENC.</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">MONTO</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">SALDO</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block font-weight="bold">NEGOCIO</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+            </fo:table-header>
+            <fo:table-body>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1013425</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>09-08-2013</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>08-09-2013</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>634</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>689,60</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>4,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>3-C08-236</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2094722</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>11-10-2013</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>10-11-2013</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>571</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.648,89</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.648,89</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>3-C08-319</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2110697</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>17-12-2013</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>16-01-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>504</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>497,82</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>497,82</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>3-C08-389</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2112026</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>27-12-2013</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>26-01-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>494</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2.317,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>128,74</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>3-C08-399</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2113303</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>06-01-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>05-02-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>484</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.583,60</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.583,60</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-003</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2113796</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>08-01-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>07-02-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>482</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>771,60</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>771,60</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-005</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2117230</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>29-01-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>28-02-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>461</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>313,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>313,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-020</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2118482</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>06-02-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>08-03-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>453</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>3.799,50</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>3.799,50</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-028</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2119143</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>11-02-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>13-03-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>448</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2.291,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2.291,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-038</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2119142</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>11-02-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>13-03-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>448</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>3.739,20</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>3.739,20</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-035</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2120672</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>21-02-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>23-03-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>438</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.857,40</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.857,40</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-045</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2120673</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>21-02-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>23-03-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>438</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>592,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>592,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-046</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2120800</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>24-02-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>26-03-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>435</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>538,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>538,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-047</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2121486</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>27-02-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>29-03-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>432</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>287,41</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>287,41</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-048</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2123131</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>06-03-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>05-04-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>425</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>983,40</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>983,40</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-055</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2125550</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>19-03-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>18-04-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>412</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>786,58</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>786,58</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-060</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2126511</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>25-03-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>24-04-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>406</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.134,57</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.134,57</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-013</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2127056</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>28-03-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>27-04-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>403</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>942,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>942,00</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-067</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2129098</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>08-04-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>08-05-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>392</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.091,87</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.091,87</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-077</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2129611</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>10-04-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>10-05-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>390</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.958,96</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.958,96</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-083</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="left">
+                  <fo:block>FACTURA</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>2130377</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>15-04-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>15-05-2014</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right" color="red">
+                  <fo:block>385</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.080,20</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="right">
+                  <fo:block>1.080,20</fo:block>
+                </fo:table-cell>
+                <fo:table-cell border="solid" border-width="1px" padding="2px" text-align="center">
+                  <fo:block>4-C08-085</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row font-size="8.0pt">
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell text-align="center" border-width="1px" padding="2px" number-columns-spanned="4">
+                  <fo:block font-weight="bold" font-style="italic" color="blue">SUB-TOTAL DOLAR:</fo:block>
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block font-weight="bold" font-style="italic" color="blue">28.903,60</fo:block>
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block font-weight="bold" font-style="italic" color="blue">26.029,74</fo:block>
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block />
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row font-size="8.0pt">
+                <fo:table-cell>
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell text-align="center" border-width="1px" padding="2px" number-columns-spanned="4">
+                  <fo:block font-weight="bold" color="blue">CANTIDAD DOCUMENTOS:</fo:block>
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block font-weight="bold" color="blue">21</fo:block>
+                </fo:table-cell>
+                <fo:table-cell text-align="right">
+                  <fo:block />
+                </fo:table-cell>
+                <fo:table-cell text-align="right" border-width="1px" padding="2px">
+                  <fo:block />
+                </fo:table-cell>
+              </fo:table-row>
+            </fo:table-body>
+          </fo:table>
+        </fo:block>
+      </fo:block>
+      <fo:block id="UltimaPagina" />
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

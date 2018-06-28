@@ -1,0 +1,41 @@
+﻿CREATE TABLE [dbo].[DEUDORES_CONTACTOS] (
+    [DDC_CODEMP]    INT           NOT NULL,
+    [DDC_CTCID]     NUMERIC (15)  NOT NULL,
+    [DDC_DDCID]     SMALLINT      NOT NULL,
+    [DDC_TICID]     INT           NOT NULL,
+    [DDC_NOMBRE]    VARCHAR (250) NOT NULL,
+    [DDC_COMID]     INT           NULL,
+    [DDC_DIRECCION] VARCHAR (800) NULL,
+    [DDC_FECING]    DATETIME      DEFAULT (getdate()) NOT NULL,
+    [DDC_ESTDIR]    SMALLINT      DEFAULT ((1)) NULL,
+    [DDC_ESTADO]    CHAR (1)      DEFAULT ('A') NULL,
+    CONSTRAINT [PK_DEUDORES_CONTACTOS] PRIMARY KEY CLUSTERED ([DDC_CODEMP] ASC, [DDC_CTCID] ASC, [DDC_DDCID] ASC),
+    CONSTRAINT [CKC_DDC_ESTADO_DEUDORES] CHECK ([DDC_ESTADO] IS NULL OR ([DDC_ESTADO]='D' OR [DDC_ESTADO]='A')),
+    CONSTRAINT [CKC_DDC_ESTDIR_DEUDORES] CHECK ([DDC_ESTDIR] IS NULL OR ([DDC_ESTDIR]=(5) OR [DDC_ESTDIR]=(4) OR [DDC_ESTDIR]=(3) OR [DDC_ESTDIR]=(2) OR [DDC_ESTDIR]=(1))),
+    CONSTRAINT [FK_DEUDORES_COMUNA_DE_COMUNA] FOREIGN KEY ([DDC_COMID]) REFERENCES [dbo].[COMUNA] ([COM_COMID]),
+    CONSTRAINT [FK_DEUDORES_DEUDORE_C_DEUDORES] FOREIGN KEY ([DDC_CODEMP], [DDC_CTCID]) REFERENCES [dbo].[DEUDORES] ([CTC_CODEMP], [CTC_CTCID]),
+    CONSTRAINT [FK_DEUDORES_TIPCONTA__TIPOS_CO] FOREIGN KEY ([DDC_CODEMP], [DDC_TICID]) REFERENCES [dbo].[TIPOS_CONTACTO] ([TIC_CODEMP], [TIC_TICID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[DEUDORES_CONTACTOS]([DDC_CODEMP] ASC, [DDC_CTCID] ASC, [DDC_DDCID] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_NOMBRE]
+    ON [dbo].[DEUDORES_CONTACTOS]([DDC_CODEMP] ASC, [DDC_CTCID] ASC, [DDC_TICID] ASC, [DDC_NOMBRE] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena los distintos tipos de contacto que tendra cada deudor 
+   
+   Ejemplo:
+   
+   Papa, Tio, Mama, Vecino, etc...', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'DEUDORES_CONTACTOS';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Este campo indica si el contacto esta activo o no', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'DEUDORES_CONTACTOS', @level2type = N'COLUMN', @level2name = N'DDC_ESTADO';
+

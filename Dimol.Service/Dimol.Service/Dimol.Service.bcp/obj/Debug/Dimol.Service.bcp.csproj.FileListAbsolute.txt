@@ -1,0 +1,6 @@
+D:\_Codigo_Dimol\Dimol.Service\Dimol.Service\Dimol.Service.bcp\bin\Debug\Dimol.Service.bcp.dll.config
+D:\_Codigo_Dimol\Dimol.Service\Dimol.Service\Dimol.Service.bcp\bin\Debug\Dimol.Service.bcp.dll
+D:\_Codigo_Dimol\Dimol.Service\Dimol.Service\Dimol.Service.bcp\bin\Debug\Dimol.Service.bcp.pdb
+D:\_Codigo_Dimol\Dimol.Service\Dimol.Service\Dimol.Service.bcp\obj\Debug\Dimol.Service.bcp.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\Dimol.Service\Dimol.Service\Dimol.Service.bcp\obj\Debug\Dimol.Service.bcp.dll
+D:\_Codigo_Dimol\Dimol.Service\Dimol.Service\Dimol.Service.bcp\obj\Debug\Dimol.Service.bcp.pdb

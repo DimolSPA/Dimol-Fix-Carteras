@@ -1,0 +1,99 @@
+﻿@model Dimol.Carteras.Models.BuscarComprobanteModel
+
+<br />
+<h2>@ViewBag.Title</h2>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Comprobante</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarComprobante" }))
+        {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>AceptarComprobante</legend>
+
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col">
+                            @Html.LabelFor(model => model.FechaEmisionDesde)    @Html.JQueryUI().Datepicker("FechaEmisionDesde").ShowButtonPanel(true).ShowWeek(false)
+                            @Html.ValidationMessageFor(model => model.FechaEmisionDesde)
+                        </div>
+                        <div class="col">
+                            @Html.LabelFor(model => model.FechaEmisionHasta)    @Html.JQueryUI().Datepicker("FechaEmisionHasta").ShowButtonPanel(true).ShowWeek(false)
+                            @Html.ValidationMessageFor(model => model.FechaEmisionHasta)
+                        </div>
+                        <div class="col" style="float: right">
+                            @Html.HiddenFor(model => model.Tipo)@Html.HiddenFor(model => model.Cartera)@Html.HiddenFor(model => model.Estado)
+                            <input type="button" value="Facturar" onclick="fnFacturarComprobantes();" />
+                            <input type="button" value="Extraer" onclick="fnExtraerBH();" />
+                            @if (ViewBag.Prfid == 13 || ViewBag.Prfid == 1)
+                            {<input type="button" value="Eliminar" onclick="fnEliminarBH();" />}
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </fieldset>
+        }
+        <br />
+        @(Html.jqGrid("gridFacturaComprobante")
+            .addColumn(new Column("Rut").setLabel("Rut")
+                .setSortable(true)
+                .setWidth(60))
+            .addColumn(new Column("NombreFantasia").setLabel("Nombre")
+                .setSortable(true)
+                .setWidth(110))
+            .addColumn(new Column("TipoDocumento").setLabel("Tipo")
+                .setSortable(true)
+                .setWidth(80))
+            .addColumn(new Column("NumeroCliente").setLabel("Número").setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(50))
+            .addColumn(new Column("Bruto").setLabel("Bruto").setAlign(Align.right).setFormatter(Formatters.number)
+                .setSortable(true)
+                .setWidth(60))
+            .addColumn(new Column("Retenido").setLabel("Retenido").setAlign(Align.right).setFormatter(Formatters.number)
+                .setSortable(true)
+                .setWidth(60))
+            .addColumn(new Column("Monto").setLabel("Pagado").setAlign(Align.right).setFormatter(Formatters.number)
+                .setSortable(true)
+                .setWidth(60))
+            .addColumn(new Column("Fecha").setLabel("Fecha")
+                .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y").setAlign(Align.center)
+                .setWidth(60))
+            .addColumn(new Column("Cliente").setLabel("Cliente").setAlign(Align.left)
+                .setSortable(true)
+                .setWidth(110))
+            .addColumn(new Column("Usuario").setLabel("Usuario").setAlign(Align.left)
+                .setSortable(true)
+                .setWidth(70))
+
+    // settings
+    .setCaption("Boletas de Honorarios")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetEstadoComprobantes?Tipo=" + Model.Tipo + "&Cartera=" + Model.Cartera + "&Estado=" + Model.Estado)
+    .setAltRows(true)
+    .setMultiSelect(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(1000)
+    .setRowList(new int[] { 100, 500, 1000 })
+    .setViewRecords(true)
+    .setSortName("NombreFantasia")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerAceptarComprobante")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("UpdateIdsOfSelectedRows(rowid, status)")
+    .onSelectAll("fnOnSelectAll(aRowids, status)")
+    .onLoadComplete("fnOnLoadComplete(this)")
+    .Render()
+
+        )
+        <br />
+    </div>
+</div>

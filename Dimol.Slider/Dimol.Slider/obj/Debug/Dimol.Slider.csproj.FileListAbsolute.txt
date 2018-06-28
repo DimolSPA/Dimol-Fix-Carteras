@@ -1,0 +1,174 @@
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\ApplicationInsights.config
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\roslyn\csc.exe
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\roslyn\vbc.exe
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\roslyn\VBCSCompiler.exe
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Dimol.Slider.dll.config
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Dimol.Slider.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Dimol.Slider.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Antlr3.Runtime.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\EntityFramework.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\EntityFramework.SqlServer.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.Web.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.ApplicationInsights.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Newtonsoft.Json.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Owin.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.Helpers.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.Mvc.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.Optimization.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.Razor.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.WebPages.Deployment.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.WebPages.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.WebPages.Razor.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\WebGrease.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.Web.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.ApplicationInsights.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.Helpers.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.Mvc.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.Optimization.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.Razor.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.WebPages.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.WebPages.Deployment.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\System.Web.WebPages.Razor.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Antlr3.Runtime.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Newtonsoft.Json.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\EntityFramework.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\EntityFramework.SqlServer.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\obj\Debug\Dimol.Slider.csprojResolveAssemblyReference.cache
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\obj\Debug\Dimol.Slider.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.Slider\Dimol.Slider\obj\Debug\Dimol.Slider.pdb
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\ApplicationInsights.config
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\roslyn\csc.exe
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\roslyn\System.Collections.Immutable.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\roslyn\System.Reflection.Metadata.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\roslyn\vbc.exe
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\roslyn\VBCSCompiler.exe
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\roslyn\VBCSCompiler.exe.config
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Dimol.Slider.dll.config
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Dimol.Slider.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Dimol.Slider.pdb
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Antlr3.Runtime.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Dimol.Slider.bcp.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Dimol.Slider.dto.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\EntityFramework.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\EntityFramework.SqlServer.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\JQueryUIHelpers.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.Agent.Intercept.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.DependencyCollector.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.Web.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.WindowsServer.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.ApplicationInsights.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AspNet.Identity.Core.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Cookies.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Facebook.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Google.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.OAuth.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Twitter.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Web.Infrastructure.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Mvc.HtmlHelper.jqGrid.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Newtonsoft.Json.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Owin.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.Helpers.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.Mvc.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.Optimization.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.Razor.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.WebPages.Deployment.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.WebPages.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.WebPages.Razor.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\WebGrease.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Dimol.Slider.dao.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Dimol.Slider.bcp.pdb
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Dimol.Slider.dto.pdb
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\JQueryUIHelpers.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.DependencyCollector.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.Web.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AI.WindowsServer.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.ApplicationInsights.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Mvc.HtmlHelper.jqGrid.pdb
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.Helpers.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.Mvc.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.Optimization.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.Razor.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.WebPages.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.WebPages.Deployment.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\System.Web.WebPages.Razor.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Antlr3.Runtime.pdb
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Newtonsoft.Json.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\EntityFramework.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\EntityFramework.SqlServer.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AspNet.Identity.Core.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Facebook.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Cookies.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.OAuth.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Google.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.Twitter.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\bin\Dimol.Slider.dao.pdb
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\obj\Debug\Dimol.Slider.csprojResolveAssemblyReference.cache
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\obj\Debug\Dimol.Slider.dll
+C:\FuentesDimol2017\Dimol.Slider\Dimol.Slider\obj\Debug\Dimol.Slider.pdb

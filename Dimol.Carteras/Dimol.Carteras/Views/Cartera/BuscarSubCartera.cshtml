@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Buscar SubCartera";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  <div class="ui-widget-header ui-corner-all">
+    <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Deudor</span>
+
+   </div>
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarDeudor" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BuscarDeudor</legend>
+
+        <div class="tabla">
+            <div class="fila">
+                <div class="col"  style="width:160px">@Html.Label("Rut")</div>
+                <div class="col"> @Html.TextBox("Rut",null,new { @class= "textboxClassRut"})</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.Label("Nombre")</div>
+                <div class="col">@Html.TextBox("Nombre",null,new { @class= "textboxClass"})
+                </div>
+            </div>
+           
+            <div class="fila">
+                <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnBuscarSubcarteras();" /></div>
+            </div>
+
+        </div>
+    </fieldset>
+}
+<br />
+@(Html.jqGrid("gridSubCartera")
+    
+    .addColumn(new Column("Sbcid").setLabel("Id")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("Rut").setLabel("Rut")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setSortable(true)
+        .setWidth(110))    
+    // settings
+    .setCaption("Sub Carteras")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerSubCartera")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("SubcarteraSeleccionada(rowid)")
+    .Render()
+
+) 
+<br />
+          </div>
+</div>

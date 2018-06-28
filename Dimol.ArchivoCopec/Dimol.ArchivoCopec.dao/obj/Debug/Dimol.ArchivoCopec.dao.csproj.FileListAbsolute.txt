@@ -1,0 +1,14 @@
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\bin\Debug\Dimol.ArchivoCopec.dao.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\bin\Debug\Dimol.ArchivoCopec.dao.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\bin\Debug\Dimol.ArchivoCopec.dto.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\bin\Debug\Dimol.dao.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\bin\Debug\CYPH.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\bin\Debug\Dimol.dto.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\bin\Debug\Dimol.ArchivoCopec.dto.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\bin\Debug\Dimol.dao.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\bin\Debug\CYPH.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\bin\Debug\CYPH.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\bin\Debug\Dimol.dto.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\obj\Debug\Dimol.ArchivoCopec.dao.csprojResolveAssemblyReference.cache
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\obj\Debug\Dimol.ArchivoCopec.dao.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dao\obj\Debug\Dimol.ArchivoCopec.dao.pdb

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0028C6CE-CC2E-4D26-B8BC-ED91F4FB2BF0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dimol.CKEditor.bcp</RootNamespace>
+    <AssemblyName>Dimol.CKEditor.bcp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dimol.bcp">
+      <HintPath>..\..\Dimol\Dimol.bcp\bin\Debug\Dimol.bcp.dll</HintPath>
+    </Reference>
+    <Reference Include="Dimol.dto">
+      <HintPath>..\..\Dimol\Dimol.dto\bin\Debug\Dimol.dto.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Documento.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dimol.CKEditor.dao\Dimol.CKEditor.dao.csproj">
+      <Project>{b14eb9ad-d2bd-4c67-ac5a-08b954e8f756}</Project>
+      <Name>Dimol.CKEditor.dao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dimol.CKEditor.dto\Dimol.CKEditor.dto.csproj">
+      <Project>{9b4093fd-7f01-4914-b0a9-05e63e0e23c0}</Project>
+      <Name>Dimol.CKEditor.dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dimol.Judicial.Mantenedores.dao\Dimol.Judicial.Mantenedores.dao.csproj">
+      <Project>{EFAFEF0B-774E-4B19-939B-84AFC4BE4368}</Project>
+      <Name>Dimol.Judicial.Mantenedores.dao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dimol.Judicial.Mantenedores.dto\Dimol.Judicial.Mantenedores.dto.csproj">
+      <Project>{875576E4-6583-4F69-A1EF-B55512A57974}</Project>
+      <Name>Dimol.Judicial.Mantenedores.dto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

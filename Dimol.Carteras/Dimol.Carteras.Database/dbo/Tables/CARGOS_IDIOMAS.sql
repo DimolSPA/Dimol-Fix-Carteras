@@ -1,0 +1,19 @@
+﻿CREATE TABLE [dbo].[CARGOS_IDIOMAS] (
+    [CAI_CODEMP] INT          NOT NULL,
+    [CAI_CARID]  INT          NOT NULL,
+    [CAI_IDID]   INT          NOT NULL,
+    [CAI_NOMBRE] VARCHAR (80) NOT NULL,
+    CONSTRAINT [PK_CARGOS_IDIOMAS] PRIMARY KEY NONCLUSTERED ([CAI_CODEMP] ASC, [CAI_CARID] ASC, [CAI_IDID] ASC),
+    CONSTRAINT [FK_CARGOS_I_CARGOS_ID_CARGOS] FOREIGN KEY ([CAI_CODEMP], [CAI_CARID]) REFERENCES [dbo].[CARGOS] ([CAR_CODEMP], [CAR_CARID]),
+    CONSTRAINT [FK_CARGOS_I_IDIOMAS_C_IDIOMAS] FOREIGN KEY ([CAI_IDID]) REFERENCES [dbo].[IDIOMAS] ([IDI_IDID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[CARGOS_IDIOMAS]([CAI_CODEMP] ASC, [CAI_CARID] ASC, [CAI_IDID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla, almacenara los distintos cargos en su respectivo idioma', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'CARGOS_IDIOMAS';
+

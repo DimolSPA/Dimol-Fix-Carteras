@@ -1,0 +1,62 @@
+﻿@model Dimol.Judicial.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "Materia Estado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Materia Estado</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("MateriaEstado")
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("IdEstado").setLabel("Id Estado")
+        .setHidden(true)    
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("NombreEstado").setLabel("Estado")
+        .setEditable(false)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.Estado+"\"")
+        .setWidth(80))
+    .addColumn(new Column("IdMateria").setLabel("Id Materia")
+        .setHidden(true)        
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("NombreMateria").setLabel("Materia")
+         .setEditable(false)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.Materia+"\"")
+        .setWidth(80))
+        
+    // settings
+    .setCaption("MateriaEstado")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Judicial/GetMateriaEstado/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    //.setSortName("Nombre")
+    .setSortName("nombreestado,nombremateria")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerMateriaEstado")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Judicial/OperMateriaEstado")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Judicial/OperMateriaEstado")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Judicial/OperMateriaEstado")
+    .setExcelExport("/Judicial/ExportToExcelMateriaEstado")
+    .Render()
+
+)

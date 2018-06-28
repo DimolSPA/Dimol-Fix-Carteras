@@ -1,0 +1,134 @@
+﻿@model Dimol.Caja.Models.ConciliacionMovimientoModel
+
+@using Mvc.HtmlHelpers
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmConciliacionMovimiento" }))
+{
+ 
+    @Html.ValidationSummary(true)
+    @Html.Hidden("MovimientoId")
+    @Html.Hidden("NumCuentaHidden")
+
+        <div class=" panel panel-primary">
+            <div class="panel-heading">Datos de Cartera</div>
+            <div class="panel-body">
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col" style="width:70px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:70px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnCargarGestorConciliacion")
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:70px">@Html.LabelFor(model => model.NombreRutGestor)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Gesid, Url.Action("BuscarNombreGestor"), "NombreRutGestor", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" panel panel-primary">
+            <div class="panel-heading">Movimiento Bancario</div>
+            <div class="panel-body">
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col" style="width:70px">@Html.LabelFor(model => model.Fecha)</div>
+                        <div class="col">
+                            @Html.JQueryUI().Datepicker("Fecha").ShowButtonPanel(true).ShowWeek(false).Disabled(true)
+                            @Html.ValidationMessageFor(model => model.Fecha)
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:70px">@Html.LabelFor(model => model.Motivo)</div>
+                        <div class="col">
+                            @Html.DropDownList("Motivo", null, new { @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.Motivo)
+                        </div>
+
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:70px">@Html.LabelFor(model => model.Sucursal)</div>
+                        <div class="col">
+                            @Html.TextBox("Sucursal", null, new { @class = "textboxClass"})
+                            @Html.ValidationMessageFor(model => model.Sucursal)
+                        </div>
+
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:70px">@Html.LabelFor(model => model.Monto)</div>
+                        <div class="col">
+                            @Html.TextBox("Monto", null, new { @class = "textboxClass", @style = "width: 80px" })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+   
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCargaComprobante" }))
+{
+    @Html.ValidationSummary(true)
+    <div class=" panel panel-primary">
+        <div class="panel-heading">Comprobante de Transacción</div>
+        <div class="panel-body">
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:120px">@Html.LabelFor(model => model.NumeroComprobante)</div>
+                    <div class="col">
+                        @Html.EditorFor(model => model.NumeroComprobante)
+                        @Html.ValidationMessageFor(model => model.NumeroComprobante)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:70px;height:25px;margin-top: 5px;"> Archivo</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoComprobante" type="file" style="width:300px"><input type="hidden" name="ArchivoComprobante" id="ArchivoComprobante"></div>
+                    <div class="col"><input type="submit" id="btnSubmitComprobante" value="Subir Archivo" /></div>
+                    <div class="col"><img id="imgSubirArchivoComprobante" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+
+                    <div class="col" style="float:right">
+
+                        <input type="button" value="Nuevo" onclick="fnLimpiarCargaComprobante();" />
+                        <input type="button" style="display:none" value="Cargar" disabled="disabled" id="btnCargarComprobante" />
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="tabla">
+
+    <div class="fila">
+        <div class="col" style="width:140px">@Html.LabelFor(model => model.TipoConciliacion)</div>
+        <div class="col">
+            @Html.DropDownList("TipoConciliacion", null, new { })
+            @Html.ValidationMessageFor(model => model.TipoConciliacion)
+        </div>
+        <div class="col" style="float:right">
+            <input type="button" value="Guardar" id="btnCargarConciliacion" disabled="disabled" onclick="fnInsertarConciliacionMovimiento();" />
+
+        </div>
+    </div>
+
+
+</div>
+<div class="tabla">
+    <div class="fila">
+       
+    </div>
+</div>
+

@@ -1,0 +1,47 @@
+﻿@model Dimol.Carteras.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "TipoRetiroEntrega";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tipo Retiro Entrega</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+     @(Html.jqGrid("TipoRetiroEntrega")
+    .addColumn(new Column("Id").setLabel("Id Motivo")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Motivo")
+        .setSortable(true)    
+        .setEditType(EditType.text)
+        .setEditable(true)
+        .setWidth(80))
+         
+    // settings
+    .setCaption("Tipo Retiro Entrega")
+    .setRequestType(RequestType.get)
+    .setUrl("~/CarteraABM/GetTipoRetiroEntrega/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerTipoRetiroEntrega")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/CarteraABM/OperTipoRetiroEntrega")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/CarteraABM/OperTipoRetiroEntrega")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/CarteraABM/OperTipoRetiroEntrega")
+    .setExcelExport("/CarteraABM/ExportToExcelTipoRetiroEntrega")
+    .Render()
+
+)

@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Ente Asignado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Ente Asignado</h2>
+<br /><br />
+
+
+
+@using Mvc.HtmlHelpers
+<div class="tabla">
+            <div class="col">
+             Tipo Ente @Html.DropDownList("TipoEnte", null, new { @class= "ComboboxClass",onchange="fnRefreshGrid()"})
+            
+            </div>
+              <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width: 350px">
+             @(Html.jqGrid("EnteAsignado")
+            .addColumn(new Column("Codemp").setLabel("codemp")
+                .setHidden(true)
+                .setEditable(true)
+                .setWidth(50))
+            .addColumn(new Column("Id").setLabel("Id")
+                 .setHidden(false)    
+                .setSortable(true)
+                .setWidth(100))
+            .addColumn(new Column("Nombre").setLabel("Nombre")
+                .setEditable(true)
+                .setSortable(true)
+                .setWidth(250))
+             .setCaption("EnteAsignado").setWidth(400)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Judicial/GetEnteAsignado/")
+                .setMultiSelect(true)
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setAutoWidth(true)
+                .setRowNum(10)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("Nombre")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerEnteAsignado")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .setNavEdit(ViewBag.Edit)
+                .setEditUrl("/Judicial/OperEnteAsignado")
+                .setNavAdd(ViewBag.Add)
+                .setAddUrl("/Judicial/OperEnteAsignado")
+                .setNavDel(ViewBag.Del)
+                .setDelUrl("/Judicial/OperEnteAsignado")
+                .setExcelExport("/Judicial/ExportToExcelEnteAsignado")
+                .Render()
+                 )
+          </div>
+               <div class="col" style="width: 50px">
+
+               </div><div class="col" style="width: 350px">
+             @(Html.jqGrid("EnteReasignar")
+            .addColumn(new Column("Codemp").setLabel("codemp")
+                .setHidden(true)
+                .setEditable(true)
+                .setWidth(50))
+            .addColumn(new Column("Id").setLabel("Id")
+               .setHidden(false)    
+                .setSortable(true)
+                .setWidth(100))
+            .addColumn(new Column("Nombre").setLabel("Nombre")
+                .setEditable(true)
+                .setSortable(true)
+                .setWidth(250))
+           .setCaption("EnteReasignar").setWidth(400)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Judicial/GetEnteReasignar/")
+                 .setMultiSelect(true)
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setAutoWidth(true)
+                .setRowNum(10)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("Nombre")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerEnteReasignar")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .setNavEdit(ViewBag.Edit)
+                .setEditUrl("/Judicial/OpeEnteReasignar")
+                .setNavAdd(ViewBag.Add)
+                .setAddUrl("/Judicial/OperEnteReasignar")
+                .setNavDel(ViewBag.Del)
+                .setDelUrl("/Judicial/OperEnteReasignar")
+                .setExcelExport("/Judicial/ExportToExcelEnteAsignado")
+                .Render()
+               )
+          </div>
+        </div>
+     <div class="col">          
+        <input type="button" value="Grabar Ente" onclick="fnGrabarEnte();" id="btnGrabarEnte"/>
+     </div>
+</div>
+
+  
+
+

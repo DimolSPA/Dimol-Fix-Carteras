@@ -1,0 +1,168 @@
+﻿@model Dimol.Carteras.Models.AgregarGestionSitrelModel
+<style>
+    div.ui-jqgrid-titlebar {
+    height: 16px;
+}
+</style>
+@using Mvc.HtmlHelpers
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmGuardarGestionSitrel" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BuscarDeudor</legend>
+        @Html.HiddenFor(model =>model.MostrarTelefono)
+        @Html.HiddenFor(model =>model.MostrarFecha)
+        @Html.HiddenFor(model =>model.TodosSeleccionados)
+        <input id="CodigoEmpresa" type="hidden" value="9004" name="CodigoEmpresa">
+        <div class="tabla" id="divTablaSitrel">
+            <div class="fila">
+                <div class="col" style="width:160px;font-weight:bold">Acciones</div>
+                <div class="col"></div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.AccionSitrel)</div>
+                <div class="col">
+                    @Html.DropDownList("AccionSitrel", null, new { @onchange = "fnActualizarContactosSitrel('ContactoSitrel');" })
+                @Html.ValidationMessageFor(model => model.AccionSitrel)
+            </div>
+                <div class="col" style="width:60px"></div>
+                <div class="col" style="width:100px"></div>
+                <div class="col">
+
+                </div>
+                <div class="col" style="float:right"><input type="button" value="Grabar" onclick="fnGuardarGestionesSitrelPost();" /></div>
+            </div>
+            <div id="divTelefonoContactoSitrel" style="display:none">
+                <div class="fila">
+                    <div class="col" style="width:160px">@Html.LabelFor(model => model.TelefonoContactoSitrel)</div>
+                    <div class="col">
+                        @Html.TextBoxFor(model => model.TelefonoContactoSitrel, new { @onkeypress = "OnlyNumber(event)" })
+                        @Html.ValidationMessageFor(model => model.TelefonoContactoSitrel)
+                    </div>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.ContactoSitrel)</div>
+                <div class="col">
+                    @Html.DropDownList("ContactoSitrel", null, new { @onchange= "fnActualizarRespuestasSitrel('RespuestaSitrel');"})
+                    @Html.ValidationMessageFor(model => model.ContactoSitrel)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.NombreContactoSitrel)</div>
+                <div class="col">
+                    @Html.TextBoxFor(model => model.NombreContactoSitrel, new { @class = "textboxClass" })
+                    @Html.ValidationMessageFor(model => model.NombreContactoSitrel)
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.RespuestaSitrel)</div>
+                <div class="col">
+                    @Html.DropDownList("RespuestaSitrel", null, new { @onchange = "fnActualizarCompromisol();" })
+                    @Html.ValidationMessageFor(model => model.RespuestaSitrel)
+                </div>
+            </div>
+                @*<div class="fila">
+                    <div class=" col" style="width:160px">@Html.LabelFor(model => model.MontoGestionSitrel)</div>
+                    <div class="col">
+                        @Html.TextBoxFor(model => model.MontoGestionSitrel)
+                        @Html.ValidationMessageFor(model => model.MontoGestionSitrel)
+                    </div>
+                </div>*@
+            <div class="fila" id="divCompromiso" style="display:none">
+                @*<div class="col" style="width:160px">@Html.LabelFor(model => model.MontoCompromisoSitrel)</div>
+                <div class="col">
+                    @Html.TextBoxFor(model => model.MontoCompromisoSitrel)
+                    @Html.ValidationMessageFor(model => model.MontoCompromisoSitrel)
+                </div>*@
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.FechaCompromisoSitrel)</div>
+                <div class="col">
+                    @Html.JQueryUI().Datepicker("FechaCompromisoSitrel", null, new { @readonly="readonly"}).ShowButtonPanel(true).ShowWeek(false)
+                    @Html.ValidationMessageFor(model => model.FechaCompromisoSitrel)
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.ComentarioSitrel) (<label id="lblComentarioSitrel">250</label>)</div>
+                <div class="col">
+                    @Html.TextAreaFor(m => m.ComentarioSitrel, 3, 55, new { @onkeypress = "kpComentarioItau(event)" })
+                @Html.ValidationMessageFor(model => model.ComentarioSitrel)
+            </div>
+        </div>
+            <div id="divProgramacion" style="display:none">
+                <div class="fila">
+                    <div class="col" style="width:160px;font-weight:bold">Programación</div>
+                    <div class="col"></div>
+                </div>
+
+                    <div class="col" style="width:60px">@Html.LabelFor(model => model.FechaProgramadaSitrel)</div>
+                    <div class="col">
+                        @Html.JQueryUI().Datepicker("FechaProgramadaSitrel", null, new { @readonly = "readonly" }).ShowButtonPanel(true).ShowWeek(false)
+                        @Html.ValidationMessageFor(model => model.FechaProgramadaSitrel)
+                    </div>
+
+                <div class="col" style="width:60px">@Html.LabelFor(model => model.HoraProgramadaSitrel)</div>
+                <div class="col">
+                    @Html.TextBoxFor(model => model.HoraProgramadaSitrel, new { @style = "width:15px" }):@Html.TextBoxFor(model => model.MinutoProgramadoSitrel, new { @style = "width:15px" })
+                    @Html.ValidationMessageFor(model => model.HoraProgramadaSitrel)
+                    @Html.ValidationMessageFor(model => model.MinutoProgramadoSitrel) (24 H)
+                </div>
+            </div>
+            <div class="fila" id="divGrillaDocsHistorial">
+                <div class="col">
+                    @(Html.jqGrid("grdDocsEstadoSitrel")
+    .addColumn(new Column("Ccbid").setLabel("Id")
+        .setHidden(true).setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("TipoCpbtNombre").setLabel("Tipo")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(200))
+    .addColumn(new Column("NumeroCpbt").setLabel("Numero")
+        .setSortable(true).setAlign(Align.center)
+        .setWidth(110))
+    .addColumn(new Column("FechaVencimiento").setLabel("Fecha Venc.").setAlign(Align.center)
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(100))
+    .addColumn(new Column("Monto").setLabel("Monto")
+        .setSortable(true).setAlign(Align.right).setFormatter(Formatters.number)
+        .setWidth(100))
+    .addColumn(new Column("Saldo").setLabel("Saldo")
+        .setSortable(true).setAlign(Align.right).setFormatter(Formatters.number)
+        .setWidth(100))
+    .addColumn(new Column("Compromiso").setLabel("Compromiso")
+        .setSortable(true).setEditable(true)
+        .setHidden(true).setAlign(Align.right).setFormatter(Formatters.number)
+        .setWidth(100))
+
+    // settings
+    .setCaption("Documentos")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(500)
+    .setRowList(new int[] { 500 })
+    .setViewRecords(true)
+    .setSortName("TipoCpbtNombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDocsEstadoSitrel")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setMultiSelect(true)
+    .setCellEdit(true)
+    .setAddUrl("~/Cartera/GetDummy")
+    .setEditUrl("~/Cartera/GetDummy")
+    //.onSelectAll("fnOnSelectAllHistorial(aRowids, status)")
+    .Render()
+
+                    )
+
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+}

@@ -1,0 +1,65 @@
+﻿@model Dimol.Contabilidad.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "TiposCausaNotas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Tipos Causa Nota Crédito/Debito</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("TiposCausaNotas")
+    .addColumn(new Column("Codemp").setLabel("Empresa")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+     
+    .addColumn(new Column("codigo").setLabel("Codigo")
+        .setSortable(true)
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setWidth(50))
+    .addColumn(new Column("nombre").setLabel("Nombre")
+        .setSortable(true)
+        .setAlign(Align.left)
+        .setEditable(true)
+        .setWidth(50))
+           
+   .addColumn(new Column("Id").setLabel("ID")
+   
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(50))
+      
+    // settings
+    
+    .setCaption("TiposCausaNotas")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Contabilidad/GetTiposCausaNotas/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("codigo")
+    
+    .setSortOrder(SortOrder.desc)
+    .setPager("pagerTiposCausaNotas")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Contabilidad/OperTiposCausaNotas")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Contabilidad/OperTiposCausaNotas")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Contabilidad/OperTiposCausaNotas")
+    .setExcelExport("/Contabilidad/ExportToExcel")
+    
+    .Render()
+
+)

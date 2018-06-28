@@ -1,0 +1,60 @@
+﻿@model Dimol.ProveedorCliente.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "SuperCategorias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>SuperCategorias</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("SuperCategorias")
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setWidth(50))
+     .addColumn(new Column("Id").setLabel("ID")
+        .setHidden(true)
+        .setWidth(20))
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setEditable(true)
+        .setAlign(Align.left)
+        .setWidth(50))
+    .addColumn(new Column("Orden").setLabel("Orden")
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setWidth(50))
+    .addColumn(new Column("Utilizacion").setLabel("Utilizacion")
+        .setHidden(true)
+        .setEditable(true)
+        .setEditRules("edithidden:true")
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.Utilizacion+"\"")
+        .setWidth(80))
+    
+    // settings
+    .setCaption("SuperCategorias")
+    .setRequestType(RequestType.get)
+    .setUrl("~/ProvCli/GetSuperCategorias/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerSuperCategorias")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/ProvCli/OperSuperCategorias")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/ProvCli/OperSuperCategorias")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/ProvCli/OperSuperCategorias")
+    .setExcelExport("/ProvCli/ExportToExcel")
+    .Render()
+
+)

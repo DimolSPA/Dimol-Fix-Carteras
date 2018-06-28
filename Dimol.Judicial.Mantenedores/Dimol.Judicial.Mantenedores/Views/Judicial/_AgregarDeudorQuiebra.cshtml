@@ -1,0 +1,55 @@
+﻿@model Dimol.Judicial.Mantenedores.Models.RolModel
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDeudorQuiebra" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>AnvanceDemanda</legend>
+        <div class="tabla" id="divTabla">
+          
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.RutDeudor)</div>
+                <div class="col">
+                    @Html.TextBox("RutDeudor", null, new { @class = "textboxClass" })
+                    @Html.ValidationMessageFor(model => model.RutDeudor)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.NombreDeudor)</div>
+                <div class="col">
+                    @Html.TextBox("NombreDeudor", null, new { @class = "textboxRutNombre", @placeholder = "Escriba el nombre del Deudor" })
+                    @Html.ValidationMessageFor(model => model.NombreDeudor)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Rol)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("Rol", null, new { @class = "textboxClass" })</div>
+
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Tribunal)</div>
+                <div class="col">
+                    @Html.JQueryUI().AutocompleteFor(model => model.TribunalSelect, Url.Action("BuscarTribunal"), "Tribunal", null, new { @class = "textboxRutNombre", @placeholder = "Escriba el nombre del tribunal" }).MinLength(3)
+                    @Html.ValidationMessageFor(model => model.Tribunal)
+                </div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.TipoCausa)</div>
+                <div class="col">@Html.DropDownList("TipoCausa", null, new { @class = "textboxRutNombre", onchange = "" })</div>
+
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.MateriaJudicial)</div>
+                <div class="col">@Html.DropDownList("MateriaJudicial", null, new { @class = "textboxRutNombre", onchange = "" })</div>
+
+            </div>
+           
+           <br />
+
+            <div class="col" style="float:right"><input type="button" id="btnGuardarQuiebraDeudor" value="Guardar" onclick="fnGuardarDeudorQuiebra();" /></div>
+        </div>
+    </fieldset>
+}

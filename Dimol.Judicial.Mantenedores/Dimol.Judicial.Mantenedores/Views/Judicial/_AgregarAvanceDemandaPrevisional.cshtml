@@ -1,0 +1,83 @@
+﻿@model Dimol.Judicial.Mantenedores.Models.AgregarAvanceDemandaModel
+
+@using Mvc.HtmlHelpers
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmAvanceDemanda" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.Hidden("PanelId")
+    @Html.Hidden("FechaEntregaHidden")
+    @Html.Hidden("usridHidden")
+    @Html.Hidden("rutDeudorHidden")
+    @Html.Hidden("nombreDeudorHidden")
+    @Html.Hidden("rutClienteHidden")
+    @Html.Hidden("nombreClienteHidden")
+    @Html.Hidden("pclidHidden")
+    @Html.Hidden("ctcidHidden")
+    @Html.Hidden("GetPerfil")
+    @Html.Hidden("GetUsuario")
+    @Html.Hidden("PanelProcesado")
+    @Html.Hidden("CountFechaEntrega")
+   
+    <fieldset>
+        <legend>Avance Demanda</legend>
+        <div class="tabla" id="divTabla">
+            <div id="Confeccion">
+                <div class="fila">
+                    <div class="col" style="width:250px">@Html.LabelFor(model => model.NombreUsuario) </div>
+                    <div class="col" id="buscarEncargado">
+                        @Html.JQueryUI().AutocompleteFor(model => model.usrid, Url.Action("BuscarNombreUsuario"), "NombreUsuario", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                        @Html.ValidationMessageFor(model => model.NombreUsuario)
+                    </div>
+                    <div class="col" id="MostrarEncargado">
+                       @Html.Label("Encargado")
+                        @Html.ValidationMessageFor(model => model.NombreUsuario)
+                    </div>
+                    
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:250px">@Html.Label("Fecha de Envío de Confección")</div>
+                    <div class="col">
+                        @Html.JQueryUI().Datepicker("FechaConfeccion").ShowButtonPanel(true).ShowWeek(false).DefaultDate(0).MinDate(0).MaxDate(0).Disabled(true)
+                        <div class="clear resultbox" id="result1"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="Correcciones">
+                <div class="fila">
+                    <div class="col" style="width:250px" id="flagTituloEnviaFechaEntrega">@Html.LabelFor(model => model.EnviaFechaEntrega)</div>
+                    <div class="col">
+                        
+                        <input type="checkbox" id="EnviaFechaEntrega" onchange="fnCambiarFechaEntrega();" />
+                        @Html.ValidationMessageFor(model => model.EnviaFechaEntrega)
+                    </div>
+                </div>
+                
+                <div class="fila">
+                    <div class="col" style="width:250px">@Html.Label("Fecha de Entrega de confección")</div>
+                    <div class="col">
+                        @Html.JQueryUI().Datepicker("FechaEntrega").ShowButtonPanel(true).ShowWeek(false).DefaultDate(0).MinDate(0).MaxDate(0).Disabled(true)
+                    </div>
+                </div>
+               
+            </div>
+            <div id="IngresoTribunal">
+                <div class="fila" id="divFechaTribunal">
+                    <div class="col" style="width:250px">@Html.Label("Fecha de Ingreso a Tribunales")</div>
+                    <div class="col">
+                        @Html.JQueryUI().Datepicker("FechaTribunal").ShowButtonPanel(true).ShowWeek(false).DefaultDate(0).MinDate(0).MaxDate(0).OnSelect("fnIngresarRol")
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:250px">@Html.Label("Comentarios")</div>
+                    <div class="col">
+                        @Html.TextArea("Comentarios", "", 3, 55, new { maxlength = 250 })
+
+                    </div>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="float:right"><input type="button" id="btnGuardar" value="Guardar" onclick="fnGuardarAvanceDemandaPrevisional();" /></div>
+            </div>
+        </div>
+    </fieldset>
+}

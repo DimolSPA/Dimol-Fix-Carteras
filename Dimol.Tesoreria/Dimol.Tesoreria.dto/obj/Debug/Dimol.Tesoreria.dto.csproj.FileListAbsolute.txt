@@ -1,0 +1,5 @@
+D:\_Codigo_Dimol\Dimol.Tesoreria\Dimol.Tesoreria\Dimol.Tesoreria.dto\bin\Debug\Dimol.Tesoreria.dto.dll
+D:\_Codigo_Dimol\Dimol.Tesoreria\Dimol.Tesoreria\Dimol.Tesoreria.dto\bin\Debug\Dimol.Tesoreria.dto.pdb
+D:\_Codigo_Dimol\Dimol.Tesoreria\Dimol.Tesoreria\Dimol.Tesoreria.dto\obj\Debug\Dimol.Tesoreria.dto.dll
+D:\_Codigo_Dimol\Dimol.Tesoreria\Dimol.Tesoreria\Dimol.Tesoreria.dto\obj\Debug\Dimol.Tesoreria.dto.pdb
+D:\_Codigo_Dimol\Dimol.Tesoreria\Dimol.Tesoreria\Dimol.Tesoreria.dto\obj\Debug\Dimol.Tesoreria.dto.csprojResolveAssemblyReference.cache

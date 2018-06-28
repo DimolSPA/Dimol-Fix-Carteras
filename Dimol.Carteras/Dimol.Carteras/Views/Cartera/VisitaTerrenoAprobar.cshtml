@@ -1,0 +1,193 @@
+﻿@model Dimol.Carteras.Models.VisitaTerrenoAprobarModel
+@{
+    ViewBag.Title = "VisitaTerrenoAprobar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Visita Terreno Aprobar</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVD0ngfhOFs5rnww7UFyz9rN6UznOIZ1U"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        // rule select
+        $.validator.addMethod("valueNotEquals", function (value, element, arg) {
+            return arg != value;
+        }, "Value must not equal arg.");
+
+        fnRulesSectionfrmGestorSolicitudVisita();
+        fnEventsfrmGestorSolicitudVisita();
+    });
+</script>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Deudor</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarVisitaTerrenoAprobar" }))
+        {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>Autorizar Visitas</legend>
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col" style="width:100px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                            @Html.ValidationMessageFor(model => model.NombreRutCliente)
+                        </div>
+                        <div style="display:none">
+@Html.LabelFor(model => model.Pais)@Html.DropDownList("Pais", null, "-- Seleccione País --", new { onchange = "PaisSeleccionado(this, 'Region' )" })
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:100px">@Html.LabelFor(model => model.Region)</div>
+                        <div class="col" style="width:250px">@Html.DropDownList("Region", null, "-- Seleccione Region --", new { @class = "ComboboxClassL", onchange = "RegionSeleccionada(this, 'Ciudad')" }) </div>
+                        <div class="col" style="width:50px">@Html.LabelFor(model => model.Ciudad)</div>
+                        <div class="col" style="width:150px"> @Html.DropDownList("Ciudad", null, "-- Seleccione Ciudad --", new { @class = "ComboboxClass", onchange = "CiudadSeleccionada(this, 'Comuna')" }) </div>
+                        <div class="col" style="width:50px"> </div>
+                        <div class="col" style="width:100px">@Html.LabelFor(model => model.Comuna)</div>
+                        <div class="col" style="width:150px"> @Html.DropDownList("Comuna", null, "-- Seleccione Comuna --", new { @class = "ComboboxClass" })</div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:100px"> </div>
+                        <div class="col" style="width:250px">  </div>
+                        
+                        
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:400px">
+                            @Html.LabelFor(model => model.Monto) @Html.EditorFor(model => model.Monto)
+                        
+                            @Html.ValidationMessageFor(model => model.Monto)
+                        </div>
+                        
+                        <div class="col">
+                            @Html.LabelFor(model => model.Quiebra)  @Html.CheckBox("enQuiebra", false)
+                            @Html.ValidationMessageFor(model => model.Quiebra)
+                        </div>  
+                                             
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:400px">
+                          
+                        </div>
+                        
+                        <div class="col">
+                            @Html.LabelFor(model => model.PreQuiebra)  @Html.CheckBox("enPreQuiebra", false)
+                            @Html.ValidationMessageFor(model => model.PreQuiebra)
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:400px">
+
+                        </div>
+                        
+                        <div class="col">
+                            @Html.LabelFor(model => model.Solicitud)  @Html.CheckBox("enSolicitud", true)
+                            @Html.ValidationMessageFor(model => model.Solicitud)
+                        </div>
+                    </div>
+                    <div class="fila">
+
+
+
+                        <div class="col" style="float: right">
+                            
+                            <input type="button" value="Buscar" onclick="fnBuscarDeudoresVisitaTerrenoAprobar();" />
+                            <input type="button" value="Aprobar" onclick="fnAgregarGestorSolicitudVisita();" />
+                            <input type="button" value="Rechazar" onclick="fnGuardarRechazarVisitaTerreno();" />
+                        </div>
+                    </div>
+                    <div class="fila">
+
+
+
+                        <div class="col" style="float:left">
+                            <label for="MontoVisita">Deuda Total:</label>
+                            <input type="text" id="MontoVisita" name="MontoVisita" />
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        }
+        <br />
+        @(Html.jqGrid("gridAprobarVisitas")
+    .addColumn(new Column("ctcid").setLabel("ctcid")
+        .setSortable(true).setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("rutDeudor").setLabel("Rut")
+        .setSortable(true)
+        .setWidth(60))
+    .addColumn(new Column("deudor").setLabel("Deudor")
+        .setSortable(true)
+            .setWidth(80))
+    .addColumn(new Column("direccion").setLabel("Direccion")
+            .setSortable(true)
+            .setWidth(100))
+    .addColumn(new Column("comuna").setLabel("Comuna")
+            .setSortable(true).setAlign(Align.center)
+            .setWidth(70))
+    .addColumn(new Column("ciudad").setLabel("Ciudad").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(70))
+
+    .addColumn(new Column("deuda").setLabel("Deuda").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(50))
+    .addColumn(new Column("cliente").setLabel("Cliente")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(80))
+    .addColumn(new Column("gestor").setLabel("Gestor")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(80))
+    .addColumn(new Column("Solicitante").setLabel("Solicitante")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(80))    
+    .addColumn(new Column("ultimaGestion").setLabel("Ultima Visita")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(70))
+
+
+    // settings
+    .setCaption("Aprobar Visitas a Terreno")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/ListarVisitaTerrenoSolicitudAprobar/?Solicitud=true")
+    .setAltRows(true)
+    .setMultiSelect(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(1000)
+    .setRowList(new int[] { 100, 500, 1000 })
+    .setViewRecords(true)
+    .setSortName("deudor")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerAprobarVisitas")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("UpdateMontoVisitaOfSelectedRows(rowid, status)")
+    .onSelectAll("fnOnSelectAllVisita(aRowids, status)")
+    .onLoadComplete("fnOnLoadCompleteVisita(this)")
+    .Render()
+
+        )
+    </div>
+</div>
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppGestorSolicitudVisita" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Asignar Gestor a la Visita Terreno")
+                .CloseOnEscape(true)
+                .Width(450)
+                .Height(200)
+
+                ))
+{
+    @Html.Partial("_AgregarGestorSolicitudVisita", Model)
+}

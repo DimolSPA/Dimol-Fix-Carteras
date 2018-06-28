@@ -1,0 +1,12 @@
+D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\obj\Release\PJSpider.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\obj\Release\PJSpider.ProjectInstaller.resources
+D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\obj\Release\PJSpider.csproj.GenerateResource.Cache
+D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\obj\Release\PJSpider.exe.manifest
+D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\obj\Release\PJSpider.exe
+D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\obj\Release\PJSpider.pdb
+D:\17-REL-01\PJSpider\PJSpider\PJSpider\obj\Release\PJSpider.csprojResolveAssemblyReference.cache
+D:\17-REL-01\PJSpider\PJSpider\PJSpider\obj\Release\PJSpider.ProjectInstaller.resources
+D:\17-REL-01\PJSpider\PJSpider\PJSpider\obj\Release\PJSpider.csproj.GenerateResource.Cache
+D:\17-REL-01\PJSpider\PJSpider\PJSpider\obj\Release\PJSpider.exe.manifest
+D:\17-REL-01\PJSpider\PJSpider\PJSpider\obj\Release\PJSpider.exe
+D:\17-REL-01\PJSpider\PJSpider\PJSpider\obj\Release\PJSpider.pdb

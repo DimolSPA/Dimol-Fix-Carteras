@@ -1,0 +1,31 @@
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Release\Dimol.Test.dll.config
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Release\Dimol.Test.dll
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Release\Dimol.Test.pdb
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Release\Dimol.bcp.dll
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Release\Dimol.dao.dll
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Release\Dimol.dto.dll
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Release\CYPH.dll
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Release\Dimol.bcp.pdb
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Release\Dimol.dao.pdb
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Release\Dimol.dto.pdb
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Release\CYPH.pdb
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Release\CYPH.xml
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\obj\Release\Dimol.Test.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\obj\Release\Dimol.Test.dll
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\obj\Release\Dimol.Test.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\Dimol.Test.dll.config
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\Dimol.Test.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\Dimol.Test.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\Dimol.bcp.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\Dimol.dao.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\Dimol.dto.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\CYPH.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\HtmlAgilityPack.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\Dimol.bcp.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\Dimol.dao.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\Dimol.dto.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\CYPH.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Release\CYPH.xml
+D:\_Codigo_Dimol\Dimol\Dimol.Test\obj\Release\Dimol.Test.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\Dimol\Dimol.Test\obj\Release\Dimol.Test.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\obj\Release\Dimol.Test.pdb

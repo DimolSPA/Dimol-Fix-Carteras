@@ -1,0 +1,18 @@
+﻿CREATE TABLE [dbo].[MOTIVO_COBRANZA_IDIOMAS] (
+    [MCI_CODEMP] INT           NOT NULL,
+    [MCI_MTCID]  INT           NOT NULL,
+    [MCI_IDID]   INT           NOT NULL,
+    [MCI_NOMBRE] VARCHAR (120) NOT NULL,
+    CONSTRAINT [PK_MOTIVO_COBRANZA_IDIOMAS] PRIMARY KEY NONCLUSTERED ([MCI_CODEMP] ASC, [MCI_MTCID] ASC, [MCI_IDID] ASC),
+    CONSTRAINT [FK_MOTIVO_C_MOTIVCOB__MOTIVO_C] FOREIGN KEY ([MCI_CODEMP], [MCI_MTCID]) REFERENCES [dbo].[MOTIVO_COBRANZA] ([MTC_CODEMP], [MTC_MTCID])
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[MOTIVO_COBRANZA_IDIOMAS]([MCI_CODEMP] ASC, [MCI_MTCID] ASC, [MCI_IDID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla, almacena los distintos tipos de cobranza en su respectivo idioma', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'MOTIVO_COBRANZA_IDIOMAS';
+

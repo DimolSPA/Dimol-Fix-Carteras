@@ -1,0 +1,120 @@
+﻿@model Dimol.Finanzas.Models.GridModel
+@{
+    ViewBag.Title = "MaximaConvencional";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    function getTrueFalse() {
+        var data = "true:false";
+        return data;
+    }
+
+</script>
+<br />
+<h2>Maxima Convencional</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("MaximaConvencional")
+    .addColumn(new Column("MXC_CODEMP").setLabel("Empresa")
+        .setHidden(true)
+        .setWidth(50))
+      
+    .addColumn(new Column("MXC_MXCID").setLabel("Codigo")
+        .setSortable(true)
+        .setAlign(Align.center)
+        .setWidth(30))
+   
+    .addColumn(new Column("TCI_NOMBRE").setLabel("Documento")
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.Documento+"\"")
+        .setWidth(50))     
+        
+   .addColumn(new Column("MXC_TPCID").setLabel("TipoDoc")
+        .setSortable(true)
+        .setHidden(true)
+        .setWidth(50))
+          
+    .addColumn(new Column("MXC_TIPO").setLabel("Tipo")
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditRules("edithidden:true")
+        .setEditOptions("value:\""+ViewBag.Tipo+"\"")
+        .setWidth(50))
+        
+    .addColumn(new Column("MXC_CODMON").setLabel("Moneda")
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditRules("edithidden:true")
+        .setEditOptions("value:\""+ViewBag.Moneda+"\"")
+        .setWidth(50))
+        
+    .addColumn(new Column("MXC_APLICA").setLabel("Aplica")
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditRules("edithidden:true")
+        .setEditOptions("value:\""+ViewBag.Aplica+"\"")
+        .setWidth(50))
+        
+    .addColumn(new Column("MXC_DESDE").setLabel("Desde")
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.text)
+        .setEditRules("edithidden:true")
+        .setWidth(50))
+        
+     .addColumn(new Column("MXC_HASTA").setLabel("Hasta")
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.text)
+        .setEditRules("edithidden:true")
+        .setWidth(50))
+        
+     .addColumn(new Column("MXC_VALOR").setLabel("Valor")
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.text)
+        .setEditRules("edithidden:true")
+        .setWidth(50))
+    // settings
+    
+    .setCaption("MaximaConvencional")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Finanzas/GetMaximaConvencional/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+      
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("MXC_MXCID")
+    
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerMaximaConvencional")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Finanzas/OperMaximaConvencional")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Finanzas/OperMaximaConvencional")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Finanzas/OperMaximaConvencional")
+    .setExcelExport("/Finanzas/ExportToExcel")
+    
+    .Render()
+
+)

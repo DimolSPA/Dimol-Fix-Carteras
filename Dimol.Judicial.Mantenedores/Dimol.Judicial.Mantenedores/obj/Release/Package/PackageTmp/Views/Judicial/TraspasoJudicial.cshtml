@@ -1,0 +1,209 @@
+﻿
+@{
+    ViewBag.Title = "Traspaso Judicial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+@using Mvc.HtmlHelpers
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Traspaso</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarComprobante" }))
+        {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>AceptarComprobante</legend>
+
+                <div class="tabla">
+                        <div class="fila">
+                            <div class="col" style="float: right">
+                                <input type="button" value="Documento No Demandable" onclick="fnAbrirMotivoNoDemandables();" />
+                                <input type="button" value="Cargar" onclick="fnCargarTraspasos();" />
+                                <input type="button" value="Traspasar" onclick="fnGuardarTraspasos();" />
+                            </div>
+                        </div>
+
+                    </div>
+
+
+            </fieldset>
+        }
+        <br />
+        <br />
+        @(Html.jqGrid("gridPorTraspasar")
+            .addColumn(new Column("Cliente").setLabel("Cliente")
+            .setEditable(false).setSortable(true).setSearch(true)
+            .setWidth(200))
+            .addColumn(new Column("RutDeudor").setLabel("Rut").setAlign(Align.center)
+            .setEditable(true).setSortable(true).setHidden(true).setSearch(true)
+                .setWidth(70))
+            .addColumn(new Column("Deudor").setLabel("Deudor")
+            .setEditable(false).setSortable(true)
+                .setWidth(200))
+            .addColumn(new Column("Numero").setLabel("Número").setAlign(Align.center)
+            .setEditable(false).setSortable(true).setSearch(true)
+                .setWidth(100))
+            .addColumn(new Column("FechaAsignacion").setLabel("Fecha Asig.").setAlign(Align.center)
+            .setEditable(false).setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(72))
+            .addColumn(new Column("FechaVencimiento").setLabel("Fecha Venc.").setAlign(Align.center)
+            .setEditable(false).setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(72))
+            .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+            .setEditable(false).setSortable(true)
+                .setWidth(70))
+            .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.number)
+                .setSortable(true)
+                .setWidth(70))
+            .addColumn(new Column("Estado").setLabel("Estado").setAlign(Align.center)
+            .setEditable(false).setSortable(true)
+                .setWidth(100))
+            .addColumn(new Column("EstadoCpbt").setLabel("EstadoCpbt")
+            .setEditable(false).setSortable(true).setHidden(true)
+                .setWidth(100))
+            .addColumn(new Column("Asegurado").setLabel("Asegurado")
+            .setEditable(false).setSortable(true)
+                .setWidth(220))    
+
+    // settings
+    .setCaption("Traspasos Pendientes")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Judicial/GetTraspasoJudicial")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(100)
+    .setRowList(new int[] { 20, 50, 100, 500 })
+    .setViewRecords(true)
+    .setMultiSelect(true)
+    .setSortName("Cliente, RutDeudor")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerPanelTraspasos")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setShrinkToFit(false)
+    .setGrouping(true)
+    .setGroupingView("groupField: ['Deudor'],groupColumnShow: [false], groupText : ['<input type=\"checkbox\" class=\"groupHeader\" onchange=\"change_checkbox(this)\" /><b> {0} - {1} Documento(s)</b>'], groupCollapse: true, groupOrder: ['asc'],groupDataSorted: true")
+    //.onSelectRow("UpdateIdsOfSelectedRows(rowid, status)")
+    .onSelectAll("fnOnSelectAllTraspaso(aRowids, status)")
+    //.onLoadComplete("fnOnLoadComplete(this)")
+    .Render()
+
+        )
+        <br />
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:130px">@Html.Label("Fecha Desde")</div>
+                <div class="col">
+                    @Html.JQueryUI().Datepicker("FechaDesde", null, new { @readonly = "readonly" }).ShowButtonPanel(true).ShowWeek(false).OnSelect("fnCargarTraspasosPendientes").DateFormat("dd-MM-yyyy")
+                </div>
+                <div class="col" style="width:30px"></div>
+                <div class="col" style="width:130px">@Html.Label("Fecha Hasta")</div>
+                <div class="col">
+                    @Html.JQueryUI().Datepicker("FechaHasta", null, new { @readonly = "readonly" }).ShowButtonPanel(true).ShowWeek(false).OnSelect("fnCargarTraspasosPendientes").DateFormat("dd-MM-yyyy")
+                </div>
+                <div class="col" style="float: right">
+                    <input type="button" value="Exportar a Excel" onclick="fnExcelTraspasosPendientes();" />
+                </div>
+            </div>
+
+        </div>
+       
+        @(Html.jqGrid("gridTraspasados")
+            .addColumn(new Column("Cliente").setLabel("Cliente")
+                .setSortable(true)
+                .setWidth(200))
+            .addColumn(new Column("RutDeudor").setLabel("Rut Deudor")
+                .setSortable(true).setAlign(Align.right).setHidden(true)
+                .setWidth(70))
+            .addColumn(new Column("Deudor").setLabel("Deudor")
+                .setSortable(true)
+                .setWidth(200))
+            .addColumn(new Column("Tipo").setLabel("Tipo").setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(100))    
+            .addColumn(new Column("Numero").setLabel("Número").setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(100))
+            .addColumn(new Column("FechaAsignacion").setLabel("Fecha Asig.").setAlign(Align.center)
+                .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(72))
+            .addColumn(new Column("FechaVencimiento").setLabel("Fecha Venc.").setAlign(Align.center)
+                .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(72))
+            .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+                .setSortable(true)
+                .setWidth(70))
+            .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.number)
+                .setSortable(true)
+                .setWidth(70))
+            .addColumn(new Column("Estado").setLabel("Estado").setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(100))
+            .addColumn(new Column("EstadoCpbt").setLabel("EstadoCpbt")
+                .setSortable(true).setHidden(true)
+                .setWidth(100))
+            .addColumn(new Column("Fecha").setLabel("Fecha")
+                .setSortable(true).setAlign(Align.center)
+                .setWidth(70))
+
+    // settings
+    .setCaption("Traspasos Realizados")
+    .setRequestType(RequestType.get)
+            .setUrl("~/Judicial/GetTraspasoJudicialHecho")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(100)
+    .setRowList(new int[] { 10, 50, 100, 500 })
+    .setViewRecords(true)
+    .setSortName("Cliente,Deudor,Fecha")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerTraspasados")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setGrouping(true)
+    //.setShrinkToFit(false)
+    .setGroupingView("groupField: ['Deudor'],groupColumnShow: [false], groupText: ['<b>{0} - {1} Documento(s)</b>'], groupCollapse: true, groupOrder: ['asc'],groupDataSorted: true")
+    .Render()
+
+        )
+        <br />
+
+
+    </div>
+</div>
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppMotivoNoDemanda" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("No Demandable")
+    .CloseOnEscape(true)
+    .Width(350)
+    .Height(150)
+    ))
+{
+    <div class="tabla">
+        <div class="fila">
+            <div class="col">@Html.Label("Motivo No Demanda")</div>
+
+        </div>
+        <div class="fila">
+            <div class="col" style="width:300px;">@Html.TextArea("MotivoRechazoDemanda", null, new { @class = "textboxClass" })</div>
+
+        </div>
+        <div class="fila" style="width:300px;">
+            <div class=" col" style="float:right"><input type="button" value="Aceptar" onclick="fnDocumentosNoDemandables();" /></div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,22 @@
+﻿CREATE TABLE [dbo].[MARCAS_VEHICULOS] (
+    [MKV_CODEMP] INT           NOT NULL,
+    [MKV_MKVID]  INT           NOT NULL,
+    [MKV_NOMBRE] VARCHAR (100) NOT NULL,
+    CONSTRAINT [PK_MARCAS_VEHICULOS] PRIMARY KEY CLUSTERED ([MKV_CODEMP] ASC, [MKV_MKVID] ASC),
+    CONSTRAINT [FK_MARCAS_V_EMP_VEH_EMPRESA] FOREIGN KEY ([MKV_CODEMP]) REFERENCES [dbo].[EMPRESA] ([EMP_CODEMP])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[MARCAS_VEHICULOS]([MKV_CODEMP] ASC, [MKV_MKVID] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_NOM]
+    ON [dbo].[MARCAS_VEHICULOS]([MKV_CODEMP] ASC, [MKV_NOMBRE] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena las distintas marcas de los vehiculos', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'MARCAS_VEHICULOS';
+

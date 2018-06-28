@@ -1,0 +1,63 @@
+﻿@using Mvc.HtmlHelpers
+@{
+    Layout = null;
+    string rowId = (string)ViewData["RowId"];
+    int level = Convert.ToInt32(rowId.Split('_')[0]) + 1;
+    int width = (int)(24 * level * 1.5);
+    int left = width - 18;
+}
+<tr id="@(level)_@(rowId)Details" class="ui-widget-content ui-row-ltr" role="row" parent="@(rowId)">
+    <td colspan="8">
+        <div class="tree-wrap tree-wrap-ltr" style="width: @(width)px;">
+            <div style="left: @(left)px;"> </div>
+        </div>
+        <span class="cell-wrapper">
+            <table>
+                <tr>                
+                    <td>
+                        @(
+                            Html.jqGrid("GridCustom")
+                        
+                            // columns
+                                .addColumn(new Column("AccountNumber").setLabel("AccountNumber").setWidth(100).setSortable(true))
+                                .addColumn(new Column("AccountName").setLabel("AccountName").setWidth(250).setSortable(true).setEditable(true))
+                                .addColumn(new Column("AccountDate").setLabel("Date").setWidth(70).setSortable(true))
+                                .addColumn(new Column("AccountType").setLabel("Type").setWidth(80).setSortable(true))
+                                .addColumn(new Column("AccountBalance").setLabel("Balance").setWidth(80).setSortable(true).setAlign(Align.right))
+ 
+                            // settings
+                            .setUrl("~/Home/GetAccountList/")
+                            .setHeight(600)
+                            .setRowNum(20)
+                            .setRowList(new int[] { 20, 50, 100, 200, 300 })
+                            .setPager("pagerGridCustom")
+                            .setPrint(true)
+                            .setLoadText("")
+ 
+                            // error handler
+                            .onLoadError("Error loading Account List")
+    
+                            // events
+                            .onBeforeRequest(@"
+                                var grid = $('#GridCustom');
+                                grid.jqGrid('setLabel', 'AccountBalance', '', {'text-align':'right'});
+                            ")
+ 
+                             // subgrid
+                            .setCustomGrid(
+                                new Grid("CustomGridAccountDetails")
+                                .setUrl("~/Home/CustomGridAccountDetails?rowId='+row_id+'")
+                                .onLoadError("CustomGrid Account Details")
+                                .setSubGridOptions("{plusicon : 'ui-icon-circle-plus', minusicon : 'ui-icon-circle-minus'}")
+                            )
+                        
+                            // render the html
+                            .Render()
+                        )
+                    </td>
+                </tr>
+            </table>
+        </span>
+    </td>
+</tr>
+

@@ -1,0 +1,287 @@
+﻿@{
+    ViewBag.Title = "PanelDemandaMasivaOrgChart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Diagrama</h2>
+<br />
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["orgchart"] });
+    $(document).ready(function () {
+        fnCargarOrgChartPanelDemandaMasiva();
+    })
+</script>
+<style>
+    table {
+        border-collapse: separate !important;
+    }
+
+    .ui-icon.green {
+        background-image: url('../../Content/themes/base/images/ui-icons_88a206_256x240.png');
+    }
+
+    .ui-icon.yellow {
+        background-image: url('../../Content/themes/base/images/ui-icons_ed9f26_256x240.png');
+    }
+
+    .panel {
+        margin-bottom: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+        box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    }
+
+    .panel-heading {
+        padding: 10px 15px;
+        background-color: #f5f5f5;
+        border-bottom: 1px solid #ddd;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+
+    .panel-title {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 16px;
+    }
+
+    .panel-body {
+        padding: 15px;
+    }
+
+    .panel-primary {
+        border-color: #428bca;
+    }
+
+        .panel-primary > .panel-heading {
+            color: #fff;
+            background-color: #428bca;
+            border-color: #428bca;
+        }
+
+
+    .badge {
+        padding: 1px 9px 2px;
+        font-size: 0.875em;
+        font-weight: bold;
+        white-space: nowrap;
+        color: #ffffff;
+        background-color: #999999;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+    }
+    /*.badge:hover {
+      color: #ffffff;
+      text-decoration: none;
+      cursor: pointer;
+    }*/
+
+    .badge-info {
+        background-color: #3a87ad;
+    }
+
+    .list-group {
+        padding-left: 0;
+        margin-bottom: 0px
+    }
+
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: 5px 10px;
+        margin-bottom: -1px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        font-size: 0.875em;
+    }
+
+        .list-group-item:first-child {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px
+        }
+
+        .list-group-item:last-child {
+            margin-bottom: 0;
+            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px
+        }
+
+        .list-group-item > .badge {
+            float: right
+        }
+
+            .list-group-item > .badge + .badge {
+                margin-right: 5px;
+            }
+
+    .nav-pills > li > a > .badge {
+        margin-left: 3px
+    }
+
+    .progress {
+        position: relative;
+        height: 20px;
+        margin-top: 2px;
+        margin-bottom: 5px;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+        box-shadow: inset 0 1px 2px rgba(0,0,0,.1)
+    }
+
+    .progress-bar {
+        float: left;
+        width: 0;
+        height: 100%;
+        font-size: 0.875em;
+        font-weight: bold;
+        line-height: 20px;
+        color: #000;
+        text-align: center;
+        background-color: #337ab7;
+        -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+        box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+        -webkit-transition: width .6s ease;
+        -o-transition: width .6s ease;
+        transition: width .6s ease
+    }
+
+    .progress span {
+        position: absolute;
+        display: block;
+        width: 100%;
+        color: black;
+    }
+
+    .progress-bar-success {
+        background-color: #5cb85c
+    }
+
+    .progress-bar-info {
+        background-color: #5bc0de
+    }
+
+    .progress-bar-warning {
+        background-color: #f0ad4e
+    }
+
+    .progress-bar-danger {
+        background-color: #d9534f
+    }
+
+    .buttonLink {
+        font: bold 11px Arial;
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: #333333;
+        padding: 2px 6px 2px 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+    }
+</style>
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:45%">
+                    <div class=" panel panel-primary">
+                        <div class="panel-heading">Panel de Demanda</div>
+                        <div class="panel-body">
+                            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmOrgChartPanelDemandaMasiva" }))
+                            {
+                                @Html.ValidationSummary(true)
+                                <div id="chartPanelDemandaMasiva"></div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col" style="width:53%">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Panel de Alerta</div>
+                        <div class="panel-body">
+                            <div class="tabla" style="margin-bottom:10px;">
+                                <div class="fila">
+                                    <div class="col" style="float:right;width:300px">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                @Html.Label("Cantidad de Demandas en Proceso")
+                                                <span class="badge badge-info">@ViewBag.DemandasProceso</span>
+                                            </li>
+                                            <li class="list-group-item">
+                                                @Html.Label("Promedio de Confección Demandas ")
+                                                <span class="badge badge-info">@ViewBag.PromedioConfeccionDias</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @(Html.jqGrid("gridPanelAlertaTipo")
+                        .addColumn(new Column("Id").setLabel("Id")
+                        .setSortable(true).setHidden(true)
+                        .setWidth(50))
+                        .addColumn(new Column("Item").setLabel("Tipo Alerta")
+                                .setSortable(true).setCustomFormatter("formatItemAlerta")
+                        .setWidth(200))
+                        .addColumn(new Column("PromedioDias").setLabel("Promedio días")
+                        .setSortable(true).setAlign(Align.center)
+                        .setWidth(80))
+
+                        .addColumn(new Column("CantCasos").setLabel("Nº Casos Atraso")
+                        .setSortable(true).setAlign(Align.center)
+                        .setWidth(90))
+                        .addColumn(new Column("Atraso").setLabel("% Atraso")
+                        .setSortable(true).setAlign(Align.center).setCustomFormatter("formatPercentage")
+                        .setWidth(90))
+                        // settings
+                        .setCaption("")
+                        .setRequestType(RequestType.get)
+                                .setUrl("~/Judicial/ListarPanelAlertaTipoMasiva/")
+                        .setAltRows(true)
+                        .setAltClass("altGridRows")
+                        .setAutoWidth(true)
+                        .setRowNum(10)
+                        .setRowList(new int[] { 10, 20, 100 })
+                        .setViewRecords(true)
+                        .setSortName("")
+                        .setSortOrder(SortOrder.asc)
+                        .setPager("pagerAlertas")
+                        .setPagerPos(PagerPos.center)
+                        .setPgButtons(true)
+                        .setCellEdit(false)
+                        .setCellSubmit(CellSubmit.clientArray)
+                        .setShrinkToFit(false)
+                        .Render()
+                            )
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppPanelDemandaReporte" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Reporte")
+    .CloseOnEscape(true)
+    .Width(950)
+    .Height(500)
+    ))
+{
+    @Html.Partial("_PanelDemandaReporte")
+}

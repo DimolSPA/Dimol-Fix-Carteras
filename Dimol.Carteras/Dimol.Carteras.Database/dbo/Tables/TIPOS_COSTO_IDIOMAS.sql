@@ -1,0 +1,19 @@
+﻿CREATE TABLE [dbo].[TIPOS_COSTO_IDIOMAS] (
+    [TCI_CODEMP] INT          NOT NULL,
+    [TCI_TCOID]  INT          NOT NULL,
+    [TCI_IDID]   INT          NOT NULL,
+    [TCI_NOMBRE] VARCHAR (60) NOT NULL,
+    CONSTRAINT [PK_TIPOS_COSTO_IDIOMAS] PRIMARY KEY CLUSTERED ([TCI_CODEMP] ASC, [TCI_TCOID] ASC, [TCI_IDID] ASC),
+    CONSTRAINT [FK_TIPOS_CO_COSTOS_ID_TIPOS_CO] FOREIGN KEY ([TCI_CODEMP], [TCI_TCOID]) REFERENCES [dbo].[TIPOS_COSTO] ([TCO_CODEMP], [TCO_TCOID]),
+    CONSTRAINT [FK_TIPOS_CO_IDIOMAS_C_IDIOMAS] FOREIGN KEY ([TCI_IDID]) REFERENCES [dbo].[IDIOMAS] ([IDI_IDID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[TIPOS_COSTO_IDIOMAS]([TCI_CODEMP] ASC, [TCI_TCOID] ASC, [TCI_IDID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena los distintos tipos de costos en su respectivo idioma', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'TIPOS_COSTO_IDIOMAS';
+

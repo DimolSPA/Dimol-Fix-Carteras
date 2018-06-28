@@ -1,0 +1,18 @@
+﻿CREATE TABLE [dbo].[CUENTAS_PADRES_IDIOMAS] (
+    [CPI_CODEMP] INT           NOT NULL,
+    [CPI_CTPID]  INT           NOT NULL,
+    [CPI_IDID]   INT           NOT NULL,
+    [CPI_NOMBRE] VARCHAR (200) NOT NULL,
+    CONSTRAINT [PK_CUENTAS_PADRES_IDIOMAS] PRIMARY KEY NONCLUSTERED ([CPI_CODEMP] ASC, [CPI_CTPID] ASC, [CPI_IDID] ASC),
+    CONSTRAINT [FK_CUENTAS__CTAPAD_ID_CUENTAS_] FOREIGN KEY ([CPI_CODEMP], [CPI_CTPID]) REFERENCES [dbo].[CUENTAS_PADRES] ([CTP_CODEMP], [CTP_CTPID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[CUENTAS_PADRES_IDIOMAS]([CPI_CODEMP] ASC, [CPI_CTPID] ASC, [CPI_IDID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla, almacena las distintas cuentas padres en su respectivo idioma', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'CUENTAS_PADRES_IDIOMAS';
+

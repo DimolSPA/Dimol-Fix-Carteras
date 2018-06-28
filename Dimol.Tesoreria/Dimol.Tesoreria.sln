@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dimol.Tesoreria", "Dimol.Tesoreria\Dimol.Tesoreria.csproj", "{28F58058-FDDA-460C-94D9-69B144A601C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dimol.Tesoreria.Tests", "Dimol.Tesoreria.Tests\Dimol.Tesoreria.Tests.csproj", "{14CB471B-03A5-4B0D-BCBF-7B0D53951CB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dimol.Tesoreria.bcp", "Dimol.Tesoreria.bcp\Dimol.Tesoreria.bcp.csproj", "{8D2A78E1-511A-462B-B3E6-FDFC512C55C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dimol.Tesoreria.dao", "Dimol.Tesoreria.dao\Dimol.Tesoreria.dao.csproj", "{1EEFE507-910F-426C-B8BD-EB729F93E08D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dimol.Tesoreria.dto", "Dimol.Tesoreria.dto\Dimol.Tesoreria.dto.csproj", "{DD18C553-CA53-46D4-8415-80555AA610FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28F58058-FDDA-460C-94D9-69B144A601C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F58058-FDDA-460C-94D9-69B144A601C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F58058-FDDA-460C-94D9-69B144A601C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F58058-FDDA-460C-94D9-69B144A601C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14CB471B-03A5-4B0D-BCBF-7B0D53951CB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14CB471B-03A5-4B0D-BCBF-7B0D53951CB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14CB471B-03A5-4B0D-BCBF-7B0D53951CB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14CB471B-03A5-4B0D-BCBF-7B0D53951CB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D2A78E1-511A-462B-B3E6-FDFC512C55C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D2A78E1-511A-462B-B3E6-FDFC512C55C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D2A78E1-511A-462B-B3E6-FDFC512C55C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D2A78E1-511A-462B-B3E6-FDFC512C55C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EEFE507-910F-426C-B8BD-EB729F93E08D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EEFE507-910F-426C-B8BD-EB729F93E08D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EEFE507-910F-426C-B8BD-EB729F93E08D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EEFE507-910F-426C-B8BD-EB729F93E08D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD18C553-CA53-46D4-8415-80555AA610FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD18C553-CA53-46D4-8415-80555AA610FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD18C553-CA53-46D4-8415-80555AA610FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD18C553-CA53-46D4-8415-80555AA610FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

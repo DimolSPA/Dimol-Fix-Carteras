@@ -1,0 +1,240 @@
+﻿@{
+    ViewBag.Title = "TraspasoFinanzasDocumento";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+}
+<br />
+<h2>Traspaso Finanzas Documento</h2>
+<style type="text/css" media="screen">
+    th.ui-th-column div {
+        white-space: normal !important;
+        height: auto !important;
+        padding: 2px;
+    }
+    .buttonLink {
+      font: bold 11px Arial;
+      text-decoration: none;
+      background-color: #EEEEEE;
+      color: #333333;
+      padding: 2px 6px 2px 6px;
+      border-top: 1px solid #CCCCCC;
+      border-right: 1px solid #333333;
+      border-bottom: 1px solid #333333;
+      border-left: 1px solid #CCCCCC;
+    }
+</style>
+<script type="text/javascript">
+   
+    window.onload = function () {
+        $("#t_gridTraspasoFinanzasDocumentos").append("<div align='right'> <button onclick='fnDefinirFactura();' title='Generar factura'><i class='fa fa-file-text-o' style='font-size:15px;'></i> </button><button onclick='fnExcelDocumentosFinanzas();' title='Exportar a Excel'> <i class='fa fa-file-excel-o' style='font-size:15px;color:green;'></i> </button></div>");
+
+        $("#gridTraspasoFinanzasDocumentos").jqGrid("setColProp", "Cliente",
+            {
+                searchoptions: {
+                    sopt: ['cn', 'nc', 'eq', 'ne'],
+                    defaultSearch: 'cn'
+                }
+            });
+       
+    }
+</script>
+@using Mvc.HtmlHelpers
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Documentos</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+
+      
+        <div class="tabla" style="display:none">
+            <div class="fila">
+                <div class="col">
+                    @*<input type="button" value="Generar" onclick="fnDefinirFactura();" />
+                    <input type="button" value="Exportar a Excel" onclick="fnExcelDocumentosFinanzas();" />*@
+                    <button onclick="fnDefinirFactura();" title="Generar factura">
+                        <i class="fa fa-file-text-o" style="font-size:20px;"></i>
+                    </button>
+                    <button onclick="fnExcelDocumentosFinanzas();" title="Exportar a Excel">
+                        <i class="fa fa-file-excel-o" style="font-size:20px;color:green;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        @(Html.jqGrid("gridTraspasoFinanzasDocumentos")
+                .addColumn(new Column("NumeroDocumento").setLabel("REC")
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(50))
+                .addColumn(new Column("RutCliente").setLabel("Rut Cliente")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(60))
+
+                .addColumn(new Column("Cliente").setLabel("Cliente")
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(true).setAlign(Align.left)
+                .setWidth(100))
+
+                .addColumn(new Column("RutDedor").setLabel("Rut Deudor")
+                .setAlign(Align.center)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(60))
+                .addColumn(new Column("Deudor").setLabel("Deudor")
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(100))
+                .addColumn(new Column("RutAsegurado").setLabel("Rut Asegurado")
+                .setAlign(Align.center)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(70))
+                .addColumn(new Column("Asegurado").setLabel("Asegurado")
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(100))
+                .addColumn(new Column("FecIngreso").setLabel("Fecha Ingreso")
+                .setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(60))
+                .addColumn(new Column("Moneda").setLabel("Moneda")
+                .setAlign(Align.center)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(50))
+                .addColumn(new Column("ValorIngreso").setLabel("Valor").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(90))
+                .addColumn(new Column("MontoIngreso").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(90))
+                .addColumn(new Column("DocumentoId").setLabel(".")
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false).setHidden(true)
+                .setWidth(30))
+                .addColumn(new Column("pclid").setLabel(" ")
+                .setEditable(true).setHidden(true)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(30))
+                .addColumn(new Column("ctcid").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(30))
+                .addColumn(new Column("sbcid").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(30))
+                .addColumn(new Column("EstatusId").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(30))
+                .addColumn(new Column("CriterioId").setLabel("Criterio")
+                .setCustomFormatter("fnSelectCriterioDisabled")
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setAlign(Align.center)
+                .setWidth(80))
+                .addColumn(new Column("MontoFacturar").setLabel("Monto a Facturar").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(80))
+                .addColumn(new Column("Observaciones").setLabel("Observaciones")
+                .setAlign(Align.center)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(150))
+                // settings
+                .setCaption("Documentos")//.setWidth(800)
+                .setAutoWidth(true)
+                .setMultiSelect(true)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Caja/ListarCajaTraspasoFinanzasDocumentosGrilla/")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setRowNum(1000)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("DocumentoId")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerTraspasoDocumento")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .setShrinkToFit(false)
+                //.onSelectRow("UpdateMontoFacturar(rowid, status)")
+                //.onSelectAll("fnOnSelectAllFacturar(aRowids, status)")
+                //.onLoadComplete("fnOnLoadCompleteFacturar(this)")
+                .setScroll(true)
+                .setHeight(400)
+                .setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+                .Render()
+                
+        )
+
+    </div>
+</div>
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAddNroFactura" }).Draggable(true)
+        .AutoOpen(false)
+        .Modal(true)
+        .Title("Generar Factura")
+        .CloseOnEscape(true)
+        .Width(350)
+        .Height(200)
+        ))
+{
+
+    <div class="tabla">
+        <div class="fila">
+
+
+
+            <div class="col" style="float:right">
+                <label for="MontoVisita">Monto Total:</label>
+                <input disabled type="text" id="MontoFactura" name="MontoFactura" />
+
+
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:100px;">@Html.Label("Nº Factura")</div>
+            <div class="col">@Html.TextBox("NroFactura", null, new { @class = "textboxClass", @style = "width: 80px" })</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:100px;">@Html.Label("Observaciones")</div>
+            <div class="col">@Html.TextArea("ObservacionesFinanzas", null, new { @class = "textboxClass", @style = "width: 200px" })</div>
+        </div>
+        <div class="fila">
+            <div class=" col" style="float:right"><input type="button" value="Aceptar" onclick="fnTraspasoFacturar();" /></div>
+        </div>
+    </div>
+}
+
+

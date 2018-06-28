@@ -1,0 +1,90 @@
+﻿@model Dimol.Carteras.Models.ClienteEstadoCobranzaModel
+@{
+    ViewBag.Title = "Gestionar Clientes de Estados de Cobranza";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<h2>Gestionar Estados de Cobranza de Cliente</h2>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Estados Cobranza</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmClienteEstadoCobranza" }))
+        {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>Perfil Estados Cobranza</legend>
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col" style="width:150px">@Html.LabelFor(model => model.NombreRutCliente) </div>
+                        <div class="col" style="width:250px">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreClienteTipoCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                            @Html.ValidationMessageFor(model => model.NombreRutCliente)
+                        </div>
+
+
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:150px"><label for="lstTipoEstado" title="Tipo Estados">Tipo Estados:</label> </div>
+                        <div class="col" style="width:250px">
+                            @Html.DropDownList("lstTipoEstado", null, new { @class = "ComboboxClass" })
+                            @Html.ValidationMessageFor(model => model.lstTipoEstado)
+                        </div>
+
+
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="float: right">
+
+                            <input type="button" value="Buscar" onclick="fnBuscarClienteEstadoCobranza();" />
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+
+        }
+
+        <br />
+
+        @(Html.jqGrid("gridClientesEstadoCobranza")
+                    .addColumn(new Column("IsSelected").setLabel("IsSelected")
+        .setSortable(true).setHidden(true)
+        .setWidth(50))
+                    .addColumn(new Column("Estid").setLabel("Estid")
+                .setSortable(true).setHidden(true)
+        .setWidth(60))
+                    .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setSortable(true)
+            .setWidth(120))
+
+
+    // settings
+    .setCaption("Estados de Cobranza")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDummy")
+    .setAltRows(true)
+    .setMultiSelect(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 50, 100 })
+    .setViewRecords(true)
+    .setSortName("nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerClienteEstadoCobranza")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("UpdateIdsOfSelectedRowsEstadoCliente(rowid, status)")
+    .onSelectAll("fnOnSelectAllEstadoCliente(aRowids, status)")
+    .onLoadComplete("fnOnLoadCompleteEstadoCliente(this)")
+    .Render()
+
+        )
+    </div>
+</div>

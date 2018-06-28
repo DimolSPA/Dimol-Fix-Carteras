@@ -1,0 +1,99 @@
+﻿@model Dimol.Carteras.Models.BuscarComprobanteModel
+
+<br />
+<h2>@ViewBag.Title</h2>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  <div class="ui-widget-header ui-corner-all">
+    <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Comprobante</span>
+
+   </div>
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarComprobante" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>AceptarComprobante</legend>
+
+        <div class="tabla">
+            <div class="fila">
+
+
+
+                <div class="col" style="float: right">@Html.HiddenFor(model => model.Tipo)@Html.HiddenFor(model => model.Cartera)@Html.HiddenFor(model => model.Estado)
+                    <input type="button" value="Cargar" onclick="fnCargarAceptarComprobantes();" />
+                    <input type="button" value="Guardar" onclick="fnGuardarAceptarComprobantes();" /></div>
+            </div>
+
+        </div>
+
+     
+    </fieldset>
+}
+<br />
+@(Html.jqGrid("gridAceptarComprobante")
+    .addColumn(new Column("IdTipoDocumento").setLabel("IdTipoDocumento")
+        .setSortable(true).setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("NombreFantasia").setLabel("Nombre")
+        .setSortable(true)
+        .setWidth(110))
+    .addColumn(new Column("TipoDocumento").setLabel("Tipo")
+        .setSortable(true)
+            .setWidth(30))
+    .addColumn(new Column("NumeroCliente").setLabel("N° Boleta").setAlign(Align.right)
+            .setSortable(true)
+            .setWidth(65))
+    .addColumn(new Column("Fecha").setLabel("Fecha")
+            .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y").setAlign(Align.center)
+            .setWidth(70))
+    .addColumn(new Column("Gestion").setLabel("Gestion").setAlign(Align.left)
+        .setSortable(true)
+        .setWidth(110))
+    .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(60))
+    .addColumn(new Column("Usuario").setLabel("Usuario")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(80))
+    .addColumn(new Column("Deudor").setLabel("Deudor")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(80))
+    .addColumn(new Column("Rol").setLabel("Rol")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(70))
+    .addColumn(new Column("Tribunal").setLabel("Tribunal")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(80))
+    .addColumn(new Column("Asegurados").setLabel("Asegurados")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(80))
+    .addColumn(new Column("Archivos").setLabel("Archivos").setAlign(Align.left)
+        .setSortable(true)
+        .setWidth(220))
+
+    // settings
+    .setCaption("Aceptar Comprobantes")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetAceptarComprobantes?Tipo="+ Model.Tipo +"&Cartera="+ Model.Cartera+"&Estado="+Model.Estado)
+    .setAltRows(true)
+    .setMultiSelect(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("NombreFantasia")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerAceptarComprobante")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("UpdateIdsOfSelectedRows(rowid, status)")
+    .onSelectAll("fnOnSelectAll(aRowids, status)")
+    .onLoadComplete("fnOnLoadComplete(this)")
+    .Render()
+
+) 
+<br />
+          </div>
+</div>

@@ -1,0 +1,358 @@
+﻿@model Dimol.Tesoreria.Models.CajaModel
+
+@{
+    ViewBag.Title = "Caja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using Mvc.HtmlHelpers
+@using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabDocumento" }).Disabled(new int[] { })))
+{
+    t.Tab("Documento", "tab1");
+    t.Tab("Estados", "tab2");
+    t.Tab("Imagenes", "tab3");
+    t.Tab("Caja", "tab4");
+    t.Tab("Negociación", "tab5");
+    using (t.BeginPanel())
+    {
+        using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarDeudor" }))
+        {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BuscarDeudor</legend>
+
+        <div class="tabla">
+             <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Tipo)</div>
+                <div class="col">@Html.DropDownList("Tipo", null, new { @class = "ComboboxClass", @onchange = "TipoSeleccionado();" })
+            @Html.ValidationMessageFor(model => model.Tipo)</div>
+                  <div class="col" style="width:100px"></div>
+                 <div class="col" style="width:140px">@Html.LabelFor(model => model.TipoDocumento)</div>
+                <div class="col">@Html.DropDownList("TipoDocumento", null, new { @class = "ComboboxClass" })
+            @Html.ValidationMessageFor(model => model.TipoDocumento)</div>
+            </div>
+            <div class="fila">
+                
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                @Html.ValidationMessageFor(model => model.NombreRutCliente)
+            </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("OnSelectClienteNegociacionCaja")
+            </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width: 120px">@Html.LabelFor(model => model.FechaDocumento)</div>
+                <div class="col"> @Html.JQueryUI().Datepicker("FechaDocumento", DateTime.Today, new { @style = "z-index:9" }).ShowButtonPanel(true).ShowWeek(false)
+                    @Html.ValidationMessageFor(model => model.Empleado)
+                </div>
+                <div class="col" style="width:200px"></div>
+                <div class="col" style="width:140px">@Html.LabelFor(model => model.NumeroDocumento)</div>
+                <div class="col">@Html.EditorFor(model => model.NumeroDocumento)
+            @Html.ValidationMessageFor(model => model.NumeroDocumento)</div>         
+            </div>     
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Moneda)</div>
+                <div class="col">@Html.DropDownList("Moneda", null, new { })
+            @Html.ValidationMessageFor(model => model.Moneda)</div>
+                <div class="col" style="width:236px"></div>
+                <div class="col" style="width:140px">@Html.LabelFor(model => model.TipoCambio)</div>
+                <div class="col">@Html.TextBoxFor(model => model.TipoCambio)
+            @Html.ValidationMessageFor(model => model.TipoCambio)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Monto)</div>
+                <div class="col">@Html.EditorFor(model => model.Monto)
+            @Html.ValidationMessageFor(model => model.Monto)</div>
+                <div class="col" style="width:200px"></div>
+                <div class="col" style="width:140px">@Html.LabelFor(model => model.Saldo)</div>
+                <div class="col">@Html.TextBoxFor(model => model.Saldo)
+            @Html.ValidationMessageFor(model => model.Saldo)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Negociacion)</div>
+                <div class="col">@Html.DropDownList("Negociacion", null, new { @class = "ComboboxClassL" })
+            @Html.ValidationMessageFor(model => model.Negociacion)</div>
+            </div>
+
+            <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnBuscarDocumentosCaja();" /></div>
+         </div>
+    </fieldset>
+        }
+    }
+    using (t.BeginPanel())
+    {
+        <br />
+@(Html.jqGrid("gridEstadosCaja")
+
+    .addColumn(new Column("Tipo").setLabel("Estado")
+        .setSortable(true).setEditable(true)
+        .setWidth(200))
+    .addColumn(new Column("Fecha").setLabel("Fecha").setEditable(true)
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(100))
+    .addColumn(new Column("TipoDocumento").setLabel("Comentarios").setEditable(true)
+        .setSortable(true)
+        .setWidth(450))
+        // settings
+    .setCaption("Estados Caja")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Tesoreria/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("TipoMovimiento, TipoDocumento, NumeroCuenta")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerEstadosCaja")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Tesoreria/OperAnularRestriccion")
+    .setNavEdit(false)
+
+    //.onSelectRow("DocumentoCajaSeleccionado(rowid)")
+    .Render()
+
+) 
+<br />
+    }
+    using (t.BeginPanel())
+    {
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width: 183px; height: 25px; margin-top: 5px;">@Html.LabelFor(model => model.Archivo)</div>
+                <div class="col" style="width: 300px">
+                    <input id="subirArchivo" type="file" style="width: 300px">@Html.HiddenFor(model => model.Archivo)</div>
+                <div class="col">
+                    <input type="submit" id="btnSubmit" value="Subir Archivo" /></div>
+                <div class="col">
+                    <img id="imgSubirArchivo" src="~/Images/blank.png" class="" style="float: left" /></div>
+            </div>
+
+        </div>
+    }
+    using (t.BeginPanel())
+    {
+        using (var tt = Html.JQueryUI().Begin(new Tabs(new { id = "tabCaja" }).Disabled(new int[] { })))
+        {
+            tt.Tab("Cancelaciones", "tab1");
+            tt.Tab("Liquidaciones", "tab2");
+            tt.Tab("Resumen Caja", "tab3");
+            using (tt.BeginPanel())
+            {
+                  <div class="tabla">
+             <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Tipo)</div>
+                <div class="col">@Html.DropDownList("Tipo", null, new { @class = "ComboboxClass", @onchange = "TipoSeleccionado();" })
+            @Html.ValidationMessageFor(model => model.Tipo)</div>
+                  <div class="col" style="width:100px"></div>
+                 <div class="col" style="width:120px">@Html.LabelFor(model => model.Moneda)</div>
+                <div class="col">@Html.DropDownList("Moneda", null, new { })
+            @Html.ValidationMessageFor(model => model.Moneda)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                @Html.ValidationMessageFor(model => model.NombreRutCliente)
+            </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("OnSelectClienteNegociacionCaja")
+            </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:140px">@Html.LabelFor(model => model.NumeroDocumento)</div>
+                <div class="col">@Html.EditorFor(model => model.NumeroDocumento)
+            @Html.ValidationMessageFor(model => model.NumeroDocumento)</div> 
+                <div class="col" style="width:200px"></div>
+                 <div class="col" style="width:140px">@Html.LabelFor(model => model.Saldo)</div>
+                <div class="col">@Html.TextBoxFor(model => model.Saldo)
+            @Html.ValidationMessageFor(model => model.Saldo)</div>
+            </div>     
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Moneda)</div>
+                <div class="col">@Html.DropDownList("Moneda", null, new { })
+            @Html.ValidationMessageFor(model => model.Moneda)</div>
+                <div class="col" style="width:236px"></div>
+                <div class="col" style="width:140px">@Html.LabelFor(model => model.TipoCambio)</div>
+                <div class="col">@Html.TextBoxFor(model => model.TipoCambio)
+            @Html.ValidationMessageFor(model => model.TipoCambio)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Monto)</div>
+                <div class="col">@Html.EditorFor(model => model.Monto)
+            @Html.ValidationMessageFor(model => model.Monto)</div>
+                <div class="col" style="width:200px"></div>
+                
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Negociacion)</div>
+                <div class="col">@Html.DropDownList("Negociacion", null, new { @class = "ComboboxClassL" })
+            @Html.ValidationMessageFor(model => model.Negociacion)</div>
+            </div>
+
+            <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnBuscarDocumentosCaja();" /></div>
+         </div>
+
+            }
+            using (tt.BeginPanel())
+            {
+            }
+            using (tt.BeginPanel())
+            {
+            }
+        }
+    }
+    using (t.BeginPanel())
+    {
+         <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.PclidNeg, Url.Action("BuscarRutNombreCliente"), "NombreRutClienteNeg", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                @Html.ValidationMessageFor(model => model.NombreRutCliente)
+            </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.CtcidNeg, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudorNeg", null, new { @class = "textboxRutNombre" }).MinLength(3)
+            </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Negociacion)</div>
+                <div class="col">@Html.DropDownList("NegociacionNeg", null, new { @class = "ComboboxClassL" })
+            @Html.ValidationMessageFor(model => model.Negociacion)</div>
+            </div>
+         </div>
+    <br />
+@(Html.jqGrid("gridNegociacionCaja")
+
+    .addColumn(new Column("Tipo").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("NumeroDocumento").setLabel("Número").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Fecha").setLabel("Fecha").setEditable(true)
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(100))
+    .addColumn(new Column("Depositar").setLabel("Depositar")
+        .setSortable(true).setFormatter(Formatters.checkbox)
+        .setWidth(70))
+    .addColumn(new Column("PagDir").setLabel("PagoDir")
+        .setSortable(true).setFormatter(Formatters.checkbox)
+        .setWidth(70))
+    .addColumn(new Column("PagCli").setLabel("PagoCli")
+        .setSortable(true).setFormatter(Formatters.checkbox)
+        .setWidth(70))
+    .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(100))
+
+    .addColumn(new Column("NombreCliente").setLabel("Cliente")
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("NombreDeudor").setLabel("Deudor")
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Empleado").setLabel("Empleado")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Estado").setLabel("Estado")
+        .setSortable(true)
+        .setWidth(150))
+
+
+    // settings
+    .setCaption("Negociación")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Tesoreria/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("TipoMovimiento, TipoDocumento, NumeroCuenta")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerNegociacionCaja")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("DocumentoCajaSeleccionado(rowid)")
+    .Render()
+
+) 
+<br />
+    }
+}
+
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  <div class="ui-widget-header ui-corner-all">
+    <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Deudor</span>
+
+   </div>
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+
+<br />
+@(Html.jqGrid("gridDocumentoCaja")
+
+    .addColumn(new Column("Tipo").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("TipoDocumento").setLabel("Documento")
+        .setSortable(true)
+        .setWidth(110))
+    .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("NumeroDocumento").setLabel("Número").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("NombreCliente").setLabel("Cliente")
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("NombreDeudor").setLabel("Deudor")
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Empleado").setLabel("Empleado")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Estado").setLabel("Estado")
+        .setSortable(true)
+        .setWidth(150))
+
+
+    // settings
+    .setCaption("Documentos Caja")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Tesoreria/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("TipoMovimiento, TipoDocumento, NumeroCuenta")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDocumentoCaja")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("DocumentoCajaSeleccionado(rowid)")
+    .Render()
+
+) 
+<br />
+          </div>
+</div>

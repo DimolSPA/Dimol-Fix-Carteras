@@ -1,0 +1,20 @@
+﻿CREATE TABLE [dbo].[ENTEJUD_ROL] (
+    [EJR_CODEMP] INT NOT NULL,
+    [EJR_ETJID]  INT NOT NULL,
+    [EJR_ROLID]  INT NOT NULL,
+    CONSTRAINT [PK_ENTEJUD_ROL] PRIMARY KEY CLUSTERED ([EJR_CODEMP] ASC, [EJR_ETJID] ASC, [EJR_ROLID] ASC),
+    CONSTRAINT [FK_ENTEJUD__ENTEJUD_R_ENTES_JU] FOREIGN KEY ([EJR_CODEMP], [EJR_ETJID]) REFERENCES [dbo].[ENTES_JUDICIAL] ([ETJ_CODEMP], [ETJ_ETJID]),
+    CONSTRAINT [FK_ENTEJUD__ROL_ENTEJ_ROL] FOREIGN KEY ([EJR_CODEMP], [EJR_ROLID]) REFERENCES [dbo].[ROL] ([ROL_CODEMP], [ROL_ROLID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[ENTEJUD_ROL]([EJR_CODEMP] ASC, [EJR_ETJID] ASC, [EJR_ROLID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla asigna a cada ente el rol con el cual deberan trabajar
+   
+   ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'ENTEJUD_ROL';
+

@@ -1,0 +1,13 @@
+D:\_Codigo_Dimol\SII\SII.dto\bin\Debug\SII.dto.dll
+D:\_Codigo_Dimol\SII\SII.dto\bin\Debug\SII.dto.pdb
+D:\_Codigo_Dimol\SII\SII.dto\bin\Debug\Dimol.dto.dll
+D:\_Codigo_Dimol\SII\SII.dto\bin\Debug\Dimol.dto.pdb
+D:\_Codigo_Dimol\SII\SII.dto\obj\Debug\SII.dto.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\SII\SII.dto\obj\Debug\SII.dto.dll
+D:\_Codigo_Dimol\SII\SII.dto\obj\Debug\SII.dto.pdb
+D:\17-REL-01\SII\SII.dto\bin\Debug\SII.dto.dll
+D:\17-REL-01\SII\SII.dto\bin\Debug\SII.dto.pdb
+D:\17-REL-01\SII\SII.dto\bin\Debug\Dimol.dto.dll
+D:\17-REL-01\SII\SII.dto\bin\Debug\Dimol.dto.pdb
+D:\17-REL-01\SII\SII.dto\obj\Debug\SII.dto.dll
+D:\17-REL-01\SII\SII.dto\obj\Debug\SII.dto.pdb

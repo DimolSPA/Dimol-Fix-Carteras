@@ -1,0 +1,126 @@
+﻿@model Dimol.Judicial.Mantenedores.Models.RolModel
+
+@{
+    //ViewBag.Title = "Buscar Rol";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Mvc.HtmlHelpers
+
+<br />
+<h2>@ViewBag.Title</h2>
+<br />
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Rol</span>
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarRol" }))
+        {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>BuscarRol</legend>
+
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Pclid, (string)ViewBag.UrlBuscarListaClientes, "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                            @Html.ValidationMessageFor(model => model.NombreRutCliente)
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                            @Html.ValidationMessageFor(model => model.NombreRutDeudor)
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.Rol)</div>
+                        <div class="col" style="width:300px; height:23px">@Html.TextBox("Rol", null, new { @class = "textboxClass" })</div>
+
+                    </div>
+                    <br />
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.Tribunal)</div>
+                        <div class="col">@Html.DropDownList("Tribunal", null, new { @class = "ComboboxClass", onchange = "" })</div>
+
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.TipoCausa)</div>
+                        <div class="col">@Html.DropDownList("TipoCausa", null, new { @class = "ComboboxClass", onchange = "" })</div>
+
+                    </div>
+                    <br />
+                    <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnBuscarRol();" /></div>
+                </div>
+            </fieldset>
+        }
+        <br />
+
+        @(Html.jqGrid("BuscarRol")
+                .addColumn(new Column("rol_rolid").setLabel("ID")
+                    .setHidden(true)
+                    .setWidth(50))
+                .addColumn(new Column("rol_numero").setLabel("Rol")
+                    .setAlign(Align.center)
+                    .setWidth(25))
+                .addColumn(new Column("trb_nombre").setLabel("Tribunal")
+                    .setWidth(60))
+               .addColumn(new Column("pcl_nomfant").setLabel("Cliente")
+                    .setWidth(40))
+               .addColumn(new Column("ctc_rut").setLabel("Rut")
+                    .setAlign(Align.center)
+                    .setWidth(20))
+                .addColumn(new Column("ctc_nomfant").setLabel("Nombre")
+                    .setWidth(80))
+                // settings
+                .setCaption("Roles")
+                .setRequestType(RequestType.get)
+                .setUrl("~/Judicial/GetDummy")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setAutoWidth(true)
+                .setRowNum(10)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("rol_rolid")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerDeudor")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .onSelectRow("fnRolSeleccionado(rowid)")
+                .Render()
+
+        )
+        <br />
+        <script>
+            function fnBuscarRol() {
+                var deudor = $("#NombreRutDeudor").val().split('-');
+                var rut = '', nombre = '';
+
+                if (deudor.length > 1) {
+                    rut = deudor[0].trim();
+                    nombre = deudor[1].trim();
+                }
+
+                //Parámetros de la url
+                var url_string = window.location.href
+                var url = new URL(url_string);
+
+                var newUrl = "/Judicial/GetRoles/?";
+                newUrl += "tipoComp=" + url.searchParams.get("tipoComp");
+                newUrl += "&cliente=" + $("#Cliente").val();
+                newUrl += "&rol=" + $("#Rol").val();
+                newUrl += "&tribunal=" + $("#Tribunal").val();
+                newUrl += "&tipoCausa=" + $("#TipoCausa").val();
+                newUrl += "&rutDeudor=" + rut;
+                newUrl += "&nombreDeudor=" + nombre;
+                newUrl += "&Ctcid=" + $("#Ctcid").val() + "&Pclid=" + $("#Pclid").val();
+
+                jQuery("#BuscarRol").jqGrid().setGridParam({ url: newUrl }).trigger('reloadGrid', [{ page: 1 }]);
+            }
+        </script>

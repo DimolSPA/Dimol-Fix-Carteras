@@ -1,0 +1,342 @@
+﻿
+@using Mvc.HtmlHelpers
+@{
+    Layout = null;
+    string rowId = (string)ViewData["RowId"];
+    int level = 1;
+    int width = (int)(24 * level * 2.0);
+    int left = width - 18;
+    
+}
+
+<tr id="@(rowId)Details" class="ui-widget-content ui-row-ltr" role="row" parent="@(rowId)">
+    <td>
+        <div class="tree-wrap tree-wrap-ltr" style="width: @(width)px;">
+            <div style="left: @(left)px;"> </div>
+        </div>
+    </td>
+<td colspan="3">
+        
+    <input type="hidden" id="QuiebraId" value="@(rowId)" />
+   <script type="text/javascript">
+    jQuery(document).ready(function ($) {
+
+        fnPanelQuiebraValidacionesEventos(@(rowId));
+    });
+    </script>
+        <div class="tabla" style="width:630px">
+            <div class="fila">
+                <div class="col" style="width:50%; padding-right:0">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+
+                            <b>Gestión</b>
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idSolicitante">
+
+                            @Html.Label("Solicitante")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idCostas">
+
+                            @Html.Label("Regulación de Costas Personales")
+
+                        </li>
+                        <li class="list-group-item" id="idRepartos">
+
+                            @Html.Label("Repartos")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idDevolucion">
+
+                            @Html.Label("Devolución 100 UF")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idIngresoSolicitud">
+
+                            @Html.Label("Ingreso Solicitud")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idNotificacionSolicitud">
+
+                            @Html.Label("Notificación Solicitud")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idAudienciaInicial">
+
+                            @Html.Label("Audiencia Inicial")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idAudienciaPrueba">
+
+                            @Html.Label("Audiencia de Prueba")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idAudienciaFallo">
+
+                            @Html.Label("Audencia de Fallo")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idResolucionLiqui">
+
+                            @Html.Label("Resolución de Liquidación")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idResolucionLiquiBC">
+
+                            @Html.Label("Publicación Resolución de Liquidación en BC")
+
+                        </li>
+                        
+                        <li class="list-group-item" id="idResolucionReorBC" style="@ViewBag.isreorganizacion">
+
+                            @Html.Label("Publicación Resolución de Reorganización en BC")
+
+                        </li>
+                        <li class="list-group-item" id="idVerificacion">
+
+                            @Html.Label("Verificación")
+
+                        </li>
+                        <li class="list-group-item" id="idAcreditacionPoder" style="@ViewBag.isreorganizacion">
+
+                            @Html.Label("Acreditación de Poder")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idJuntaConstitutiva">
+
+                            @Html.Label("Junta Constitutiva")
+
+                        </li>
+                        <li class="list-group-item" id="idJuntaDeliberativa" style="@ViewBag.isreorganizacion">
+
+                            @Html.Label("Junta Deliberativa")
+
+                        </li>
+                        <li class="list-group-item" id="idStatusAcuerdo" style="@ViewBag.isreorganizacion">
+
+                            @Html.Label("Aprobación o Rechazo del acuerdo")
+
+                        </li>
+                        <li class="list-group-item" id="idVerificadoAcreditado">
+
+                            @Html.Label("Res Que tiene por verificado el crédito o acreditado el poder")
+
+                        </li>
+                        <li class="list-group-item" id="idNomCreditoVerificado">
+
+                            @Html.Label("Nómina de Créditos Verificados")
+
+                        </li>
+                        <li class="list-group-item" id="idImpugnacion">
+
+                            @Html.Label("Impugnación")
+
+                        </li>
+                        <li class="list-group-item" id="idNomCreditoReconocido">
+
+                            @Html.Label("Nómina de Créditos Reconocidos")
+
+                        </li>
+                        <li class="list-group-item" id="idSolAntecedente">
+
+                            @Html.Label("Solicita Antecedentes para ND al Cliente")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idRecepcionAntecedente">
+
+                            @Html.Label("Recepción de Antecedentes para solicitar ND")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idEnvioAntecedente">
+
+                            @Html.Label("Envío de Antecedentes para ND al Liquidador")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idEmisionND">
+
+                            @Html.Label("Emisión ND")
+
+                        </li>
+                        
+                        <li class="list-group-item" style="@ViewBag.Display" id="idPgoCostasPersonales">
+
+                            @Html.Label("Pago Costas Personales")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idAprobacionCtaFinal">
+
+                            @Html.Label("Aprobacion Cuenta Final")
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idCertificadoIncobrable">
+
+                            @Html.Label("Certificado de Incobrabilidad")
+
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="col" style="width:40%;padding-left:0">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+
+                            <b>Monto y Fecha</b>
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idSolicitanteValue">
+                            @Html.DropDownList("ComboSolicitante", null, new { @class = "ComboboxClassS", onchange = "fnLiquidacionCampos('" + (rowId) + "',this.value)" })
+
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idCostasValue">
+                            @Html.JQueryUI().Datepicker("fecCostasPersonales").ShowButtonPanel(true).ShowWeek(false)
+                            @Html.TextBox("MtoCostasPersonales", null, new { @class = "textboxClass", @style = "width: 80px" })
+                            &nbsp;<span id="errmsg"></span>
+                        </li>
+                        <li class="list-group-item" id="idRepartosValue">
+
+                            @Html.JQueryUI().Datepicker("fecRepartos").ShowButtonPanel(true).ShowWeek(false)
+                            @Html.TextBox("MtoRepartos", null, new { @class = "textboxClass", @style = "width: 80px" })
+                            <input type="button" value="+" class="btn btn-info" onclick="fnMostrarRepartos(@(rowId));" />
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idDevolucionValue">
+
+                            @Html.JQueryUI().Datepicker("fecDevolucion").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idIngresoSolicitudValue">
+
+                            @Html.JQueryUI().Datepicker("fecIngresoSolicitud").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idNotificacionSolicitudValue">
+
+                            @Html.JQueryUI().Datepicker("fecNotificacionSolicitud").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idAudienciaInicialValue">
+
+                            @Html.JQueryUI().Datepicker("fecAudienciaInicial").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idAudienciaPruebaValue">
+
+                            @Html.JQueryUI().Datepicker("fecAudienciaPrueba").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idAudienciaFalloValue">
+
+                            @Html.JQueryUI().Datepicker("fecAudienciaFallo").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idResolucionLiquiValue">
+
+                            @Html.JQueryUI().Datepicker("fecResolucionLiquidacion").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idResolucionLiquiBCValue">
+
+                            @Html.JQueryUI().Datepicker("fecResolucionLiquidacionBC").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        
+                        <li class="list-group-item" id="idResolucionReorBCValue" style="@ViewBag.isreorganizacion">
+
+                            @Html.JQueryUI().Datepicker("fecResolucionReorganizacionBC").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        <li class="list-group-item" id="idVerificacionValue">
+                            @Html.JQueryUI().Datepicker("fecVerificacion").ShowButtonPanel(true).ShowWeek(false)
+                           
+                        </li>
+                        <li class="list-group-item" id="idAcreditacionPoderValue" style="@ViewBag.isreorganizacion">
+                            @Html.JQueryUI().Datepicker("fecAcreditacionPoder").ShowButtonPanel(true).ShowWeek(false)
+                          
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idJuntaConstitutivaValue">
+                            @Html.JQueryUI().Datepicker("fecJuntaConstitutiva").ShowButtonPanel(true).ShowWeek(false)
+                          
+                        </li>
+                        <li class="list-group-item" id="idJuntaDeliberativaValue" style="@ViewBag.isreorganizacion">
+                            @Html.JQueryUI().Datepicker("fecJuntaDeliberativa").ShowButtonPanel(true).ShowWeek(false)
+                          
+                        </li>
+                        <li class="list-group-item" id="idStatusAcuerdoValue" style="@ViewBag.isreorganizacion">
+                            @Html.DropDownList("ComboApruebaRechaza", null, new { @class = "ComboboxClassS", @style = "width: 80px" })
+                            @Html.JQueryUI().Datepicker("fecAcuerdo").ShowButtonPanel(true).ShowWeek(false)
+                          
+                        </li>
+                        <li class="list-group-item" id="idVerificadoAcreditadoValue">
+                            @Html.JQueryUI().Datepicker("fecVerificadoAcreditado").ShowButtonPanel(true).ShowWeek(false)
+                          
+                        </li>
+                        <li class="list-group-item" id="idNomCreditoVerificadoValue">
+                            @Html.JQueryUI().Datepicker("fecNomCreditoVerificado").ShowButtonPanel(true).ShowWeek(false)
+                           
+                        </li>
+                        <li class="list-group-item" id="idImpugnacionValue">
+                            @Html.JQueryUI().Datepicker("fecImpugnacion").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        <li class="list-group-item" id="idNomCreditoReconocidoValue">
+                            @Html.JQueryUI().Datepicker("fecNomCreditoReconocido").ShowButtonPanel(true).ShowWeek(false)
+                           
+                        </li>
+                        <li class="list-group-item" id="idSolAntecedenteValue">
+                            @Html.JQueryUI().Datepicker("fecSolAntecedente").ShowButtonPanel(true).ShowWeek(false)
+     
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idRecepcionAntecedenteValue">
+                            @Html.JQueryUI().Datepicker("fecRecepcionAntecedente").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idEnvioAntecedente">
+                            @Html.JQueryUI().Datepicker("fecEnvioAntecedente").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idEmisionNDValue">
+                            @Html.JQueryUI().Datepicker("fecEmisionND").ShowButtonPanel(true).ShowWeek(false)
+                            @Html.TextBox("MtoEmision", null, new { @class = "textboxClass", @style = "width: 80px" })
+
+                        </li>
+                        
+                        <li class="list-group-item" style="@ViewBag.Display" id="idPgoCostasPersonalesValue">
+
+                            @Html.JQueryUI().Datepicker("fecPgoCostasPersonales").ShowButtonPanel(true).ShowWeek(false)
+                            @Html.TextBox("PgoCostasPersonales", null, new { @class = "textboxClass", @style = "width: 80px" })
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idAprobacionCtaFinalValue">
+
+                            @Html.JQueryUI().Datepicker("fecAprobacionCtaFinal").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                        <li class="list-group-item" style="@ViewBag.Display" id="idCertificadoIncobrableValue">
+
+                            @Html.JQueryUI().Datepicker("fecCertificadoIncobrable").ShowButtonPanel(true).ShowWeek(false)
+
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="float:right"><input type="button" value="Guardar" onclick="fnGuardarAvancePanelQuiebra(@(rowId));" /></div>
+            </div>
+        </div>
+    @using (Html.JQueryUI().Begin(new Dialog(new { id = "ppPanelQuiebraRepartos" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Datos de Repartos")
+                .CloseOnEscape(true)
+                .Width(700)
+                .Height(700)
+
+                ))
+    {
+        @Html.Partial("_AgregarRepartoPanelquiebra")
+    }
+    </td>
+</tr>

@@ -1,0 +1,62 @@
+﻿@model Dimol.Carteras.Models.SalidaItauModel
+
+@{
+    ViewBag.Title = "Archivos Salida Itau";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Archivos Salida Itau</h2>
+@using Mvc.HtmlHelpers
+@using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabDocumento" })))
+{
+    t.Tab("Archivos Salida", "tab1");
+    using (t.BeginPanel())
+    {
+        using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmSalidaItau" }))
+        {
+            @Html.ValidationSummary(true)
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="width:183px">@Html.LabelFor(model => model.RutCliente)</div>
+            <div class="col">
+                @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "RutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                @Html.ValidationMessageFor(model => model.RutCliente)
+            </div>
+        </div>
+
+        <div class="fila">
+            <div class="col" style="width:183px">@Html.LabelFor(model => model.FechaDesde)</div>
+            <div class="col">
+                @Html.JQueryUI().Datepicker("FechaDesde", null, new { @readonly = "readonly" }).ShowButtonPanel(true).ShowWeek(false)
+                @Html.ValidationMessageFor(model => model.FechaDesde)
+            </div>
+            <div class="col" style="width:183px">@Html.LabelFor(model => model.FechaHasta)</div>
+            <div class="col">
+                @Html.JQueryUI().Datepicker("FechaHasta", null, new { @readonly = "readonly" }).ShowButtonPanel(true).ShowWeek(false)
+                @Html.ValidationMessageFor(model => model.FechaHasta)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:183px;font-weight:bold">Archivos</div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="float:left">
+                    <input type="button" value="Gestiones" onclick="fnArchivoSalidaItau(8)" />
+                    <input type="button" value="Direcciones" onclick="fnArchivoSalidaItau(9)" />
+                    <input type="button" value="Telefonos" onclick="fnArchivoSalidaItau(10)" />
+                    <input type="button" value="Email" onclick="fnArchivoSalidaItau(11)" />
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        }
+
+    }
+}

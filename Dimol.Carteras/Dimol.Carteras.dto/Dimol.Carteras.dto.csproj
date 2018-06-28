@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{789BF8D7-16AF-449B-84B5-B2FD8C0C5E70}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dimol.Carteras.dto</RootNamespace>
+    <AssemblyName>Dimol.Carteras.dto</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dimol.dto">
+      <HintPath>..\..\DimolAssemblies\Dimol.dto.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accion.cs" />
+    <Compile Include="AceptarComprobante.cs" />
+    <Compile Include="Aplicaciones.cs" />
+    <Compile Include="BienPropiedad.cs" />
+    <Compile Include="BienVehiculo.cs" />
+    <Compile Include="BoletaHonorarioSalida.cs" />
+    <Compile Include="BuscarAceptarComprobante.cs" />
+    <Compile Include="BuscarComprobante.cs" />
+    <Compile Include="BuscarDeudor.cs" />
+    <Compile Include="BuscarEstadoComprobante.cs" />
+    <Compile Include="BuscarSubCartera.cs" />
+    <Compile Include="CabeceraComprobante.cs" />
+    <Compile Include="CargaCocha.cs" />
+    <Compile Include="CargaSuseso.cs" />
+    <Compile Include="CargaItau.cs" />
+    <Compile Include="CargaMasiva.cs" />
+    <Compile Include="CastigoMasivo.cs" />
+    <Compile Include="ClasificacionInsumo.cs" />
+    <Compile Include="ClasificacionComprobante.cs" />
+    <Compile Include="ClientLayer.cs" />
+    <Compile Include="ClientPoi.cs" />
+    <Compile Include="Comprobante.cs" />
+    <Compile Include="ConsultaPJ.cs" />
+    <Compile Include="DatosCarga.cs" />
+    <Compile Include="DatosCargaVisitaTerreno.cs" />
+    <Compile Include="DetalleCabeceraComprobante.cs" />
+    <Compile Include="DetalleComprobanteCompra.cs" />
+    <Compile Include="Deudor.cs" />
+    <Compile Include="DeudorSII.cs" />
+    <Compile Include="DocumentoCastDev.cs" />
+    <Compile Include="DocumentoDeudor.cs" />
+    <Compile Include="DocumentoDiario.cs" />
+    <Compile Include="DocumentoMover.cs" />
+    <Compile Include="EjecutivoMutual.cs" />
+    <Compile Include="ErrorCarga.cs" />
+    <Compile Include="Gestor.cs" />
+    <Compile Include="GoogleGeoCodeResponse.cs" />
+    <Compile Include="ImpuestoComprobante.cs" />
+    <Compile Include="MotivoCastigoDevolucion.cs" />
+    <Compile Include="MotivoCobranza.cs" />
+    <Compile Include="PerfilEstadoCobranza.cs" />
+    <Compile Include="Proceso.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recordatorio.cs" />
+    <Compile Include="RestriccionGestor.cs" />
+    <Compile Include="SubCartera.cs" />
+    <Compile Include="Torta.cs" />
+    <Compile Include="VisitaTerrenoCarteraGestorGeoGestion.cs" />
+    <Compile Include="VisitaTerrenoGenerar.cs" />
+    <Compile Include="VisitaTerrenoSolicitudAceptar.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

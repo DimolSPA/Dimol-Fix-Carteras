@@ -1,0 +1,256 @@
+﻿@model Dimol.Caja.Models.LiquidacionPorcentajeModel
+@using Mvc.HtmlHelpers
+@{
+    string Disabled = "";
+    if (Model.EstadoLiquidacionId == "2")
+    {
+        Disabled = "disabled";
+    }
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmLiquidacionDocumento" }))
+{
+    @Html.HiddenFor(model => model.pclidLiqui)
+    @Html.HiddenFor(model => model.conciliacionId)
+    @Html.HiddenFor(model => model.ctcidLiqui)
+    @Html.HiddenFor(model => model.EstadoLiquidacionId)
+    @Html.HiddenFor(model => model.Docs)
+    <div class=" panel panel-primary">
+        <div class="panel-heading">Datos del Pago</div>
+        <div class="panel-body">
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="text-align:center;width:1300px;">
+                        <div class="tabla">
+                            <div class="fila" style="width:100%; overflow-x: auto; white-space: nowrap;">
+                                <div class="col" style="padding-right:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            <b>Nº</b>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.NumComprobante)</label>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%;padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.Cliente)
+                                        </li>
+                                        <li class="list-group-item">
+                                            @Html.DisplayFor(model => model.Cliente)
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.RutDeudor)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.RutDeudor)</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.Deudor)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.Deudor)</label>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.Monto)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.Monto)</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.CapitalPor)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.CapitalPor)</label>
+                                        </li>
+                                        <li class="list-group-item list-group-item-info">
+                                            <label>@Html.DisplayFor(model => model.Capital)</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.InteresPor)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.InteresPor)</label>
+                                        </li>
+                                        <li class="list-group-item list-group-item-info">
+                                            <label>@Html.DisplayFor(model => model.Interes)</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col" style="padding-right:0; padding-left:0">
+                                    <ul class="list-group" style="width:100%; padding-right:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.HonorarioPor)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.HonorarioPor)</label>
+                                        </li>
+                                        <li class="list-group-item list-group-item-info">
+                                            <label>@Html.DisplayFor(model => model.Honorario)</label>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                                <div class="col" style="padding-left:0;">
+                                    <ul class="list-group" style="width:100%; padding-left:0">
+                                        <li class="list-group-item list-group-item-secondary">
+                                            @Html.LabelFor(model => model.Saldo)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label>@Html.DisplayFor(model => model.Saldo)</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                           </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="float:right">
+                
+                <input type="button" value="Liquidacion de Documentos" id="btnVerImputacion" @Disabled onclick="fnVerFormularioImputacion();" />
+
+            </div>
+        </div>
+    </div>
+   
+}
+
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="float:left; width:98%">
+            @(Html.jqGrid("gridDocumentoDeudoresLiquidacion")
+                .addColumn(new Column("Pclid").setLabel("Pclid")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("Ccbid").setLabel("Ccbid")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+
+                .addColumn(new Column("Asegurado").setLabel("Asegurado")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("TipoDocumento").setLabel("Tipo")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("Numero").setLabel("Numero")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Estado").setLabel("Estado")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(50))
+                .addColumn(new Column("FechaVencimiento").setLabel("Venc.")
+                .setSortable(true).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(60))
+                .addColumn(new Column("Moneda").setLabel("Moneda")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(50))
+                .addColumn(new Column("Monto").setLabel("Monto Asignado").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Intereses").setLabel("Interes").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Honorarios").setLabel("Honorarios").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("GastoPrejudicial").setLabel("Gast. Pre.").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("GastoJudicial").setLabel("Gast. Jud.").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("TotalDeuda").setLabel("Total").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+
+        // settings
+                        .setCaption("Documentos")//.setWidth(800)
+                        .setAutoWidth(true)
+                        .setMultiSelect(true)
+                        .setRequestType(RequestType.get)
+                        .setUrl("~/Tesoreria/ListarLiquidacionDocumentosDeudorGrilla/?pclid=" + Model.pclidLiqui + "&ctcid=" + Model.ctcidLiqui)
+                        .setAltRows(true)
+                        .setAltClass("altGridRows")
+                        .setRowNum(1000)
+                        .setRowList(new int[] { 10, 30, 50 })
+                        .setViewRecords(true)
+                        .setSortName("FechaVencimiento")
+                        .setSortOrder(SortOrder.asc)
+                        .setPager("pagerDocumentosDeudoresLiq")
+                        .setPagerPos(PagerPos.center)
+                        .setPgButtons(true)
+                        .setCellEdit(false)
+                        .setCellSubmit(CellSubmit.clientArray)
+                        .setAutoWidth(true)
+                        .setShrinkToFit(false)
+                        .setScroll(true)
+                        .setHeight(300)
+                        .setGrouping(true)
+                        .setGroupingView("groupField: ['Asegurado'],groupColumnShow: [false], groupText: ['<input type=\"checkbox\" class=\"groupHeader\" onchange=\"fnChangecheckGroupGridLiqDocs(this)\" /><b> {0} - {1} Documento(s)</b>'], groupCollapse: true, groupOrder: ['desc'],groupDataSorted: true")
+                        .onSelectRow("UpdateidsOfSelectedRowsCcbid(rowid, status)")
+                        .onSelectAll("fnOnSelectAllCcbid(aRowids, status)")
+                        .onLoadComplete("fnOnLoadCompleteCcbid(this, xhr)")
+                        .Render()
+
+
+
+            )
+
+        </div>
+    </div>
+</div>
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="float:right">
+
+            <input type="button" value="Finalizar Documentos" style="display:none" id="btnFinalizardoc"  onclick="fnFinalizarDocumentos();" />
+
+        </div>
+    </div>
+</div>

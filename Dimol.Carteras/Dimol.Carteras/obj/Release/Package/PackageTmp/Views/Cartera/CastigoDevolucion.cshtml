@@ -1,0 +1,300 @@
+﻿@model Dimol.Carteras.Models.CastigoDevolucionModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = ViewBag.Title;
+}
+<br />
+<h2>@ViewBag.Title</h2>
+<br />
+<style>
+    .btn{display:inline-block;font-weight:400;line-height:1.25;text-align:center;white-space:nowrap;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;border:1px solid transparent;padding:.5rem 1rem;font-size:1rem;border-radius:.25rem;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
+    .btn:focus,
+    .btn:hover{text-decoration:none}
+    .btn.focus,
+    .btn:focus{outline:0;-webkit-box-shadow:0 0 0 2px rgba(2,117,216,.25);box-shadow:0 0 0 2px rgba(2,117,216,.25)}
+    .btn-success{color:#fff;background-color:#5cb85c;border-color:#5cb85c}
+    .btn-success:hover{color:#fff;background-color:#449d44;border-color:#419641}
+    .btn-success.focus,
+    .btn-success:focus{-webkit-box-shadow:0 0 0 2px rgba(92,184,92,.5);box-shadow:0 0 0 2px rgba(92,184,92,.5)}
+    .btn-success.disabled,.btn-success:disabled{background-color:#5cb85c;border-color:#5cb85c}
+    .btn-sm{padding:.25rem .5rem;font-size:.875rem;border-radius:.2rem}
+    .btn-info{font-weight: bold;color:#000;background-color:#5bc0de;border-color:#5bc0de}
+    .btn-info:hover{font-weight: bold;color:#000;background-color:#31b0d5;border-color:#2aabd2}
+    .btn-info.focus,.btn-info:focus{-webkit-box-shadow:0 0 0 2px rgba(91,192,222,.5);box-shadow:0 0 0 2px rgba(91,192,222,.5)}
+    .btn-info.disabled,.btn-info:disabled{background-color:#5bc0de;border-color:#5bc0de}
+
+    .alert-message
+    {
+        top: 20%;
+        left: 40%;
+        position: absolute;
+        width:40%;
+        padding:.75rem 1.25rem;margin-bottom:1rem;
+        border-left: 3px solid #eee;
+    }
+    /* The close button */
+    .closebtn {
+        margin-left: 15px;
+        color: black;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    /* When moving the mouse over the close button */
+    .closebtn:hover {
+        color: black;
+    }
+    .alert-message h4
+    {
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+    .alert-message p:last-child
+    {
+        margin-bottom: 0;
+    }
+    .alert-message code
+    {
+        background-color: #fff;
+        border-radius: 3px;
+    }
+    .alert-message-success
+    {
+        background-color: #F4FDF0;
+        border-color: #3C763D;
+    }
+    .alert-message-success h4
+    {
+        color: #3C763D;
+    }
+    .alert-message-danger
+    {
+        background-color: #fdf7f7;
+        border-color: #d9534f;
+    }
+    .alert-message-danger h4
+    {
+        color: #d9534f;
+    }
+    .alert-message-warning
+    {
+        background-color: #fcf8f2;
+        border-color: #f0ad4e;
+    }
+    .alert-message-warning h4
+    {
+        color: #f0ad4e;
+    }
+    .alert-message-info
+    {
+        background-color: #f4f8fa;
+        border-color: #5bc0de;
+    }
+    .alert-message-info h4
+    {
+        color: #5bc0de;
+    }
+
+    .rowWarningSinRolEnJudicial { background-color: #fdf7f7; border-color: #d9534f; background-image: none; }
+</style>
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.closebtn', function () {
+            var div = this.parentElement;
+            setTimeout(function () { div.style.display = "none"; }, 600);
+        });
+    });
+    window.onload = function () {
+        $("#gridDocumentos").jqGrid("setColProp", "Monto", { summaryType: "sum" });
+        $("#gridDocumentos").jqGrid("setColProp", "Monto", { summaryTpl: "Sub-Total: {0}" });
+        $("#gridDocumentos").jqGrid("setColProp", "Saldo", { summaryType: "sum" });
+        $("#gridDocumentos").jqGrid("setColProp", "Saldo", { summaryTpl: "Sub-Total: {0}" });
+       
+        //$("#gridDocumentos").bind("jqGridInitGrid", function () {
+        //    $("#gridDocumentos").jqGrid("setColProp", "Monto", { summaryType: "sum" });
+        //});
+    }
+</script>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Documentos a Procesar</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCastigoDevolucion" }))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                    <div class="col" style="width:400px">
+                        @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnActualizarMoverCartera")
+                        @Html.ValidationMessageFor(model => model.NombreRutCliente)
+                    </div>
+                    <div class="col" style="float: right">
+                        <input type="button" value="Buscar" onclick="fnBuscarDocsCastDev();" style="display:none" />
+                        <input type="button" value="Grabar" onclick="fnGrabarCastDev();" />
+                        @Html.Hidden("Tipo")
+                        @Html.Hidden("Cartera")
+                    </div>
+                </div>
+                @*<div class="fila">
+                    <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnActualizarMoverCartera")
+                        @Html.ValidationMessageFor(model => model.NombreRutDeudor)
+                    </div>
+                </div>*@
+                 <div class="fila">
+                    <div class="col" style="width:120px">@Html.LabelFor(model => model.Estado)</div>
+                    <div class="col">@Html.DropDownList("Estado", null, new { @class = "ComboboxClass", onchange = "ActualizaEstado()" })
+                        <button id="btnDeudor" class="btn btn-info btn-sm" onclick="fnBuscarDocumentosCastigoDevolucion(); return false;">
+                            Seleccionar Documentos<span class="ui-icon ui-icon-search" style="float: right; margin-left: .3em;"></span>
+                        </button>
+                     </div>
+                </div>
+               
+                <div class="fila">
+                    <div class="col" style="width:120px">@Html.LabelFor(model => model.TipoComprobante)</div>
+                    <div class="col"> @Html.DropDownList("TipoComprobante", null, new { @class = "ComboboxClassL", onchange = "ActualizaTipoComprobante()" })</div>
+                   
+                    @Html.HiddenFor(model => model.CabeceraId)
+                    @Html.Hidden("Tipcpbtdoc")
+                    @Html.Hidden("Tipprod")
+                    @Html.Hidden("Costos")
+                    @Html.Hidden("Selcpbt")
+                    @Html.Hidden("Cartcli")
+                    @Html.Hidden("Contable")
+                    @Html.Hidden("Selapl")
+                    @Html.Hidden("Aplica")
+                    @Html.Hidden("Cptoctbl")
+                    @Html.Hidden("Findeuda")
+                    @Html.Hidden("Cancela")
+                    @Html.Hidden("Libcompra")
+                    @Html.Hidden("Cambiodoc")
+                    @Html.Hidden("Remesa")
+                    @Html.Hidden("Forpag")
+                    @Html.Hidden("Tipdig")
+                    @Html.Hidden("Ordcomp")
+                    @Html.Hidden("Clbid")
+                    @Html.Hidden("Sinimp")
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:120px">Motivo de Castigo/Devolución</div>
+                    <div class="col">
+                        <button id="btnMotivo" class="btn btn-info btn-sm" onclick="fnAbrirMotivosCastigoDevolucion(); return false;">
+                            Seleccionar Motivos<span class="ui-icon ui-icon-search" style="float: right; margin-left: .3em;"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="fila" style="display:none">
+                    <div class="col" style="width:120px">@Html.LabelFor(model => model.Glosa)</div>
+                    <div class="col">@Html.TextArea("Glosa", "", 4, 55, new { })</div>
+                </div>
+            </div>
+
+    <div  id="alert" style="display:none">
+    </div>
+            
+        }
+        @Html.Hidden("DocumentosSeleccionados")
+        <br />
+        @(Html.jqGrid("gridDocumentos")
+           
+    .addColumn(new Column("Tipo").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(120))
+    .addColumn(new Column("Moneda").setLabel("Moneda").setAlign(Align.right)
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Numero").setLabel("Número").setAlign(Align.right)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("FechaAsignacion").setLabel("Fecha Asig.").setAlign(Align.center)
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(70))
+    .addColumn(new Column("FechaVencimiento").setLabel("Fecha Venc.").setAlign(Align.center)
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(70))     
+    .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+        .setSortable(true)
+        .setWidth(120))
+            .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.integer)
+        .setSortable(true)
+        .setWidth(120))
+            .addColumn(new Column("Estado").setLabel("Estado").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(80))
+    .addColumn(new Column("EstadoCpbt").setLabel("EstadoCpbt")
+        .setSortable(true).setHidden(true)
+        .setWidth(100))
+    .addColumn(new Column("Deudor").setLabel("Deudor")
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("Asegurado").setLabel("Asegurado")
+        .setSortable(true)
+        .setWidth(150))
+    .addColumn(new Column("RolNumero").setLabel("Rol").setAlign(Align.center)
+         .setSortable(true)
+         .setWidth(70))
+    .addColumn(new Column("RolId").setLabel("RolId")
+         .setSortable(true).setHidden(true)
+         .setWidth(70))     
+    // settings
+    .setCaption("Documentos").setDataType(DataType.local).setData("")
+    //.setRequestType(RequestType.get)
+    //        .setUrl("~/Cartera/GetDocsSelectedCastigoDevolucion")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(500)
+    .setRowList(new int[] { 50, 100, 200, 500, 1000 })
+    .setViewRecords(true)
+    .setSortName("Estado")
+    .setSortOrder(SortOrder.desc)
+    .setPager("pagerMoverCartera")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true).setShrinkToFit(false).setFooterRow(true).setGrouping(true).setGroupingView("groupField: ['Deudor'],groupColumnShow: [false], groupText: ['{0}'], groupCollapse: false, groupOrder: ['desc'],groupDataSorted: true")
+    //.onSelectRow("UpdateIdsOfSelectedRows(rowid, status)")
+    //.onSelectAll("fnOnSelectAllCastigo(aRowids, status)")
+    .onLoadComplete("fnOnLoadCompleteCastigo(this, xhr)")//.onPaging("fnloadDocsSelectedCastigoDevolucion()")
+    .Render()
+
+        )
+        <br />
+    </div>
+</div>
+
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppDocumentosDeudor" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true).OnClose("fnloadDocsSelectedCastigoDevolucion")
+    .Title("Documento Deudor")
+    .CloseOnEscape(true)
+    .Width(900)
+    .Height(500)
+    ))
+{
+    @Html.Partial("_BuscarDocumentosDeudores")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppMotivoCastigo" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Motivos")
+    .CloseOnEscape(true)
+    .Width(900)
+    .Height(500)
+    ))
+{
+    @Html.Partial("_AgregarMotivoCastigoDevolucion")
+}
+
+

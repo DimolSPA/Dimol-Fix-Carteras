@@ -1,0 +1,22 @@
+﻿CREATE TABLE [dbo].[EMPLEADOS_DOCUMENTOS] (
+    [EPD_CODEMP]    INT      NOT NULL,
+    [EPD_EMPLID]    INT      NOT NULL,
+    [EPD_TDCID]     INT      NOT NULL,
+    [EPD_ITEM]      SMALLINT NOT NULL,
+    [EPD_DOCUMENTO] IMAGE    NULL,
+    CONSTRAINT [PK_EMPLEADOS_DOCUMENTOS] PRIMARY KEY NONCLUSTERED ([EPD_CODEMP] ASC, [EPD_EMPLID] ASC, [EPD_TDCID] ASC, [EPD_ITEM] ASC),
+    CONSTRAINT [FK_EMPLEADO_EMPLEADOS_EMPLEADO3] FOREIGN KEY ([EPD_CODEMP], [EPD_EMPLID]) REFERENCES [dbo].[EMPLEADOS] ([EPL_CODEMP], [EPL_EMPLID]),
+    CONSTRAINT [FK_EMPLEADO_TIPDOCCON_TIPOS_DO] FOREIGN KEY ([EPD_CODEMP], [EPD_TDCID]) REFERENCES [dbo].[TIPOS_DOCCONT] ([TDC_CODEMP], [TDC_TDCID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[EMPLEADOS_DOCUMENTOS]([EPD_CODEMP] ASC, [EPD_EMPLID] ASC, [EPD_TDCID] ASC, [EPD_ITEM] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla, almacena los distintos documentos para los empleados, se guardaran fisicamente en el motor de la base de datos
+   
+   Podran ser de cualquier tipo', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'EMPLEADOS_DOCUMENTOS';
+

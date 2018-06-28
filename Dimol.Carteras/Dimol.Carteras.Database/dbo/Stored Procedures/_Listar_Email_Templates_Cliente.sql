@@ -1,0 +1,14 @@
+﻿CREATE PROCEDURE [dbo].[_Listar_Email_Templates_Cliente]
+(
+@pclid int
+) 
+AS
+BEGIN
+SET NOCOUNT ON;
+	
+	SELECT TEMPLATEID, PCLID AS CLIENTE, ALIAS, [FILENAME]
+	FROM [dbo].[SYSTEM_EMAIL_TEMPLATES]
+	WHERE [dbo].[SYSTEM_EMAIL_TEMPLATES].PCLID = @pclid;
+
+END
+

@@ -1,0 +1,5 @@
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dto\bin\Release\Dimol.Reportes.dto.dll
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dto\bin\Release\Dimol.Reportes.dto.pdb
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dto\obj\Release\Dimol.Reportes.dto.dll
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dto\obj\Release\Dimol.Reportes.dto.pdb
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dto\obj\Release\Dimol.Reportes.dto.csprojResolveAssemblyReference.cache

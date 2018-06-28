@@ -1,0 +1,117 @@
+﻿@model Dimol.Carteras.Models.VisitaTerrenoGenerarModel
+
+@{
+    ViewBag.Title = "VisitaTerrenoGenerar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        // rule select
+        $.validator.addMethod("valueNotEquals", function (value, element, arg) {
+            return arg != value;
+        }, "Value must not equal arg.");
+
+        fnEventsfrmBuscarVisitaTerrenoGenerar();
+       
+    });
+</script>
+    <h2>Visita Terreno Generar</h2>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Deudor</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarVisitaTerrenoGenerar" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.Hidden("passGeoGestion")
+            @Html.Hidden("userGeoGestion")
+            <fieldset>
+                <legend>Generar Visitas</legend>
+                <div class="tabla">
+                   <div class="fila">
+                        <div class="col" style="width:150px"><label for="lstGestoresTerreno" title="Gestores Terreno">Gestores Terreno:</label> </div>
+                        <div class="col" style="width:250px">
+                            @Html.DropDownList("lstGestoresTerreno", null, new { @class = "ComboboxClass" })  
+                            @Html.ValidationMessageFor(model => model.lstGestoresTerreno)
+                        </div>
+
+
+                    </div>
+                   <div class="fila">
+                    <div class="col" style="float: right">
+                            
+                            <input type="button" value="Generar" onclick="fnCrearEnviarVisitasTerreno();" /> 
+                        </div>
+                    </div>
+                   
+                </div>
+            </fieldset>
+
+        }
+        <br />
+        @(Html.jqGrid("gridGenerarVisitas")
+    .addColumn(new Column("SolicitudId").setLabel("SolicitudId")
+        .setSortable(true).setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("RutDeudor").setLabel("Rut")
+        .setSortable(true)
+        .setWidth(60))
+    .addColumn(new Column("Deudor").setLabel("Deudor")
+        .setSortable(true)
+            .setWidth(120))
+    .addColumn(new Column("Direccion").setLabel("Direccion")
+            .setSortable(true)
+            .setWidth(120))
+    .addColumn(new Column("Comuna").setLabel("Comuna")
+            .setSortable(true).setAlign(Align.center)
+            .setWidth(70))
+    .addColumn(new Column("Ciudad").setLabel("Ciudad").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Latitud").setLabel("Latitud")
+         .setEditable(false)
+         .setSortable(true)
+         .setWidth(80))
+    .addColumn(new Column("Longitud").setLabel("Longitud")
+         .setEditable(false)
+         .setSortable(true)
+         .setWidth(80))
+            .addColumn(new Column("Deuda").setLabel("deuda").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(50))
+    .addColumn(new Column("Gestor").setLabel("Gestor")
+            .setSortable(true).setHidden(true)
+    .setWidth(80))
+    
+
+
+    // settings
+    .setCaption("Generar Visitas a Terreno")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDummy")
+    .setAltRows(true)
+    .setMultiSelect(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(1000)
+    .setRowList(new int[] { 100, 500, 1000 })
+    .setViewRecords(true)
+    .setSortName("Deudor")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerGenerarVisitas")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("UpdateIdsOfSelectedRows(rowid, status)")
+    .onSelectAll("fnOnSelectAll(aRowids, status)")
+    .onLoadComplete("fnOnLoadComplete(this)")
+    .Render()
+
+        )
+    </div>
+</div>
+

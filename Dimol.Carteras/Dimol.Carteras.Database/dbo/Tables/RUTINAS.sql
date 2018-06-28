@@ -1,0 +1,19 @@
+﻿CREATE TABLE [dbo].[RUTINAS] (
+    [RTN_CODEMP] INT           NOT NULL,
+    [RTN_RTNID]  INT           NOT NULL,
+    [RTN_NOMBRE] VARCHAR (200) NOT NULL,
+    [RTN_NIVEL]  SMALLINT      DEFAULT ((1)) NOT NULL,
+    CONSTRAINT [PK_RUTINAS] PRIMARY KEY CLUSTERED ([RTN_CODEMP] ASC, [RTN_RTNID] ASC),
+    CONSTRAINT [CKC_RTN_NIVEL_RUTINAS] CHECK ([RTN_NIVEL]=(3) OR [RTN_NIVEL]=(2) OR [RTN_NIVEL]=(1)),
+    CONSTRAINT [FK_RUTINAS_EMPRESA_R_EMPRESA] FOREIGN KEY ([RTN_CODEMP]) REFERENCES [dbo].[EMPRESA] ([EMP_CODEMP])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[RUTINAS]([RTN_CODEMP] ASC, [RTN_RTNID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena las distintas rutinas', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'RUTINAS';
+

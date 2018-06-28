@@ -1,0 +1,37 @@
+﻿@model Dimol.Finanzas.Models.ContratoCarteraModel
+
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmClausulas" }))
+{
+    @Html.ValidationSummary(true)
+            
+        <div class="tabla">
+
+             <div class="fila" style="visibility:hidden" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.idCCT2)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("idCCT2", 0, new { @class = "textboxClass" })</div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.ClausulasTodas2)</div>
+                <div class="col">@Html.DropDownList("ClausulasTodas2", null, new { @class= "ComboboxClass",  onchange=""})</div>
+                
+            </div>
+
+                       
+
+        </div>
+        
+}
+       
+  
+     <div class="col" style="float:none"><input type="button" value="Guardar" onclick="fnAgregarClausula2();" /></div>
+       </div>
+    </div>
+
+ 

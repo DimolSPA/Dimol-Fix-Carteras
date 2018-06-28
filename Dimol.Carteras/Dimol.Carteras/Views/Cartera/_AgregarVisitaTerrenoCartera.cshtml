@@ -1,0 +1,48 @@
+﻿@model Dimol.Carteras.Models.VisitaTerrenoCarteraGestor
+
+@using Mvc.HtmlHelpers
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmVisitaTerrenoCarteraGestor" }))
+{
+    @Html.ValidationSummary(true)
+   @Html.Hidden("CarteraId")
+    @Html.Hidden("passGeoGestion")
+    @Html.Hidden("userGeoGestion")
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.LstGestor)</div>
+            <div class="col">
+                @Html.DropDownList("LstGestor", null, new { @class = "ComboboxClass" })
+                @Html.ValidationMessageFor(model => model.LstGestor)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.CarteraNombre)</div>
+            <div class="col">
+
+                @Html.TextBox("CarteraNombre", null, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.CarteraNombre)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Descripcion)</div>
+            <div class="col">
+
+                @Html.TextBox("Descripcion", null, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.Descripcion)
+            </div>
+        </div>
+       
+        
+        <div class="fila">
+            <div class="col" style="float:right">
+                <input type="button" value="Guardar" id="btnGuardar" onclick="fnCrearClientLayerVisitaTerrenoCarteraGestor();" />
+
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

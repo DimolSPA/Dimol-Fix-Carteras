@@ -1,0 +1,13 @@
+﻿CREATE TABLE [dbo].[DEUDOR_QUIEBRA] (
+    [CODEMP]            INT           NOT NULL,
+    [RUT]               VARCHAR (20)  NOT NULL,
+    [NOMBRE]            VARCHAR (600) NOT NULL,
+    [ROLNUMERO]         VARCHAR (20)  NOT NULL,
+    [TRIBUNALID]        INT           NOT NULL,
+    [TIPOCAUSAID]       INT           NULL,
+    [MATERIAJODICIALID] INT           NULL,
+    [USRID_REGISTRO]    INT           NOT NULL,
+    [FEC_REGISTRO]      DATETIME      CONSTRAINT [DF_DEUDOR_QUIEBRA_FEC_REGISTRO] DEFAULT (getdate()) NOT NULL,
+    CONSTRAINT [PK_DEUDOR_QUIEBRA] PRIMARY KEY CLUSTERED ([RUT] ASC)
+);
+

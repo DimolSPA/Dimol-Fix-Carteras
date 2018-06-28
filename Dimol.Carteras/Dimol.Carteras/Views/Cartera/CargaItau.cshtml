@@ -1,0 +1,289 @@
+﻿@model Dimol.Carteras.Models.CargaItauModel
+
+@{
+    ViewBag.Title = "Carga Itau";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<h2>Carga Itau</h2>
+
+@using Mvc.HtmlHelpers
+@using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabDocumento" })))
+{
+    t.Tab("Carga", "tab1");
+    using (t.BeginPanel())
+    {
+        using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCargaMasiva" }))
+        {
+            @Html.ValidationSummary(true)
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:183px">@Html.LabelFor(model => model.RutCliente)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "RutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("OnSelectClienteCargaMasiva")
+                        @Html.ValidationMessageFor(model => model.RutCliente)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px">@Html.LabelFor(model => model.TipoCartera)</div>
+                    <div class="col" style="width:100px">
+                        @Html.DropDownListFor(model => model.TipoCartera, ViewBag.TipoCartera as List<SelectListItem>, new { onchange = "OnSelectTipoCartera()" })
+                        @Html.ValidationMessageFor(model => model.TipoCartera)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px">@Html.LabelFor(model => model.CodigoCarga)</div>
+                    <div class="col" style="width:200px">
+                        @Html.DropDownListFor(model => model.CodigoCarga, null, new { })
+                        @Html.ValidationMessageFor(model => model.CodigoCarga)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px"> @Html.LabelFor(model => model.Contrato)</div>
+                    <div class="col">
+                        @Html.DropDownListFor(model => model.Contrato, null, new { })
+                        @Html.ValidationMessageFor(model => model.Contrato)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoDeudor)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoDeudor" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoDeudor)</div>
+                    <div class="col"><img id="imgSubirArchivoDeudor" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoDireccion)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoDireccion" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoDireccion)</div>
+                    <div class="col"><img id="imgSubirArchivoDireccion" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoTelefono)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoTelefono" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoTelefono)</div>
+                    <div class="col"><img id="imgSubirArchivoTelefono" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoEmail)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoEmail" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoEmail)</div>
+                    <div class="col"><img id="imgSubirArchivoEmail" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoOperacion)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoOperacion" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoOperacion)</div>
+                    <div class="col"><img id="imgSubirArchivoOperacion" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoCuota)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoCuota" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoCuota)</div>
+                    <div class="col"><img id="imgSubirArchivoCuota" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoPago)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoPago" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoPago)</div>
+                    <div class="col"><img id="imgSubirArchivoPago" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:183px"></div>
+                    <div class="col" style="width:300px"></div>
+                    <div class="col" style="float:right">
+                        <input type="button" value="Nuevo" onclick="fnLimpiarCargaItau()" />
+                        <input type="button" value="Procesar" onclick="fnProcesarCargaItau()" disabled="disabled" id="btnProcesar" />
+                        <input type="button" value="Cargar" onclick="fnCargarArchivosItau();" disabled="disabled" id="btnCargar" />
+                        <input type="submit" id="btnSubmit" value="Subir Archivos" />
+                        
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:950px; flex-align:center">
+                        @(Html.jqGrid("grdCargaMasivaItau")
+                            .addColumn(new Column("Rut").setLabel("Rut")
+                                .setSortable(true).setAlign(Align.right)
+                                .setWidth(35))
+                            .addColumn(new Column("Nombre").setLabel("Nombre")
+                                .setSortable(true)
+                                .setWidth(120))
+                            .addColumn(new Column("Numero").setLabel("Numero")
+                                .setSortable(true).setAlign(Align.center)
+                                .setWidth(50))
+                            .addColumn(new Column("TipoDocumento").setLabel("Documento")
+                                .setSortable(true)
+                                .setWidth(90))
+                            .addColumn(new Column("TipoError").setLabel("Error")
+                                .setSortable(true)
+                                .setWidth(110))
+
+
+                            // settings
+                            .setCaption("Resultado Carga").setDataType(DataType.local).setData("")
+                            //.setRequestType(RequestType.get)
+                            //.setUrl("~/Mantenedor/GetAcciones/")
+                            .setAltRows(true)
+                            .setAltClass("altGridRows")
+                            .setAutoWidth(true)
+                            .setRowNum(10)
+                            .setRowList(new int[] { 10, 30, 50 })
+                            .setViewRecords(true)
+                            .setSortName("Nombre")
+                            .setSortOrder(SortOrder.asc)
+                            .setPager("pagerCargaMasiva")
+                            .setPagerPos(PagerPos.center)
+                            .setPgButtons(true)
+                            .setCellEdit(false)
+                            .setCellSubmit(CellSubmit.clientArray)
+                            //.setExcelExport("/Mantenedor/ExportToExcel")
+                            .Render()
+                        )
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        window.onload = function () {
+            document.getElementById('frmCargaMasiva').onsubmit = function () {
+                var formdata = new FormData(); //FormData object
+                var fileInput = document.getElementById('subirArchivoDeudor');
+                //Iterating through each files selected in fileInput
+                for (i = 0; i < fileInput.files.length; i++) {
+                    //Appending each file to FormData object
+                    if (fileInput.files[i].name.contains("ITAU_DEUDOR")) {
+                        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                    }
+                    else
+                    {
+                        alert("Error al subir archivo deudor");
+                        $("#imgSubirArchivoDeudor").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+                        return false;
+                    }
+                }
+                var fileInput = document.getElementById('subirArchivoDireccion');
+                //Iterating through each files selected in fileInput
+                for (i = 0; i < fileInput.files.length; i++) {
+                    //Appending each file to FormData object
+                    if (fileInput.files[i].name.contains("ITAU_DIREC")) {
+                        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                    } else {
+                        alert("Error al subir archivo direccion");
+                        $("#imgSubirArchivoDireccion").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+                        return false;
+                    }
+                }
+                var fileInput = document.getElementById('subirArchivoTelefono');
+                //Iterating through each files selected in fileInput
+                for (i = 0; i < fileInput.files.length; i++) {
+                    //Appending each file to FormData object
+                    if (fileInput.files[i].name.contains("ITAU_TELEF")) {
+                        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                    } else {
+                        alert("Error al subir archivo telefono");
+                        $("#imgSubirArchivoTelefono").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+                        return false;
+                    }
+                }
+                var fileInput = document.getElementById('subirArchivoEmail');
+                //Iterating through each files selected in fileInput
+                for (i = 0; i < fileInput.files.length; i++) {
+                    //Appending each file to FormData object
+                    if (fileInput.files[i].name.contains("ITAU_EMAIL")) {
+                        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                    } else {
+                        alert("Error al subir archivo email");
+                        $("#imgSubirArchivoEmail").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+                        return false;
+                    }
+                }
+                var fileInput = document.getElementById('subirArchivoOperacion');
+                //Iterating through each files selected in fileInput
+                for (i = 0; i < fileInput.files.length; i++) {
+                    //Appending each file to FormData object
+                    if (fileInput.files[i].name.contains("ITAU_OPER")) {
+                        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                    } else {
+                        alert("Error al subir archivo operacion");
+                        $("#imgSubirArchivoOperacion").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+                        return false;
+                    }
+                }
+                var fileInput = document.getElementById('subirArchivoCuota');
+                //Iterating through each files selected in fileInput
+                for (i = 0; i < fileInput.files.length; i++) {
+                    //Appending each file to FormData object
+                    if (fileInput.files[i].name.contains("ITAU_CUOTA")) {
+                        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                    } else {
+                        alert("Error al subir archivo cuota");
+                        $("#imgSubirArchivoCuota").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+                        return false;
+                    }
+                }
+                var fileInput = document.getElementById('subirArchivoPago');
+                //Iterating through each files selected in fileInput
+                for (i = 0; i < fileInput.files.length; i++) {
+                    //Appending each file to FormData object
+                    if (fileInput.files[i].name.contains("ITAU_PAGO")) {
+                        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                    } else {
+                        alert("Error al subir archivo pago");
+                        $("#imgSubirArchivoPago").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+                        return false;
+                    }
+                }
+                //Creating an XMLHttpRequest and sending
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/Cartera/Upload/?tipo=CargaItau');
+                xhr.send(formdata);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        $('#Archivo').val(xhr.responseText.replace(/\"/g, ''))
+                        if (xhr.responseText == '""') {
+                            alert("Error al subir archivos al servidor");
+                            $("#imgSubirArchivoDeudor").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoDireccion").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoTelefono").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoEmail").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoOperacion").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoCuota").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoPago").removeClass("ok").addClass("error");
+                            $("#btnCargar").attr("disabled", "disabled");
+                            $("#btnSubmit").removeAttr("disabled");
+                        } else {
+                            var archivos = xhr.responseText.split(';');
+                            if (archivos.length > 0) { $('#ArchivoDeudor').val(archivos[0].replace(/\"/g, '')); $("#imgSubirArchivoDeudor").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoDeudor").removeClass("ok").addClass("error"); }
+                            if (archivos.length > 1) { $('#ArchivoDireccion').val(archivos[1].replace(/\"/g, '')); $("#imgSubirArchivoDireccion").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoDireccion").removeClass("ok").addClass("error"); }
+                            if (archivos.length > 2) { $('#ArchivoTelefono').val(archivos[2].replace(/\"/g, '')); $("#imgSubirArchivoTelefono").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoTelefono").removeClass("ok").addClass("error"); }
+                            if (archivos.length > 3) { $('#ArchivoEmail').val(archivos[3].replace(/\"/g, '')); $("#imgSubirArchivoEmail").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoEmail").removeClass("ok").addClass("error"); }
+                            if (archivos.length > 4) { $('#ArchivoOperacion').val(archivos[4].replace(/\"/g, '')); $("#imgSubirArchivoOperacion").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoOperacion").removeClass("ok").addClass("error"); }
+                            if (archivos.length > 5) { $('#ArchivoCuota').val(archivos[5].replace(/\"/g, '')); $("#imgSubirArchivoCuota").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoCuota").removeClass("ok").addClass("error"); }
+                            if (archivos.length > 6) { $('#ArchivoPago').val(archivos[6].replace(/\"/g, '')); $("#imgSubirArchivoPago").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoPago").removeClass("ok").addClass("error"); }
+                            //alert("Archivo listo para ser procesado");
+                            $("#btnCargar").removeAttr("disabled");
+                            $("#btnSubmit").attr("disabled", "disabled");
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+
+    </script>
+}
+
+

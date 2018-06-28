@@ -1,0 +1,7 @@
+C:\Users\Felipe\Desktop\Dimol\Mvc.HtmlHelper.jqGrid\jqGrid.Sample\bin\jqGrid.Sample.dll
+C:\Users\Felipe\Desktop\Dimol\Mvc.HtmlHelper.jqGrid\jqGrid.Sample\bin\jqGrid.Sample.pdb
+C:\Users\Felipe\Desktop\Dimol\Mvc.HtmlHelper.jqGrid\jqGrid.Sample\bin\Mvc.HtmlHelper.jqGrid.dll
+C:\Users\Felipe\Desktop\Dimol\Mvc.HtmlHelper.jqGrid\jqGrid.Sample\bin\Mvc.HtmlHelper.jqGrid.pdb
+C:\Users\Felipe\Desktop\Dimol\Mvc.HtmlHelper.jqGrid\jqGrid.Sample\obj\Debug\jqGrid.Sample.csprojResolveAssemblyReference.cache
+C:\Users\Felipe\Desktop\Dimol\Mvc.HtmlHelper.jqGrid\jqGrid.Sample\obj\Debug\jqGrid.Sample.dll
+C:\Users\Felipe\Desktop\Dimol\Mvc.HtmlHelper.jqGrid\jqGrid.Sample\obj\Debug\jqGrid.Sample.pdb

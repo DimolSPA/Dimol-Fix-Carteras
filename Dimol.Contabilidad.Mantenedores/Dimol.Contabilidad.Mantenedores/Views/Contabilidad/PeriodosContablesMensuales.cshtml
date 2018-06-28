@@ -1,0 +1,99 @@
+﻿@model Dimol.Contabilidad.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "PeriodosContablesMensuales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    function getTrueFalse() {
+        var data = "true:false";
+        return data;
+    }
+
+</script>
+
+<br />
+<h2>Periodos Contables Mensuales</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("PeriodosContablesMensuales")
+    .addColumn(new Column("Codemp").setLabel("Empresa")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+     
+    .addColumn(new Column("ano").setLabel("Año")
+        .setSortable(true)
+        .setAlign(Align.center)
+        //.setEditable(true)
+        .setWidth(30))
+    .addColumn(new Column("mes").setLabel("Mes")
+        .setSortable(true)
+        .setAlign(Align.left)
+        //.setEditable(true)
+        .setWidth(60))
+    .addColumn(new Column("inicio").setLabel("Desde")
+        .setSortable(true)
+        .setEditable(true)
+        .setAlign(Align.center)
+        
+        .setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(50))
+    .addColumn(new Column("fin").setLabel("Hasta")
+        .setSortable(true)
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(50))
+    .addColumn(new Column("habilitado").setLabel("Habilitado")
+        .setSortable(true)
+        .setEditable(true)
+        .setWidth(30)
+        .setAlign(Align.center)
+        .setEditOptions("value:getTrueFalse()")
+        .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox))
+    
+    .addColumn(new Column("finalizado").setLabel("Finalizado")
+        .setSortable(true)
+        .setEditable(true)
+        .setWidth(30)
+        .setAlign(Align.center)
+        .setEditOptions("value:getTrueFalse()")
+        .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox))
+        
+   .addColumn(new Column("IdPeriodoMensual").setLabel("ID")
+        .setHidden(true)
+        .setSortable(true)
+        .setWidth(50))
+        
+       
+    // settings
+    
+    .setCaption("PeriodosContablesMensuales")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Contabilidad/GetPeriodosContablesMensuales/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50, 30, 30, 30 })
+    .setViewRecords(true)
+    .setSortName("ano")
+    
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerPeriodosContablesMensuales")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Contabilidad/OperPeriodoContableMes")
+    //.setNavAdd(ViewBag.Add)
+    //.setAddUrl("/Contabilidad/OperPeriodoContableMes")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Contabilidad/OperPeriodoContableMes")
+    .setExcelExport("/Contabilidad/ExportToExcel")
+    
+    .Render()
+
+)

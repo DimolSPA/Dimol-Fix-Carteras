@@ -1,0 +1,149 @@
+﻿Installing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Restoring event log to previous state for source Service1.
+Installing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Rolling back assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Installing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Rolling back assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Installing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Rolling back assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Installing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Unable to create an instance of the PJSpider.ProjectInstaller installer type.
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
+The inner exception System.NullReferenceException was thrown with the following error message: Object reference not set to an instance of an object..
+Rolling back assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Unable to create an instance of the PJSpider.ProjectInstaller installer type.
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
+The inner exception System.NullReferenceException was thrown with the following error message: Object reference not set to an instance of an object..
+Installing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Uninstalling assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Installing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Installing service Bot Poder Judicial...
+Service Bot Poder Judicial has been successfully installed.
+Creating EventLog source Bot Poder Judicial in log Application...
+Committing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Installing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Installing service Bot Poder Judicial...
+Creating EventLog source Bot Poder Judicial in log Application...
+Rolling back assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Restoring event log to previous state for source Bot Poder Judicial.
+Installing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Installing service Bot Poder Judicial...
+Creating EventLog source Bot Poder Judicial in log Application...
+Rolling back assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Restoring event log to previous state for source Bot Poder Judicial.
+Uninstalling assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Removing EventLog source Bot Poder Judicial.
+Service Bot Poder Judicial is being removed from the system...
+Service Bot Poder Judicial was successfully removed from the system.
+Installing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Installing service Bot Poder Judicial...
+Service Bot Poder Judicial has been successfully installed.
+Creating EventLog source Bot Poder Judicial in log Application...
+Committing assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Uninstalling assembly 'D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.InstallLog
+   assemblypath = D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider\bin\Debug\PJSpider.exe
+Removing EventLog source Bot Poder Judicial.
+Service Bot Poder Judicial is being removed from the system...
+Service Bot Poder Judicial was successfully removed from the system.
+Attempt to stop service Bot Poder Judicial.

@@ -1,0 +1,5 @@
+C:\Users\Rodrigo\Desktop\Dimol_FINANZAS\Dimol_Finanzas\Dimol.Finanzas\Dimol.Finanzas.dto\bin\Debug\Dimol.Finanzas.dto.dll
+C:\Users\Rodrigo\Desktop\Dimol_FINANZAS\Dimol_Finanzas\Dimol.Finanzas\Dimol.Finanzas.dto\bin\Debug\Dimol.Finanzas.dto.pdb
+C:\Users\Rodrigo\Desktop\Dimol_FINANZAS\Dimol_Finanzas\Dimol.Finanzas\Dimol.Finanzas.dto\obj\Debug\Dimol.Finanzas.dto.csprojResolveAssemblyReference.cache
+C:\Users\Rodrigo\Desktop\Dimol_FINANZAS\Dimol_Finanzas\Dimol.Finanzas\Dimol.Finanzas.dto\obj\Debug\Dimol.Finanzas.dto.dll
+C:\Users\Rodrigo\Desktop\Dimol_FINANZAS\Dimol_Finanzas\Dimol.Finanzas\Dimol.Finanzas.dto\obj\Debug\Dimol.Finanzas.dto.pdb

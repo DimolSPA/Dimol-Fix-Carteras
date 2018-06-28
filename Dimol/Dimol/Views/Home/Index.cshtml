@@ -1,0 +1,16 @@
+﻿@model  Dimol.dto.UserSession
+@{
+    ViewBag.Title = "Página principal"; 
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+          
+        </div>
+    </section>
+}
+<br />
+<h3>Bienvenido, las novedades del día:</h3>
+<ol class="round">
+    @Html.Partial("_Home"+ Model.PrfId)
+</ol>

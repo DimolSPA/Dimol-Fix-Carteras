@@ -1,0 +1,41 @@
+﻿@using Mvc.HtmlHelpers
+@using jqGrid.Sample.Models
+@model List<Organization>
+           
+@{
+    Layout = null;
+    string rowId = (string)ViewData["RowId"];
+    int level = Convert.ToInt32(rowId.Split('_')[0]) + 1;
+    int width = (int)(12 * level * 1.5);
+    int left = width - 18;
+}
+@foreach (Organization org in Model)
+{
+    <tr id="@(org.Id)" class="ui-widget-content" role="row">
+        <td></td>
+        <td title="@(org.Name)" style="width: @(width)px;" role="gridcell">
+            <table>
+                <tr>
+                    <td class="treeclick" align="right">
+                        <div style="width: @(width)px;">
+                            <div id="div_@(org.Id)" class="ui-icon ui-icon-plus" style="left: @(left)px;"/>
+                            <script type="text/javascript">
+                                $("#div_@(org.Id)").click(function () {
+                                    toggleExpCol("div_@(org.Id)", "@(org.Id)");
+                                });
+                            </script>
+                        </div>
+                    </td>
+                    <td title="@(org.Name)" style="white-space: nowrap" role="gridcell">@org.Name
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td role="gridcell">@org.AssetAllocation</td>
+        <td role="gridcell">@org.ClientReview</td>
+        <td role="gridcell">@org.IneligibleActivity</td>
+        <td role="gridcell">@org.InvestmentGuideline</td>
+        <td role="gridcell">@org.BillableAssets</td>
+        <td role="gridcell">@org.NonEarnedPcs</td>
+    </tr>
+}

@@ -1,0 +1,212 @@
+﻿@model Dimol.Caja.Models.BusquedaConciliacionAprobadoModel
+@{
+    ViewBag.Title = "Consulta de Pagos";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+@using Mvc.HtmlHelpers
+
+<style type="text/css" media="screen">
+    th.ui-th-column div {
+        white-space: normal !important;
+        height: auto !important;
+        padding: 2px;
+    }
+
+    .rowImputado {
+        background-color: #99ccff;
+        border-color: #00264d;
+        background-image: none;
+    }
+</style>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+
+        fnEventsfrmRecepcionDocumento();
+    });
+
+    window.onload = function () {
+        $("#t_gridConsultaPago").append("<div align='right'><button onclick='fnExcelPagos();' title='Exportar a Excel'><i class='fa fa-file-excel-o' style='font-size:15px;color:green;'></i></button></div>");
+        $("#gridConsultaPago").jqGrid("setColProp", "Cliente",
+            {
+                searchoptions: {
+                    sopt: ['cn', 'nc', 'eq', 'ne'],
+                    defaultSearch: 'cn'
+                }
+            });
+       
+    }
+</script>
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:125px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                <div class="col">
+                    @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnCargarGridConciliacionAprGrilla")
+
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:125px">@Html.LabelFor(model => model.NombreRutDeudorSearch)</div>
+                <div class="col">
+                    @Html.JQueryUI().AutocompleteFor(model => model.CtcidSearch, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudorSearch", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:125px">Fecha Cancelacion</div>
+                <div class="col">
+                    @Html.JQueryUI().Datepicker("FechaBusquedaConcilia", DateTime.Today, new { @style = "z-index:9" }).ShowButtonPanel(true).ShowWeek(false)
+
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:125px">@Html.LabelFor(model => model.NumeroComprobante)</div>
+                <div class="col">
+                    @Html.EditorFor(model => model.NumeroComprobante)
+                    @Html.ValidationMessageFor(model => model.NumeroComprobante)
+
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="float:right;">
+
+                    <input type="button" value="Buscar" id="btnBuscarPago" onclick="fnCargarGridPagos();" />
+
+                </div>
+            </div>
+        </div>
+        @(Html.jqGrid("gridConsultaPago")
+
+
+                .addColumn(new Column("ConciliacionId").setLabel("ConciliacionId")
+                .setEditable(false)
+                .setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("MovimientoId").setLabel("MovimientoId")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("CustodiaId").setLabel("CustodiaId")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("Pclid").setLabel("Pclid")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("GestorId").setLabel("GestorId")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("RutCliente").setLabel("Rut Cliente")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Cliente").setLabel("Cliente")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("TipoConciliacion").setLabel("Comprobante")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("NumComprobante").setLabel("Nº Comprobante")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Moneda").setLabel("Moneda")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(50))
+                 .addColumn(new Column("TipoCambio").setLabel("Tipo Cambio")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(50))
+                 .addColumn(new Column("RutDeudor").setLabel("Rut Deudor")
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Deudor").setLabel("Deudor")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(200))
+                 .addColumn(new Column("TipoDocumento").setLabel("Tipo")
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Numero").setLabel("Numero")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("FechaAsignado").setLabel("Fecha Asignado")
+                .setSortable(true).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(80))
+                .addColumn(new Column("Asignado").setLabel("Asignado").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Capital").setLabel("Capital").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Interes").setLabel("Interes").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Honorario").setLabel("Honorario").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("GastoPre").setLabel("GastoPre").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("GastoJud").setLabel("GastoJud").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("RutAsegurado").setLabel("Rut Asegurado")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Asegurado").setLabel("Asegurado")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("Gestor").setLabel("Gestor")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("FecCancela").setLabel("Fecha Cancelación")
+                .setSortable(true).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(80))
+                // settings
+                .setCaption("Documentos Pagados")//.setWidth(800)
+                .setAutoWidth(true)
+                .setMultiSelect(false)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Tesoreria/ConsultaDePagos?pclid=&ctcid=&fechaCancelacion=" + DateTime.Now + "&numComprobante=")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setRowNum(1000)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("ConciliacionId")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerPagos")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .setAutoWidth(true)
+                .setShrinkToFit(false)
+                .setScroll(true)
+                .setHeight(400)
+                .setGrouping(true)
+                .setGroupingView("groupField: ['Cliente'],groupColumnShow: [false], groupText: ['<b>{0} - {1} Documentos(s)</b>'], groupCollapse: false, groupOrder: ['desc'],groupDataSorted: true")
+                .setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+                .Render()
+
+
+        )
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="width:120px"><label id="lblNumCuenta">Nº de Cuenta</label></div>
+        <div class="col">
+            @Html.TextBox("NumeroCuenta", null, new { @class = "textboxClass" })
+            
+        </div>
+
+    </div>
+    <div class="fila">
+        <div class="col" style="width:120px"><label id="lblCrearTipoCuenta">Tipo de Cuenta</label></div>
+        <div class="col">
+            @Html.DropDownList("TipoCuenta", null, new { })
+            
+        </div>
+
+    </div>
+    <div class="fila">
+        <div class="col" style="width:120px"><label id="lblBanco">Banco</label></div>
+        <div class="col">
+            @Html.DropDownList("Banco", null, new { })
+
+        </div>
+
+    </div>
+    <div class="fila">
+        <div class="col" style="float:right">
+            <input type="button" value="Guardar" id="btnGuardarCuenta" onclick="fnCrearCuentaBancaria();" />
+        </div>
+
+    </div>
+</div>

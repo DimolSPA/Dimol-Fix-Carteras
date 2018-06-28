@@ -1,0 +1,24 @@
+﻿CREATE TABLE [dbo].[ISAPRES] (
+    [ISP_CODEMP] INT           NOT NULL,
+    [ISP_ISPID]  INT           NOT NULL,
+    [ISP_RUT]    VARCHAR (20)  NOT NULL,
+    [ISP_NOMBRE] VARCHAR (120) NOT NULL,
+    [ISP_PCTID]  INT           NOT NULL,
+    CONSTRAINT [PK_ISAPRES] PRIMARY KEY NONCLUSTERED ([ISP_CODEMP] ASC, [ISP_ISPID] ASC),
+    CONSTRAINT [FK_ISAPRES_EMPRESA_I_EMPRESA] FOREIGN KEY ([ISP_CODEMP]) REFERENCES [dbo].[EMPRESA] ([EMP_CODEMP])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[ISAPRES]([ISP_CODEMP] ASC, [ISP_ISPID] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_RUT]
+    ON [dbo].[ISAPRES]([ISP_CODEMP] ASC, [ISP_RUT] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla, almacena las distintas Isapres', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'ISAPRES';
+

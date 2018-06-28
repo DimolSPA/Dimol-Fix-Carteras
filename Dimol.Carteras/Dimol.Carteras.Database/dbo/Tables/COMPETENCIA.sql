@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[COMPETENCIA] (
+    [ID_COMPETENCIA] INT          IDENTITY (1, 1) NOT NULL,
+    [CODEMP]         INT          NOT NULL,
+    [NOMBRE]         VARCHAR (50) NOT NULL,
+    CONSTRAINT [PK_Competencia] PRIMARY KEY CLUSTERED ([ID_COMPETENCIA] ASC)
+);
+

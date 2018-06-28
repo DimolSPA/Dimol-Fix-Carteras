@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[TIPOS_PROCESO] (
+    [CODEMP]              INT          NOT NULL,
+    [TIPO_PROCESO]        INT          IDENTITY (1, 1) NOT NULL,
+    [NOMBRE_TIPO_PROCESO] VARCHAR (50) NOT NULL,
+    [FECHA]               DATETIME     NOT NULL,
+    [USUARIO]             INT          NOT NULL,
+    CONSTRAINT [PK_TIPOS_PROCESO] PRIMARY KEY CLUSTERED ([CODEMP] ASC, [TIPO_PROCESO] ASC)
+);
+

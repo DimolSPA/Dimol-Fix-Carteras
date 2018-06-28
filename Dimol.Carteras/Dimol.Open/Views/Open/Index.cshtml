@@ -1,0 +1,614 @@
+﻿@model Dimol.Open.Models.BuscarCausaJudicial
+@{
+    ViewBag.Title = "Buscar Causas Judiciales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Buscar Rut</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#dlgChgPss").dialog({
+            autoOpen: false,
+            width: 200,
+            height: 150,
+            modal: true,
+            show: {
+                effect: "bounce",
+                duration: 500
+            },
+            hide: {
+                effect: "puff",
+                duration: 500
+            },
+            open: function () {                
+                $("#idPssAct").val('');
+                $("#idNewPss").val('');
+                $("#idCnfPss").val('');
+            },
+            close: function () {
+                
+            },
+            position: { 
+                my: "center", 
+                at: "center", 
+                of: $(this)
+            }
+        });
+    });
+
+    $(function () {
+        $("#dlgUsers").dialog({
+            autoOpen: false,
+            width: 700,
+            height: 250,
+            modal: true,
+            show: {
+                effect: "bounce",
+                duration: 500
+            },
+            hide: {
+                effect: "puff",
+                duration: 500
+            },
+            open: function () {
+                fnTraeUsuariosPJ(0, 'R');
+            },
+            close: function () {
+
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: $(this)
+            }
+        });
+    });
+
+    $(function () {
+        $("#dlgEmpresas").dialog({
+            autoOpen: false,
+            width: 600,
+            height: 400,
+            modal: true,
+            show: {
+                effect: "bounce",
+                duration: 500
+            },
+            hide: {
+                effect: "puff",
+                duration: 500
+            },
+            open: function () {
+                fnTraeRutaLogoEmpresaPJ(0, 'R');
+            },
+            close: function () {
+
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: $(this)
+            }
+        });
+    });
+
+    window.onload = function () {        
+
+            document.getElementById('frmCargaImagen').onsubmit = function () {
+
+                if ($('#RutClienteLogo').val() != '' && $('#idLogoEmpresa').val() != '') {
+
+                    var formdata = new FormData(); //FormData object
+                    var fileInput = document.getElementById('idLogoEmpresa');
+                    //Iterating through each files selected in fileInput
+                    for (i = 0; i < fileInput.files.length; i++) {
+                        //Appending each file to FormData object
+                        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                    }
+                    //Creating an XMLHttpRequest and sending
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '/Open/Upload/?tipo=CargaLogoEmpresa&Pclid=' + $('#PclidLogo').val() + '&idUser=' + ($('#idRutaLogo').val() == '' ? 0 : $('#idRutaLogo').val()));
+                    xhr.send(formdata);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            $('#Archivo').val(xhr.responseText.replace(/\"/g, ''))
+                            if (xhr.responseText == '""') {
+                                alert("Error al subir la imagen al servidor");
+                                $("#imgSubirArchivo").removeClass("ok").addClass("error");
+                            } else if (xhr.responseText == '-1') {
+                                alert("El tipo de imagen no es válida, sólo se permiten archivos .jpg, .jpeg, o .png");
+                                $("#imgSubirArchivo").removeClass("ok").addClass("error");                  
+                            } else if (xhr.responseText == '0') {
+                                alert("El cliente ya tiene una imagen cargada");
+                                $("#imgSubirArchivo").removeClass("ok").addClass("error");                  
+                            } else {
+                                alert("Empresa ingresada con éxito");
+                                $("#imgSubirArchivo").removeClass("error").addClass("ok");
+                            }
+                        }
+                    }
+                    return false;
+                }
+                else {
+                    alert("Debe completar todos los datos");
+                }
+            }
+       
+    }
+</script>
+
+@if (Session["Usuario"] != null)
+{
+    <text>
+        @using (Html.BeginForm("LogOff", "Open", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <div style="float:right;margin-top:-30px;">
+                <div class="tabla">
+                    <div class="fila">
+                       <!-- <div class="col">
+                            <img alt="Fotografía" src="@ViewBag.UrlFoto" height="70px" width="70px" style="border-radius:4px;box-shadow: 5px 5px 5px grey;" />
+                        </div>
+                        <div class="col" style="width:150px;text-align:left;vertical-align:middle;padding-left:10px;">
+                            <div style="height:20px;vertical-align:middle">
+                                @ViewBag.UserName
+                            </div>
+                            <div style="height:20px;vertical-align:middle">
+                                @ViewBag.Cargo
+                            </div>
+                            <div style="height:20px;vertical-align:middle">
+                                Mensajes
+                            </div>
+                        </div>-->
+                        @if (ViewBag.Prf == "S")
+                        {
+                            <div class="col">
+                                <a href="#" onclick="$('#dlgUsers').dialog('open');">Ingresar Usuario</a>
+                            </div>
+                            <div class="col">
+                                <a href="#" onclick="$('#dlgEmpresas').dialog('open');">Ingresar Empresa</a>
+                            </div>
+                        }
+                        <div class="col">
+                            <input type="hidden" id="usrPJ" value="@ViewBag.UsrName" />
+                        </div>
+                        <div class="col">
+                            <a href="#" onclick="$('#dlgChgPss').dialog('open');">Cambiar Password</a>
+                            <!--@Html.ActionLink("Cambiar Password", "Login", "Open", routeValues: null, htmlAttributes: new { id = "cambioPass" })-->
+                        </div>
+                        <div class="col">
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </text>
+}
+else
+{
+
+
+    <ul>
+        <li>@Html.ActionLink("Iniciar sesión", "Login", "Open", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+
+}
+
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Causas Civiles</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarDeudorCausasJudiciales" }))
+        {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>Buscar Deudor</legend>
+
+                <div class="tabla">
+
+
+                    <!--<div class="fila">
+                        <div class="col" style="width:160px">@Html.LabelFor(model => model.RutDeudor)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "RutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                            @Html.ValidationMessageFor(model => model.RutDeudor)
+                            @Html.HiddenFor(model => model.RutDeudor)@Html.HiddenFor(model => model.NombreRutDeudor)
+                        </div>
+                    </div>-->
+
+                    <div class="fila">
+                        <div class="col" style="width:160px">@Html.LabelFor(model => model.RutDeudor)</div>
+                        <div class="col">
+                            @Html.TextBox("RutDeudor", null, new { @class = "textboxRutNombre", maxlength = 10, style = "width:80px;", onkeypress = "$('#NombreDeudor').html('')" }) -
+                            @Html.TextBox("DvDeudor", null, new { @class = "textboxRutNombre", maxlength = 1, style = "width:20px;", onkeypress = "$('#NombreDeudor').html('')" })
+                            @Html.Label(" ", new { id = "NombreDeudor", style="margin-left:10px;" })
+                            @Html.ValidationMessageFor(model => model.RutDeudor)
+                            @Html.HiddenFor(model => model.RutDeudor)@Html.HiddenFor(model => model.NombreRutDeudor)
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnGridBuscarCausaRut();" /></div>
+                    </div>
+
+                </div>
+
+            </fieldset>
+        }
+        <div class="tabla">
+            <div class="fila">
+
+                <div class="col" style="width:99%">
+                    @using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabDocumento" })))
+                    {
+                        t.Tab("Causas Encontradas", "tab1");
+                        //t.Tab("Causas Internas", "tab2");
+                        using (t.BeginPanel())
+                        {
+                            @(Html.jqGrid("gridCausas")
+                                     .addColumn(new Column("Rol").setLabel("Rol").setAlign(Align.center)
+                                            .setSortable(true)//.setCustomFormatter("fnLinkPJ")
+                                            .setWidth(100))
+                                    .addColumn(new Column("Fecha").setLabel("Fecha").setAlign(Align.center)
+                                        .setSortable(true)
+                                        .setWidth(65).setFormatter(Formatters.date).setDateFmt("d-m-Y"))
+                                    .addColumn(new Column("Caratulado").setLabel("Caratulado")
+                                        .setSortable(true)
+                                        .setWidth(350))
+                                    .addColumn(new Column("Tribunal").setLabel("Tribunal")
+                                        .setSortable(true)
+                                        .setWidth(300))
+                                    .addColumn(new Column("RutaDemanda").setLabel("Demanda")
+                                        .setSortable(true).setCustomFormatter("fnBotonesArchivo")
+                                        .setWidth(60))
+                                // settings
+                                .setCaption("Causas Encontradas")
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Open/GetDummy")
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setAutoWidth(false)
+                                .setRowNum(30)
+                                .setRowList(new int[] { 10, 30, 50 })
+                                .setViewRecords(true)
+                                .setSortName("Fecha")
+                                .setSortOrder(SortOrder.desc)
+                                .setPager("pagerCausas")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .setNavEdit(true)
+                                .setEditUrl("/Cartera/EditDummy")
+                                .setAddUrl("/Cartera/EditDummy")
+                                .setExcelExport("/Mantenedor/ExportToExcel")
+                                .setShrinkToFit(false)
+                                .setWidth(900)
+                                .onGridComplete("fnNotifCausasDeudor()")
+                                .Render())
+
+                            @*using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDeudorCausas" }))
+                        {
+                            @Html.ValidationSummary(true)
+                            <p>Causas de Gestion de la cartera</p>
+
+                        }*@
+                            <br />
+
+                        }
+
+                        /*    using (t.BeginPanel())
+                            {
+                                @(Html.jqGrid("gridRol")
+                                .addColumn(new Column("Rolid").setLabel("rolid").setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(65))
+                                .addColumn(new Column("Cliente").setLabel("Cliente")
+                                    .setSortable(true)
+                                    .setWidth(150))
+                                .addColumn(new Column("Deudor").setLabel("Deudor")
+                                    .setSortable(true)
+                                    .setWidth(150))
+                                .addColumn(new Column("NumeroRol").setLabel("Rol")
+                                    .setSortable(true)
+                                    .setWidth(70))
+                                .addColumn(new Column("Causa").setLabel("Causa")
+                                    .setSortable(true)
+                                    .setWidth(120))
+                                .addColumn(new Column("Tribunal").setLabel("Tribunal")
+                                    .setSortable(true)
+                                    .setWidth(150))
+                                .addColumn(new Column("Materia").setLabel("Materia")
+                                    .setSortable(true)
+                                    .setWidth(150))
+                                .addColumn(new Column("Estado").setLabel("Estado")
+                                    .setSortable(true)
+                                    .setWidth(120))
+
+                                // settings
+                                .setCaption("Roles")
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Cartera/GetDummy")
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setAutoWidth(false)
+                                .setRowNum(10)
+                                .setRowList(new int[] { 10, 30, 50 })
+                                .setViewRecords(true)
+                                .setSortName("NumeroRol")
+                                .setSortOrder(SortOrder.desc)
+                                .setPager("pagerRol")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .onSelectRow("RolSeleccionado(rowid)")
+                                .Render()
+
+                                                        )
+                                <br />
+                                @(Html.jqGrid("gridDocRol")
+                            .addColumn(new Column("Tipo").setLabel("Tipo")
+                                .setSortable(true)
+                                .setWidth(120))
+                            .addColumn(new Column("Numero").setLabel("Número")
+                                .setSortable(true).setAlign(Align.right)
+                                .setWidth(120))
+                            .addColumn(new Column("Monto").setLabel("Monto")
+                                .setSortable(true).setFormatter(Formatters.number).setAlign(Align.right)
+                                .setWidth(120))
+                            .addColumn(new Column("Saldo").setLabel("Saldo")
+                                .setSortable(true).setFormatter(Formatters.number).setAlign(Align.right)
+                                .setWidth(120))
+                                                        // settings
+                            .setCaption("Documentos ROL")
+                            .setRequestType(RequestType.get)
+                            .setUrl("~/Cartera/GetDummy")
+                            .setAltRows(true)
+                            .setAltClass("altGridRows")
+                            .setAutoWidth(true)
+                            .setRowNum(10)
+                            .setRowList(new int[] { 10, 30, 50 })
+                            .setViewRecords(true)
+                            .setSortName("Ccbid")
+                            .setSortOrder(SortOrder.asc)
+                            .setPager("pagerDocRol")
+                            .setPagerPos(PagerPos.center)
+                            .setPgButtons(true)
+                            .setCellEdit(false)
+                            .setCellSubmit(CellSubmit.clientArray)
+                            .setFooterRow(true)
+                            .onLoadComplete("var grid = $('#gridDocRol'); grid.jqGrid('footerData','set', {Tipo: 'Total:', Monto: totalMontoRol , Saldo: totalSaldoRol });")
+                            .Render()
+
+                                                )
+                                                @Html.Hidden("hddTotalMontoRol", 0)
+                                                @Html.Hidden("hddTotalSaldoRol", 0)
+
+                                                <br />
+
+                                                @(Html.jqGrid("gridEstadosRol")
+                            .addColumn(new Column("Id").setLabel("Eliminar")
+                                .setSortable(true).setHidden(true)
+                                .setWidth(60))
+                            .addColumn(new Column("Materia").setLabel("Materia")
+                                .setSortable(true)
+                                .setWidth(120))
+                            .addColumn(new Column("Cuaderno").setLabel("Cuaderno")
+                                .setSortable(true)
+                                .setWidth(120))
+                            .addColumn(new Column("Estado").setLabel("Estado")
+                                .setSortable(true)
+                                .setWidth(120))
+                            .addColumn(new Column("FechaJudicial").setLabel("Fecha")
+                                .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                .setWidth(70))
+                            .addColumn(new Column("Comentario").setLabel("Comentario")
+                                .setSortable(true)
+                                .setWidth(275))
+                            .addColumn(new Column("Usuario").setLabel("Usuario")
+                                .setSortable(true)
+                                .setWidth(150))
+                            .addColumn(new Column("Archivo").setLabel("Archivo")
+                                .setSortable(true).setCustomFormatter("fnBotonesArchivo")
+                                .setWidth(60))
+
+                            // settings
+                            .setCaption("Estados").setWidth(950)
+                            .setRequestType(RequestType.get)
+                            .setUrl("~/Cartera/GetDummy")
+                            .setAltRows(true)
+                            .setAltClass("altGridRows")
+                            .setRowNum(10)
+                            .setRowList(new int[] { 10, 30, 50 })
+                            .setViewRecords(true)
+                            .setSortName("FechaJudicial")
+                            .setSortOrder(SortOrder.desc)
+                            .setPager("pagerEstados")
+                            .setPagerPos(PagerPos.center)
+                            .setPgButtons(true)
+                            .setCellEdit(false)
+                            .setCellSubmit(CellSubmit.clientArray)
+                            .setShrinkToFit(true)
+                            .Render()
+
+                                                )
+                            }*/
+                        <div id="dvTotalCausas"></div>
+                        <h6>* Consulta de causas en tribunales civiles Año 2013 en adelante</h6>
+                        <h6>* Solo se muestran causas como demandado y es probable que no aparezcan todas las causas asociadas al rut</h6>
+                    }
+                    @using (Html.JQueryUI().Begin(new JQueryUIHelpers.Dialog(new { id = "ppDocto" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Documento Deudor")
+    .CloseOnEscape(true)
+    .Width(900)
+    .Height(600)
+                        //.TriggerClick("button")
+    ))
+                    {
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="dlgChgPss" title="Cambio de Contraseña">
+        <div class="tabla">
+            <div class="fila">
+                <div class="col">
+                    <input type="password" placeholder="Password Actual" id="idPssAct" />
+                </div>
+                <div class="col">
+                    <button onclick="(document.getElementById('idPssAct').type == 'text') ? document.getElementById('idPssAct').type = 'password' : document.getElementById('idPssAct').type = 'text';" class="ui-icon ui-icon-circle-plus"></button>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col">
+                    <input type="password" placeholder="Nuevo Password" id="idNewPss" />
+                </div>
+                <div class="col">
+                    <button onclick="(document.getElementById('idNewPss').type == 'text') ? document.getElementById('idNewPss').type = 'password' : document.getElementById('idNewPss').type = 'text';" class="ui-icon ui-icon-circle-plus"></button>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col">
+                    <input type="password" placeholder="Confirme Password" id="idCnfPss" />
+                </div>
+                <div class="col">
+                    <button onclick="(document.getElementById('idCnfPss').type == 'text') ? document.getElementById('idCnfPss').type = 'password' : document.getElementById('idCnfPss').type = 'text';" class="ui-icon ui-icon-circle-plus"></button>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col">
+                    <button onclick="fnGuardarPassword()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dlgUsers" title="Usuarios">
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:90px">
+                    Id Usuario
+                </div>
+                <div class="col">
+                    <input type="text" id="idUserId" disabled/>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:90px">
+                    Nombre
+                </div>
+                <div class="col">
+                    <input type="text" id="idNombrePers" />
+                    <input type="button" id="idButtonL" value="<<" onclick="fnTraeUsuariosPJ($('#idUserId').val(), 'L');" />
+                    <input type="button" id="idButtonR" value=">>" onclick="fnTraeUsuariosPJ($('#idUserId').val(), 'R');" />
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:90px">
+                    Usuario
+                </div>
+                <div class="col">
+                    <input type="text" id="idUsername" />                    
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:90px">Password</div>
+                <div class="col"><input type="password" placeholder="Password" id="idPass" /></div>
+                <div class="col"><button onclick="(document.getElementById('idPass').type == 'text') ? document.getElementById('idPass').type = 'password' : document.getElementById('idPass').type = 'text';" class="ui-icon ui-icon-circle-plus"></button></div>
+            </div>
+
+            <div class="fila">                
+                <div class="col" style="width:90px">@Html.LabelFor(model => model.RutCliente)</div>
+                <div class="col">
+                    @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "RutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                    @Html.ValidationMessageFor(model => model.RutCliente)
+                    @Html.HiddenFor(model => model.RutCliente)@Html.HiddenFor(model => model.NombreRutCliente)
+                </div>
+                
+            </div>
+            
+            <div class="fila">
+                <div class="col" style="width:90px">
+                    @Html.LabelFor(model => model.Activo)
+                </div>
+                <div class="col">
+                    @Html.DropDownListFor(model => model.Activo, ViewBag.Activo as List<SelectListItem>)
+                    @Html.ValidationMessageFor(model => model.Activo)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:90px">
+                    @Html.LabelFor(model => model.Perfil)
+                </div>
+                <div class="col">
+                    @Html.DropDownListFor(model => model.Perfil, ViewBag.Perfil as List<SelectListItem>)
+                    @Html.ValidationMessageFor(model => model.Perfil)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col"><button onclick="fnNewUserPJ()">Nuevo</button></div>
+                <div class="col"><button onclick="fnGuardarUserPJ()">Guardar</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dlgEmpresas" title="Empresas">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCargaImagen" }))
+        {
+        @Html.ValidationSummary(true)
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:60px">Id</div>
+                    <div class="col"><input type="text" id="idRutaLogo" disabled /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:60px">@Html.LabelFor(model => model.RutClienteLogo)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.PclidLogo, Url.Action("BuscarRutNombreCliente"), "RutClienteLogo", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                        @Html.ValidationMessageFor(model => model.RutClienteLogo)
+                        @Html.HiddenFor(model => model.RutClienteLogo)@Html.HiddenFor(model => model.NombreRutClienteLogo)
+                    </div>
+                    <div class="col">
+                        <input type="button" id="idBotonL" value="<<" onclick="fnTraeRutaLogoEmpresaPJ($('#idRutaLogo').val(), 'L');" />
+                        <input type="button" id="idBotonR" value=">>" onclick="fnTraeRutaLogoEmpresaPJ($('#idRutaLogo').val(), 'R');" />
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:60px" id="idNombreLogo">Ruta</div>
+                    <div class="col"><input type="file" style="width:300px" id="idLogoEmpresa"><input type="hidden" name="Archivo" id="Archivo"></div>
+                    <div class="col"><img id="imgSubirArchivo" src="~/Images/blank.png" class="" style="float:left" /></div>                    
+                </div>
+                <div class="fila">
+                    <div class="col"><img id="idLogoEmpresaPJ" src="" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col"><input type="button" onclick="fnNuevaEmpresaPJ()" value="Nuevo" /></div>
+                    <div class="col"><input type="submit" id="idGuardarLogo" value="Guardar" /></div> 
+                </div>
+                <div class="fila">
+                    <div class="col" style="font-weight:bold">* Se recomienda que la imagen a subir no supere los 300 x 165 px</div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+<br />
+
+

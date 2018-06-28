@@ -1,0 +1,35 @@
+﻿
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+
+<br />
+@(Html.jqGrid("gridMotivoCastigoDevolucion")
+    .addColumn(new Column("TipoId").setLabel("Tipo")
+        .setSortable(true).setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Motivo").setAlign(Align.left)
+        .setSortable(true)
+        .setWidth(700))
+
+    // settings
+    .setCaption("Motivos de Castigo/Devolucion")
+    .setRequestType(RequestType.get)
+    .setUrl("~/cartera/ListarMotivoCastigoDevolucion")
+    .setAltRows(true)
+    .setMultiSelect(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(200)
+    .setRowList(new int[] { 10, 50, 100, 500 })
+    .setViewRecords(true)
+        .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerMotivoCastigoDevolucion")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("UpdateIdsOfSelectedRowsMotivo(rowid, status)")
+    .onSelectAll("fnOnSelectAllMotivo(aRowids, status)")
+    .onLoadComplete("fnOnLoadCompleteMotivo(this, xhr)")
+    .Render()
+
+)

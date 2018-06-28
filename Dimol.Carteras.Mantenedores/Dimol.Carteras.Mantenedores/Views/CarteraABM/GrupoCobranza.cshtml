@@ -1,0 +1,66 @@
+﻿@model Dimol.Carteras.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "Grupo Cobranza";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Grupo Cobranza</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("GrupoCobranza")
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+   .addColumn(new Column("CodSucursal").setLabel("CodSucursal")
+        .setEditable(true)    
+        .setHidden(true)    
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Id").setLabel("Id")
+       .setEditable(false)    
+       .setSortable(true)
+       .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+     .addColumn(new Column("CodEmpleado").setLabel("CodEmpleado")
+        .setHidden(true)   
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+     .addColumn(new Column("NombreEmpleado").setLabel("Nombre Empleado")
+       .setSortable(true)     
+       .setEditable(true)
+       .setEditType(EditType.select)
+       .setEditOptions("value:\""+ViewBag.Empleados+"\"")
+       .setWidth(80))
+      
+    // settings
+    .setCaption("Grupo Cobranza")
+    .setRequestType(RequestType.get)
+    .setUrl("~/CarteraABM/GetGrupoCobranza/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("NombreEmpleado,Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerGrupoCobranza")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/CarteraABM/OperGrupoCobranza")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/CarteraABM/OperGrupoCobranza")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/CarteraABM/OperGrupoCobranza")
+    .setExcelExport("/CarteraABM/ExportToExcelGrupoCobranza")
+    .Render()
+    )

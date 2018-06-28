@@ -1,0 +1,44 @@
+﻿@using RazorEngine
+@using Dimol.Email.dto.MailModels
+@inherits RazorEngine.Templating.TemplateBase<BaseEmailModel<SiemensGeneral>>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Test Email</title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <p style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;">Estimado Cliente,</p>
+    <p style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;text-align: justify;">Junto con saludar y con el fin de informar el estado actual de su cuenta a la fecha, procedemos a detallar el resumen  de sus facturas  (vencidas y por vencer), junto  con  lo anterior también señalamos los datos de nuestras Cuentas Corriente, favor una vez realizado el pago no olvide enviar comprobante a nuestro mail cobranza@dimol.cl</p>
+    <p style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;"><b>Facturas de ARE 5461</b><br />Razón Social: SIEMENS S.A.<br />Rut: 94.995.000-k<br />Cuenta corriente Banco Santander.<br />Cta. N°0-032-5800563-0</p>
+    <p style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;"><b>Facturas de ARE 504s</b><br />Razón Social: SIEMENS HEALTHCARE EQUIPOS MEDICOS SPA.<br />Rut: 76.481.921-7<br />Cuenta corriente Banco BBVA<br />Cta. N°0504-0083-0100032840</p>
+    <p style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;">Para cualquier consulta referente a su crédito no dude en contactarnos.</p>
+    <p style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;">Agradecido de su atención.</p><br />
+
+    <table>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <span style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;"><xsl:value-of select="/DocumentoCocha/Banco" /></span><br />
+                <span style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;">Ejecutivo de Cuenta</span><br />
+                <span style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;">Dimol SpA</span><br />
+                <span style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;">Compañía 1390, Of. 1109</span><br />
+                <span style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;">Teléfono: 56 (2) - <xsl:value-of select="/DocumentoCocha/Numero" /></span><br />
+                <span style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;">E-Mail: <xsl:value-of select="/DocumentoCocha/Cuenta" /></span><br /><br /><br />
+                <span style="font-family:'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;">Por cuenta de nuestro cliente.</span><br />
+                <img src="cid:Logo" alt="Dimol" width="275" height="120" />
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

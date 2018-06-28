@@ -1,0 +1,1 @@
+﻿create Procedure Update_Ejercicios_Fotos1(@ejc_codemp integer, @ejc_ejcid integer, @ejc_imagen image) as    UPDATE ejercicios         SET ejc_imagen1 = @ejc_imagen          WHERE ( ejercicios.ejc_codemp = @ejc_codemp ) AND             ( ejercicios.ejc_ejcid = @ejc_ejcid )   

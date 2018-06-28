@@ -1,0 +1,183 @@
+﻿/*@import '_mixins.scss';*/
+/*@import '_reset.scss';
+@import '_about-light.scss';*/
+
+/*
+ * Copyright (c) 2012-2013 Thibaut Courouble
+ * http://www.cssflow.com
+ *
+ * Licensed under the MIT License:
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+
+$navCounterHeight: 20px;
+$navCounterDefaultColor: #e23442;
+$navCounterColors: green #75a940, blue #3b8de2;
+
+.nav {
+  padding: 4px;
+  background: rgba(black, .04);
+  border-radius: 23px;
+  @include box-shadow(inset 0 1px rgba(black, .08), 0 -1px rgba(black, .3), 0 1px rgba(white, .12));
+}
+
+.nav-list {
+  padding: 0 6px;
+  height: 34px;
+  background: #f4f5f7;
+  border-radius: 18px;
+  @include linear-gradient(top, white, #e1e2eb);
+  @include box-shadow(inset 0 0 0 1px rgba(white, .3), 0 1px 1px rgba(black, .2));
+
+  > li {
+    float: left;
+    height: 17px;
+    margin: 8px 0;
+
+    & + li { border-left: 1px dotted #989ca8; }
+  }
+}
+
+.nav-link {
+  float: left;
+  position: relative;
+  margin-top: -8px;
+  padding: 0 14px;
+  line-height: 34px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #555;
+  text-decoration: none;
+  text-shadow: 0 1px white;
+
+  &:hover {
+    color: #333;
+    text-decoration: underline;
+  }
+}
+
+.nav-counter {
+    background: #e23442 linear-gradient(to bottom, #e8616c, #dd202f) repeat scroll 0 0;
+    border: 1px solid #911f28;
+    border-radius: 11px;
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.1) inset, 0 1px rgba(0, 0, 0, 0.12);
+    color: white;
+    font-weight: normal;
+    height: 20px;
+    line-height: 20px;
+    margin-top: -11px;
+    min-width: 8px;
+    padding: 0 6px;
+    position: absolute;
+    right: 1px;
+    text-align: center;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+    top: -1px;
+}
+
+.nav-counter-blue {
+    background: #3b8de2 linear-gradient(to bottom, #67a7e9, #2580df) repeat scroll 0 0;
+    border: 1px solid #215a96;
+}
+
+.nav-counter-green {
+    background: #75a940 linear-gradient(to bottom, #8ec15b, #689739) repeat scroll 0 0;
+    border: 1px solid #42582b;
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+     -moz-box-sizing: $val;
+          box-sizing: $val;
+}
+
+@mixin user-select($val...) {
+  -webkit-user-select: $val;
+     -moz-user-select: $val;
+      -ms-user-select: $val;
+          user-select: $val;
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+          box-shadow: $shadows;
+}
+
+@function inverse-side($side) {
+  @if      $side == top    { @return bottom; }
+  @else if $side == bottom { @return top; }
+  @else if $side == left   { @return right; }
+  @else if $side == right  { @return left; }
+}
+
+@mixin linear-gradient($gradientLine, $colorStops...) {
+  background-image: -webkit-linear-gradient($gradientLine, $colorStops);
+  background-image:    -moz-linear-gradient($gradientLine, $colorStops);
+  background-image:      -o-linear-gradient($gradientLine, $colorStops);
+  @if length($gradientLine) == 2 {
+  background-image:         linear-gradient(to #{inverse-side(nth($gradientLine, 1))} #{inverse-side(nth($gradientLine, 2))}, $colorStops);
+  } @else {
+  background-image:         linear-gradient(to #{inverse-side($gradientLine)}, $colorStops);
+  }
+}
+
+@mixin radial-gradient($gradient...) {
+  background-image: -webkit-radial-gradient($gradient);
+  background-image:    -moz-radial-gradient($gradient);
+  background-image:      -o-radial-gradient($gradient);
+  background-image:         radial-gradient($gradient);
+}
+
+@mixin transition($transition...) {
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+     -moz-transition-property: $properties;
+       -o-transition-property: $properties;
+          transition-property: $properties;
+}
+
+@mixin transform($transform...) {
+  -webkit-transform: $transform;
+     -moz-transform: $transform;
+      -ms-transform: $transform;
+       -o-transform: $transform;
+          transform: $transform;
+}
+
+@mixin clearfix {
+  zoom: 1;
+
+  &:before, &:after {
+    content: '';
+    display: table;
+  }
+
+  &:after { clear: both; }
+}
+
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin hide-text() {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin hidpi {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+         only screen and (min-resolution: 144dpi) {
+    @content;
+  }
+}

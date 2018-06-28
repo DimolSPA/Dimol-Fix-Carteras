@@ -1,0 +1,39 @@
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\Dimol.PDF.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\Dimol.PDF.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\obj\Debug\Dimol.PDF.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\obj\Debug\Dimol.PDF.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\obj\Debug\Dimol.PDF.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\fop.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Beans.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Charsets.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Corba.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Core.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Management.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Media.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Misc.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Naming.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Remoting.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Security.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Text.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Tools.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.Util.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.XML.API.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.XML.Bind.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.XML.Crypto.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.XML.Parse.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.XML.Transform.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.XML.WebServices.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.OpenJDK.XML.XPath.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.Runtime.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.AWT.WinForms.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.Runtime.JNI.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\Dimol.PDF.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\Dimol.PDF.pdb
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\fop.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.AWT.WinForms.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.PDF\bin\Debug\IKVM.Runtime.JNI.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.PDF\obj\Debug\Dimol.PDF.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.PDF\obj\Debug\Dimol.PDF.dll
+D:\_Codigo_Dimol\Dimol.Carteras.Mantenedores\Dimol.PDF\obj\Debug\Dimol.PDF.pdb

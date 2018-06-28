@@ -1,0 +1,94 @@
+﻿@model Dimol.Contabilidad.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "Impuesto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Impuestos</h2>
+<br /><br />
+<script>
+    function getTrueFalse() {
+        var data = "true:false";
+        return data;
+    }
+
+</script>
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("Impuesto")
+    .addColumn(new Column("Codemp").setLabel("Empresa")
+        .setHidden(true)
+        //.setEditable(true)
+        .setWidth(50))
+     
+    .addColumn(new Column("nombre").setLabel("Nombre")
+        .setSortable(true)
+        .setEditable(true)
+        .setAlign(Align.left)
+        .setWidth(50))
+    .addColumn(new Column("nombreCorto").setLabel("Nombre Corto")
+        .setSortable(true)
+        .setEditable(true)
+        .setAlign(Align.left)
+        .setWidth(20))
+        
+    .addColumn(new Column("idPlanDeCuentas").setLabel("ID")
+        .setHidden(true)
+        .setSortable(true)
+        .setWidth(20))
+    
+    .addColumn(new Column("nombrePlanDeCuentas").setLabel("Cuenta Contable")
+        //.setSortable(true)
+        .setEditable(true)
+        .setAlign(Align.left)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.nombrePlanDeCuentas+"\"")
+        .setWidth(60))
+    .addColumn(new Column("retenido").setLabel("Retenido")
+        .setSortable(true)
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setWidth(15)
+        .setEditOptions("value:getTrueFalse()")
+        .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox))
+   .addColumn(new Column("monto").setLabel("%")
+        .setSortable(true)
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setWidth(15))
+        
+   .addColumn(new Column("id").setLabel("ID Impuesto")
+        .setHidden(true)
+        .setSortable(true)
+        .setWidth(20))
+      
+    // settings
+    
+    .setCaption("Impuesto")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Contabilidad/GetImpuestos/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50, 30, 30 })
+    .setViewRecords(true)
+    .setSortName("nombre")
+    
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerImpuesto")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Contabilidad/OperImpuesto")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Contabilidad/OperImpuesto")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Contabilidad/OperImpuesto")
+    .setExcelExport("/Contabilidad/ExportToExcel")
+    
+    .Render()
+
+)

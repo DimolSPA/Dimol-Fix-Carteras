@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6E68EB00-CA9A-49D2-B67F-052F07DDB8DF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dimol.Open</RootNamespace>
+    <AssemblyName>Dimol.Open</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dimol.CKEditor.dto, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores\bin\Dimol.CKEditor.dto.dll</HintPath>
+    </Reference>
+    <Reference Include="Dimol.Judicial.Mantenedores.bcp">
+      <HintPath>..\..\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores\bin\Dimol.Judicial.Mantenedores.bcp.dll</HintPath>
+    </Reference>
+    <Reference Include="Dimol.Judicial.Mantenedores.dto">
+      <HintPath>..\..\Dimol.Judicial.Mantenedores\Dimol.Judicial.Mantenedores\bin\Dimol.Judicial.Mantenedores.dto.dll</HintPath>
+    </Reference>
+    <Reference Include="JQueryUIHelpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=1440f6df3b58b47e, processorArchitecture=MSIL">
+      <HintPath>..\packages\jQueryUIHelpers.Mvc4.3.0.0\lib\net40\JQueryUIHelpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\OpenController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BuscarCausaJudicial.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\menu_styles.css" />
+    <Content Include="Content\nav.css" />
+    <Content Include="Content\slider\elastislide.css" />
+    <Content Include="Content\slider\style.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\ui.jqgrid.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\_about-dark.scss" />
+    <Content Include="Content\_about-light.scss" />
+    <Content Include="Content\_mixins.scss" />
+    <Content Include="Content\_reset.scss" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\ajax-loader-autoc.gif" />
+    <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\black.png" />
+    <Content Include="Images\blank-avatar.jpg" />
+    <Content Include="Images\blank.png" />
+    <Content Include="Images\blank_avatar.jpg" />
+    <Content Include="Images\botones\Add.png" />
+    <Content Include="Images\botones\Add20.png" />
+    <Content Include="Images\botones\add_det.gif" />
+    <Content Include="Images\botones\Avanzar.jpg" />
+    <Content Include="Images\botones\Back.png" />
+    <Content Include="Images\botones\Bar Chart.png" />
+    <Content Include="Images\botones\Candado.gif" />
+    <Content Include="Images\botones\Candado2.gif" />
+    <Content Include="Images\botones\Comment.png" />
+    <Content Include="Images\botones\Delete.png" />
+    <Content Include="Images\botones\doc20.png" />
+    <Content Include="Images\botones\Email.png" />
+    <Content Include="Images\botones\excel20.png" />
+    <Content Include="Images\botones\excel40.png" />
+    <Content Include="Images\botones\Exit.png" />
+    <Content Include="Images\botones\hide.png" />
+    <Content Include="Images\botones\Info.png" />
+    <Content Include="Images\botones\Line Chart.png" />
+    <Content Include="Images\botones\Load.png" />
+    <Content Include="Images\botones\Loading.png" />
+    <Content Include="Images\botones\logo_excel.png" />
+    <Content Include="Images\botones\logo_pdf.png" />
+    <Content Include="Images\botones\Modify.png" />
+    <Content Include="Images\botones\Next.png" />
+    <Content Include="Images\botones\Oficina_PDF.ico" />
+    <Content Include="Images\botones\Oficina_XLS.ico" />
+    <Content Include="Images\botones\Pausa.jpg" />
+    <Content Include="Images\botones\pdf20.png" />
+    <Content Include="Images\botones\pdf40.png" />
+    <Content Include="Images\botones\Picture.png" />
+    <Content Include="Images\botones\Pie Chart.png" />
+    <Content Include="Images\botones\Play.jpg" />
+    <Content Include="Images\botones\Print.png" />
+    <Content Include="Images\botones\Print20.png" />
+    <Content Include="Images\botones\Profile.png" />
+    <Content Include="Images\botones\related40.png" />
+    <Content Include="Images\botones\Save.png" />
+    <Content Include="Images\botones\Search.png" />
+    <Content Include="Images\botones\show.png" />
+    <Content Include="Images\botones\Warning.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\empleados\1_1_109.jpg" />
+    <Content Include="Images\empleados\1_1_11.jpg" />
+    <Content Include="Images\empleados\1_1_110.jpg" />
+    <Content Include="Images\empleados\1_1_111.jpg" />
+    <Content Include="Images\empleados\1_1_112.jpg" />
+    <Content Include="Images\empleados\1_1_114.jpg" />
+    <Content Include="Images\empleados\1_1_115.jpg" />
+    <Content Include="Images\empleados\1_1_116.jpg" />
+    <Content Include="Images\empleados\1_1_119.jpg" />
+    <Content Include="Images\empleados\1_1_121.jpg" />
+    <Content Include="Images\empleados\1_1_122.jpg" />
+    <Content Include="Images\empleados\1_1_123.jpg" />
+    <Content Include="Images\empleados\1_1_124.jpg" />
+    <Content Include="Images\empleados\1_1_125.jpg" />
+    <Content Include="Images\empleados\1_1_126.jpg" />
+    <Content Include="Images\empleados\1_1_130.jpg" />
+    <Content Include="Images\empleados\1_1_132.jpg" />
+    <Content Include="Images\empleados\1_1_133.jpg" />
+    <Content Include="Images\empleados\1_1_134.jpg" />
+    <Content Include="Images\empleados\1_1_135.jpg" />
+    <Content Include="Images\empleados\1_1_136.jpg" />
+    <Content Include="Images\empleados\1_1_137.jpg" />
+    <Content Include="Images\empleados\1_1_145.jpg" />
+    <Content Include="Images\empleados\1_1_146.jpg" />
+    <Content Include="Images\empleados\1_1_153.jpg" />
+    <Content Include="Images\empleados\1_1_165.jpg" />
+    <Content Include="Images\empleados\1_1_166.jpg" />
+    <Content Include="Images\empleados\1_1_168.jpg" />
+    <Content Include="Images\empleados\1_1_170.jpg" />
+    <Content Include="Images\empleados\1_1_171.jpg" />
+    <Content Include="Images\empleados\1_1_173.jpg" />
+    <Content Include="Images\empleados\1_1_174.jpg" />
+    <Content Include="Images\empleados\1_1_175.jpg" />
+    <Content Include="Images\empleados\1_1_178.jpg" />
+    <Content Include="Images\empleados\1_1_179.jpg" />
+    <Content Include="Images\empleados\1_1_180.jpg" />
+    <Content Include="Images\empleados\1_1_181.jpg" />
+    <Content Include="Images\empleados\1_1_182.jpg" />
+    <Content Include="Images\empleados\1_1_183.jpg" />
+    <Content Include="Images\empleados\1_1_189.jpg" />
+    <Content Include="Images\empleados\1_1_192.jpg" />
+    <Content Include="Images\empleados\1_1_195.jpg" />
+    <Content Include="Images\empleados\1_1_197.jpg" />
+    <Content Include="Images\empleados\1_1_201.jpg" />
+    <Content Include="Images\empleados\1_1_209.jpg" />
+    <Content Include="Images\empleados\1_1_212.jpg" />
+    <Content Include="Images\empleados\1_1_213.jpg" />
+    <Content Include="Images\empleados\1_1_215.jpg" />
+    <Content Include="Images\empleados\1_1_216.jpg" />
+    <Content Include="Images\empleados\1_1_217.jpg" />
+    <Content Include="Images\empleados\1_1_218.jpg" />
+    <Content Include="Images\empleados\1_1_219.jpg" />
+    <Content Include="Images\empleados\1_1_220.jpg" />
+    <Content Include="Images\empleados\1_1_222.jpg" />
+    <Content Include="Images\empleados\1_1_223.jpg" />
+    <Content Include="Images\empleados\1_1_225.jpg" />
+    <Content Include="Images\empleados\1_1_28.jpg" />
+    <Content Include="Images\empleados\1_1_285.jpg" />
+    <Content Include="Images\empleados\1_1_3.jpg" />
+    <Content Include="Images\empleados\1_1_30.jpg" />
+    <Content Include="Images\empleados\1_1_4.jpg" />
+    <Content Include="Images\empleados\1_1_5.jpg" />
+    <Content Include="Images\empleados\1_1_66.jpg" />
+    <Content Include="Images\empleados\1_1_70.jpg" />
+    <Content Include="Images\empleados\1_1_71.jpg" />
+    <Content Include="Images\empleados\1_1_79.jpg" />
+    <Content Include="Images\empleados\1_1_80.jpg" />
+    <Content Include="Images\empleados\1_1_81.jpg" />
+    <Content Include="Images\empleados\1_1_83.jpg" />
+    <Content Include="Images\empleados\1_1_85.jpg" />
+    <Content Include="Images\empleados\1_1_86.jpg" />
+    <Content Include="Images\empleados\1_1_88.jpg" />
+    <Content Include="Images\empleados\1_1_89.jpg" />
+    <Content Include="Images\empleados\1_1_91.jpg" />
+    <Content Include="Images\empleados\1_1_93.jpg" />
+    <Content Include="Images\empleados\1_1_94.jpg" />
+    <Content Include="Images\empleados\1_1_95.jpg" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\logo-dimol.png" />
+    <Content Include="Images\nav.png" />
+    <Content Include="Images\nav_thumbs.png" />
+    <Content Include="Images\ok_error.png" />
+    <Content Include="Images\pattern.png" />
+    <Content Include="Images\switch-off-icon-20.png" />
+    <Content Include="Images\switch-on-icon-20.png" />
+    <Content Include="Images\views.png" />
+    <None Include="Properties\PublishProfiles\DimolOpen.pubxml" />
+    <None Include="Scripts\jquery-1.7-vsdoc.js" />
+    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-1.7.js" />
+    <Content Include="Scripts\jquery-1.7.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.0.js" />
+    <Content Include="Scripts\jquery-ui-1.10.0.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery-ui.unobtrusive-2.2.0.js" />
+    <Content Include="Scripts\jquery-ui.unobtrusive-2.2.0.min.js" />
+    <Content Include="Scripts\jquery.jqGrid-4.4.1\i18n\grid.locale-es.js" />
+    <Content Include="Scripts\jquery.jqGrid-4.4.1\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.1.0.debug.js" />
+    <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\site.js" />
+    <Content Include="Scripts\slider\gallery.js" />
+    <Content Include="Scripts\slider\jquery.easing.1.3.js" />
+    <Content Include="Scripts\slider\jquery.elastislide.js" />
+    <Content Include="Scripts\slider\jquery.tmpl.min.js" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Open\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Dimol\Dimol.bcp\Dimol.bcp.csproj">
+      <Project>{00928a66-f585-4be6-9c5e-bd450589784b}</Project>
+      <Name>Dimol.bcp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Dimol\Dimol.dto\Dimol.dto.csproj">
+      <Project>{bf7f8e44-f92e-406d-9836-b2c0f6e2a3ad}</Project>
+      <Name>Dimol.dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Dimol\Dimol\Dimol.csproj">
+      <Project>{613C1865-59D7-4D9B-90BC-77D3D1588A96}</Project>
+      <Name>Dimol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mvc.HtmlHelper.jqGrid\Mvc.HtmlHelper.jqGrid\Mvc.HtmlHelper.jqGrid.csproj">
+      <Project>{6e40cc48-8edf-4608-9bd3-d43a9b649409}</Project>
+      <Name>Mvc.HtmlHelper.jqGrid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dimol.Carteras.bcp\Dimol.Carteras.bcp.csproj">
+      <Project>{76d0ef38-efc2-462f-bb51-c30ab34257e8}</Project>
+      <Name>Dimol.Carteras.bcp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dimol.Carteras.dto\Dimol.Carteras.dto.csproj">
+      <Project>{789bf8d7-16af-449b-84b5-b2fd8c0c5e70}</Project>
+      <Name>Dimol.Carteras.dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dimol.Open.bcp\Dimol.Open.bcp.csproj">
+      <Project>{f5407c08-96f3-47eb-93f5-c5021d41e10b}</Project>
+      <Name>Dimol.Open.bcp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dimol.Open.dto\Dimol.Open.dto.csproj">
+      <Project>{315512d2-4442-442e-b470-853f61bbbe0c}</Project>
+      <Name>Dimol.Open.dto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64573</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:64573/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

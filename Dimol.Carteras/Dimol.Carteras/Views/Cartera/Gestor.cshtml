@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Gestor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Gestor</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using Mvc.HtmlHelpers
+<style>
+fieldset {
+    border: 1px solid #1F497D;
+    background: #ddd;
+    border-radius: 2px;
+    padding: 15px;
+}
+
+fieldset legend {
+    background: #1F497D;
+    color: #fff;
+    padding: 0.2em 0.5em ;
+    font-size: 32px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 5px #ddd;
+    margin-left: 20px;
+}
+</style>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        // rule select
+        $.validator.addMethod("valueNotEquals", function (value, element, arg) {
+            return arg != value;
+        }, "Value must not equal arg.");
+
+        fnRulesSectionTerreno();
+        fnRulesSectionfrmGestor();
+        fnEventsfrmGestor();
+    });
+</script>
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Gestores</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+
+            <br />
+        <div class="tabla">
+            <div class="fila">
+                <div class="col"><button class="search" id="btnAgregarGestor" onclick="fnAgregarGestor();" style="vertical-align:middle"><img src="~/Images/botones/Add20.png" width="20px" height="20px" title="Agregar" alt="Agregar" /></button>Agregar </div>
+            </div>
+        </div><br />
+            @(Html.jqGrid("gridGestores")
+                .addColumn(new Column("Nombre").setLabel("Nombre")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(150))
+
+                .addColumn(new Column("Telefono").setLabel("Teléfono")
+                .setSortable(true).setAlign(Align.center)
+                .setWidth(100))
+
+                .addColumn(new Column("Email").setLabel("Email")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(200))
+                .addColumn(new Column("Estado").setLabel("Estado")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("GesId").setLabel(" ")
+                .setHidden(false)
+                .setEditable(false).setCustomFormatter("fnBotonesGridGestores")
+                .setWidth(30))
+                .addColumn(new Column("IdTipoCartera").setLabel("IdTipoCartera")
+                .setSortable(true).setHidden(true)
+                .setWidth(60))
+                .addColumn(new Column("IdGrupo").setLabel("IdGrupo")
+                .setSortable(true).setHidden(true)
+                .setWidth(60))
+                .addColumn(new Column("IndRemoto").setLabel("IndRemoto")
+                .setSortable(true).setHidden(true)
+                .setWidth(60))
+                .addColumn(new Column("IndTerreno").setLabel("IndTerreno")
+                .setSortable(true).setHidden(true)
+                .setWidth(60))
+                .addColumn(new Column("TelefonoTerreno").setLabel("TelefonoTerreno")
+                .setSortable(true).setHidden(true)
+                .setWidth(60))
+                .addColumn(new Column("TelefonoImei").setLabel("TelefonoImei")
+                .setSortable(true).setHidden(true)
+                .setWidth(60))
+                .addColumn(new Column("IdEmpleado").setLabel("IdEmpleado")
+                .setSortable(true).setHidden(true)
+                .setWidth(60))
+                    // settings
+                .setCaption("Gestores").setWidth(700)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Cartera/ListarGestorGrilla/")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setAutoWidth(false)
+                .setRowNum(10)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("Estado, Nombre")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerGestores")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .Render()
+
+
+            )
+
+    </div>
+</div>
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppGestor" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Agregar Gestor")
+                .CloseOnEscape(true)
+                .Width(600)
+                .Height(415)
+
+                ))
+{
+    @Html.Partial("_AgregarGestor")
+}

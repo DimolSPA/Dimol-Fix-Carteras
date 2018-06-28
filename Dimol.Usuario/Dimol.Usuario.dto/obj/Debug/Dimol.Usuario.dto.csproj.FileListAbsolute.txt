@@ -1,0 +1,15 @@
+C:\Users\Rodrigo\Desktop\EntregasFinales_DIMOL\Dimol_Usuario\Dimol.Usuario\Dimol.Usuario.dto\bin\Debug\Dimol.Usuario.dto.dll
+C:\Users\Rodrigo\Desktop\EntregasFinales_DIMOL\Dimol_Usuario\Dimol.Usuario\Dimol.Usuario.dto\bin\Debug\Dimol.Usuario.dto.pdb
+C:\Users\Rodrigo\Desktop\EntregasFinales_DIMOL\Dimol_Usuario\Dimol.Usuario\Dimol.Usuario.dto\obj\Debug\Dimol.Usuario.dto.dll
+C:\Users\Rodrigo\Desktop\EntregasFinales_DIMOL\Dimol_Usuario\Dimol.Usuario\Dimol.Usuario.dto\obj\Debug\Dimol.Usuario.dto.pdb
+C:\Users\Rodrigo\Desktop\EntregasFinales_DIMOL\Dimol_Usuario\Dimol.Usuario\Dimol.Usuario.dto\obj\Debug\Dimol.Usuario.dto.csprojResolveAssemblyReference.cache
+C:\FuentesDimol2017\Dimol.Usuario\Dimol.Usuario.dto\bin\Debug\Dimol.Usuario.dto.dll
+C:\FuentesDimol2017\Dimol.Usuario\Dimol.Usuario.dto\bin\Debug\Dimol.Usuario.dto.pdb
+C:\FuentesDimol2017\Dimol.Usuario\Dimol.Usuario.dto\obj\Debug\Dimol.Usuario.dto.dll
+C:\FuentesDimol2017\Dimol.Usuario\Dimol.Usuario.dto\obj\Debug\Dimol.Usuario.dto.pdb
+C:\FuentesDimol2018\Dimol.Usuario\Dimol.Usuario.dto\bin\Debug\Dimol.Usuario.dto.dll
+C:\FuentesDimol2018\Dimol.Usuario\Dimol.Usuario.dto\bin\Debug\Dimol.Usuario.dto.pdb
+C:\FuentesDimol2018\Dimol.Usuario\Dimol.Usuario.dto\obj\Debug\Dimol.Usuario.dto.csproj.CoreCompileInputs.cache
+C:\FuentesDimol2018\Dimol.Usuario\Dimol.Usuario.dto\obj\Debug\Dimol.Usuario.dto.dll
+C:\FuentesDimol2018\Dimol.Usuario\Dimol.Usuario.dto\obj\Debug\Dimol.Usuario.dto.pdb
+C:\FuentesDimol2018\Dimol.Usuario\Dimol.Usuario.dto\obj\Debug\Dimol.Usuario.dto.csprojResolveAssemblyReference.cache

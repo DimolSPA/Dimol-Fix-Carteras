@@ -1,0 +1,4 @@
+D:\_Codigo_Dimol\Dimol.Tesoreria\Dimol.Tesoreria.dto\bin\Release\Dimol.Tesoreria.dto.dll
+D:\_Codigo_Dimol\Dimol.Tesoreria\Dimol.Tesoreria.dto\bin\Release\Dimol.Tesoreria.dto.pdb
+D:\_Codigo_Dimol\Dimol.Tesoreria\Dimol.Tesoreria.dto\obj\Release\Dimol.Tesoreria.dto.dll
+D:\_Codigo_Dimol\Dimol.Tesoreria\Dimol.Tesoreria.dto\obj\Release\Dimol.Tesoreria.dto.pdb

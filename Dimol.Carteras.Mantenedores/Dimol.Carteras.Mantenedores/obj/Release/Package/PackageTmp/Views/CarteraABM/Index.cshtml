@@ -1,0 +1,226 @@
+﻿@{
+    ViewBag.Title = "Gestionar Cartera";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Mvc.HtmlHelpers
+<br />
+<h2>Gestionar Cartera</h2>
+@using (var t = Html.JQueryUI().BeginTabs())
+{
+    t.Tab("Gestionar", "tab1");
+    t.Tab("Judicial", "tab2");
+    t.Tab("Negociación", "tab3");
+    using (t.BeginPanel())
+    {
+        <div class="tabla">
+            <div class="fila">
+                <div class="col">1</div>
+                <div class="col">2</div>
+                <div class="col">3</div>
+            </div>
+            <div class="fila">
+                <div class="col">4</div>
+                <div class="col">5</div>
+                <div class="col">6</div>
+            </div>
+        </div>
+        <p>First panel</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla hendrerit elit sit amet mauris suscipit convallis. Sed bibendum mi in odio posuere venenatis. Integer nisi tortor, rutrum a tincidunt non, consequat quis augue. Fusce eu massa quis lorem laoreet lacinia sed eu purus. Sed eu mauris interdum velit congue feugiat ac sit amet libero. Nullam vel libero ut urna tempor fringilla et ac dolor. Phasellus scelerisque consectetur egestas. Aenean ac risus ullamcorper felis molestie ultricies sodales sed augue. Ut et turpis lacinia lorem aliquam semper vitae eu massa. </p>
+    }
+    using (t.BeginPanel())
+    {
+@(Html.jqGrid("DocRol")
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("Idioma").setLabel("Idioma")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("IdAccion").setLabel("Id Acción")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Acción")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+    .addColumn(new Column("Agrupa").setLabel("Acción")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(80))
+    
+    // settings
+    .setCaption("Documentos ROL").setHiddenGrid(true)
+    .setRequestType(RequestType.get)
+    .setUrl("~/CarteraABM/GetAcciones1/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDocRol")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/CarteraABM/OperAccion")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/CarteraABM/OperAccion")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/CarteraABM/OperAccion")
+    .setExcelExport("/CarteraABM/ExportToExcel")
+    .Render()
+
+) 
+    <br />
+    @(Html.jqGrid("Estados").setHiddenGrid(true)
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("Idioma").setLabel("Idioma")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("IdAccion").setLabel("Id Acción")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Acción")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+    .addColumn(new Column("Agrupa").setLabel("Acción")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(80))
+    
+    // settings
+    .setCaption("Estados")
+    .setRequestType(RequestType.get)
+    .setUrl("~/CarteraABM/GetAcciones1/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerEstados")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/CarteraABM/OperAccion")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/CarteraABM/OperAccion")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/CarteraABM/OperAccion")
+    .setExcelExport("/CarteraABM/ExportToExcel")
+    .Render()
+
+) 
+}
+    using (t.BeginPanel())
+    {
+        <p>Third panel</p>
+        <p>Praesent malesuada, sem non euismod blandit, augue est tempor metus, vitae consectetur urna dui at purus. Ut viverra lorem urna. Suspendisse egestas leo id elit consectetur adipiscing vel vel odio. Curabitur ut adipiscing augue. Donec rhoncus eros sed massa posuere aliquam. Cras tincidunt dapibus augue eu congue. Donec ut nunc lorem, eu blandit orci. Quisque ac libero id erat suscipit eleifend non sed nibh. Duis et augue orci, a lacinia dolor. Donec dui enim, sodales sit amet pellentesque ut, placerat vel lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed fringilla, felis et blandit posuere, dolor quam interdum eros, vel sodales nisl sapien in velit. Cras vel orci leo. </p>
+    }
+}
+<br />
+
+
+@(Html.jqGrid("Acciones").setHiddenGrid(true)
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("Idioma").setLabel("Idioma")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("IdAccion").setLabel("Id Acción")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Acción")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+    .addColumn(new Column("Agrupa").setLabel("Acción")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(80))
+    
+    // settings
+    .setCaption("Documentos")
+    .setRequestType(RequestType.get)
+    .setUrl("~/CarteraABM/GetAcciones/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerAcciones")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/CarteraABM/OperAccion")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/CarteraABM/OperAccion")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/CarteraABM/OperAccion")
+    .setExcelExport("/CarteraABM/ExportToExcel")
+    .Render()
+
+)
+<br />
+@using (var u = Html.JQueryUI().BeginTabs())
+{
+    u.Tab("Contactos", "tab1");
+    u.Tab("Historial", "tab2");
+    u.Tab("Imágenes", "tab3");
+    u.Tab("Documentos", "tab4");
+    u.Tab("Configuración", "tab5");
+    u.Tab("Datos Retiro", "tab6");
+    using (u.BeginPanel())
+    {
+        <p>First panel</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla hendrerit elit sit amet mauris suscipit convallis. Sed bibendum mi in odio posuere venenatis. Integer nisi tortor, rutrum a tincidunt non, consequat quis augue. Fusce eu massa quis lorem laoreet lacinia sed eu purus. Sed eu mauris interdum velit congue feugiat ac sit amet libero. Nullam vel libero ut urna tempor fringilla et ac dolor. Phasellus scelerisque consectetur egestas. Aenean ac risus ullamcorper felis molestie ultricies sodales sed augue. Ut et turpis lacinia lorem aliquam semper vitae eu massa. </p>
+    }
+    using (u.BeginPanel())
+    {
+        <p>Secod panel</p>
+        <p>In hac habitasse platea dictumst. Donec nec magna enim. Donec vel lacus ut eros dapibus suscipit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum luctus est quis ante euismod varius. Morbi vulputate velit vitae est varius dignissim dapibus tellus placerat. Curabitur augue tortor, pellentesque sit amet porttitor eu, tincidunt eu arcu. Integer turpis eros, adipiscing et facilisis eu, vestibulum vitae mi. In tincidunt odio ut lorem euismod vel placerat augue bibendum. Donec non quam quis odio tincidunt vehicula. Donec dictum, lorem eget viverra convallis, sapien neque scelerisque quam, suscipit facilisis ante ligula et augue. Proin eget tellus tellus, sit amet fringilla est. Sed at turpis vitae ligula porttitor cursus. Maecenas metus tortor, hendrerit malesuada venenatis at, sodales facilisis leo. </p>
+    }
+    using (u.BeginPanel())
+    {
+        <p>Third panel</p>
+        <p>Praesent malesuada, sem non euismod blandit, augue est tempor metus, vitae consectetur urna dui at purus. Ut viverra lorem urna. Suspendisse egestas leo id elit consectetur adipiscing vel vel odio. Curabitur ut adipiscing augue. Donec rhoncus eros sed massa posuere aliquam. Cras tincidunt dapibus augue eu congue. Donec ut nunc lorem, eu blandit orci. Quisque ac libero id erat suscipit eleifend non sed nibh. Duis et augue orci, a lacinia dolor. Donec dui enim, sodales sit amet pellentesque ut, placerat vel lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed fringilla, felis et blandit posuere, dolor quam interdum eros, vel sodales nisl sapien in velit. Cras vel orci leo. </p>
+    }
+     using (u.BeginPanel())
+    {
+        <p>Secod panel</p>
+        <p>In hac habitasse platea dictumst. Donec nec magna enim. Donec vel lacus ut eros dapibus suscipit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum luctus est quis ante euismod varius. Morbi vulputate velit vitae est varius dignissim dapibus tellus placerat. Curabitur augue tortor, pellentesque sit amet porttitor eu, tincidunt eu arcu. Integer turpis eros, adipiscing et facilisis eu, vestibulum vitae mi. In tincidunt odio ut lorem euismod vel placerat augue bibendum. Donec non quam quis odio tincidunt vehicula. Donec dictum, lorem eget viverra convallis, sapien neque scelerisque quam, suscipit facilisis ante ligula et augue. Proin eget tellus tellus, sit amet fringilla est. Sed at turpis vitae ligula porttitor cursus. Maecenas metus tortor, hendrerit malesuada venenatis at, sodales facilisis leo. </p>
+    }
+    using (u.BeginPanel())
+    {
+        <p>Third panel</p>
+        <p>Praesent malesuada, sem non euismod blandit, augue est tempor metus, vitae consectetur urna dui at purus. Ut viverra lorem urna. Suspendisse egestas leo id elit consectetur adipiscing vel vel odio. Curabitur ut adipiscing augue. Donec rhoncus eros sed massa posuere aliquam. Cras tincidunt dapibus augue eu congue. Donec ut nunc lorem, eu blandit orci. Quisque ac libero id erat suscipit eleifend non sed nibh. Duis et augue orci, a lacinia dolor. Donec dui enim, sodales sit amet pellentesque ut, placerat vel lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed fringilla, felis et blandit posuere, dolor quam interdum eros, vel sodales nisl sapien in velit. Cras vel orci leo. </p>
+    }
+    using (u.BeginPanel())
+    {
+        <p>Third panel</p>
+        <p>Praesent malesuada, sem non euismod blandit, augue est tempor metus, vitae consectetur urna dui at purus. Ut viverra lorem urna. Suspendisse egestas leo id elit consectetur adipiscing vel vel odio. Curabitur ut adipiscing augue. Donec rhoncus eros sed massa posuere aliquam. Cras tincidunt dapibus augue eu congue. Donec ut nunc lorem, eu blandit orci. Quisque ac libero id erat suscipit eleifend non sed nibh. Duis et augue orci, a lacinia dolor. Donec dui enim, sodales sit amet pellentesque ut, placerat vel lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed fringilla, felis et blandit posuere, dolor quam interdum eros, vel sodales nisl sapien in velit. Cras vel orci leo. </p>
+    }
+}

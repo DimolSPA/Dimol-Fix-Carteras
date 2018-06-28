@@ -1,0 +1,5 @@
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dto\bin\Debug\Dimol.ArchivoCopec.dto.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dto\bin\Debug\Dimol.ArchivoCopec.dto.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dto\obj\Debug\Dimol.ArchivoCopec.dto.csprojResolveAssemblyReference.cache
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dto\obj\Debug\Dimol.ArchivoCopec.dto.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec.dto\obj\Debug\Dimol.ArchivoCopec.dto.pdb

@@ -1,0 +1,100 @@
+﻿@model Dimol.Caja.Models.CalculoRemesaModel
+@using Mvc.HtmlHelpers
+<script>
+
+    jQuery(document).ready(function () {
+
+        jQuery("#gridCalculoRemesa").jqGrid({
+            altRows: true,
+            altclass: 'altGridRows',
+            autowidth: true,
+            caption: 'Documentos',
+            cellEdit: false,
+            cellsubmit: 'clientArray',
+            datatype: 'json',
+            height: 400,
+            pager: '#pagerGridCalculoRemesa',
+            pagerpos: 'center',
+            pgbuttons: true,
+            mtype: 'post',
+            rowList: [100, 500, 1000],
+            rowNum: 1000,
+            scroll: true,
+            //sortname: 'Deudor',
+            shrinkToFit: false,
+            //sortorder: 'asc',
+            url: '/Tesoreria/ListarCalculoRemesarGrilla/',
+            postData: $("#frmCalculoRemesa").serializeArray(),
+            viewrecords: true,
+            footerrow: true,
+            loadComplete: function (xhr) { fnOnLoadCompleteGridCalculoRemesa(this, xhr) },
+            colModel: [
+                { name: 'ImputacionId', hidden: true, label: 'ImputacionId', sortable: false, width: 20, index: 'ImputacionId', editable: false },
+                { name: 'ConciliacionId', hidden: true, label: 'ConciliacionId', sortable: false, width: 20, index: 'ConciliacionId', editable: false },
+                { name: 'Ccbid', hidden: true, label: 'Ccbid', sortable: false, width: 20, index: 'Pclid', editable: false },
+                { name: 'Pclid', hidden: true, label: 'Pclid', sortable: false, width: 20, index: 'Pclid', editable: false },
+				{ name: 'Ctcid', hidden: true, label: 'Ctcid', sortable: false, width: 20, index: 'Pclid', editable: false },
+				{ align: 'right', name: 'NumComprobante', label: 'Nº Comprobante', sortable: true, width: 70, index: 'NumComprobante', editable: false },
+                { name: 'Deudor', label: 'Deudor', sortable: true, width: 100, index: 'Deudor', editable: false },
+				{ align: 'right', name: 'Tipo', label: 'Tipo', sortable: false, width: 150, index: 'Tipo', editable: false },
+				{ name: 'NumDocumento', label: 'Numero', sortable: false, width: 60, index: 'NumDocumento', editable: false },
+				{ align: 'right', name: 'Capital', formatter: 'integer', label: 'Recuperado Capital', sortable: false, width: 80, index: 'Capital', summaryTpl: "{0}", summaryType: "sum" },
+				{ align: 'right', name: 'Interes', formatter: 'integer', label: 'Recuperado Interes', sortable: false, width: 80, index: 'Interes', summaryTpl: "{0}", summaryType: "sum" },
+				{ align: 'right', name: 'Honorario', formatter: 'integer', label: 'Recuperado Honorario', sortable: false, width: 80, index: 'Honorario', summaryTpl: "{0}", summaryType: "sum" },
+                { align: 'right', name: 'RecuperadoGasto', formatter: 'integer', label: 'Recuperado Gastos', sortable: false, width: 80, index: 'RecuperadoGasto', summaryTpl: "{0}", summaryType: "sum" },
+                { align: 'right', name: 'TotalRecuperado', formatter: 'integer', label: 'Total a Remesar', sortable: false, width: 80, index: 'TotalRecuperado', summaryTpl: "{0}", summaryType: "sum" },
+				{ align: 'right', name: 'PorCapital', formatter: 'integer', label: '% K', sortable: false, width: 20, index: 'PorCapital' },
+				{ align: 'right', name: 'PorInteres', formatter: 'integer', label: '% I', sortable: false, width: 20, index: 'PorInteres' },
+				{ align: 'right', name: 'PorHonorario', formatter: 'integer', label: '% H', sortable: false, width: 20, index: 'PorHonorario' },
+				{ align: 'right', name: 'GananciaCapital', formatter: 'integer', label: 'Capital', sortable: false, width: 70, index: 'GananciaCapital', summaryTpl: "{0}", summaryType: "sum" },
+				{ align: 'right', name: 'GananciaInteres', formatter: 'integer', label: 'Interes', sortable: false, width: 70, index: 'GananciaInteres', summaryTpl: "{0}", summaryType: "sum" },
+				{ align: 'right', name: 'GananciaHonorario', formatter: 'integer', label: 'Honorario', sortable: false, width: 80, index: 'GananciaHonorario', summaryTpl: "{0}", summaryType: "sum" },
+				{ align: 'right', name: 'TotalGanancia', hidden: true, formatter: 'integer', label: 'Total Dimol', sortable: false, width: 80, index: 'TotalGanancia', summaryTpl: "{0}", summaryType: "sum" },
+                { align: 'right', name: 'TotalCliente', formatter: 'integer', label: 'Monto Facturar', sortable: false, width: 80, index: 'TotalCliente', summaryTpl: "{0}", summaryType: "sum" },
+                { align: 'right', name: 'Anticipo', hidden: true, formatter: 'integer', label: 'Anticipo', sortable: false, width: 80, index: 'Anticipo' },
+                { name: 'DocumentoId', hidden: true, label: 'DocumentoId', sortable: false, width: 20, index: 'DocumentoId', editable: false },
+                { align: 'right', name: 'AnticipoDebitado', hidden: true, formatter: 'integer', label: 'AnticipoDebitado', sortable: false, width: 80, index: 'AnticipoDebitado' },
+                { name: 'ConciliacionTipoId', hidden: true, label: 'ConciliacionTipoId', sortable: false, width: 20, index: 'ConciliacionTipoId', editable: false },
+                { align: 'center', name: 'ConciliacionTipo', label: 'Tipo Conciliacion', sortable: false, width: 100, index: 'ConciliacionTipo', editable: false },
+            ],
+            grouping: true,
+            groupingView: {
+                //groupField: ['Deudor', 'NumComprobante'],
+                //groupColumnShow: [false, false],
+                //groupText: ['<b>{0}</b>', '<b>Comprobante: {0} - {1} Documento(s)</b>'],
+                //groupSummary: [true, true],
+                //groupCollapse: true,
+                //groupOrder: ['asc', 'asc'],
+                groupField: ['ConciliacionTipo', 'Deudor'],
+                groupColumnShow: [false, false],
+                groupText: ['<b>Tipo Conciliación: {0}</b>', '<b>Deudor: {0} - {1} Documento(s)</b>'],
+                groupSummary: [true, true],
+                groupCollapse: true,
+                groupOrder: ['asc'],
+                groupDataSorted: false
+            }
+
+        }).navGrid("#pagerGridCalculoRemesa", { edit: false, add: false, del: false, search: false });
+
+
+
+    });
+</script>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCalculoRemesa" }))
+{
+    @Html.HiddenFor(model => model.IdsConciliacion)
+}
+<br />
+<div id="divGridCalculoRemesa">
+    <table id="gridCalculoRemesa"></table>
+    <div id="pagerGridCalculoRemesa"></div>
+</div>
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="float:right">
+
+            <input type="button" value="Generar" id="btnGenerarRemesa" onclick="fnGenerarRemesa();"/>
+
+        </div>
+    </div>
+</div>

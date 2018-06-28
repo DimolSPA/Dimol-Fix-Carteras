@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[ACCION_JUDICIAL] (
+    [CODEMP] INT NULL,
+    [INSID]  INT NULL,
+    [TIPO]   INT NULL
+);
+

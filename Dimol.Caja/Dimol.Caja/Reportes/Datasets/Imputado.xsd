@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Imputado" targetNamespace="http://tempuri.org/Imputado.xsd" xmlns:mstns="http://tempuri.org/Imputado.xsd" xmlns="http://tempuri.org/Imputado.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Imputado" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Imputado" msprop:Generator_UserDSName="Imputado">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dtImputado" msprop:Generator_TableClassName="dtImputadoDataTable" msprop:Generator_TableVarName="tabledtImputado" msprop:Generator_TablePropName="dtImputado" msprop:Generator_RowDeletingName="dtImputadoRowDeleting" msprop:Generator_RowChangingName="dtImputadoRowChanging" msprop:Generator_RowEvHandlerName="dtImputadoRowChangeEventHandler" msprop:Generator_RowDeletedName="dtImputadoRowDeleted" msprop:Generator_UserTableName="dtImputado" msprop:Generator_RowChangedName="dtImputadoRowChanged" msprop:Generator_RowEvArgName="dtImputadoRowChangeEvent" msprop:Generator_RowClassName="dtImputadoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TipoDocumento" msprop:Generator_ColumnVarNameInTable="columnTipoDocumento" msprop:Generator_ColumnPropNameInRow="TipoDocumento" msprop:Generator_ColumnPropNameInTable="TipoDocumentoColumn" msprop:Generator_UserColumnName="TipoDocumento" type="xs:string" minOccurs="0" />
+              <xs:element name="Capital" msprop:Generator_ColumnVarNameInTable="columnCapital" msprop:Generator_ColumnPropNameInRow="Capital" msprop:Generator_ColumnPropNameInTable="CapitalColumn" msprop:Generator_UserColumnName="Capital" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Interes" msprop:Generator_ColumnVarNameInTable="columnInteres" msprop:Generator_ColumnPropNameInRow="Interes" msprop:Generator_ColumnPropNameInTable="InteresColumn" msprop:Generator_UserColumnName="Interes" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Honorario" msprop:Generator_ColumnVarNameInTable="columnHonorario" msprop:Generator_ColumnPropNameInRow="Honorario" msprop:Generator_ColumnPropNameInTable="HonorarioColumn" msprop:Generator_UserColumnName="Honorario" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GastoPreJudicial" msprop:Generator_ColumnVarNameInTable="columnGastoPreJudicial" msprop:Generator_ColumnPropNameInRow="GastoPreJudicial" msprop:Generator_ColumnPropNameInTable="GastoPreJudicialColumn" msprop:Generator_UserColumnName="GastoPreJudicial" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GastoJudicial" msprop:Generator_ColumnVarNameInTable="columnGastoJudicial" msprop:Generator_ColumnPropNameInRow="GastoJudicial" msprop:Generator_ColumnPropNameInTable="GastoJudicialColumn" msprop:Generator_UserColumnName="GastoJudicial" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,51 @@
+﻿<head>
+    <meta charset="utf-8">
+    <title>A Simple Page with CKEditor</title>
+    <!-- Make sure the path to CKEditor is correct. -->
+    <script src="/scripts/ckeditor.js"></script>
+</head>
+<body>
+    <form action="javascript:handleCKEditorPost();void(0);">
+        <div class="tabla">
+            <div class="fila">
+                <div class="fila">
+                    <div class="col" style="width:260px">Borradores</div>
+                    <div class="col">@Html.DropDownList("Borradores", null, new { @class = "ComboboxClassXL", onchange = "fnBorradorSeleccionado();" })</div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:45%">Primera Versión</div>
+                    <div class="col" style="width:45%">Última Versión</div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:45%;font-weight:bold"><label id="PrimerBorrador"></label></div>
+                    <div class="col" style="width:45%;font-weight:bold"><label id="UltimoBorrador"></label></div>
+                </div>
+            </div>
+        </div>
+                <textarea name="editor1" id="editor1" rows="20" cols="80"></textarea>
+                <script>
+                    // Replace the <textarea id="editor1"> with a CKEditor
+                    // instance, using default configuration.
+                    //CKEDITOR.replace('editor1');
+
+                </script>
+                <script>
+                    //CKEDITOR.plugins.registered['save'] = {
+                    //    init: function (editor) {
+                    //        var command = editor.addCommand('save',
+                    //        {
+                    //            modes: { wysiwyg: 1, source: 1 },
+                    //            exec: function (editor) { // Add here custom function for the save button
+                    //                alert('You clicked the save button in CKEditor toolbar!');
+                    //            }
+                    //        });
+                    //        editor.ui.addButton('Save', { label: 'Save', command: 'save' });
+                    //    }
+                    //}
+
+                    // CKEDITOR.replace('editor1');
+
+                </script>
+    </form>
+
+</body>

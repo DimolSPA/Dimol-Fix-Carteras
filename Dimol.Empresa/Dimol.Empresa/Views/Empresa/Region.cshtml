@@ -1,0 +1,64 @@
+﻿@model Dimol.Empresa.Models.GridModel
+@{
+    ViewBag.Title = "Regiones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Regiones</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+@(Html.jqGrid("Regiones")
+   
+    .addColumn(new Column("IdPais").setLabel("IdPais")
+        .setEditable(false)    
+        .setHidden(true)
+        .setSortable(true)
+        .setWidth(80))
+    .addColumn(new Column("NombrePais").setLabel("Pais")
+        .setEditable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.Region+"\"")
+        .setWidth(250))
+    .addColumn(new Column("IdRegion").setLabel("IdRegion")
+        .setEditable(false)    
+        .setHidden(true )
+        .setSortable(true)
+        .setWidth(80))
+    .addColumn(new Column("NombreRegion").setLabel("Nombre")
+        .setHidden(false)
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(250))
+     .addColumn(new Column("Orden").setLabel("Orden")
+        .setHidden(false)
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+   
+      
+    .setCaption("Region")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Empresa/GetRegion/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("NombrePais,Orden,NombreRegion")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerRegion")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Empresa/OperRegion")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Empresa/OperRegion")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Empresa/OperRegion")
+    .setExcelExport("/Empresa/ExportToExcelRegion")
+    .Render()
+
+)

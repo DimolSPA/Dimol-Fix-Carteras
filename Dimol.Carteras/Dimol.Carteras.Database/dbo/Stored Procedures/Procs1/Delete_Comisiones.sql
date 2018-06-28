@@ -1,0 +1,1 @@
+﻿create Procedure Delete_Comisiones(@cms_codemp integer, @cms_sucid integer, @cms_anio smallint, @cms_mes smallint) as    DELETE FROM comisiones       WHERE ( comisiones.cms_codemp = @cms_codemp ) AND             ( comisiones.cms_sucid = @cms_sucid ) AND             ( comisiones.cms_anio = @cms_anio ) AND             ( comisiones.cms_mes = @cms_mes )                

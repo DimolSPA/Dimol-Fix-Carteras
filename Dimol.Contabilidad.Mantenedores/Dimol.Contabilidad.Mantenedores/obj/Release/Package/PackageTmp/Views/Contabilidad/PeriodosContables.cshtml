@@ -1,0 +1,93 @@
+﻿@model Dimol.Contabilidad.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "PeriodosContables";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    function getTrueFalse() {
+        var data = "true:false";
+        return data;
+    }
+
+    
+    
+</script>
+
+<br />
+<h2>Periodos Contables</h2>
+<br /><br />
+
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("PeriodosContables")
+
+        
+    .addColumn(new Column("Codemp").setLabel("Empresa")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+     
+    .addColumn(new Column("ano").setLabel("Año")
+        .setSortable(true)
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setFormatOptions("disabled:true")
+        .setWidth(50))
+        
+    .addColumn(new Column("habilitado").setLabel("Habilitado")
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setWidth(50)
+        .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+        .setEditOptions("value:getTrueFalse()"))
+           
+    .addColumn(new Column("finalizado").setLabel("Finalizado")
+        
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setWidth(50)
+        .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+        
+        //.setEditRules("#dialog-confirm")
+        .setEditOptions("value:getTrueFalse()"))
+        
+   .addColumn(new Column("IdPeriodo").setLabel("ID")
+   
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        //.setEditRules("edithidden:true")
+        .setWidth(50))
+       
+    // settings
+    
+    .setCaption("PeriodosContables")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Contabilidad/GetPeriodosContables/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("ano")
+    
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerPeriodosContables")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Contabilidad/OperPeriodoContable")
+    
+    .setNavAdd(ViewBag.Add)
+    
+    .setAddUrl("/Contabilidad/OperPeriodoContable")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Contabilidad/OperPeriodoContable")
+    .setExcelExport("/Contabilidad/ExportToExcel")
+    
+    .Render()
+
+)

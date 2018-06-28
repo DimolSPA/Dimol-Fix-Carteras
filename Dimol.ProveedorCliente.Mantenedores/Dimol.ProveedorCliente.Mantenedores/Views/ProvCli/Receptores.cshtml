@@ -1,0 +1,457 @@
+﻿@model Dimol.ProveedorCliente.Mantenedores.Models.ProveedorClienteModel
+@{
+    ViewBag.Title = "Receptores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Receptores</h2>
+<br />
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+       @using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabProveedorCliente" })))
+       {
+           t.Tab("Cliente", "tab1");
+           t.Tab("Sucursal", "tab2");
+           //t.Tab("Impuestos", "tab3");
+           //t.Tab("Contactos", "tab4");
+           //t.Tab("Cuenta Corriente", "tab5");
+           //t.Tab("Contratos Cobranza", "tab6");
+           //t.Tab("Listas Precios", "tab7");
+
+           using (t.BeginPanel())
+           {
+               using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmProveedorCliente" }))
+               {
+    @Html.ValidationSummary(true)
+
+
+        <div class="tabla">
+            @*<div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Tipo)</div>
+                <div class="col">@Html.DropDownList("Tipo", null, new { @class = "ComboboxClass" })</div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Nacionalidad)</div>
+                <div class="col">@Html.DropDownList("Nacionalidad", null, new { @class = "ComboboxClass", onchange = "" })</div>
+            </div>*@
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Rut)</div>
+                <div class="col" style="height:23px">@Html.TextBox("Rut", null, new { @class = "textboxClassM" })</div>
+
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Nombre)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("Nombre", null, new { @class = "textboxClass" })</div>
+
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.ApellidoPaterno)</div>
+                <div class="col">@Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "textboxClassM" })
+            @Html.ValidationMessageFor(model => model.ApellidoPaterno)</div>
+                <div class="col">@Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "textboxClassM" })
+            @Html.ValidationMessageFor(model => model.ApellidoMaterno)</div>
+            </div>
+           
+            @*<div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.NombreFantasia)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("NombreFantasia", null, new { @class = "textboxClass" })</div>
+
+            </div>
+            <br />
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Giro)</div>
+                <div class="col">@Html.DropDownList("Giro", null, new { @class = "ComboboxClassL", onchange = "" })</div>
+                
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaIngreso)</div>
+                <div class="col">@Html.JQueryUI().Datepicker("FechaIngreso").ShowButtonPanel(true).ShowWeek(false)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Estados)</div>
+                <div class="col">@Html.DropDownList("Estado", null, new { @class = "ComboboxClass", onchange = "" })</div>
+                
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaFin)</div>
+                <div class="col">@Html.JQueryUI().Datepicker("FechaFin").ShowButtonPanel(true).ShowWeek(false)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Transportista)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.Transportista)
+            @Html.ValidationMessageFor(model => model.Transportista)</div>
+            </div>
+            
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Naviera)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.Naviera)
+            @Html.ValidationMessageFor(model => model.Naviera)</div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Comentario)</div>
+                <div class="col" style="width:100px">@Html.TextArea("Comentario", null, new { @class = "textareaClass" })</div>
+
+            </div>
+            
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.RutRepLegal)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("RutRepLegal", null, new { @class = "textboxClass" })</div>
+
+            </div>
+            
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.NombreRepLegal)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("NombreRepLegal", null, new { @class = "textboxClass" })</div>
+
+            </div>          
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Mostrar)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.Mostrar)
+            @Html.ValidationMessageFor(model => model.Mostrar)</div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.TipoCartera)</div>
+                <div class="col">@Html.DropDownList("TipoCartera", null, new { @class = "ComboboxClass", onchange = "" })</div>
+                
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.CodigoSAP)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("CodigoSAP", null, new { @class = "textboxClass" })</div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Usuario)</div>
+                <div class="col">@Html.DropDownList("Usuario", null, new { @class = "ComboboxClass", onchange = "" })</div>
+                
+            </div>*@
+
+        </div>
+    
+               }
+            <br />
+           }
+
+
+           using (t.BeginPanel())
+           {
+               
+        <div class="tabla">
+            
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.CodigoSucursal)</div>
+                <div class="col" style="height:23px">@Html.TextBox("CodigoSucursal", null, new { @class = "textboxRut" })</div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.NombreSucursal)</div>
+                <div class="col" style="height:23px">@Html.TextBox("NombreSucursal", null, new { @class = "textboxClass" })</div>
+
+            </div>
+
+           @* <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.CasaMatriz)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.CasaMatriz)
+            @Html.ValidationMessageFor(model => model.CasaMatriz)</div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Pais)</div>
+                <div class="col"> @Html.DropDownList("Pais", null, "-- Seleccione País --", new { onchange = "PaisSeleccionado(this,'Region')" })</div>
+                
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Region)</div>
+                <div class="col"> @Html.DropDownList("Region", null, new { @class = "ComboboxClassL", onchange = "RegionSeleccionada(this,'Ciudad')" })</div>
+                
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Ciudad)</div>
+                <div class="col"> @Html.DropDownList("Ciudad", null, new { @class = "ComboboxClass", onchange = "CiudadSeleccionada(this,'Comuna')" })</div>
+                
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Comuna)</div>
+                <div class="col">@Html.DropDownList("Comuna", null, new { @class = "ComboboxClass" })</div>
+                
+            </div>*@
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Direccion)</div>
+                <div class="col" style="height:23px">@Html.TextBox("Direccion", null, new { @class = "textboxClass" })</div>
+
+            </div>
+
+            @*<div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Telefono)</div>
+                <div class="col" style="height:23px">@Html.TextBox("Telefono", null, new { @class = "textboxRut" })</div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Fax)</div>
+                <div class="col" style="height:23px">@Html.TextBox("Fax", null, new { @class = "textboxRut" })</div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Correo)</div>
+                <div class="col" style="height:23px">@Html.TextBox("Correo", null, new { @class = "textboxClass" })</div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Banco)</div>
+                <div class="col">@Html.DropDownList("Banco", null, new { @class = "ComboboxClassL", onchange = "" })</div>
+                
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.TipoCuenta)</div>
+                <div class="col">@Html.DropDownList("TipoCuenta", null, new { @class = "ComboboxClass", onchange = "" })</div>
+                
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Numero)</div>
+                <div class="col" style="height:23px">@Html.TextBox("Numero", null, new { @class = "textboxClass" })</div>
+
+            </div>
+
+            <br />*@
+        </div>
+          
+           <br />
+           }
+           
+           //Impuestos
+           @*using (t.BeginPanel())
+           {
+               
+        <div class="tabla">
+            
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Impuesto)</div>
+                <div class="col">@Html.DropDownList("Impuesto", null, new { @class = "ComboboxClass", onchange = "" })</div>
+                
+            </div>
+
+            
+          
+            <br />
+        </div>
+          
+           <br />
+           }*@
+           
+           //Contactos
+           @*using (t.BeginPanel())
+           {
+               
+        <div class="tabla">
+            
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Sucursal)</div>
+                <div class="col">@Html.DropDownList("Sucursal", null, new { @class = "ComboboxClass", onchange = "" })</div>
+                
+            </div>
+
+             <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.TipoContacto)</div>
+                <div class="col">@Html.DropDownList("TipoContacto", null, new { @class = "ComboboxClassL", onchange = "" })</div>
+                
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.NombreContacto)</div>
+                <div class="col" style="height:23px">@Html.TextBox("NombreContacto", null, new { @class = "textboxClass" })</div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.TelefonoContacto)</div>
+                <div class="col" style="height:23px;width:140px">@Html.TextBox("TelefonoContacto", null, new { @class = "textboxRut" })</div>
+
+                <div class="col" style="width:72px">@Html.LabelFor(model => model.AnexoContacto)</div>
+                <div class="col" style="height:23px">@Html.TextBox("AnexoContacto", null, new { @class = "textboxRut" })</div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.FaxContacto)</div>
+                <div class="col" style="height:23px">@Html.TextBox("FaxContacto", null, new { @class = "textboxRut" })</div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.CelularContacto)</div>
+                <div class="col" style="height:23px">@Html.TextBox("CelularContacto", null, new { @class = "textboxRut" })</div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.CorreoContacto)</div>
+                <div class="col" style="height:23px">@Html.TextBox("CorreoContacto", null, new { @class = "textboxClass" })</div>
+
+            </div>
+            
+        <br />
+        </div>
+          
+           <br />
+           
+           }*@
+           
+           //Cuenta Corriente
+           
+           @*using (t.BeginPanel())
+           {
+               
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Tipo)</div>
+                <div class="col">@Html.DropDownList("Tipo", null, new { @class = "ComboboxClass" })</div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.FormaDePago)</div>
+                <div class="col">@Html.DropDownList("FormaDePago", null, new { @class = "ComboboxClassL" })</div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.UtilizaCredito)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.UtilizaCredito)
+            @Html.ValidationMessageFor(model => model.UtilizaCredito)</div>
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.LimiteCredito)</div>
+                <div class="col" style="height:23px">@Html.TextBox("LimiteCredito", null, new { @class = "textboxClass" })</div>
+
+            </div>
+
+             <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.CreditoConsumido)</div>
+                <div class="col" style="height:23px">@Html.TextBox("CreditoConsumido", null, new { @class = "textboxClass" })</div>
+
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.EstadoCredito)</div>
+                <div class="col">@Html.DropDownList("EstadoCredito", null, new { @class = "ComboboxClass" })</div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.ComentarioCuentaCorriente)</div>
+                <div class="col" style="width:100px">@Html.TextArea("ComentarioCuentaCorriente", null, new { @class = "textareaClass" })</div>
+
+            </div>
+
+            <br />
+        </div>
+          
+           <br />
+           
+           }*@
+           //Contratos Cobranzas
+                     
+           @*using (t.BeginPanel())
+           {
+               
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.ContratoCartera)</div>
+                <div class="col">@Html.DropDownList("ContratoCartera", null, new { @class = "ComboboxClassL" })</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.RutContrato)</div>
+                <div class="col" style="height:23px">@Html.TextBox("RutContrato", null, new { @class = "textboxRut" })</div>
+
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.NombreContrato)</div>
+                <div class="col" style="height:23px">@Html.TextBox("NombreContrato", null, new { @class = "textboxClass" })</div>
+
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Indefinido)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.Indefinido)
+            @Html.ValidationMessageFor(model => model.Indefinido)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaInicioContrato)</div>
+                <div class="col">@Html.JQueryUI().Datepicker("FechaInicioContrato").ShowButtonPanel(true).ShowWeek(false)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaFinContrato)</div>
+                <div class="col">@Html.JQueryUI().Datepicker("FechaFinContrato").ShowButtonPanel(true).ShowWeek(false)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.InteresClientes)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.InteresClientes)
+            @Html.ValidationMessageFor(model => model.InteresClientes)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.HonorariosClientes)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.HonorariosClientes)
+            @Html.ValidationMessageFor(model => model.HonorariosClientes)</div>
+            </div>
+        <br />
+        </div>
+          
+           <br />
+           
+           }*@
+           
+           
+           <div class="tabla">
+                <div class="col" style="float:right"><input type="button" value="Guardar" onclick="fnGuardarReceptores();" /></div>
+           </div>
+       } 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<br />
+
+ 
+
+
+<br />
+<script>
+    function fnGuardarInsumos() {
+        var newUrl = "/ProvCli/GuardarInsumos/?"
+        //alert("ESTADO" + $("#Estado").val())
+        newUrl += "&tipoInsumo=" + $("#TiposInsumo").val()
+        newUrl += "&superCategoria=" + $("#SuperCategoria").val()
+        newUrl += "&categoria=" + $("#Categoria").val()
+        newUrl += "&codigo=" + $("#CodigoBuscar").val()
+        newUrl += "&nombre=" + $("#NombreBuscar").val()
+        newUrl += "&estado=" + $("#EstadoInsumo").val()
+        newUrl += "&tipo=" + $("#Tipo").val()
+        //newUrl += "Estado=" + 1
+        //newUrl += "&Rut=" + $("#RutDeudorBuscar").val() + "&Ctcid=" + $("#Ctcid").val() + "&Nombre=" + $("#NombreBuscar").val() + "&ApellidoPaterno=" + $("#ApellidoPaterno").val()
+        //newUrl += "&NombreFantasia=" + $("#NombreFantasia").val() + "&Telefono=" + $("#Telefono").val() + "&Email=" + $("#Email").val()
+        //newUrl += "&Direccion=" + $("#DireccionBuscar").val() + "&Rol=" + $("#Rol").val() + "&SituacionCartera=" + $("#SituacionCartera").val() + "&NumeroCPBT=" + $("#NumeroCPBT").val()
+        //newUrl += "&Gestor=" + $("#gesid").val()
+
+        jQuery("#BuscarInsumos").jqGrid().setGridParam({ url: newUrl }).trigger('reloadGrid', [{ page: 1 }])
+    }
+
+
+</script>

@@ -1,0 +1,112 @@
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.pdb
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Antlr3.Runtime.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\CYPH.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Dimol.bcp.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Dimol.dao.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Dimol.dto.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.bcp.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.dto.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Elmah.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\EntityFramework.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\JQueryUIHelpers.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Microsoft.Web.Infrastructure.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Mvc.HtmlHelper.jqGrid.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Newtonsoft.Json.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\System.Web.Mvc.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\System.Web.Optimization.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\System.Web.Providers.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\System.Web.Razor.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\System.Web.WebPages.Deployment.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\System.Web.WebPages.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\System.Web.WebPages.Razor.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\WebGrease.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.dao.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.bcp.pdb
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.dto.pdb
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\CYPH.xml
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\JQueryUIHelpers.xml
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\EntityFramework.xml
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Newtonsoft.Json.xml
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\System.Web.Mvc.xml
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\System.Web.Razor.xml
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\System.Web.WebPages.xml
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\System.Web.WebPages.Deployment.xml
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\System.Web.WebPages.Razor.xml
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.dao.pdb
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\es\EntityFramework.resources.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.Mvc.resources.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.Optimization.resources.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.Providers.resources.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.Razor.resources.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.WebPages.resources.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.WebPages.Deployment.resources.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.WebPages.Razor.resources.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\obj\Release\Dimol.Empresa.csprojResolveAssemblyReference.cache
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\obj\Release\Dimol.Empresa.dll
+D:\Dimol\Entregas PL\20141109\Dimol.Empresa\Dimol.Empresa\obj\Release\Dimol.Empresa.pdb
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.dll.config
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.pdb
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Antlr3.Runtime.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\CYPH.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.bcp.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.dao.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.dto.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.bcp.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.dto.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Elmah.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\EntityFramework.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\JQueryUIHelpers.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Microsoft.Web.Infrastructure.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Mvc.HtmlHelper.jqGrid.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Newtonsoft.Json.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\System.Web.Mvc.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\System.Web.Optimization.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\System.Web.Providers.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\System.Web.Razor.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\System.Web.WebPages.Deployment.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\System.Web.WebPages.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\System.Web.WebPages.Razor.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\WebGrease.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.dao.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Microsoft.Web.WebPages.OAuth.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\DotNetOpenAuth.AspNet.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\DotNetOpenAuth.Core.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\DotNetOpenAuth.OAuth.Consumer.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\DotNetOpenAuth.OAuth.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\DotNetOpenAuth.OpenId.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.bcp.pdb
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.dto.pdb
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\CYPH.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.dto.pdb
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\JQueryUIHelpers.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\EntityFramework.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Newtonsoft.Json.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\System.Web.Mvc.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\System.Web.Razor.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\System.Web.WebPages.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\System.Web.WebPages.Deployment.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\System.Web.WebPages.Razor.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Dimol.Empresa.dao.pdb
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\Microsoft.Web.WebPages.OAuth.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\DotNetOpenAuth.AspNet.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\DotNetOpenAuth.Core.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\DotNetOpenAuth.OAuth.Consumer.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\DotNetOpenAuth.OAuth.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\DotNetOpenAuth.OpenId.xml
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\es\EntityFramework.resources.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.Mvc.resources.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.Optimization.resources.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.Providers.resources.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.Razor.resources.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.WebPages.resources.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.WebPages.Deployment.resources.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\es\System.Web.WebPages.Razor.resources.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\bin\es\Microsoft.Web.WebPages.OAuth.resources.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\obj\Release\Dimol.Empresa.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\obj\Release\Dimol.Empresa.dll
+D:\_Codigo_Dimol\Dimol.Empresa\Dimol.Empresa\obj\Release\Dimol.Empresa.pdb

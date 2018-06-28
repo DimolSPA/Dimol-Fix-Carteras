@@ -1,0 +1,71 @@
+﻿@model Dimol.Caja.Models.CriterioRemesaViewModel
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCriterioRemesa" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Pclid)
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.Desde)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.Desde)
+                @Html.ValidationMessageFor(model => model.Desde)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.Hasta)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.Hasta)
+                @Html.ValidationMessageFor(model => model.Hasta)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.TipoRegion)</div>
+            <div class="col"> @Html.DropDownListFor(model => model.TipoRegion, null)</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.CodigoCarga)</div>
+            <div class="col"> @Html.DropDownListFor(model => model.CodigoCarga, null, "-- Seleccione Código de Carga --")</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.TipoCambioCapital)</div>
+            <div class="col"> @Html.DropDownListFor(model => model.TipoCambioCapital, null)</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.Capital)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.Capital)
+                @Html.ValidationMessageFor(model => model.Capital)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.Interes)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.Interes)
+                @Html.ValidationMessageFor(model => model.Interes)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.Honorario)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.Honorario)
+                @Html.ValidationMessageFor(model => model.Honorario)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.TipoConciliacion)</div>
+            <div class="col"> @Html.DropDownListFor(model => model.TipoConciliacion, null)</div>
+        </div>
+        <div class="fila" id="divCondicionAnticipo">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.CondicionAnticipo)</div>
+            <div class="col"> @Html.DropDownListFor(model => model.CondicionAnticipo, null, "-- Seleccione Condicion --")</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="float:right">
+                <input type="button" value="Guardar" id="btnGuardar" onclick="fnInsertUpdateCriterioRemesa();"  />
+
+            </div>
+        </div>
+    </div>
+
+}

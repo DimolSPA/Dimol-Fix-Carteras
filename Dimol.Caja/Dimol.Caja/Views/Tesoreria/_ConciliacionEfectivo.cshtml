@@ -1,0 +1,249 @@
+﻿@model Dimol.Caja.Models.ConciliacionCustodiaModel
+
+@using Mvc.HtmlHelpers
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+
+        $("#cb_" + $("#gridMovimientosPendientes")[0].id).hide();
+
+        $('#gridMovimientosPendientes').jqGrid('setGridParam', {
+
+            beforeSelectRow: function (rowid) {
+                var $self = $(this);
+                $self.jqGrid("resetSelection");
+                return true;
+                //if ($('#frmConciliacionCustodia select[id=EstadoDocumento]').val() == "2") {
+                //    return true;
+                //} else {
+                //    return false;
+                //}
+            }
+        });
+    });
+
+
+</script>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmConciliacionCustodia" }))
+{
+    @Html.ValidationSummary(true)
+
+    @Html.Hidden("CustodiaId")
+    @Html.Hidden("pclidHidden")
+    @Html.Hidden("ctcidHidden")
+    @Html.Hidden("gesidHidden")
+    @Html.Hidden("ConciliacionId")
+   
+    <div class=" panel panel-primary">
+        <div class="panel-heading">Datos de Cartera</div>
+        <div class="panel-body">
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:125px">@Html.LabelFor(model => model.NombreRutClienteCC)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.PclidCC, Url.Action("BuscarRutNombreCliente"), "NombreRutClienteCC", null, new { @class = "textboxRutNombre" }).MinLength(3)
+
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:125px">@Html.LabelFor(model => model.NombreRutDeudorCC)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.CtcidCC, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudorCC", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnCargarGestorConciliacionCustodia")
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:125px">@Html.LabelFor(model => model.NombreRutGestorCC)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.GesidCC, Url.Action("BuscarNombreGestor"), "NombreRutGestorCC", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=" panel panel-primary" style="display:none">
+        <div class="panel-heading">Datos Bancarios</div>
+        <div class="panel-body">
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:125px">@Html.LabelFor(model => model.Banco)</div>
+                    <div class="col">
+                        @Html.DropDownList("Banco", null, new { @class = "textboxClass" })
+
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:125px">@Html.LabelFor(model => model.GiroA)</div>
+                    <div class="col">
+                        @Html.TextBox("GiroA", null, new { @class = "textboxClass", @style = "width: 80px" })
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=" panel panel-primary">
+        <div class="panel-heading">Datos Documento</div>
+        <div class="panel-body">
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:45%">
+                        <div class="tabla">
+                            <div class="fila" style="display:none">
+                                <div class="col" style="width:125px">@Html.LabelFor(model => model.NumeroDocumento)</div>
+                                <div class="col">
+                                    @Html.TextBox("NumeroDocumento", null, new { @class = "textboxClass", @style = "width: 80px" })
+
+                                </div>
+
+                            </div>
+                            <div class="fila">
+                                <div class="col" style="width:125px">@Html.LabelFor(model => model.MontoDocumento)</div>
+                                <div class="col">
+                                    @Html.TextBox("MontoDocumento", null, new { @class = "textboxClass", @style = "width: 80px" })
+
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="col" style="width:125px">@Html.LabelFor(model => model.FechaDocumento)</div>
+                                <div class="col">
+                                    @Html.JQueryUI().Datepicker("FechaDocumento").ShowButtonPanel(true).ShowWeek(false).Disabled(true)
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col" style="width:50%">
+                        <div class="tabla">
+
+                            <div class="fila" style="display:none">
+                                <div class="col" style="width:125px">@Html.LabelFor(model => model.FechaProrroga)</div>
+                                <div class="col">
+                                    @Html.JQueryUI().Datepicker("FechaProrroga").ShowButtonPanel(true).ShowWeek(false)
+
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="col" style="width:125px">@Html.LabelFor(model => model.EstadoDocumento)</div>
+                                <div class="col">
+                                    @Html.DropDownList("EstadoDocumento", null, new { @class = "textboxClass", @style = "width: 150px" })
+
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="col" style="width:125px">@Html.LabelFor(model => model.NumComprobanteDoc)</div>
+                                <div class="col">
+                                    @Html.EditorFor(model => model.NumComprobanteDoc)
+                                    @Html.ValidationMessageFor(model => model.NumComprobanteDoc)
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="width:125px">@Html.LabelFor(model => model.Cuenta)</div>
+        <div class="col">
+            @Html.DropDownList("Cuenta", null, new { @class = "textboxClass", onchange = "fnBuscarCuenta(this.options[this.selectedIndex].text)" })
+
+        </div>
+    </div>
+</div>
+
+@(Html.jqGrid("gridMovimientosPendientes")
+.addColumn(new Column("MovimientoId")
+.setEditable(false).setHidden(true)
+.setSortable(false)
+.setWidth(70))
+.addColumn(new Column("NumCuenta").setLabel("Nº Cuenta")
+.setEditable(false)
+.setSortable(true)
+.setWidth(100))
+.addColumn(new Column("FecMovimiento").setLabel("Fecha")
+.setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+.setSortable(true)
+.setWidth(90))
+.addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+.setSortable(true)
+.setWidth(80))
+.addColumn(new Column("Motivo").setLabel("Motivo")
+.setEditable(false)
+.setSortable(true)
+.setWidth(200))
+.addColumn(new Column("Sucursal").setLabel("Sucursal")
+.setEditable(false).setHidden(true)
+.setSortable(true)
+.setWidth(80))
+.addColumn(new Column("Movimiento").setLabel("Movimiento")
+.setEditable(false).setAlign(Align.center).setHidden(true)
+.setSortable(true)
+.setWidth(80))
+.addColumn(new Column("MotivoSistema").setLabel("Motivo Sistema")
+.setEditable(false).setHidden(true)
+.setSortable(true)
+.setWidth(150))
+.addColumn(new Column("Estado").setLabel("Estado")
+.setEditable(false).setHidden(true)
+.setSortable(true)
+.setWidth(80))
+.addColumn(new Column("MotivoSistemaId").setLabel("MotivoSistemaId")
+.setEditable(false).setHidden(true)
+.setSortable(true)
+.setWidth(10))
+.addColumn(new Column("EstadoId").setLabel("EstadoId")
+.setEditable(false).setHidden(true)
+.setSortable(true)
+.setWidth(10))
+// settings
+.setCaption("Movimientos Bancarios")//.setWidth(800)
+.setAutoWidth(true)
+.setRequestType(RequestType.get)
+.setUrl("~/Tesoreria/GetDummy/")
+.setAltRows(true)
+.setAltClass("altGridRows")
+.setAutoWidth(false)
+.setRowNum(500)
+.setRowList(new int[] { 50, 100, 500 })
+.setViewRecords(true)
+.setSortName("FecMovimiento")
+.setSortOrder(SortOrder.asc)
+.setPager("pagerMovimientosPendientes")
+.setPagerPos(PagerPos.center)
+.setPgButtons(true)
+.setCellEdit(false)
+.setCellSubmit(CellSubmit.clientArray)
+.setScroll(true)
+.setHeight(100)
+.setMultiSelect(true)
+.Render()
+
+
+)
+<br />
+<div class="tabla">
+    <div class="fila" style="display:none">
+        <div class="col" style="width:140px">@Html.LabelFor(model => model.TipoConciliacion)</div>
+        <div class="col">
+            @Html.DropDownList("TipoConciliacion", null, new { })
+            @Html.ValidationMessageFor(model => model.TipoConciliacion)
+        </div>
+    </div>
+</div>
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="float:right">
+            <input type="button" value="Conciliar" id="btnGuardarConciliaCustodia" onclick="fnGuardarConciliaEfectivoCustodia();" />
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.dto\bin\Release\Dimol.Carteras.Mantenedores.dto.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.dto\bin\Release\Dimol.Carteras.Mantenedores.dto.pdb
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.dto\bin\Release\Dimol.dto.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.dto\obj\Release\Dimol.Carteras.Mantenedores.dto.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.dto\obj\Release\Dimol.Carteras.Mantenedores.dto.dll
+d:\documents\visual studio 2012\Projects\Dimol.Carteras.Mantenedores\Dimol.Carteras.Mantenedores.dto\obj\Release\Dimol.Carteras.Mantenedores.dto.pdb

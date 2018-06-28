@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{565474F2-742F-489D-8549-D44404B41AAD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dimol.CastigoMasivo</RootNamespace>
+    <AssemblyName>Dimol.CastigoMasivo</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Dimol\Dimol.bcp\Dimol.bcp.csproj">
+      <Project>{00928a66-f585-4be6-9c5e-bd450589784b}</Project>
+      <Name>Dimol.bcp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Dimol\Dimol.dto\Dimol.dto.csproj">
+      <Project>{bf7f8e44-f92e-406d-9836-b2c0f6e2a3ad}</Project>
+      <Name>Dimol.dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dimol.Carteras.bcp\Dimol.Carteras.bcp.csproj">
+      <Project>{76d0ef38-efc2-462f-bb51-c30ab34257e8}</Project>
+      <Name>Dimol.Carteras.bcp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dimol.Carteras.dto\Dimol.Carteras.dto.csproj">
+      <Project>{789bf8d7-16af-449b-84b5-b2fd8c0c5e70}</Project>
+      <Name>Dimol.Carteras.dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dimol.Reportes.bcp\Dimol.Reportes.bcp.csproj">
+      <Project>{6dd2a60f-5551-41fe-8e57-d916b75d8dba}</Project>
+      <Name>Dimol.Reportes.bcp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dimol.Reportes.dto\Dimol.Reportes.dto.csproj">
+      <Project>{402f6ad6-741f-4724-aba9-74674b93e432}</Project>
+      <Name>Dimol.Reportes.dto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

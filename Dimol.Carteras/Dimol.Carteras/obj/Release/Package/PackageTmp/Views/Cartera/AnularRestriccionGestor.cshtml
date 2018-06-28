@@ -1,0 +1,60 @@
+﻿@model Dimol.Carteras.Models.AnularRestriccionGestorModel
+
+@{
+    ViewBag.Title = "Anular Restricción Gestor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("gridAnularRestriccion")
+    .addColumn(new Column("Usrid").setLabel("Autoriza")
+        .setEditable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.Usuarios+"\"")
+        .setWidth(150))
+    .addColumn(new Column("Gesid").setLabel("Gestor")
+        .setEditable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.Gestores+"\"")
+        .setWidth(150))
+    .addColumn(new Column("FechaDesde").setLabel("Desde")
+        .setEditable(true).setAlign(Align.center).setEditOptions("dataInit: function(el) { setTimeout(function() { $(el).datepicker(); }, 200); } ")
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(80))
+    .addColumn(new Column("FechaHasta").setLabel("Hasta")
+        .setEditable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setSortable(true).setAlign(Align.center).setEditOptions("dataInit: function(el) { setTimeout(function() { $(el).datepicker(); }, 200); } ")
+        .setWidth(80))
+    
+    // settings
+    .setCaption("Anular Restricción")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetRestriccionesGestor/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("NombreUsuario,NombreGestor")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerAnularRestriccion")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Cartera/OperAnularRestriccion")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Cartera/OperAnularRestriccion")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Cartera/OperAnularRestriccion")
+    .setExcelExport("/Cartera/ExcelAnularRestriccion")
+    .Render()
+
+)
+
+

@@ -1,0 +1,56 @@
+﻿
+@using Mvc.HtmlHelpers
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmGuardarCabeceraDetalle" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BuscarDeudor</legend>
+        @Html.Hidden("Modo")
+        @Html.Hidden("Item")        
+        @*@Html.HiddenFor(model =>model.MostrarFecha)
+            @Html.HiddenFor(model =>model.TodosSeleccionados)*@
+        <div class="tabla" id="divTabla">
+            <div class="fila">
+                <div class="col" style="width:150px">@Html.Label("Item")</div>
+                <div class="col">
+                    @Html.JQueryUI().Autocomplete("Insid", "fnAutocompleteItems", null, "Codigo", null, new { @class = "textboxRutNombre" }).MinLength(5)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:150px">@Html.Label("Monto")</div>
+                <div class="col">
+                    @Html.TextBox("Monto", null, new { @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);", @style = "text-align:right" })
+                </div>
+                <div class="col" style="width:100px">@Html.Label("ImpuestoRetenido")</div>
+                <div class="col">
+                    @Html.CheckBox("ImpuestoRetenido", true)
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:150px">@Html.Label("Fecha Accion Judicial")</div>
+                <div class="col" style="width:100px">
+                    @Html.JQueryUI().Datepicker("FecAccJud").ShowButtonPanel(true).ShowWeek(false)
+                </div>
+            </div>
+                <div class="fila">
+                    <div class="col" style="width:300px"><input id="subirArchivoEstampe" type="file" onchange="($('#idDocumentoEstampe').children().length < 1 && $('#subirArchivoEstampe').val() != '') ? ($('#idDocumentoEstampe').append('<div><span>' + $('#subirArchivoEstampe').val().split('\\').pop() + '</span><span onclick=\'$(this).parent().remove()\' style=\'cursor:pointer;color:red\'>&nbsp;&times;</span></div>')) : ''" style="width:300px">@Html.Hidden("ArchivoEstmp")</div>
+                    <div class="col"><img id="imgSubirArchivo" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:100px" id="idDocumentoEstampe"></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:100px"></div>
+                    <div class="col">
+                        @*@Html.TextBox("Cantidad", null,new { @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);", @style = "text-align:right" })*@
+                        @Html.Hidden("Cantidad", "1")
+                    </div>
+                    <div class="col" style="float:right"><input type="button" value="Grabar" onclick="fnGuardarComprobanteDetalle();" /></div>
+                </div>
+
+            </div>
+    </fieldset>
+}

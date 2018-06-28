@@ -1,0 +1,217 @@
+﻿
+CREATE PROCEDURE [dbo].[_Listar_VisitaTerrenoSolicitudAprobar]
+(
+@codemp int,
+@pclid int,
+@idRegion int,
+@idCiudad int,
+@idComuna int,
+@monto decimal (15,2),
+@quiebra char(1),
+@solitada char(1),
+@preQuiebra char(1),
+@where varchar(1000),
+@sidx varchar(255),
+@sord varchar(10),
+@inicio int,
+@limite int
+)
+AS
+
+BEGIN
+
+SET NOCOUNT ON;
+declare @query varchar(7000),
+@isSolitada varchar(20),
+@isPreQuiebra varchar(100);
+
+if @solitada = 'S'
+	begin
+		SET @isSolitada = 'IS NOT NULL'--IS NOT NULL es solitada
+	end
+else
+	SET @isSolitada = 'IS NULL'--IS NULL es no solicitada
+
+if @preQuiebra = 'S'
+	begin
+		SET @isPreQuiebra = 'R.ROL_PREQUIEBRA'--esta en prequiebra
+	end
+else
+	SET @isPreQuiebra = 'ISNULL(R.ROL_PREQUIEBRA, ''N'')'--no esta en prequiebra
+
+set @query = '  select * from
+  (select *,ROW_NUMBER() OVER (ORDER BY ' + @sidx + ' ' + @sord+ ') as row from    
+  (	'
+set @query = @query + '
+	SELECT 
+		VISITAS.PCLID, VISITAS.CTCID, SOLICITUDID, 
+		RUT_DEUDOR, DEUDOR, QUIEBRA, 
+		VISITAS.DIRECCION, COMID, VISITAS.COMUNA, 
+		CIUID, CIUDAD, REGID, REGION, 
+		ROUND(VISITAS.DEUDA, 0) DEUDA, CLIENTE, GESTOR,
+		CONVERT(VARCHAR, VTS.FEC_CREACION, 103)  + '' - '' + VTD.VISITA ULTMAVISITA,
+		(Select top 1 USR_NOMBRE from USUARIOS u with(nolock) where u.USR_USRID = Solicita) Solicitante
+
+	FROM
+			(SELECT DISTINCT  CPBT.CCB_PCLID PCLID, CPBT.CCB_CTCID CTCID,(CASE
+																	WHEN VTS.SOLICITUD_ID IS NOT NULL THEN VTS.SOLICITUD_ID
+																	ELSE 0
+																	END) SOLICITUDID,
+					DD.CTC_RUT RUT_DEUDOR, DD.CTC_NOMFANT DEUDOR,CPBT.CTC_QUIEBRA QUIEBRA, 
+					DD.CTC_DIRECCION DIRECCION, 
+					DD.CTC_COMID COMID, COM.COM_NOMBRE COMUNA, COM.COM_CIUID CIUID, CIU.CIU_NOMBRE CIUDAD, 
+					CIU.CIU_REGID REGID, REG.REG_NOMBRE REGION,
+					SUM(CPBT.CCB_SALDO) DEUDA, CPBT.PCL_NOMFANT CLIENTE, GES.GES_NOMBRE GESTOR,
+					VTS.USRID_CREACION Solicita
+				FROM CARTERA_CLIENTES_DOCUMENTOS_CPBT_DOC CPBT
+				JOIN DEUDORES DD
+				ON CPBT.CCB_CTCID = DD.CTC_CTCID
+				JOIN COMUNA COM
+				ON DD.CTC_COMID = COM.COM_COMID
+				JOIN CIUDAD CIU
+				ON COM.COM_CIUID = CIU.CIU_CIUID
+				JOIN REGION REG
+				ON CIU.CIU_REGID = REG.REG_REGID
+				LEFT JOIN VISITA_TERRENO_SOLICITUD VTS
+				ON  DD.CTC_CTCID =  VTS.CTCID
+				AND DD.CTC_DIRECCION LIKE CONCAT(''%'', VTS.DIRECCION, ''%'') 
+				--AND VTS.DIRECCION = DD.CTC_DIRECCION
+				--AND VTS.IDCOMUNA = DD.CTC_COMID
+				AND DD.CTC_COMID = VTS.IDCOMUNA
+				AND VTS.VISITADA = ''N''
+				AND VTS.ID_ESTATUS = 1
+				LEFT JOIN GESTOR_CARTERA GSC
+				ON CPBT.CCB_PCLID = GSC.GSC_PCLID
+				AND CPBT.CCB_CTCID = GSC.GSC_CTCID
+				LEFT JOIN GESTOR GES
+				ON GSC.GSC_GESID = GES.GES_GESID
+				LEFT JOIN ROL_DOCUMENTOS AS RLD
+				ON CPBT.CCB_CTCID = RLD.RDC_CTCID
+				LEFT JOIN ROL AS R
+				on RLD.RDC_ROLID= R.ROL_ROLID
+				WHERE  CPBT.CCB_ESTCPBT IN (''V'',''J'')
+				AND CPBT.CTC_QUIEBRA = ''' +  CONVERT(VARCHAR,@quiebra) + '''
+				AND CPBT.CCB_CODEMP = ' + CONVERT(VARCHAR,@codemp) + '
+				AND DD.CTC_DIRECCION != ''''
+				AND CPBT.CCB_CTCID NOT IN (Select vtts.ctcid from visita_terreno_solicitud vtts
+											where vtts.ctcid = DD.CTC_CTCID
+											and vtts.direccion = DD.CTC_DIRECCION
+											and vtts.idcomuna =  DD.CTC_COMID
+											and vtts.ID_ESTATUS != 1)
+				AND VTS.CTCID ' + CONVERT(VARCHAR,@isSolitada) + '
+				AND ' + CONVERT(VARCHAR,@isPreQuiebra) + '= ''' +  CONVERT(VARCHAR,@preQuiebra) + ''' 
+				GROUP BY CPBT.CCB_PCLID, CPBT.CCB_CTCID, VTS.SOLICITUD_ID,
+					DD.CTC_RUT, DD.CTC_NOMFANT,CPBT.CTC_QUIEBRA, 
+					DD.CTC_DIRECCION, 
+					DD.CTC_COMID, COM.COM_NOMBRE, COM.COM_CIUID, CIU.CIU_NOMBRE, 
+					CIU.CIU_REGID, REG.REG_NOMBRE,
+					CPBT.PCL_NOMFANT,GES.GES_NOMBRE,VTS.USRID_CREACION
+				UNION 
+				SELECT DISTINCT
+					CPBT.CCB_PCLID PCLID, CPBT.CCB_CTCID CTCID, (CASE
+																	WHEN VTS.SOLICITUD_ID IS NOT NULL THEN VTS.SOLICITUD_ID
+																	ELSE 0
+																	END) SOLICITUDID,
+					DD.CTC_RUT RUT_DEUDOR, DD.CTC_NOMFANT DEUDOR,CPBT.CTC_QUIEBRA QUIEBRA, 
+					DDC.DDC_DIRECCION DIRECCION, 
+					DDC.DDC_COMID COMID, COM.COM_NOMBRE COMUNA, COM.COM_CIUID CIUID, CIU.CIU_NOMBRE CIUDAD, 
+					CIU.CIU_REGID REGID, REG.REG_NOMBRE REGION,
+					SUM(CPBT.CCB_SALDO) DEUDA, CPBT.PCL_NOMFANT CLIENTE, GES.GES_NOMBRE GESTOR,
+					VTS.USRID_CREACION Solicita
+				FROM CARTERA_CLIENTES_DOCUMENTOS_CPBT_DOC CPBT
+				JOIN DEUDORES DD
+				ON CPBT.CCB_CTCID = DD.CTC_CTCID
+				JOIN DEUDORES_CONTACTOS DDC
+				ON DD.CTC_CTCID = DDC.DDC_CTCID
+				JOIN COMUNA COM
+				ON DDC.DDC_COMID = COM.COM_COMID
+				JOIN CIUDAD CIU
+				ON COM.COM_CIUID = CIU.CIU_CIUID
+				JOIN REGION REG
+				ON CIU.CIU_REGID = REG.REG_REGID
+				LEFT JOIN VISITA_TERRENO_SOLICITUD VTS
+				ON  DDC.DDC_CTCID =  VTS.CTCID
+				AND DDC.DDC_DIRECCION LIKE CONCAT(''%'', VTS.DIRECCION, ''%'') 
+				--AND DDC.DDC_DIRECCION = VTS.DIRECCION 
+				AND DDC.DDC_COMID = VTS.IDCOMUNA
+				AND VTS.VISITADA = ''N''
+				AND VTS.ID_ESTATUS = 1
+				LEFT JOIN GESTOR_CARTERA GSC
+				ON CPBT.CCB_PCLID = GSC.GSC_PCLID
+				AND CPBT.CCB_CTCID = GSC.GSC_CTCID
+				LEFT JOIN GESTOR GES
+				ON GSC.GSC_GESID = GES.GES_GESID
+				LEFT JOIN ROL_DOCUMENTOS AS RLD
+				ON CPBT.CCB_CTCID = RLD.RDC_CTCID
+				LEFT JOIN ROL AS R
+				on RLD.RDC_ROLID= R.ROL_ROLID
+				WHERE  CPBT.CCB_ESTCPBT IN (''V'',''J'')
+				AND CPBT.CTC_QUIEBRA = ''' +  CONVERT(VARCHAR,@quiebra) + '''
+				AND CPBT.CCB_CODEMP = ' + CONVERT(VARCHAR,@codemp) + '
+				AND DDC.DDC_DIRECCION != ''''
+				AND CPBT.CCB_CTCID NOT IN (Select vtts.ctcid from visita_terreno_solicitud vtts
+											where vtts.ctcid = DDC.DDC_CTCID
+											and vtts.direccion = DDC.DDC_DIRECCION
+											and vtts.idcomuna = DDC.DDC_COMID
+											and vtts.ID_ESTATUS != 1)
+				AND VTS.CTCID ' + CONVERT(VARCHAR,@isSolitada) + '
+				AND ' + CONVERT(VARCHAR,@isPreQuiebra) + '= ''' +  CONVERT(VARCHAR,@preQuiebra) + ''' 
+				GROUP BY CPBT.CCB_PCLID, CPBT.CCB_CTCID, VTS.SOLICITUD_ID,
+					DD.CTC_RUT, DD.CTC_NOMFANT,CPBT.CTC_QUIEBRA, 
+					DDC.DDC_DIRECCION, 
+					DDC.DDC_COMID, COM.COM_NOMBRE, COM.COM_CIUID, CIU.CIU_NOMBRE, 
+					CIU.CIU_REGID, REG.REG_NOMBRE,
+					CPBT.PCL_NOMFANT,GES.GES_NOMBRE,VTS.USRID_CREACION) AS VISITAS
+			LEFT JOIN (SELECT TOP 1 WITH TIES 
+								SOLICITUD_ID, CTCID, FEC_CREACION, ID_ESTATUS
+							FROM 
+								VISITA_TERRENO_SOLICITUD 
+							ORDER BY
+								ROW_NUMBER() OVER(PARTITION BY CTCID ORDER BY FEC_CREACION DESC)) VTS
+				ON  VISITAS.CTCID =  VTS.CTCID
+				AND VTS.ID_ESTATUS = 5
+				LEFT JOIN VISITA_TERRENO VT
+				ON VTS.SOLICITUD_ID = VT.SOLICITUD_ID
+				LEFT JOIN VISITA_TERRENO_DETALLE VTD
+				ON VT.ID_VISITA = VTD.ID_VISITA
+				AND VT.CTCID = VTD.CTCID'
+
+if @pclid is not null 
+	begin
+		set @query = @query + ' WHERE VISITAS.PCLID= ' +  CONVERT(VARCHAR,@pclid)
+	end
+
+--if @ctcid is not null 
+--	begin
+--		set @query = @query + ' AND CTCID= ' +  CONVERT(VARCHAR,@ctcid)
+--	end
+if @idRegion is not null 
+	begin
+		set @query = @query + ' AND REGID= ' +  CONVERT(VARCHAR,@idRegion)
+	end
+if @idCiudad is not null 
+	begin
+		set @query = @query + ' AND CIUID= ' +  CONVERT(VARCHAR,@idCiudad)
+	end
+if @idComuna is not null 
+	begin
+		set @query = @query + ' AND COMID= ' +  CONVERT(VARCHAR,@idComuna)
+	end
+if @monto is not null 
+	begin
+		set @query = @query + ' AND DEUDA > ' +  CONVERT(VARCHAR,@monto)
+	end 
+
+set @query = @query +') as tabla  ) as t
+  where  row > ' + CONVERT(VARCHAR,@inicio) + ' and row <= '+CONVERT(VARCHAR,@limite)
+
+if @where is not null
+begin
+set @query = @query + @where;
+end
+
+ --select @query
+ --PRINT(@query)
+ exec(@query)	
+
+END

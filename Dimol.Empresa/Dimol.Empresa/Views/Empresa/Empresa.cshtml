@@ -1,0 +1,227 @@
+﻿@model Dimol.Empresa.Models.EmpresaModel
+@{
+    ViewBag.Title = "Empresa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Empresa</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-ui-{version}.js"></script>
+<script src="~/Scripts/jquery-ui.unobtrusive-{version}.js"></script>
+
+
+@using Mvc.HtmlHelpers
+
+
+      @using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabEmpresa" })))
+       {
+           t.Tab("Empresa", "tab1");
+           t.Tab("Sucursales", "tab2");
+           t.Tab("Configuraciones", "tab3");
+           using (t.BeginPanel())
+           {
+               using (Html.BeginForm(null, null, FormMethod.Post, new { id = "tab1" }))
+               {
+                @Html.ValidationSummary(true)
+
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="fila">
+                            <div class="col" style="width:160px">Rut
+                            </div>
+                            <div class="col">@Html.TextBox("Rut", null, new { @class = "textboxClass" })
+                                 @Html.ValidationMessageFor(model => model.Rut)
+                            </div>
+                        </div>
+          
+                        <div class="fila">
+                            <div class="col" style="width:160px">Nombre
+                            </div>
+                            <div class="col">@Html.TextBox("Nombre", null, new { @class = "textboxClass" })
+                            @Html.ValidationMessageFor(model => model.Nombre)
+                            </div>
+                        </div>
+            
+                        <div class="fila">
+                            <div class="col" style="width:160px">Giro
+                            </div>
+                            <div class="col">@Html.TextBoxFor(model => model.Giro, new { @class = "textboxClassM" })
+                             @Html.ValidationMessageFor(model => model.Giro)
+                            </div>
+                        </div>
+                        <div class="fila">
+                            <div class="col" style="width:160px">Representante Legal
+                            </div>
+                            <div class="col">@Html.TextBoxFor(model => model.NombreRepresentanteLegal, new { @class = "textboxClass" })
+                            </div>
+                        </div>
+
+                        <div class="fila">
+                            <div class="col" style="width:160px">Rut Rep. legal
+                            </div>
+                            <div class="col">@Html.TextBoxFor(model => model.RutRepresentanteLegal, new { @class = "textboxClass" })
+                            </div>
+                        </div>
+                          <div class="fila">
+                            <div class="col" style="float:left"><input type="button" value="Grabar" onclick="fnGuardarEmpresa();" /></div>
+                            </div>
+                    </div>
+                </div>
+                }
+           }
+           using (t.BeginPanel())
+           {
+             <div class="tabla">
+                <div class="fila">
+                    <div class="col">
+                        @(Html.jqGrid("gridSucurales")
+                        .addColumn(new Column("CodEmp").setLabel("CodEmp")
+                            .setHidden(true)    
+                            .setEditable(true)
+                            .setSortable(true)
+                            .setWidth(50))
+                        .addColumn(new Column("Id").setLabel("Id")
+                            .setHidden(true)
+                            .setEditable(true)
+                            .setWidth(50))
+                        .addColumn(new Column("Nombre").setLabel("Nombre")
+                            .setHidden(false)
+                            .setEditable(true)
+                            .setWidth(350))
+                         .addColumn(new Column("IdComuna").setLabel("IdComuna")
+                            .setHidden(true )
+                            .setEditable(false)
+                            .setWidth(50))
+                          .addColumn(new Column("Comuna").setLabel("Comuna")
+                            .setEditable(true)
+                            .setEditType(EditType.select)
+                            .setEditOptions("value:\""+ViewBag.Comunas+"\"")
+                            .setWidth(80))
+                          .addColumn(new Column("Direccion").setLabel("Direccion")
+                            .setHidden(false)
+                            .setEditable(true)
+                            .setWidth(50))
+                         .addColumn(new Column("Telefono").setLabel("Telefono")
+                            .setHidden(false)
+                            .setEditable(true)
+                            .setWidth(50))
+                          .addColumn(new Column("Fax").setLabel("Fax")
+                            .setHidden(false)
+                            .setEditable(true)
+                            .setWidth(50))
+                          .addColumn(new Column("Email").setLabel("Email")
+                            .setHidden(false)
+                            .setEditable(true)
+                            .setWidth(50))
+                           .addColumn(new Column("Css").setLabel("Css")
+                            .setHidden(false)
+                            .setEditable(true)
+                            .setWidth(50))
+                         .addColumn(new Column("Matriz").setLabel("Matriz")
+                           .setEditable(true)
+                            .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+                            .setAlign(Align.center)
+                            .setWidth(50)) 
+        
+                            // settings
+                            .setCaption("Sucursales").setWidth(400)
+                            .setRequestType(RequestType.get)
+                            .setUrl("~/Empresa/GetSucurales")
+                            .setAltRows(true)
+                            .setAltClass("altGridRows")
+                            .setAutoWidth(false)
+                            .setRowNum(10)
+                            .setRowList(new int[] { 10, 30, 50 })
+                            .setViewRecords(true)
+                            .setSortName("Nombre")
+                            .setSortOrder(SortOrder.asc)
+                            .setPager("pagerGetSucurales")
+                            .setPagerPos(PagerPos.center)
+                            .setPgButtons(true)
+                            .setCellEdit(false)
+                            .setCellSubmit(CellSubmit.clientArray)
+                            .setNavEdit(ViewBag.Edit)
+                            .setEditUrl("/Empresa/OperEmpresaSucursal")
+                            .setNavAdd(ViewBag.Add)
+                            .setAddUrl("/Empresa/OperEmpresaSucursal")
+                            .setNavDel(ViewBag.Del)
+                            .setDelUrl("/Empresa/OperEmpresaSucursal")
+                            .setExcelExport("/Empresa/ExportToExcelEmpresaSucursal")
+                            .Render()
+
+                        )
+                       </div>
+                </div>
+            </div>  
+           }
+          
+           using (t.BeginPanel())
+           {
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col">
+                        @(Html.jqGrid("gridGetConfiguracion")
+                        .addColumn(new Column("CodEmp").setLabel("CodEmp")
+                            .setHidden(true)    
+                            .setEditable(true)
+                            .setSortable(true)
+                            .setWidth(50))
+                        .addColumn(new Column("Id").setLabel("Id")
+                            .setHidden(false)
+                            .setEditable(false)
+                            .setWidth(50))
+                        .addColumn(new Column("Nombre").setLabel("Nombre")
+                            .setHidden(false)
+                            .setEditable(true)
+                            .setWidth(350))
+                         .addColumn(new Column("ValorNumerico").setLabel("Valor Numero")
+                            .setHidden(false)
+                            .setEditable(true)
+                            .setWidth(200))
+                          .addColumn(new Column("ValorTexto").setLabel("Valor Texto")
+                            .setHidden(false)
+                            .setEditable(true)
+                            .setWidth(200))    
+                
+
+                        // settings
+                        .setCaption("Configuraciones").setWidth(400)
+                        .setRequestType(RequestType.get)
+                        .setUrl("~/Empresa/GetConfiguracion")
+                        .setAltRows(true)
+                        .setAltClass("altGridRows")
+                        .setAutoWidth(false)
+                        .setRowNum(10)
+                        .setRowList(new int[] { 10, 30, 50 })
+                        .setViewRecords(true)
+                        .setSortName("Nombre")
+                        .setSortOrder(SortOrder.asc)
+                        .setPager("pagerGetConfiguracion")
+                        .setPagerPos(PagerPos.center)
+                        .setPgButtons(true)
+                        .setCellEdit(false)
+                        .setCellSubmit(CellSubmit.clientArray)
+                        .setNavEdit(ViewBag.Edit)
+                        .setEditUrl("/Empresa/OperEmpresaConfiguracion")
+                        .setNavAdd(ViewBag.Add)
+                        .setAddUrl("/Empresa/OperEmpresaConfiguracion")
+                        .setNavDel(ViewBag.Del)
+                        .setDelUrl("/Empresa/OperEmpresaConfiguracion")
+                        .setExcelExport("/Empresa/ExportToExcelConfiguracion")
+                        .Render()
+
+                    )
+
+                    </div>
+                </div>
+            </div>  
+         
+           }
+           <br />
+
+       }
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

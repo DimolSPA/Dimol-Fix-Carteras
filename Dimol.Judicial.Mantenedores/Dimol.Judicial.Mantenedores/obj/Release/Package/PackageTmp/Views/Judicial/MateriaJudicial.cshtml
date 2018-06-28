@@ -1,0 +1,54 @@
+﻿@model Dimol.Judicial.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "Materia Judicial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Materia Judicial</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("MateriaJudicial")
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("Id").setLabel("Id")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+    .addColumn(new Column("Orden").setLabel("Orden")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(50))
+        
+    // settings
+    .setCaption("MateriaJudicial")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Judicial/GetMateriaJudicial/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerMateriaJudicial")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Judicial/OperMateriaJudicial")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Judicial/OperMateriaJudicial")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Judicial/OperMateriaJudicial")
+    .setExcelExport("/Judicial/ExportToExcelMateriaJudicial")
+    .Render()
+
+)

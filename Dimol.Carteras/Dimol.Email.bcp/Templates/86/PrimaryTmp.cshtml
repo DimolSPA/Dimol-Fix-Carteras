@@ -1,0 +1,47 @@
+﻿@using RazorEngine
+@using Dimol.Email.dto.MailModels
+@inherits RazorEngine.Templating.TemplateBase<BaseEmailModel<EmailTest>>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>Test Email</title>
+    <style>
+        body{
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>@Model.Props.TestDescription - Copec</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Integer venenatis placerat auctor. Nullam a augue fringilla, 
+            gravida ante eget, hendrerit tortor. Vivamus faucibus velit ex, 
+            vestibulum dictum ligula tristique sed. In varius pharetra convallis. 
+            Nulla id magna erat. Phasellus finibus orci eu risus facilisis consequat scelerisque ut nibh. 
+            Orci varius natoque penatibus et magnis dis parturient montes, 
+            nascetur ridiculus mus. Nunc vel ex eros. 
+            Ut iaculis aliquam ipsum, quis ornare leo lacinia in. 
+            Vestibulum mollis lectus ornare orci dapibus dignissim.
+        </p>
+        <table>
+            <tr>
+                <td>TestName</td>
+                <td>TestLastName</td>
+            </tr>
+            <tr>
+                <td>Jean</td>
+                <td>Robles</td>
+            </tr>
+            <tr>
+                <td>David</td>
+                <td>Febres</td>
+            </tr>
+        </table>
+    </div>
+    
+</body>
+</html>

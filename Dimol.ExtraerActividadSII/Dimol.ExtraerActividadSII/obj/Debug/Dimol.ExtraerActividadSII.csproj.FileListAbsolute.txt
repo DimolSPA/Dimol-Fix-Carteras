@@ -1,0 +1,9 @@
+D:\_Codigo_Dimol\Dimol.ExtraerActividadSII\Dimol.ExtraerActividadSII\bin\Debug\Dimol.ExtraerActividadSII.exe.config
+D:\_Codigo_Dimol\Dimol.ExtraerActividadSII\Dimol.ExtraerActividadSII\bin\Debug\Dimol.ExtraerActividadSII.exe
+D:\_Codigo_Dimol\Dimol.ExtraerActividadSII\Dimol.ExtraerActividadSII\bin\Debug\Dimol.ExtraerActividadSII.pdb
+D:\_Codigo_Dimol\Dimol.ExtraerActividadSII\Dimol.ExtraerActividadSII\obj\Debug\Dimol.ExtraerActividadSII.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\Dimol.ExtraerActividadSII\Dimol.ExtraerActividadSII\obj\Debug\Dimol.ExtraerActividadSII.Form1.resources
+D:\_Codigo_Dimol\Dimol.ExtraerActividadSII\Dimol.ExtraerActividadSII\obj\Debug\Dimol.ExtraerActividadSII.Properties.Resources.resources
+D:\_Codigo_Dimol\Dimol.ExtraerActividadSII\Dimol.ExtraerActividadSII\obj\Debug\Dimol.ExtraerActividadSII.csproj.GenerateResource.Cache
+D:\_Codigo_Dimol\Dimol.ExtraerActividadSII\Dimol.ExtraerActividadSII\obj\Debug\Dimol.ExtraerActividadSII.exe
+D:\_Codigo_Dimol\Dimol.ExtraerActividadSII\Dimol.ExtraerActividadSII\obj\Debug\Dimol.ExtraerActividadSII.pdb

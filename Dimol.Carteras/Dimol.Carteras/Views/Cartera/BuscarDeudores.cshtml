@@ -1,0 +1,111 @@
+﻿@model Dimol.Carteras.Models.BuscarDeudorModel
+@{
+    ViewBag.Title = "Buscar Deudores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Buscar Deudores</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using Mvc.HtmlHelpers
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  <div class="ui-widget-header ui-corner-all">
+    <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Deudor</span>
+
+   </div>
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+      @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarDeudor" }))
+{
+    @Html.ValidationSummary(true)
+       <fieldset>
+        <legend>BuscarDeudor</legend>
+
+        <div class="tabla">
+            <div class="fila">
+                <div class="col"  style="width:160px">@Html.LabelFor(model => model.Rut)</div>
+                <div class="col"> @Html.JQueryUI().Autocomplete("CtcidDialog", Url.Action("BuscarRutDeudor"),null,"RutDeudorBuscar",null,new { @class= "textboxRut"}).MinLength(15)
+            @Html.ValidationMessageFor(model => model.Rut)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Nombre)</div>
+                <div class="col">@Html.TextBox("NombreBuscar",null,new { @class= "textboxClass"})
+            @Html.ValidationMessageFor(model => model.Nombre)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.ApellidoPaterno)</div>
+                <div class="col">@Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "textboxClassM"})
+            @Html.ValidationMessageFor(model => model.ApellidoPaterno)</div>
+                <div class="col">@Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "textboxClassM"})
+            @Html.ValidationMessageFor(model => model.ApellidoMaterno)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.NombreFantasia)</div>
+                <div class="col">@Html.TextBoxFor(model => model.NombreFantasia, new { @class= "textboxClass"})
+            @Html.ValidationMessageFor(model => model.NombreFantasia)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Telefono)</div>
+                <div class="col">@Html.EditorFor(model => model.Telefono)
+            @Html.ValidationMessageFor(model => model.Telefono)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Email)</div>
+                <div class="col">@Html.TextBoxFor(model => model.Email, new { @class= "textboxClass"})
+            @Html.ValidationMessageFor(model => model.Email)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Direccion)</div>
+                <div class="col">@Html.TextBox("DireccionBuscar", null, new { @class= "textboxClass"})
+            @Html.ValidationMessageFor(model => model.Direccion)</div>
+                <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnGridBuscarDeudores();" /></div>
+            </div>
+        </div>
+    </fieldset>
+}
+<br />
+@(Html.jqGrid("gridBuscarDeudores")
+    .addColumn(new Column("Ctcid").setLabel("Id Deudor")
+        .setHidden(true)
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("Rut").setLabel("RUT")
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("NombreFantasia").setLabel("Nombre Fantasía")
+        .setSortable(true)
+        .setWidth(180))
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setSortable(true)
+        .setWidth(110))
+    .addColumn(new Column("Paterno").setLabel("Ap. Paterno")
+        .setSortable(true)
+        .setWidth(110))
+    .addColumn(new Column("Materno").setLabel("Ap. Paterno")
+        .setHidden(true)
+        .setWidth(110))
+    
+    // settings
+    .setCaption("Deudores")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDummy/")
+    .setAltRows(true)
+    .setWidth(800)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("NombreFantasia")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDeudor")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("BuscarDeudorSeleccionado(rowid)")
+    .Render()
+
+) 
+<br />
+   </div>
+</div>
+    

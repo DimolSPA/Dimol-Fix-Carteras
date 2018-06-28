@@ -1,0 +1,6 @@
+D:\17-REL-01\SII\DescargaStatusSII\obj\Release\DescargaStatusSII.csprojResolveAssemblyReference.cache
+D:\17-REL-01\SII\DescargaStatusSII\obj\Release\DescargaStatusSII.StatusMain.resources
+D:\17-REL-01\SII\DescargaStatusSII\obj\Release\DescargaStatusSII.Properties.Resources.resources
+D:\17-REL-01\SII\DescargaStatusSII\obj\Release\DescargaStatusSII.csproj.GenerateResource.Cache
+D:\17-REL-01\SII\DescargaStatusSII\obj\Release\DescargaStatusSII.exe
+D:\17-REL-01\SII\DescargaStatusSII\obj\Release\DescargaStatusSII.pdb

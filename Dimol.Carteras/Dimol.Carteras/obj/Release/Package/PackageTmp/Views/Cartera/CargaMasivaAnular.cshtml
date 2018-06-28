@@ -1,0 +1,51 @@
+﻿@model Dimol.Carteras.Models.GridModel
+@{
+    ViewBag.Title = "Anular Carga Masiva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Anular Carga Masiva</h2>
+<br />
+@using Mvc.HtmlHelpers
+@(Html.jqGrid("gridAnularCarga")
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true).setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("Pclid").setLabel("Pclid")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("NombreCliente").setLabel("Nombre Cliente")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(80))
+    .addColumn(new Column("Fecha").setLabel("Fecha")
+        .setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setSortable(true).setAlign(Align.center)
+        .setWidth(50))
+    .addColumn(new Column("Usuario").setLabel("Usuario")
+        .setAlign(Align.left)
+        .setSortable(true)
+        .setWidth(80))
+    
+    // settings
+    .setCaption("Anular Carga Masiva").onGridComplete("$('#edit_gridAnularCarga').hide()")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetAnularCarga/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Fecha")
+    .setSortOrder(SortOrder.desc)
+    .setPager("pagerAnularCarga")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Cartera/OperAnularCarga")
+    .setExcelExport("/Cartera/ExportToExcel")
+    .Render()
+
+)

@@ -1,0 +1,7 @@
+D:\17-REL-01\Dimol.Carteras\Dimol.Carteras.dto\bin\Release\Dimol.Carteras.dto.dll
+D:\17-REL-01\Dimol.Carteras\Dimol.Carteras.dto\bin\Release\Dimol.Carteras.dto.pdb
+D:\17-REL-01\Dimol.Carteras\Dimol.Carteras.dto\bin\Release\Dimol.dto.dll
+D:\17-REL-01\Dimol.Carteras\Dimol.Carteras.dto\bin\Release\Dimol.dto.pdb
+D:\17-REL-01\Dimol.Carteras\Dimol.Carteras.dto\obj\Release\Dimol.Carteras.dto.csprojResolveAssemblyReference.cache
+D:\17-REL-01\Dimol.Carteras\Dimol.Carteras.dto\obj\Release\Dimol.Carteras.dto.dll
+D:\17-REL-01\Dimol.Carteras\Dimol.Carteras.dto\obj\Release\Dimol.Carteras.dto.pdb

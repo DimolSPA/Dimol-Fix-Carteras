@@ -1,0 +1,48 @@
+﻿@if (Session["Usuario"] != null )
+{
+    <text>
+    <div>
+        <div class="tabla" style="padding-left: 150px">
+            <div class="fila">
+                <div class="col" style="width: 20px; text-align: left; vertical-align: middle; padding-left: 10px">
+                    <div style="height: 20px;vertical-align:middle">
+                        UF: 
+                    </div>
+                </div>
+                <div class="col" style="width: 80px; text-align: right; vertical-align: middle; padding-left: 10px">
+                    <div style="height: 20px;vertical-align:middle;color:@ViewBag.EstadoUF">
+                        $@ViewBag.Uf
+                    </div>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width: 20px; text-align: left; vertical-align: middle; padding-left: 10px">
+                    <div style="height: 20px;vertical-align:middle">
+                        USD:
+                    </div>
+                </div>
+                <div class="col" style="width: 80px; text-align: right; vertical-align: middle; padding-left: 10px">
+                    <div style="height: 20px;vertical-align:middle;color:@ViewBag.EstadoDolar">
+                        $@ViewBag.Dolar
+                    </div>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width: 20px; text-align: left; vertical-align: middle; padding-left: 10px">
+                    <div style="height: 20px;vertical-align:middle">
+                        UTM: 
+                    </div>
+                </div>
+                <div class="col" style="width: 80px; text-align: right; vertical-align: middle; padding-left: 10px">
+                    <div style="height: 20px;vertical-align:middle">
+                        $@ViewBag.UTM
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </text>
+}
+
+
+

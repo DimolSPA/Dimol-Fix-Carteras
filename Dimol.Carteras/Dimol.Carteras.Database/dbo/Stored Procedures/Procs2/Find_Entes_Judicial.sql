@@ -1,0 +1,1 @@
+﻿create Procedure Find_Entes_Judicial(@etj_codemp integer, @etj_pclid integer, @etj_emplid integer) as    SELECT count(entes_judicial.etj_etjid)        FROM entes_judicial       WHERE ( entes_judicial.etj_codemp = @etj_codemp ) AND             ( entes_judicial.etj_pclid = @etj_pclid ) OR             ( entes_judicial.etj_emplid = @etj_emplid )   

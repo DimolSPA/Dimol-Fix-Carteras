@@ -1,0 +1,364 @@
+﻿@model Dimol.Caja.Models.BusquedaConciliacionAprobadoModel
+@{
+    ViewBag.Title = "Liquidacion de Documentos";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+    
+}
+
+<br />
+<h2>@ViewBag.Title</h2>
+@using Mvc.HtmlHelpers
+
+<style type="text/css" media="screen">
+    th.ui-th-column div {
+        white-space: normal !important;
+        height: auto !important;
+        padding: 2px;
+    }
+
+    .rowImputado { background-color: #99ccff; border-color: #00264d; background-image: none; }
+   
+</style>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+
+        fnEventsfrmIngresoManual();
+    });
+    window.onload = function () {
+        $("#t_gridMovimientosConciliados").append("<div align='right'><input type='button' value='Ingresar Pago' onclick='fnAbrirFormPagoManual();' /></div>");
+
+    }
+</script>
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+   
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        <div class="tabla" style="display:none">
+            <div class="fila">
+                <div class="col" style="float:right">
+                    <input type="button" value="Ingresar Pago" onclick="fnAbrirFormPagoManual();" />
+
+                </div>
+            </div>
+        </div>
+        @using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabGestionConciliacion" })))
+        {
+            t.Tab("Pendientes", "tab1");
+            t.Tab("Aprobados", "tab2");
+            using (t.BeginPanel())
+            {
+                @(Html.jqGrid("gridMovimientosConciliados")
+               
+                
+                .addColumn(new Column("ConciliacionId").setLabel("ConciliacionId")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("MovimientoId").setLabel("MovimientoId")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("CustodiaId").setLabel("CustodiaId")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("Pclid").setLabel("Pclid")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("GestorId").setLabel("GestorId")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(20))
+                .addColumn(new Column("FechaConciliacion").setLabel("Fecha Conciliación")
+                .setSortable(true).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(80))
+                .addColumn(new Column("NumComprobante").setLabel("Nº Comprobante")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("RutCliente").setLabel("Rut Cliente")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Cliente").setLabel("Cliente")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("RutDeudor").setLabel("Rut Deudor")
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Deudor").setLabel("Deudor")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(200))
+                .addColumn(new Column("MotivoSistema").setLabel("Motivo")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(80))
+                .addColumn(new Column("Tipoconciliacion").setLabel("Tipo")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("EstadoLiquidacion").setLabel("Estado")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(100))
+                    // settings
+                .setCaption("Movimientos Conciliados")//.setWidth(800)
+                .setAutoWidth(true)
+                .setMultiSelect(false)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Tesoreria/ListarMovimientosConciliadoGrilla/")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setRowNum(1000)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("ConciliacionId")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerMovimientoConciliado")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .setAutoWidth(true)
+                .setShrinkToFit(false)
+                .setScroll(true)
+                .setHeight(400)
+                .setGrouping(true)
+                .setGroupingView("groupField: ['Cliente'],groupColumnShow: [false], groupText: ['<b>{0} - {1} Comprobantes(s)</b>'], groupCollapse: false, groupOrder: ['desc'],groupDataSorted: true")
+                .onDblClickRow("fnDoubleClickLiquidacion(rowid)")
+                .setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+                .Render()
+
+
+                )
+            }
+            using (t.BeginPanel())
+            {
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col" style="width:125px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnCargarGridConciliacionAprGrilla")
+
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:125px">@Html.LabelFor(model => model.NombreRutDeudorSearch)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.CtcidSearch, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudorSearch", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:125px">@Html.LabelFor(model => model.FechaBusquedaConcilia)</div>
+                        <div class="col">
+                            @Html.JQueryUI().Datepicker("FechaBusquedaConcilia", DateTime.Today, new { @style = "z-index:9" }).ShowButtonPanel(true).ShowWeek(false)
+
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:125px">@Html.LabelFor(model => model.NumeroComprobante)</div>
+                        <div class="col">
+                            @Html.EditorFor(model => model.NumeroComprobante)
+                            @Html.ValidationMessageFor(model => model.NumeroComprobante)
+
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="float:right;">
+
+                            <input type="button" value="Buscar" id="btnBuscargridMovimientosApr" onclick="fnCargarGridConciliacionAprGrilla();" />
+
+                        </div>
+                    </div>
+</div>
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col" style="float:left; width:98%">
+                            @(Html.jqGrid("gridMovimientosApr")
+                            .addColumn(new Column("comprobante").setLabel("Edita")
+                            .setHidden(false).setHidden(true)
+                            .setEditable(false).setCustomFormatter("fnBotonEditarLiquidacion")
+                            .setWidth(50)
+                            .setAlign(Align.center))
+                            .addColumn(new Column("liquidacion").setLabel("Comp")
+                            .setHidden(false)
+                            .setEditable(false).setCustomFormatter("fnBotonVerComprobanteLiquidacion")
+                            .setWidth(40)
+                            .setAlign(Align.center))
+                            .addColumn(new Column("ConciliacionId").setLabel("ConciliacionId")
+                            .setEditable(false).setHidden(true)
+                            .setSortable(true)
+                            .setWidth(20))
+                            .addColumn(new Column("MovimientoId").setLabel("MovimientoId")
+                            .setEditable(false).setHidden(true)
+                            .setSortable(true)
+                            .setWidth(20))
+                            .addColumn(new Column("CustodiaId").setLabel("CustodiaId")
+                            .setEditable(false).setHidden(true)
+                            .setSortable(true)
+                            .setWidth(20))
+                            .addColumn(new Column("Pclid").setLabel("Pclid")
+                            .setEditable(false).setHidden(true)
+                            .setSortable(true)
+                            .setWidth(20))
+                            .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                            .setEditable(false).setHidden(true)
+                            .setSortable(true)
+                            .setWidth(20))
+                            .addColumn(new Column("GestorId").setLabel("GestorId")
+                            .setEditable(false).setHidden(true)
+                            .setSortable(true)
+                            .setWidth(20))
+                            .addColumn(new Column("FechaConciliacion").setLabel("Fecha Conciliación")
+                            .setSortable(true).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                            .setWidth(80))
+                            .addColumn(new Column("NumComprobante").setLabel("Nº Comprobante")
+                            .setEditable(false)
+                            .setSortable(true)
+                            .setWidth(80))
+                            .addColumn(new Column("RutCliente").setLabel("Rut Cliente")
+                            .setEditable(false)
+                            .setSortable(true)
+                            .setWidth(80))
+                            .addColumn(new Column("Cliente").setLabel("Cliente")
+                            .setEditable(false)
+                            .setSortable(true)
+                            .setWidth(100))
+                            .addColumn(new Column("RutDeudor").setLabel("Rut Deudor")
+                            .setSortable(true)
+                            .setWidth(80))
+                            .addColumn(new Column("Deudor").setLabel("Deudor")
+                            .setEditable(false)
+                            .setSortable(true)
+                            .setWidth(200))
+                            .addColumn(new Column("MotivoSistema").setLabel("Motivo")
+                            .setEditable(false)
+                            .setSortable(true)
+                            .setWidth(100))
+                            .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+                            .setSortable(true)
+                            .setWidth(80))
+                            .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.integer)
+                            .setSortable(true)
+                            .setWidth(80))
+                            .addColumn(new Column("Tipoconciliacion").setLabel("Tipo")
+                            .setEditable(false)
+                            .setSortable(true)
+                            .setWidth(100))
+                            .addColumn(new Column("EstadoLiquidacion").setLabel("Estado")
+                            .setEditable(false)
+                            .setSortable(true)
+                            .setWidth(100))
+                            .addColumn(new Column("Remesa").setLabel("Reversa")
+                            .setEditable(false).setCustomFormatter("fnBotonReversarImputacion")
+                            .setSortable(true)
+                            .setWidth(50))
+                            // settings
+                            .setCaption("Movimientos Aprobados").setWidth(930)
+                            .setAutoWidth(false)
+                            .setRequestType(RequestType.get)
+                            .setUrl("~/Tesoreria/ListarMovimientosConciliadoPendienteGrilla?pclid=&ctcid=&fechaConciliacion=" + DateTime.Now + "&numComprobante=")
+                            .setAltRows(true)
+                            .setAltClass("altGridRows")
+                            .setRowNum(1000)
+                            .setRowList(new int[] { 10, 30, 50 })
+                            .setViewRecords(true)
+                            .setSortName("ConciliacionId")
+                            .setSortOrder(SortOrder.asc)
+                            .setPager("pagerMovimientoApr")
+                            .setPagerPos(PagerPos.center)
+                            .setPgButtons(true)
+                            .setCellEdit(false)
+                            .setCellSubmit(CellSubmit.clientArray)
+                            .setShrinkToFit(false)
+                            .setScroll(true)
+                            .setHeight(400)
+                            .setGrouping(true)
+                            .setGroupingView("groupField: ['Cliente'],groupColumnShow: [false], groupText: ['<b>{0} - {1} Comprobantes(s)</b>'], groupCollapse: false, groupOrder: ['desc'],groupDataSorted: true")
+                            .Render()
+
+
+                            )
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+
+    </div>
+
+</div>
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppFormLiquidacionDocs" }).Draggable(true)
+.AutoOpen(false)
+.Modal(true)
+.Title("Liquidación Documentos")
+.CloseOnEscape(true)
+.Width(950)
+.Height(700)
+
+))
+{
+   
+    <div id="loadingmessageLiqui" style="display: none" class="progressLoading">
+        <img src="~/Images/ajax-loader.gif" />
+    </div>
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppFormImputacionDocs" }).Draggable(true)
+.AutoOpen(false)
+.Modal(true)
+.Title("Imputación de Documentos")
+.CloseOnEscape(true)
+.Width(950)
+.Height(700)
+))
+{
+    <div id="loadingmessage" style="display: none" class="progressLoading">
+        <img src="~/Images/ajax-loader.gif" />
+    </div>
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAddPagoManual" }).Draggable(true)
+.AutoOpen(false)
+.Modal(true)
+.Title("Pago Reportado")
+.CloseOnEscape(true)
+.Width(600)
+.Height(250)
+))
+{
+    @Html.Partial("_AgregarPagoManual")
+}
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppDocto" }).Draggable(true)
+.AutoOpen(false)
+.Modal(true)
+.Title("Comprobante")
+.CloseOnEscape(true)
+.Width(900)
+.Height(600)
+
+))
+{
+}
+@Styles.Render("~/Content/caja")
+
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+}
+
+

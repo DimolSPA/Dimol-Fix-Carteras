@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<BorradorJudicial xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Pclid>0</Pclid> 
+	<Ctcid>0</Ctcid> 
+	<Rolid>1477</Rolid> 
+	<Rol>709-2012</Rol> 
+	<Anio>2015</Anio> 
+	<Cliente>COOPEUCH LTDA</Cliente> 
+	<RutCliente>828789007</RutCliente> 
+	<RutDeudor>6.110.483-6</RutDeudor> 
+	<NombreDeudor>TERESA DEL CARMEN ASCENCIO PÉREZ</NombreDeudor> 
+	<PaisDeudor>CHILE</PaisDeudor> 
+	<RegionDeudor>X REGIÓN - LOS LAGOS</RegionDeudor> 
+	<CiudadDeudor>CHILOE</CiudadDeudor> 
+	<ComunaDeudor>CASTRO</ComunaDeudor> 
+	<CodigoPostalDeudor>0</CodigoPostalDeudor> 
+	<DireccionDeudor>PILOTO SAMUEL ULLOA Nº728</DireccionDeudor> 
+	<RutEmpleado>13.831.554-1</RutEmpleado> 
+	<NombreEmpleado>MAY CONZUELO</NombreEmpleado> 
+	<PaternoEmpleado>GUTIERREZ</PaternoEmpleado> 
+	<MaternoEmpleado>OTTO</MaternoEmpleado> 
+	<Tribunal>JUZGADO DE LETRAS DE CASTRO</Tribunal> 
+	<Fecha>0001-01-01T00:00:00</Fecha> 
+	<Monto>0</Monto> 
+	<Cuotas>40</Cuotas> 
+	<MontoCuota>2.790.054</MontoCuota> 
+	<MontoPrimeraCuota>0</MontoPrimeraCuota> 
+	<MontoUltimaCuota>69751.00</MontoUltimaCuota> 
+	<FechaPrimeraCuota>06 - julio - 2012</FechaPrimeraCuota> 
+	<FechaUltimaCuota>06 - octubre - 2015</FechaUltimaCuota> 
+	<Interes>0.000</Interes> 
+	<NombreFantasiaDeudor>TERESA DEL CARMEN ASCENCIO PÉREZ</NombreFantasiaDeudor> 
+	<PaternoDeudor>CARMEN</PaternoDeudor> 
+	<MaternoDeudor /> 
+	<Saldo>0</Saldo> 
+	<FechaVencimiento>0001-01-01T00:00:00</FechaVencimiento> 
+	<FechaRol>0001-01-01T00:00:00</FechaRol> 
+	<FechaDemanda>06 - junio - 2012</FechaDemanda> 
+	<DiaPago>6</DiaPago> 
+	<MontoAvenimientoEscrito>DOS MILLONES SETECIENTOS NOVENTA MIL CINCUENTA Y CUATRO</MontoAvenimientoEscrito> 
+	<MontoCuotaAvenimientoEscrito>CERO</MontoCuotaAvenimientoEscrito> 
+</BorradorJudicial>

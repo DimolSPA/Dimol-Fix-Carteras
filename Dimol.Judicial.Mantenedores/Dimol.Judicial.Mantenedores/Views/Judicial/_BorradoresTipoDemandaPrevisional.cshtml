@@ -1,0 +1,23 @@
+﻿<script src="/scripts/ckeditor.js"></script>
+
+<form action="javascript:handleCKEditorPostDemandaPrevisional();void(0);">
+    <div class="tabla">
+        <div class="fila">
+            <div class="fila">
+                <div class="col" style="width:260px">Borradores</div>
+                <div class="col">
+                    @Html.DropDownList("TipoBorrador", null, new { @class = "ComboboxClassXL", onchange = "fnBorradorSeleccionadoPanelDemandasPrevisional();" })
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:45%">Primera Versión</div>
+                <div class="col" style="width:45%">Última Versión</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:45%;font-weight:bold"><label id="PrimerBorrador"></label></div>
+                <div class="col" style="width:45%;font-weight:bold"><label id="UltimoBorrador"></label></div>
+            </div>
+        </div>
+    </div>
+    <textarea name="editor1" id="editor1" rows="20" cols="80"></textarea>
+</form>

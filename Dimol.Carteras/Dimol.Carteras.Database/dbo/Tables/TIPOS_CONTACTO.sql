@@ -1,0 +1,22 @@
+﻿CREATE TABLE [dbo].[TIPOS_CONTACTO] (
+    [TIC_CODEMP] INT           NOT NULL,
+    [TIC_TICID]  INT           NOT NULL,
+    [TIC_NOMBRE] VARCHAR (100) NOT NULL,
+    CONSTRAINT [PK_TIPOS_CONTACTO] PRIMARY KEY NONCLUSTERED ([TIC_CODEMP] ASC, [TIC_TICID] ASC),
+    CONSTRAINT [FK_TIPOS_CO_EMPRESA_T_EMPRESA] FOREIGN KEY ([TIC_CODEMP]) REFERENCES [dbo].[EMPRESA] ([EMP_CODEMP])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[TIPOS_CONTACTO]([TIC_CODEMP] ASC, [TIC_TICID] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_NOMBRE]
+    ON [dbo].[TIPOS_CONTACTO]([TIC_CODEMP] ASC, [TIC_NOMBRE] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla, almacena los distintos tipos de contacto que tendra la sucursal', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'TIPOS_CONTACTO';
+

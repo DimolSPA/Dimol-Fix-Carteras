@@ -1,0 +1,59 @@
+﻿@model Dimol.Carteras.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "Acciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Acciones</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("Acciones")
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("Idioma").setLabel("Idioma")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("IdAccion").setLabel("Id Acción")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Acción")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+    .addColumn(new Column("Agrupa").setLabel("Grupo Acción")
+        .setEditable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.Agrupa+"\"")
+        .setWidth(80))
+    
+    // settings
+    .setCaption("Acciones")
+    .setRequestType(RequestType.get)
+    .setUrl("~/CarteraABM/GetAcciones/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerAcciones")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/CarteraABM/OperAccion")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/CarteraABM/OperAccion")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/CarteraABM/OperAccion")
+    .setExcelExport("/CarteraABM/ExportToExcel")
+    .Render()
+
+)

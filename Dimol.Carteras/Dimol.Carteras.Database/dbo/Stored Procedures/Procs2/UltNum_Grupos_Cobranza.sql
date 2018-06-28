@@ -1,0 +1,1 @@
+﻿create Procedure UltNum_Grupos_Cobranza(@grc_codemp integer, @grc_sucid integer) as  select IsNull(Max(grc_grcid)+1, 1)  from grupos_cobranza  where grc_codemp = @grc_codemp and             grc_sucid = @grc_sucid 

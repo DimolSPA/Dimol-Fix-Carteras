@@ -1,0 +1,9 @@
+D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider.dto\bin\Release\PJSpider.dto.dll
+D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider.dto\bin\Release\PJSpider.dto.pdb
+D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider.dto\obj\Release\PJSpider.dto.dll
+D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider.dto\obj\Release\PJSpider.dto.pdb
+D:\_Codigo_Dimol\PJSpider\PJSpider\PJSpider.dto\obj\Release\PJSpider.dto.csprojResolveAssemblyReference.cache
+D:\17-REL-01\PJSpider\PJSpider\PJSpider.dto\bin\Release\PJSpider.dto.dll
+D:\17-REL-01\PJSpider\PJSpider\PJSpider.dto\bin\Release\PJSpider.dto.pdb
+D:\17-REL-01\PJSpider\PJSpider\PJSpider.dto\obj\Release\PJSpider.dto.dll
+D:\17-REL-01\PJSpider\PJSpider\PJSpider.dto\obj\Release\PJSpider.dto.pdb

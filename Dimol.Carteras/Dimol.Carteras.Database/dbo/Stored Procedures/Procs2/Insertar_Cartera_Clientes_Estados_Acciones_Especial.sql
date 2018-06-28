@@ -1,0 +1,35 @@
+﻿
+
+Create Procedure Insertar_Cartera_Clientes_Estados_Acciones_Especial(@cea_codemp integer, @cea_pclid numeric (15), @cea_ctcid numeric (15), @cea_fecha datetime, 
+                                                                                                      @cea_accid integer, @cea_sucid integer, 
+                                                                                                     @cea_gesid integer, @cea_contacto char (1), @cea_ipred varchar (30), @cea_ipmaquina varchar (30), 
+                                                                                                     @cea_comentario text, @cea_estado char (1), @cea_usrid integer, @cea_ddcid integer) as  
+INSERT INTO cartera_clientes_estados_acciones  
+         ( cea_codemp,   
+           cea_pclid,   
+           cea_ctcid,   
+           cea_fecha,   
+           cea_accid,   
+           cea_sucid,   
+           cea_gesid,   
+           cea_contacto,   
+           cea_ipred,   
+           cea_ipmaquina,   
+           cea_comentario,   
+           cea_estado,   
+           cea_usrid,
+           cea_ddcid  )  
+  VALUES ( @cea_codemp,   
+           @cea_pclid,   
+           @cea_ctcid,   
+           @cea_fecha,   
+           @cea_accid,   
+           @cea_sucid,   
+           @cea_gesid,   
+           @cea_contacto,   
+           @cea_ipred,   
+           @cea_ipmaquina,   
+           @cea_comentario,   
+           @cea_estado,   
+           @cea_usrid,
+           @cea_ddcid  )

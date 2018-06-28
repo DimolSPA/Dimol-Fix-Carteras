@@ -1,0 +1,30 @@
+﻿CREATE TABLE [dbo].[ESTADOS_DOCUMENTOS_DIARIOS] (
+    [EDC_CODEMP] INT          NOT NULL,
+    [EDC_EDCID]  INT          NOT NULL,
+    [EDC_TIPMOV] CHAR (1)     NOT NULL,
+    [EDC_NOMBRE] VARCHAR (20) NOT NULL,
+    [EDC_ESTADO] SMALLINT     NOT NULL,
+    CONSTRAINT [PK_ESTADO_DOCUMENTOS] PRIMARY KEY NONCLUSTERED ([EDC_CODEMP] ASC, [EDC_EDCID] ASC),
+    CONSTRAINT [CKC_EDC_TIPMOV_ESTADO_D] CHECK ([EDC_TIPMOV]='T' OR [EDC_TIPMOV]='E' OR [EDC_TIPMOV]='I'),
+    CONSTRAINT [CKC_ETC_ESTADO_ESTADO_D] CHECK ([EDC_ESTADO]=(8) OR [EDC_ESTADO]=(7) OR [EDC_ESTADO]=(6) OR [EDC_ESTADO]=(5) OR [EDC_ESTADO]=(4) OR [EDC_ESTADO]=(3) OR [EDC_ESTADO]=(2) OR [EDC_ESTADO]=(1)),
+    CONSTRAINT [FK_ESTADOS__EMP_ESTDO_EMPRESA] FOREIGN KEY ([EDC_CODEMP]) REFERENCES [dbo].[EMPRESA] ([EMP_CODEMP])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[ESTADOS_DOCUMENTOS_DIARIOS]([EDC_CODEMP] ASC, [EDC_EDCID] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_NOMBRE]
+    ON [dbo].[ESTADOS_DOCUMENTOS_DIARIOS]([EDC_CODEMP] ASC, [EDC_TIPMOV] ASC, [EDC_NOMBRE] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena los distintos estados de los documentos, dependiendo del tipo de movimiento', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'ESTADOS_DOCUMENTOS_DIARIOS';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Indica el comportamiento', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'ESTADOS_DOCUMENTOS_DIARIOS', @level2type = N'COLUMN', @level2name = N'EDC_ESTADO';
+

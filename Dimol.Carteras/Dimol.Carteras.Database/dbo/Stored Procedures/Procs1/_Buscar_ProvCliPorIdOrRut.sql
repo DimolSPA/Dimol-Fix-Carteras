@@ -1,0 +1,15 @@
+﻿CREATE Procedure [dbo].[_Buscar_ProvCliPorIdOrRut]
+(
+	@codemp int,
+	@pclid numeric(15,0) = null,
+	@pclrut varchar(20) = null
+)
+AS
+BEGIN
+	SELECT TOP(1) [PCL_CODEMP],[PCL_PCLID],[PCL_TPCID],[PCL_RUT],[PCL_NOMBRE],[PCL_APEPAT],[PCL_APEMAT],[PCL_NOMFANT],[PCL_GIRID],[PCL_FECING],[PCL_ESTADO],[PCL_FECFIN],[PCL_REPLEGAL],[PCL_RUTLEGAL],[PCL_TIPCLI],[PCL_LOGO],[PCL_WEB],[PCL_COMENTARIO],[PCL_TIPCART],[PCL_TRANSPORTISTA],[PCL_USRID],[PCL_NAVIERA],[PCL_CODIGO]
+	FROM [dbo].[PROVCLI]
+	WHERE
+		PCL_CODEMP = @codemp AND
+		(@pclid IS NULL OR PCL_PCLID = @pclid) AND
+		(@pclrut IS NULL OR PCL_RUT = @pclrut)
+END

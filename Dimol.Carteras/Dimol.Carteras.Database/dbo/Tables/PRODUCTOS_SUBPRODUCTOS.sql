@@ -1,0 +1,29 @@
+﻿CREATE TABLE [dbo].[PRODUCTOS_SUBPRODUCTOS] (
+    [PSP_CODEMP]    INT             NOT NULL,
+    [PSP_PRODID]    NUMERIC (15)    NOT NULL,
+    [PSP_SUBPRODID] NUMERIC (15)    NOT NULL,
+    [PSP_CANTIDAD]  DECIMAL (15, 2) NOT NULL,
+    [PSP_PTAID]     INT             NULL,
+    [PSP_FECING]    DATETIME        NULL,
+    CONSTRAINT [PK_PRODUCTOS_SUBPRODUCTOS] PRIMARY KEY NONCLUSTERED ([PSP_CODEMP] ASC, [PSP_PRODID] ASC, [PSP_SUBPRODID] ASC),
+    CONSTRAINT [FK_PRODUCTO_PRODAREA__PRODUCTO2] FOREIGN KEY ([PSP_CODEMP], [PSP_PTAID]) REFERENCES [dbo].[PRODUCTO_AREA] ([PTA_CODEMP], [PTA_PTAID]),
+    CONSTRAINT [FK_PRODUCTO_PRODUCTO__PRODUCTO] FOREIGN KEY ([PSP_CODEMP], [PSP_PRODID]) REFERENCES [dbo].[PRODUCTOS] ([PDT_CODEMP], [PDT_PRODID]),
+    CONSTRAINT [FK_PRODUCTO_PRODUCTOS_PRODUCTO8] FOREIGN KEY ([PSP_CODEMP], [PSP_SUBPRODID]) REFERENCES [dbo].[PRODUCTOS] ([PDT_CODEMP], [PDT_PRODID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[PRODUCTOS_SUBPRODUCTOS]([PSP_PRODID] ASC, [PSP_CODEMP] ASC, [PSP_SUBPRODID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla, almacena los productos que arman un producto final
+   
+   ejemplo:
+   
+   Tansformador ---> Bobinas
+                                Carcasas
+                                Puertas
+                                etc...', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'PRODUCTOS_SUBPRODUCTOS';
+

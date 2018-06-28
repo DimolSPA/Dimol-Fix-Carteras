@@ -1,0 +1,162 @@
+﻿@model Dimol.Carteras.Models.CargaMasivaModel
+
+@{
+    ViewBag.Title = "Cargas Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+           <br />  
+<h2>Cargas Clientes</h2>
+@using Mvc.HtmlHelpers
+@using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabDocumento" })))
+{
+    t.Tab("Carga", "tab1");
+    using (t.BeginPanel())
+    {
+        using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCargaClientes" }))
+        {
+    @Html.ValidationSummary(true)
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="width:183px">@Html.LabelFor(model => model.RutCliente)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "RutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("OnSelectClienteCargaMasiva")
+                @Html.ValidationMessageFor(model => model.RutCliente)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:183px">@Html.LabelFor(model => model.TipoCartera)</div>
+            <div class="col"style="width:100px">@Html.DropDownListFor(model => model.TipoCartera, ViewBag.TipoCartera as List<SelectListItem>, new { onchange = "OnSelectTipoCartera()" })
+                @Html.ValidationMessageFor(model => model.TipoCartera)
+            </div>            
+        </div>
+        <div class="fila">
+            <div class="col" style="width:183px">@Html.LabelFor(model => model.CodigoCarga)</div>
+            <div class="col" style="width:200px">@Html.DropDownListFor(model => model.CodigoCarga, null, new { })
+                @Html.ValidationMessageFor(model => model.CodigoCarga)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:183px"> @Html.LabelFor(model => model.Contrato)</div>
+            <div class="col" style="width:110px">@Html.DropDownListFor(model => model.Contrato, null, new { })
+            @Html.ValidationMessageFor(model => model.Contrato)</div>
+
+        </div>
+        <div class="fila">
+            <div class="col" style="width:100px">@Html.LabelFor(model => model.ActualizarDatos)</div>
+            <div class="col" style="padding-right:70px">
+                @Html.EditorFor(model => model.ActualizarDatos)
+                @Html.ValidationMessageFor(model => model.ActualizarDatos)
+            </div>
+            <div class="col" style="width:70px">@Html.LabelFor(model => model.Simulacion)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.Simulacion)
+                @Html.ValidationMessageFor(model => model.Simulacion)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.Archivo)</div>
+            <div class="col" style="width:300px"><input id="subirArchivo" type="file" style="width:300px">@Html.HiddenFor(model => model.Archivo)</div>
+            <div class="col"><input type="submit" id="btnSubmit" value="Subir Archivo" /></div>
+            <div class="col"><img id="imgSubirArchivo" src="~/Images/blank.png" class="" style="float:left" /></div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:183px"></div>
+            <div class="col" style="width:300px"></div>
+             <div class="col" style="float:right"> <input type="button" value="Nuevo" onclick="fnLimpiarCarga()" />
+                                                   <input type="button" value="Cargar" onclick="fnCargarArchivo();" disabled="disabled" id="btnCargar"/>
+            </div>
+        </div>
+        <div class="fila" >
+            <div class="col" style="width:950px; flex-align:center">
+                @(Html.jqGrid("grdCargaClientes")
+                    .addColumn(new Column("Rut").setLabel("Rut")
+                        .setSortable(true).setAlign(Align.right)
+                        .setWidth(35))
+                    .addColumn(new Column("Nombre").setLabel("Nombre")
+                        .setSortable(true)
+                        .setWidth(120))
+                    .addColumn(new Column("Numero").setLabel("Numero")
+                        .setSortable(true).setAlign(Align.center)
+                        .setWidth(50))
+                    .addColumn(new Column("TipoDocumento").setLabel("Documento")
+                        .setSortable(true)
+                        .setWidth(90))
+                    .addColumn(new Column("TipoError").setLabel("Error")
+                        .setSortable(true)
+                        .setWidth(110))
+        
+    
+                    // settings
+                    .setCaption("Resultado Carga").setDataType(DataType.local).setData("")
+                    //.setRequestType(RequestType.get)
+                    //.setUrl("~/Mantenedor/GetAcciones/")
+                    .setAltRows(true)
+                    .setAltClass("altGridRows")
+                    .setAutoWidth(true)
+                    .setRowNum(10)
+                    .setRowList(new int[] { 10, 30, 50 })
+                    .setViewRecords(true)
+                    .setSortName("Nombre")
+                    .setSortOrder(SortOrder.asc)
+                    .setPager("pagerCargaClientes")
+                    .setPagerPos(PagerPos.center)
+                    .setPgButtons(true)
+                    .setCellEdit(false)
+                    .setCellSubmit(CellSubmit.clientArray)
+                    //.setExcelExport("/Mantenedor/ExportToExcel")
+                    .Render()
+
+)
+            </div>
+        </div>
+    </div>
+
+
+
+        
+        
+
+
+    
+}
+
+}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+  <script>
+                   window.onload = function () {
+                       document.getElementById('frmCargaClientes').onsubmit = function () {
+                           var formdata = new FormData(); //FormData object
+                           var fileInput = document.getElementById('subirArchivo');
+                           //Iterating through each files selected in fileInput
+                           for (i = 0; i < fileInput.files.length; i++) {
+                               //Appending each file to FormData object
+                               formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                           }
+                           //Creating an XMLHttpRequest and sending
+                           var xhr = new XMLHttpRequest();
+                           xhr.open('POST', '/Cartera/Upload/?tipo=Carga');
+                           xhr.send(formdata);
+                           xhr.onreadystatechange = function () {
+                               if (xhr.readyState == 4 && xhr.status == 200) {
+                                   $('#Archivo').val(xhr.responseText.replace(/\"/g,''))
+                                   if (xhr.responseText == '""') {
+                                       alert("Error al subir el archivo al servidor");
+                                       $("#imgSubirArchivo").removeClass("ok").addClass("error");
+                                       $("#btnCargar").attr("disabled", "disabled");
+                                       $("#btnSubmit").removeAttr("disabled");
+                                   } else {
+                                       alert("Archivo listo para ser procesado");
+                                       $("#imgSubirArchivo").removeClass("error").addClass("ok");
+                                       $("#btnCargar").removeAttr("disabled");
+                                       $("#btnSubmit").attr("disabled", "disabled");
+                                   }
+                               }
+                           }
+                           return false;
+                       }
+                   }
+
+</script>
+}

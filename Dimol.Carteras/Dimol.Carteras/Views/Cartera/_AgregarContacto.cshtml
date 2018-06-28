@@ -1,0 +1,139 @@
+﻿@model Dimol.Carteras.Models.ContactoTelefonoMailModel
+
+@using Mvc.HtmlHelpers
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmContactoTelefono" }))
+        {
+            @Html.ValidationSummary(true)
+    <input type="hidden" id="TipoForm" name="TipoForm" />
+    <input type="hidden" id="Ddcid" name="Ddcid" />
+    <div class="tabla" id="divTablaContacto">
+        <div id="divContactoTelefono">
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Telefono)</div>
+                <div class="col">
+
+                    @Html.TextBox("Telefono", null, new { maxlength = 9, autocomplete = "off", placeholder = "912345678" })
+                    @Html.ValidationMessageFor(model => model.Telefono)
+                </div>
+            </div>
+            <div class="fila" id="divAnexo" style="display:none">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Anexo)</div>
+                <div class="col">
+                    @Html.TextBox("Anexo")
+                    @Html.ValidationMessageFor(model => model.Anexo)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.TipoTelefono)</div>
+                <div class="col">
+                    @Html.DropDownList("TipoTelefono", null, new { @class = "ComboboxClass" })
+                    @Html.ValidationMessageFor(model => model.TipoTelefono)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.EstadoTelefono)</div>
+                <div class="col">
+                    @Html.DropDownList("EstadoTelefono", null, new { @class = "ComboboxClass" })
+                    @Html.ValidationMessageFor(model => model.EstadoTelefono)
+                </div>
+            </div>
+        </div>
+        <div id="divContactoEmail">
+            <div class="fila">
+                <div class="col" style="width:160px">Cliente</div>
+                <div class="col email-pclid">
+                    @Html.JQueryUI().AutocompleteFor(model => model.PclidEmail, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Email)</div>
+                <div class="col">
+                    @Html.TextBox("Email", null, new { @class = "textboxClass" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.EmailMasivo)</div>
+                <div class="col">
+                    @Html.CheckBoxFor(model => model.EmailMasivo)
+                    @Html.ValidationMessageFor(model => model.EmailMasivo)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.TipoEmail)</div>
+                <div class="col">
+                    @Html.DropDownList("TipoEmail", null, new { @class = "ComboboxClass" })
+                    @Html.ValidationMessageFor(model => model.TipoEmail)
+                </div>
+            </div>
+
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.NombreContacto)</div>
+            <div class="col">
+                @Html.TextBox("NombreContacto", null, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.NombreContacto)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.TipoContacto)</div>
+            <div class="col">
+                @Html.DropDownList("TipoContacto", null, new { @class = "ComboboxClass" })
+                @Html.ValidationMessageFor(model => model.TipoContacto)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.EstadoContacto)</div>
+            <div class="col">
+                @Html.DropDownList("EstadoContacto", null, new { @class = "ComboboxClass" })
+                @Html.ValidationMessageFor(model => model.EstadoContacto)
+            </div>
+        </div>
+        <div id="divDireccionesContacto">
+            <div class="fila" id="divIdPais">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.IdPais)</div>
+                <div class="col"> @Html.DropDownList("IdPais", null, "-- Seleccione País --", new { onchange = "PaisSeleccionado(this,'IdRegion')" })</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.IdRegion)</div>
+                <div class="col"> @Html.DropDownList("IdRegion", null, new { @class = "ComboboxClassL", onchange = "RegionSeleccionada(this,'IdCiudad')" })</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.IdCiudad)</div>
+                <div class="col"> @Html.DropDownList("IdCiudad", null, new { @class = "ComboboxClass", onchange = "CiudadSeleccionada(this,'IdComuna')" })</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.IdComuna)</div>
+                <div class="col">@Html.DropDownList("IdComuna", null, new { @class = "ComboboxClass" })</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.DireccionContacto)</div>
+                <div class="col">
+                    @Html.TextBox("DireccionContacto", null, new { @class = "textboxClass" })
+                    @Html.ValidationMessageFor(model => model.DireccionContacto)
+                </div>
+            </div>
+            <div class="fila" id="divTipoDireccion">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.TipoDireccion)</div>
+                <div class="col">@Html.DropDownList("TipoDireccion", null, new { @class = "ComboboxClass" })</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.EstadoDireccion)</div>
+                <div class="col">@Html.DropDownListFor(model => model.EstadoDireccion, null)</div>
+            </div>
+        </div>
+
+        <div class="fila">
+            <div class="col" style="float:right"><input type="button" value="Guardar" id="btnGuardarContacto" onclick="fnGuardarContacto();" /></div>
+        </div>
+    </div>
+
+        }
+        <br />
+   
+   
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

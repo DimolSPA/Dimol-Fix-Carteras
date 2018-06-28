@@ -1,0 +1,100 @@
+﻿@model Dimol.Usuario.Models.UsuarioModel
+
+@{
+    ViewBag.Title = "Buscar Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Buscar Usuarios</h2>
+<br />
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Usuario</span>
+
+    </div>
+    <div style="height: auto;  width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarUsuario" }))
+        {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>BuscarUsuarios</legend>
+
+                <div class="tabla">
+
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.Nombre)</div>
+                        <div class="col" style="width:300px; height:23px">@Html.TextBox("Nombre", null, new { @class = "textboxClass" })</div>
+
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.Usuario)</div>
+                        <div class="col" style="width:300px; height:23px">@Html.TextBox("Usuario", null, new { @class = "textboxClass" })</div>
+
+                    </div>
+
+                    <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnBuscarUsuario();" /></div>
+                </div>
+            </fieldset>
+
+        }
+    </div>
+    <br />
+</div>
+
+@(Html.jqGrid("BuscarUsuario")
+    .addColumn(new Column("IdUsuario").setLabel("ID")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+
+        .setWidth(30))
+    .addColumn(new Column("Estado").setLabel("Estado")
+
+        .setWidth(50))
+   .addColumn(new Column("FechaUltimoIngreso").setLabel("Fec. Ult. Ing.")
+        .setWidth(50))
+
+   .addColumn(new Column("FechaBloqueo").setLabel("Fec. Bloqueo")
+        .setWidth(50))
+
+    // settings
+    .setCaption("Usuario")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Usuario/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(50)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDeudor")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("UsuarioSeleccionado(rowid)")
+    .Render()
+
+)
+
+<br />
+
+<script>
+    function fnBuscarUsuario() {
+        var newUrl = "/Usuario/GetUsuario/?"
+        newUrl += "&nombre=" + $("#Nombre").val()
+        newUrl += "&usuario=" + $("#Usuario").val()
+
+        jQuery("#BuscarUsuario").jqGrid().setGridParam({ url: newUrl }).trigger('reloadGrid', [{ page: 1 }])
+    }
+
+    function UsuarioSeleccionado(id) {
+        var url = "/Usuario/Usuario/?IdUsuario=" + id;
+        window.location.href = url;
+    }
+
+</script>

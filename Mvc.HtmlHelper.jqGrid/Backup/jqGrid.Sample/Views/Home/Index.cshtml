@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<h2>@ViewBag.Message</h2>
+
+<div id="tabs" style="display: none">
+    <ul>
+        <li><a href="#tabs-1">Grid</a></li>
+        <li><a href="#tabs-2">SubGrid</a></li>
+        <li><a href="#tabs-3">Custom Grid</a> </li>
+        <li><a href="#tabs-4">Custom Tree</a></li>
+    </ul>
+    &nbsp;
+    <div id="tabs-1">
+        @if (ViewBag.TabIndex == "1")
+        {
+            @Html.Partial("_Grid")
+        }
+    </div>
+    <div id="tabs-2">
+        @if (ViewBag.TabIndex == "2")
+        {
+            @Html.Partial("_SubGrid")
+            // @Html.Partial("_SubGrid")
+        }
+    </div>
+    <div id="tabs-3">
+        @if (ViewBag.TabIndex == "3")
+        {
+            @Html.Partial("_CustomGrid")
+        }
+    </div>
+    <div id="tabs-11">
+        @if (ViewBag.TabIndex == "4")
+        {
+            @Html.Partial(@"_CustomTree")
+        }
+    </div>
+</div>
+&nbsp;
+<script type="text/javascript">
+    $(document).ready(function () 
+    {
+        $("#tabs").tabs(
+        {
+            selected: "@ViewBag.SelectedTab",
+            select: function (e, ui) 
+            {
+                var index = new Number(ui.index) + 1;
+                var url = "@Url.Content("~/Home/Index?TabIndex=")" + index;
+                document.location = url;
+                return false;
+            }
+        }).show();
+    });
+
+    $(window).load(function () {
+        ResizeGrids();
+    });
+
+    $(window).resize(function () {
+        ResizeGrids();
+    });
+
+    function ResizeGrids() {
+        var pos = $("#tabs").position();
+        var width = $("#tabs").width() - 40;
+        var height = $(window).height() - 370;
+
+        $("#GridMain").setGridWidth(width);
+        $("#GridMain").setGridHeight(height);
+
+        $("#CustomTree").setGridWidth(width);
+        $("#CustomTree").setGridHeight(height);
+    }
+</script>

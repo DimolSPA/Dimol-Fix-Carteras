@@ -1,0 +1,54 @@
+﻿@model Dimol.ProveedorCliente.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "TiposProvCli";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Tipos Proveedor/Cliente</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("TiposProvCli")
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setWidth(50))
+     .addColumn(new Column("Id").setLabel("ID")
+        .setWidth(20))
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setEditable(true)
+        .setWidth(50))
+     .addColumn(new Column("Agrupa").setLabel("Tipo")
+        .setHidden(true)
+        .setEditable(true)
+        .setEditRules("edithidden:true")
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.Agrupa+"\"")
+        .setWidth(80))
+        
+    // settings
+    .setCaption("TiposProvCli")
+    .setRequestType(RequestType.get)
+    .setUrl("~/ProvCli/GetTiposProvCli/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerGiros")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/ProvCli/OperTiposProvCli")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/ProvCli/OperTiposProvCli")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/ProvCli/OperTiposProvCli")
+    .setExcelExport("/ProvCli/ExportToExcel")
+    .Render()
+
+)

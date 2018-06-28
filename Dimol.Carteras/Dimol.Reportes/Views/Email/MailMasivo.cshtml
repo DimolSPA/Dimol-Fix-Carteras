@@ -1,0 +1,207 @@
+﻿@model Dimol.Reportes.Models.EmailMasivoModel
+@{
+    ViewBag.Title = "Mail Masivo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using Mvc.HtmlHelpers
+<h2>Envío de email masivos</h2>
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">  >></span>
+
+    </div>
+    <div style="height: auto; min-height: 150px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmailMasivo" }))
+        {
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col" style="width:130px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre", @onchange = "fnBuscarClientesTemplates()" }).MinLength(3)
+                            @Html.ValidationMessageFor(model => model.NombreRutCliente)
+                        </div>
+                    </div>
+
+                    <div class="template-control" style="display:none;">
+                        <div class="col" style="width:70px; padding-left:50px;">@Html.LabelFor(model => model.Template)</div>
+                        <div class="col">
+                            @Html.DropDownListFor(model => model.Template, Enumerable.Empty<SelectListItem>())
+                            @Html.ValidationMessageFor(model => model.Template)
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:130px">Monto</div>
+                        <div class="col">
+                            Desde @Html.EditorFor(model => model.MontoDesde)
+                            @Html.ValidationMessageFor(model => model.MontoDesde)
+                        </div>
+                        <div class="col" style="margin-left:30px">
+                            Hasta @Html.EditorFor(model => model.MontoHasta)
+                            @Html.ValidationMessageFor(model => model.MontoHasta)
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:130px">@Html.LabelFor(model => model.FechaVencimiento)</div>
+                        <div class="col">
+                            @Html.DropDownListFor(model => model.FechaOperador, ViewBag.FechaTipos as IEnumerable<SelectListItem>)
+                            @Html.JQueryUI().Datepicker("FechaVencimiento").ShowButtonPanel(true).ShowWeek(false)
+                            @Html.ValidationMessageFor(model => model.FechaVencimiento)
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width: 130px">@Html.LabelFor(model => model.TipoCartera)</div>
+                        <div class="col" style="width: 100px">
+                            @Html.DropDownListFor(model => model.TipoCartera, ViewBag.TipoCartera as List<SelectListItem>, new { onchange = "fnActualizarGestoresMasivo()" })
+                            @Html.ValidationMessageFor(model => model.TipoCartera)
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:130px">@Html.LabelFor(model => model.Liquidacion)</div>
+                        <div class="col">
+                            @Html.CheckBoxFor(model => model.Liquidacion, htmlAttributes: new { onchange = "fnBuscarLiquidaciones(this)" })
+                            
+                            @Html.ValidationMessageFor(model => model.Liquidacion)
+                        </div>
+                        <div class="col liquidacion-tipo-ctnr" style="display:none;">
+                            Tipo
+                            @Html.DropDownListFor(model => model.TipoLiquidacion, Enumerable.Empty<SelectListItem>())
+                            @Html.ValidationMessageFor(model => model.TipoLiquidacion)
+                        </div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="float:left">
+                            @Html.Hidden("Codemp")
+                            <div class="template-control" style="display:none;">
+                                <input type="button" value="Previsualizar" onclick="showEmailTemplatePreview()" />
+                            </div>
+                            <input type="button" value="Buscar deudores" id="btnBuscar" onclick="createTargetsList()" />
+                        </div>
+                        <div class="col" style="float:right">
+                            @Html.Hidden("Codemp")
+                            <input type="button" value="Realizar envío de prueba" id="btnGrabar" onclick="sendTestEmails()" />
+                            <input type="button" value="Confirmar envío masivo" id="btnGrabar" onclick="sendMassiveEmails()" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:40%;">
+                        @(Html.jqGrid("gridEstado")
+                .addColumn(new Column("ID").setLabel("Id")
+                    .setHidden(true)
+                    .setSortable(false)
+                    .setWidth(50))
+                .addColumn(new Column("ESTADO").setLabel("Nombre")
+                   .setSortable(false)
+                   .setWidth(200))
+                .setCaption("Estados asociados al cliente").setMultiSelect(true)
+                .setRequestType(RequestType.get)
+                //.setUrl("~/Email/GetEstados/")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setAutoWidth(true)
+                .setRowNum(50)
+                .setRowList(new int[] { 50 })
+                .setViewRecords(true)
+                .setSortName("ESTADO")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerEstado")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .Render()
+
+
+                        )
+
+                        <br />
+
+                        @(Html.jqGrid("gridGestor")
+.addColumn(new Column("Id").setLabel("Id")
+    .setHidden(true)
+    .setSortable(false)
+    .setWidth(50))
+.addColumn(new Column("Nombre").setLabel("Gestor")
+   .setSortable(false)
+   .setWidth(200))
+.setCaption("Gestores").setMultiSelect(true)
+.setRequestType(RequestType.get)
+.setUrl("~/Email/GetGestores/")
+.setAltRows(true)
+.setAltClass("altGridRows")
+.setAutoWidth(true)
+.setRowNum(100)
+.setRowList(new int[] { 100 })
+.setViewRecords(true)
+.setSortName("Nombre")
+.setSortOrder(SortOrder.asc)
+.setPager("pagerGestor")
+.setPagerPos(PagerPos.center)
+.setPgButtons(true)
+.setCellEdit(false)
+.setCellSubmit(CellSubmit.clientArray)
+.Render()
+
+
+                        )
+
+                    </div>
+                    <div class="col" style="width:58%">
+                        @(Html.jqGrid("gridTargets")
+                .addColumn(new Column("Id").setLabel("Id")
+                                .setHidden(true)
+                                .setSortable(false)
+                                .setWidth(50))
+
+                .addColumn(new Column("Rut").setLabel("Rut")
+                   .setSortable(false)
+                   .setWidth(100))
+                .addColumn(new Column("Deudor").setLabel("Deudor")
+                   .setSortable(false)
+                   .setWidth(250))
+                .addColumn(new Column("Contactos").setLabel("Contactos")
+                   .setSortable(false)
+                   .setWidth(100))
+                .addColumn(new Column("Gestor").setLabel("Gestor")
+                   .setSortable(false)
+                   .setWidth(100))
+                .setCaption("Deudores").setMultiSelect(true)
+                .setRequestType(RequestType.get)
+                //.setUrl("~/Email/GetEstados/")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setAutoWidth(true)
+                .setRowNum(50)
+                .setRowList(new int[] { 50, 100 })
+                .setViewRecords(true)
+                //.setSortName("Deudor")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerTargets")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .Render()
+
+
+                        )
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+
+@*Preview modal*@
+<div id="templatePreview">
+
+</div>

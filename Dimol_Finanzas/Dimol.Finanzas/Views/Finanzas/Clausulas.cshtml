@@ -1,0 +1,105 @@
+﻿@model Dimol.Finanzas.Models.ContratoCarteraModel
+
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmClausulas" }))
+{
+    @Html.ValidationSummary(true)
+            
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Tipo)</div>
+                <div class="col">@Html.DropDownList("Tipo", null, new { @class= "ComboboxClass",  onchange=""})</div>
+                
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Nombre)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("Nombre", null, new { @class = "textboxClass" })</div>
+
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Clonar)</div>
+                <div class="col">@Html.CheckBoxFor(model => model.Clonar)</div>
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.NombreClonar)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("NombreClonar", null, new { @class = "textboxClass" })</div>
+
+            </div>
+            
+            <div class="fila" style="visibility:hidden">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.idCCT)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("idCCT", 0, new { @class = "textboxClass" })</div>
+
+            </div>
+
+        </div>
+        
+}
+       
+  
+ @(Html.jqGrid("Clausulas")
+    .addColumn(new Column("id").setLabel("ID")
+        //.setEditable(true)
+        .setHidden(true)
+        .setWidth(20))
+    
+    .addColumn(new Column("cli_nombre").setLabel("Nombre")
+        //.setEditable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.ClausulasTodas+"\"")
+        .setWidth(60))
+    
+    .addColumn(new Column("idCCT").setLabel("idCCT")
+        //.setEditable(true)
+        //.IsEditable(true)
+        .setHidden(true)
+        .setEditOptions("value:\""+ViewBag.idCCT2+"\"")
+        .setEditRules("edithidden:true")
+        .setWidth(20))
+
+    // settings
+    .setCaption("Clausulas")
+    .setRequestType(RequestType.get)
+    .setUrl("/Finanzas/GetClausulas")
+    .setAltRows(true)
+    .setWidth(735)
+    .setScrollRows(true)
+    .setAltClass("altGridRows")
+    //.setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("cli_nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerClausulas")
+    .setPagerPos(PagerPos.center)
+    //.setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    //.setNavEdit(ViewBag.Edit)
+    //.setEditUrl("/Finanzas/OperClausulas")
+    //.setNavAdd(ViewBag.Add)
+    //.setAddUrl("/Finanzas/OperClausulas")
+    //.setNavDel(ViewBag.Del)
+    //.setDelUrl("/Finanzas/OperClausulas")
+    .Render()
+
+    )
+
+    <div class="col" style="float:left" id="btnAgregarClausula"><input type="button" value="Agregar" onclick="fnAgregarClausula();" /></div>
+    <div class="col" style="float:left"><input type="button" value="Eliminar" onclick="fnEliminarClausula();" /></div>
+       </div>
+    </div>
+    <div class="col" style="float:left"><input type="button" value="Guardar Todo" onclick="fnGuardarTodoClausulas();" /></div>
+ @using (Html.JQueryUI().Begin(
+    new Dialog().Draggable(true).AutoOpen(false).Modal(true).Title("Nueva Clausula").CloseOnEscape(true).Width(800).Height(450).TriggerClick("#btnAgregarClausula")))
+    {
+        @Html.Partial("NuevaClausula", Model)
+    }

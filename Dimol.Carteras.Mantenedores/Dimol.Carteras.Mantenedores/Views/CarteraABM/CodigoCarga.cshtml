@@ -1,0 +1,66 @@
+﻿@model Dimol.Carteras.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "Codigo Carga";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Codigo Carga</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("CodigoCarga")
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+   .addColumn(new Column("Pclid").setLabel("Pclid")
+        .setEditable(true)    
+        .setHidden(true)    
+        .setSortable(true)
+        .setWidth(50))
+   .addColumn(new Column("NombreCliente").setLabel("Cliente")
+       .setSortable(true)     
+       .setEditable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.Clientes+"\"")
+        .setWidth(80))
+    .addColumn(new Column("Correlativo").setLabel("Correlativo")
+       .setEditable(true)    
+       .setHidden(true)    
+       .setSortable(true)
+       .setWidth(50))
+    .addColumn(new Column("Codigo").setLabel("Codigo")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+     .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+      
+    // settings
+    .setCaption("CodigoCarga")
+    .setRequestType(RequestType.get)
+    .setUrl("~/CarteraABM/GetCodigoCarga/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("NombreCliente,Correlativo")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerCodigoCarga")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/CarteraABM/OperCodigoCarga")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/CarteraABM/OperCodigoCarga")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/CarteraABM/OperCodigoCarga")
+    .setExcelExport("/CarteraABM/ExportToExcelCodigoCarga")
+    .Render()
+    )

@@ -1,0 +1,65 @@
+﻿@model Dimol.Contabilidad.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "TiposTraslados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Tipos Traslado</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("TiposTraslados")
+    .addColumn(new Column("Codemp").setLabel("Empresa")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+           
+    .addColumn(new Column("codigo").setLabel("Codigo")
+        .setSortable(true)
+        .setAlign(Align.center)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("nombre").setLabel("Nombre")
+        .setSortable(true)
+        .setAlign(Align.left)
+        .setEditable(true)
+        .setWidth(50))
+           
+   .addColumn(new Column("Id").setLabel("ID")
+   
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(50))
+      
+    // settings
+    
+    .setCaption("TiposTraslados")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Contabilidad/GetTiposTraslados/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("codigo")
+    
+    .setSortOrder(SortOrder.desc)
+    .setPager("pagerTiposTraslados")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Contabilidad/OperTiposTraslados")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Contabilidad/OperTiposTraslados")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Contabilidad/OperTiposTraslados")
+    .setExcelExport("/Contabilidad/ExportToExcel")
+    
+    .Render()
+
+)

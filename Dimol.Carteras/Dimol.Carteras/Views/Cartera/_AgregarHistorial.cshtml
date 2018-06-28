@@ -1,0 +1,156 @@
+﻿@model Dimol.Carteras.Models.AgregarGestionModel
+@using Mvc.HtmlHelpers
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmGuardarGestion" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BuscarDeudor</legend>
+        @Html.HiddenFor(model =>model.MostrarTelefono)
+        @Html.HiddenFor(model =>model.MostrarFecha)
+        @Html.HiddenFor(model =>model.TodosSeleccionados)
+        <div class="tabla" id="divTabla">
+            <div class="fila">
+                <div class="col" style="width:160px;font-weight:bold">Acciones</div>
+                <div class="col"></div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.TipoGestion)</div>
+                <div class="col">
+                    @Html.DropDownList("TipoGestion", null, new { @onchange = "fnActualizarTipoGestion()" })
+                @Html.ValidationMessageFor(model => model.TipoGestion)
+            </div>
+                <div class="col" style="width:60px"></div>
+                <div class="col" style="width:100px">@Html.LabelFor(model => model.CambiaEstado)</div>
+                <div class="col">
+                    @Html.CheckBoxFor(m => m.CambiaEstado, new { @onchange = "fnMostrarCambioEstados()" })
+                    @Html.ValidationMessageFor(model => model.CambiaEstado)
+                </div>
+                <div class="col" style="float:right"><input type="button" value="Grabar" onclick="fnGuardarGestionesPost();" /></div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Contacto)</div>
+                <div class="col">
+                    @Html.DropDownList("Contacto", null, new {})
+                    @Html.ValidationMessageFor(model => model.Contacto)
+                </div>
+            </div>
+            <div id="divTelefonoHistorial" style="display:none">
+                <div class="fila">
+                    <div class="col" style="width:160px">@Html.LabelFor(model => model.TelefonoHistorial)</div>
+                    <div class="col">
+                        @Html.DropDownList("TelefonoHistorial", null, new { })
+                        @Html.ValidationMessageFor(model => model.TelefonoHistorial)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class=" col" style="width:160px">@Html.LabelFor(model => model.ResultadoLlamado)</div>
+                    <div class="col">
+                        @Html.DropDownList("ResultadoLlamado", null, new { })
+                        @Html.ValidationMessageFor(model => model.ResultadoLlamado)
+                    </div>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">@Html.LabelFor(model => model.Comentario)</div>
+                <div class="col">
+                    @Html.TextAreaFor(m => m.Comentario, 3, 55, new { })
+                @Html.ValidationMessageFor(model => model.Comentario)
+            </div>
+        </div>
+            <div id="divCambioEstado" style="display:none">
+                <div class="fila">
+                    <div class="col" style="width:160px;font-weight:bold">Estados</div>
+                    <div class="col"></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:160px">@Html.LabelFor(model => model.Agrupa)</div>
+                    <div class="col">
+                        @Html.DropDownList("Agrupa", null, new { @class = "ComboboxClassM", @onchange = "fnActualizarEstadosHistorial('TipoEstado')" })
+                        @Html.ValidationMessageFor(model => model.Agrupa)
+                    </div>
+                    <div class="col" style="width:60px"></div>
+                    <div class="col" style="width:150px">@Html.LabelFor(model => model.EstadosXDocumentos)</div>
+                    <div class="col">
+                        @Html.CheckBoxFor(m => m.EstadosXDocumentos, new { @onchange = "fnActualizarEstadosHistorial('TipoEstado')" , @checked = "True"})
+                        @Html.ValidationMessageFor(model => model.EstadosXDocumentos)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:160px">@Html.LabelFor(model => model.TipoEstado)</div>
+                    <div class="col">
+                        @Html.DropDownList("TipoEstado", null, new { @onchange = "fnActualizarEstados()"})
+                        @Html.ValidationMessageFor(model => model.TipoEstado)
+                    </div>
+                </div>
+                <div class="fila" id="divFechaHistorial" style="display:none">
+                    <div class="col" style="width:160px">@Html.LabelFor(model => model.FechaHistorial)</div>
+                    <div class="col">
+                        @Html.JQueryUI().Datepicker("FechaHistorial").ShowButtonPanel(true).ShowWeek(false)
+                        @Html.ValidationMessageFor(model => model.FechaHistorial)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col">
+                    </div>
+                </div>
+                <div id="divGrillaDocsHistorial">
+                    @(Html.jqGrid("grdDocumentosCambioEstado")
+    .addColumn(new Column("Ccbid").setLabel("Id")
+        .setHidden(true).setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("TipoCpbtNombre").setLabel("Tipo")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(200))
+    .addColumn(new Column("NumeroCpbt").setLabel("Numero")
+        .setSortable(true).setAlign(Align.center)
+        .setWidth(110))
+    .addColumn(new Column("FechaVencimiento").setLabel("Fecha Venc.").setAlign(Align.center)
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(100))
+    .addColumn(new Column("Monto").setLabel("Monto")
+        .setSortable(true).setAlign(Align.right).setFormatter(Formatters.number)
+        .setWidth(100))
+    .addColumn(new Column("Saldo").setLabel("Saldo")
+        .setSortable(true).setAlign(Align.right).setFormatter(Formatters.number)
+        .setWidth(100))
+    .addColumn(new Column("Compromiso").setLabel("Compromiso")
+        .setSortable(true).setEditable(true)
+        .setHidden(true).setAlign(Align.right).setFormatter(Formatters.number)
+        .setWidth(100))
+
+    // settings
+    .setCaption("Documentos")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(500)
+    .setRowList(new int[] { 500 })
+    .setViewRecords(true)
+    .setSortName("TipoCpbtNombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDocumentosCambioEstado")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setMultiSelect(true)
+    .setCellEdit(true)
+    .setAddUrl("~/Cartera/GetDummy")
+    .setEditUrl("~/Cartera/GetDummy")
+    //.onSelectAll("fnOnSelectAllHistorial(aRowids, status)")
+    
+    //.onLoadComplete("fnOnLoadCompleteHistorial(this)")
+    //.onPaging("fnOnPagingHistorial(this)")
+    .Render()
+
+                    )
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}

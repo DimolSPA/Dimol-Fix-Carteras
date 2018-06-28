@@ -1,0 +1,6 @@
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Debug\Dimol.Convertidor.exe.config
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Debug\Dimol.Convertidor.exe
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\bin\Debug\Dimol.Convertidor.pdb
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\obj\Debug\Dimol.Convertidor.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\obj\Debug\Dimol.Convertidor.exe
+D:\_Codigo_Dimol\Dimol.Convertidor\Dimol.Convertidor\obj\Debug\Dimol.Convertidor.pdb

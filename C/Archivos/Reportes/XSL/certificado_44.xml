@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<BorradorJudicial xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Pclid>0</Pclid> 
+	<Ctcid>0</Ctcid> 
+	<Rolid>5</Rolid> 
+	<TipoRol>C</TipoRol> 
+	<Rol>7608-2008</Rol> 
+	<Anio>2015</Anio>
+	<RutEmpleado>138315541</RutEmpleado> 
+	<NombreEmpleado>MAY CONZUELO</NombreEmpleado> 
+	<PaternoEmpleado>GUTIERREZ</PaternoEmpleado> 
+	<MaternoEmpleado>OTTO</MaternoEmpleado> 
+	<Tribunal>1º JUZGADO DE LETRAS DE CALAMA</Tribunal> 
+	<Fecha>0001-01-01T00:00:00</Fecha> 
+	<Monto>0</Monto> 
+	<Cuotas>0</Cuotas> 
+	<MontoCuota>0</MontoCuota> 
+	<MontoUltimaCuota>0</MontoUltimaCuota> 
+	<FechaPrimeraCuota>0001-01-01T00:00:00</FechaPrimeraCuota> 
+	<FechaUltimaCuota>0001-01-01T00:00:00</FechaUltimaCuota> 
+	<Interes>0</Interes> 
+	<IdTribunal>0</IdTribunal> 
+	<IdTipoCausa>0</IdTipoCausa> 
+	<FechaIngreso>0001-01-01T00:00:00</FechaIngreso> 
+	<FechaRol>0001-01-01T00:00:00</FechaRol> 
+	<FechaDemanda>0001-01-01T00:00:00</FechaDemanda> 
+	<IdMateriaJudicial>0</IdMateriaJudicial> 
+	<IdEstado>0</IdEstado> 
+	<BloquearRol>false</BloquearRol> 
+	<ProcesoQuiebra>false</ProcesoQuiebra> 
+	<Quiebra>false</Quiebra> 
+</BorradorJudicial>

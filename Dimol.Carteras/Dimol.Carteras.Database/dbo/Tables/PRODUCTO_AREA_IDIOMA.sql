@@ -1,0 +1,18 @@
+﻿CREATE TABLE [dbo].[PRODUCTO_AREA_IDIOMA] (
+    [PAI_CODEMP] INT           NOT NULL,
+    [PAI_PTAID]  INT           NOT NULL,
+    [PAI_IDIID]  INT           NOT NULL,
+    [PAI_NOMBRE] VARCHAR (150) NOT NULL,
+    CONSTRAINT [PK_PRODUCTO_AREA_IDIOMA] PRIMARY KEY NONCLUSTERED ([PAI_CODEMP] ASC, [PAI_PTAID] ASC, [PAI_IDIID] ASC),
+    CONSTRAINT [FK_PRODUCTO_PRODAREA__PRODUCTO] FOREIGN KEY ([PAI_CODEMP], [PAI_PTAID]) REFERENCES [dbo].[PRODUCTO_AREA] ([PTA_CODEMP], [PTA_PTAID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[PRODUCTO_AREA_IDIOMA]([PAI_CODEMP] ASC, [PAI_PTAID] ASC, [PAI_IDIID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena las distintas areas delproducto en su respectivo idioma', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'PRODUCTO_AREA_IDIOMA';
+

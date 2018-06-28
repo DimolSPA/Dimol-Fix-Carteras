@@ -1,0 +1,56 @@
+﻿@model Dimol.Carteras.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "Tipo Documentos Deudores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Acciones</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("TipoDocumentoDeudor")
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+    .addColumn(new Column("Id").setLabel("Id")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+    .addColumn(new Column("Tipo").setLabel("Tipo")
+        .setSortable(true)
+        .setEditable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\""+ViewBag.Tipo+"\"")
+        .setWidth(80))
+    
+    // settings
+    .setCaption("Tipos Documentoa Deudores")
+    .setRequestType(RequestType.get)
+    .setUrl("~/CarteraABM/GetTipoDocumentoDeudor/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerTipoDocumentoDeudor")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/CarteraABM/OperTipoDocumentoDeudor")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/CarteraABM/OperTipoDocumentoDeudor")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/CarteraABM/OperTipoDocumentoDeudor")
+    .setExcelExport("/CarteraABM/ExportToExcelTipoDocumentoDeudor")
+    .Render()
+
+)

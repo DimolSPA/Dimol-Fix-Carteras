@@ -1,0 +1,18 @@
+﻿CREATE TABLE [dbo].[ERRORES_IDIOMAS] (
+    [ERI_ERRID]       INT           NOT NULL,
+    [ERI_IDID]        INT           NOT NULL,
+    [ERI_DESCRIPCION] VARCHAR (400) NOT NULL,
+    CONSTRAINT [PK_ERRORES_IDIOMAS] PRIMARY KEY CLUSTERED ([ERI_ERRID] ASC, [ERI_IDID] ASC),
+    CONSTRAINT [FK_ERRORES__ERRORES_I_ERRORES] FOREIGN KEY ([ERI_ERRID]) REFERENCES [dbo].[ERRORES] ([ERR_ERRID]),
+    CONSTRAINT [FK_ERRORES__IDIOMAS_E_IDIOMAS] FOREIGN KEY ([ERI_IDID]) REFERENCES [dbo].[IDIOMAS] ([IDI_IDID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[ERRORES_IDIOMAS]([ERI_ERRID] ASC, [ERI_IDID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena los distintos errores en su respectivo idioma', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'ERRORES_IDIOMAS';
+

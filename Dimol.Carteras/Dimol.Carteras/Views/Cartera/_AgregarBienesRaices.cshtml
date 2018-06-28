@@ -1,0 +1,116 @@
+﻿@model Dimol.Carteras.dto.BienPropiedad
+@using Mvc.HtmlHelpers
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBienPropiedad" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.Hidden("BienesRaicesId")
+    <div class="tabla">
+
+        
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.ConservadorId)</div>
+            <div class="col">
+                @Html.DropDownListFor(model => model.ConservadorId, null, "-- Seleccione  --", new { @class = "ComboboxClass" })
+                @Html.ValidationMessageFor(model => model.ConservadorId)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Rol)</div>
+            <div class="col">
+
+                @Html.TextBoxFor(model => model.Rol, null, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.Rol)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Foja)</div>
+            <div class="col">
+
+                @Html.TextBoxFor(model => model.Foja, null, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.Foja)
+            </div>
+        </div>
+        
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Anio)</div>
+            <div class="col">
+
+                @Html.TextBoxFor(model => model.Anio, null, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.Anio)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Direccion)</div>
+            <div class="col">
+
+                @Html.TextBoxFor(model => model.Direccion, null, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.Direccion)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Propietario)</div>
+            <div class="col">
+                @Html.CheckBoxFor(model => model.Propietario)
+
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.EvaluoFiscal)</div>
+            <div class="col">
+                @Html.CheckBoxFor(model => model.EvaluoFiscal)
+
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Verificado)</div>
+            <div class="col">
+                @Html.CheckBoxFor(model => model.Verificado)
+
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Hipotecado)</div>
+            <div class="col">
+                @Html.CheckBoxFor(model => model.Hipotecado)
+
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Embargo)</div>
+            <div class="col">
+                @Html.CheckBoxFor(model => model.Embargo)
+
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col">
+
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col" style="width:70px;height:25px;margin-top: 5px;"> Archivo</div>
+                        <div class="col" style="width:300px"><input id="subirArchivoCertificado" type="file" style="width:300px"><input type="hidden" name="ArchivoCertificado" id="ArchivoCertificado"></div>
+                        <div class="col"><input type="submit" id="btnSubmitCertificado" value="Subir Archivo" /></div>
+                        <div class="col"><img id="imgSubirArchivoCertificado" src="~/Images/blank.png" class="" style="float:left" /></div>
+                        <div class="col"><input type="button" value="Nuevo" onclick="fnLimpiarCargaCertificado();" /></div>
+                    </div>
+                    <div class="fila">
+
+                        <div class="col" style="float:right">
+                            <input type="button" style="display:none" value="Cargar" disabled="disabled" id="btnCargarComprobante" />
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="float:right">
+                <input type="button" value="Guardar" id="btnGuardar" onclick="fnGuardarBienesRaices();" />
+
+            </div>
+        </div>
+    </div>
+
+}

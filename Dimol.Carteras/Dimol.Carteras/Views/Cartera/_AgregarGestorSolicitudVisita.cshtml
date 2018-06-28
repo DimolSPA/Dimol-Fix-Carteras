@@ -1,0 +1,28 @@
+﻿@model Dimol.Carteras.Models.VisitaTerrenoAprobarModel
+@using Mvc.HtmlHelpers
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmGestorSolicitudVisita" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="width:150px"><label for="lstGestoresTerreno" title="Gestores Terreno">Gestores Terreno:</label></div>
+            <div class="col" style="width:250px">
+               
+                @Html.DropDownList("lstGestoresTerreno", null, new { @class = "ComboboxClass" })
+                @Html.ValidationMessageFor(model => model.lstGestoresTerreno)
+                
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col">
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="float:right">
+                <input type="button" value="Aprobar" onclick="fnGuardarAprobarVisitaTerreno();" />
+
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,49 @@
+﻿CREATE TABLE [dbo].[CARTERA_CLIENTES_ESTADOS_ACCIONES] (
+    [CEA_CODEMP]     INT          NOT NULL,
+    [CEA_PCLID]      NUMERIC (15) NOT NULL,
+    [CEA_CTCID]      NUMERIC (15) NOT NULL,
+    [CEA_FECHA]      DATETIME     NOT NULL,
+    [CEA_ACCID]      INT          NOT NULL,
+    [CEA_SUCID]      INT          NOT NULL,
+    [CEA_GESID]      INT          NULL,
+    [CEA_CONTACTO]   CHAR (1)     NOT NULL,
+    [CEA_IPRED]      VARCHAR (30) NOT NULL,
+    [CEA_IPMAQUINA]  VARCHAR (30) NOT NULL,
+    [CEA_COMENTARIO] TEXT         NOT NULL,
+    [CEA_ESTADO]     CHAR (1)     DEFAULT ('S') NOT NULL,
+    [CEA_USRID]      INT          NOT NULL,
+    [CEA_DDCID]      SMALLINT     NULL,
+    [CEA_TELEFONO]   BIGINT       NULL,
+    CONSTRAINT [PK_CARTERA_CLIENTES_ESTADOS_AC] PRIMARY KEY NONCLUSTERED ([CEA_CODEMP] ASC, [CEA_PCLID] ASC, [CEA_CTCID] ASC, [CEA_FECHA] ASC, [CEA_ACCID] ASC),
+    CONSTRAINT [CKC_CEA_CONTACTO_CARTERA_] CHECK ([CEA_CONTACTO]='N' OR [CEA_CONTACTO]='S'),
+    CONSTRAINT [CKC_CEA_CONTACTO_CARTERA__CM] CHECK ([CEA_CONTACTO]='N' OR [CEA_CONTACTO]='S'),
+    CONSTRAINT [CKC_CEA_ESTADO_CARTERA_] CHECK ([CEA_ESTADO]='N' OR [CEA_ESTADO]='S'),
+    CONSTRAINT [CKC_CEA_ESTADO_CARTERA__CM] CHECK ([CEA_ESTADO]='N' OR [CEA_ESTADO]='S'),
+    CONSTRAINT [FK_CARTERA__ACCIONES__ACCIONES] FOREIGN KEY ([CEA_CODEMP], [CEA_ACCID]) REFERENCES [dbo].[ACCIONES] ([ACC_CODEMP], [ACC_ACCID]),
+    CONSTRAINT [FK_CARTERA__DEUCONT_E_DEUDORES] FOREIGN KEY ([CEA_CODEMP], [CEA_CTCID], [CEA_DDCID]) REFERENCES [dbo].[DEUDORES_CONTACTOS] ([DDC_CODEMP], [DDC_CTCID], [DDC_DDCID]),
+    CONSTRAINT [FK_CARTERA__GEST_CART_GESTOR] FOREIGN KEY ([CEA_CODEMP], [CEA_SUCID], [CEA_GESID]) REFERENCES [dbo].[GESTOR] ([GES_CODEMP], [GES_SUCID], [GES_GESID]),
+    CONSTRAINT [FK_CARTERA__GESTOR_ES_GESTOR] FOREIGN KEY ([CEA_CODEMP], [CEA_SUCID], [CEA_GESID]) REFERENCES [dbo].[GESTOR] ([GES_CODEMP], [GES_SUCID], [GES_GESID]),
+    CONSTRAINT [FK_CARTERA__USU_CCEA_USUARIOS] FOREIGN KEY ([CEA_CODEMP], [CEA_USRID]) REFERENCES [dbo].[USUARIOS] ([USR_CODEMP], [USR_USRID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[CARTERA_CLIENTES_ESTADOS_ACCIONES]([CEA_CODEMP] ASC, [CEA_PCLID] ASC, [CEA_FECHA] ASC, [CEA_CTCID] ASC, [CEA_ACCID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla, almacenara las distintas acciones para cada estado de la cartera de los clientes', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'CARTERA_CLIENTES_ESTADOS_ACCIONES';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Indica si la accion se realizara al contacto o no
+   
+   Ejemplo, llamada telefonica', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'CARTERA_CLIENTES_ESTADOS_ACCIONES', @level2type = N'COLUMN', @level2name = N'CEA_CONTACTO';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Este campo indica si la accion, esta terminada o no
+   
+   Ejemplo, el IVR, Carta, Etc', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'CARTERA_CLIENTES_ESTADOS_ACCIONES', @level2type = N'COLUMN', @level2name = N'CEA_ESTADO';
+

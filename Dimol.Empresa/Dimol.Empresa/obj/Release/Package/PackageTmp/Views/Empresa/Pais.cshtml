@@ -1,0 +1,52 @@
+﻿@model Dimol.Empresa.Models.GridModel
+@{
+    ViewBag.Title = "Paises";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Paises</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+@(Html.jqGrid("Pais")
+   
+    .addColumn(new Column("Id").setLabel("Id")
+        .setSortable(true)
+        .setWidth(80))
+ 
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(250))
+    .addColumn(new Column("Codigo").setLabel("Codigo")
+        .setHidden(false)
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+   
+      
+    .setCaption("Pais")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Empresa/GetPais/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerPais")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Empresa/OperPais")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Empresa/OperPais")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Empresa/OperPais")
+    .setExcelExport("/Empresa/ExportToExcelPais")
+    .Render()
+
+)

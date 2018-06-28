@@ -1,0 +1,24 @@
+﻿CREATE TABLE [dbo].[AFP] (
+    [AFP_CODEMP] INT          NOT NULL,
+    [AFP_AFPID]  INT          NOT NULL,
+    [AFP_RUT]    VARCHAR (20) NOT NULL,
+    [AFP_NOMBRE] VARCHAR (20) NOT NULL,
+    [AFP_PCTID]  INT          NOT NULL,
+    CONSTRAINT [PK_AFP] PRIMARY KEY NONCLUSTERED ([AFP_CODEMP] ASC, [AFP_AFPID] ASC),
+    CONSTRAINT [FK_AFP_EMPRESA_A_EMPRESA] FOREIGN KEY ([AFP_CODEMP]) REFERENCES [dbo].[EMPRESA] ([EMP_CODEMP])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[AFP]([AFP_CODEMP] ASC, [AFP_AFPID] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_RUT]
+    ON [dbo].[AFP]([AFP_CODEMP] ASC, [AFP_RUT] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena las distintas AFP', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'AFP';
+

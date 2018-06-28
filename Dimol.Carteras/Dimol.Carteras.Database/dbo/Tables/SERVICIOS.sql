@@ -1,0 +1,24 @@
+﻿CREATE TABLE [dbo].[SERVICIOS] (
+    [SVE_CODEMP] INT           NOT NULL,
+    [SVE_SVEID]  INT           NOT NULL,
+    [SVE_NOMBRE] VARCHAR (200) NOT NULL,
+    [SVE_ORDEN]  SMALLINT      DEFAULT ((5)) NOT NULL,
+    [SVE_FOTO]   VARCHAR (100) NULL,
+    CONSTRAINT [PK_SERVICIOS] PRIMARY KEY CLUSTERED ([SVE_CODEMP] ASC, [SVE_SVEID] ASC),
+    CONSTRAINT [FK_SERVICIO_EMPRESA_S_EMPRESA] FOREIGN KEY ([SVE_CODEMP]) REFERENCES [dbo].[EMPRESA] ([EMP_CODEMP])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[SERVICIOS]([SVE_CODEMP] ASC, [SVE_SVEID] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_NOMBRE]
+    ON [dbo].[SERVICIOS]([SVE_CODEMP] ASC, [SVE_NOMBRE] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena los distintos servicios, que se ofreceran en la web', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'SERVICIOS';
+

@@ -1,0 +1,46 @@
+﻿@model Dimol.Carteras.Models.GridModel
+@{
+    ViewBag.Title = "MotivoCobranza";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Motivo de Cobranza</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("MotivoCobranza")
+    .addColumn(new Column("Id").setLabel("Id Motivo")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Motivo")
+        .setEditType(EditType.text)
+        .setEditable(true)
+        .setWidth(80))
+    
+    // settings
+    .setCaption("Motivo de Cobranza")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Mantenedor/GetAcciones/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerAcciones")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(true)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Mantenedor/OperAccion")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Mantenedor/OperAccion")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Mantenedor/OperAccion")
+    .setExcelExport("/Mantenedor/ExportToExcel")
+    .Render()
+
+)

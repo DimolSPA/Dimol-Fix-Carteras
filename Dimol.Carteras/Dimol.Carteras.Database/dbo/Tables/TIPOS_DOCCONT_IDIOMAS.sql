@@ -1,0 +1,19 @@
+﻿CREATE TABLE [dbo].[TIPOS_DOCCONT_IDIOMAS] (
+    [TCI_CODEMP] INT           NOT NULL,
+    [TCI_TDCID]  INT           NOT NULL,
+    [TCI_IDID]   INT           NOT NULL,
+    [TCI_NOMBRE] VARCHAR (150) NOT NULL,
+    CONSTRAINT [PK_TIPOS_DOCCONT_IDIOMAS] PRIMARY KEY NONCLUSTERED ([TCI_CODEMP] ASC, [TCI_TDCID] ASC, [TCI_IDID] ASC),
+    CONSTRAINT [FK_TIPOS_DO_IDIO_TIPD_IDIOMAS] FOREIGN KEY ([TCI_IDID]) REFERENCES [dbo].[IDIOMAS] ([IDI_IDID]),
+    CONSTRAINT [FK_TIPOS_DO_TIPDOCCON_TIPOS_DO] FOREIGN KEY ([TCI_CODEMP], [TCI_TDCID]) REFERENCES [dbo].[TIPOS_DOCCONT] ([TDC_CODEMP], [TDC_TDCID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[TIPOS_DOCCONT_IDIOMAS]([TCI_TDCID] ASC, [TCI_IDID] ASC, [TCI_CODEMP] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla, almacena los distintos tipos de contratos documentos dependiendo de su idioma', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'TIPOS_DOCCONT_IDIOMAS';
+

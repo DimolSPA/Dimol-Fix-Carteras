@@ -1,0 +1,99 @@
+﻿@model Dimol.Carteras.Models.BuscarComprobanteModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  <div class="ui-widget-header ui-corner-all">
+    <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Comprobante</span>
+
+   </div>
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarComprobante" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.Hidden(Model.Cartera)
+    <fieldset>
+        <legend>BuscarComprobante</legend>
+
+        @if (Model.Tipo == "CC") {
+            @Html.Partial("_BuscarComprobantesCartera", Model)
+        }
+        else
+        {
+            @Html.Partial("_BuscarComprobantesCompraVenta", Model)
+        }
+
+     
+    </fieldset>
+}
+<br />
+@(Html.jqGrid("gridComprobantes")
+    //.addColumn(new Column("Rut").setLabel("Rut")
+    //    .setSortable(true)
+    //    .setWidth(50))
+    .addColumn(new Column("NombreFantasia").setLabel("Receptor")
+        .setSortable(true)
+        .setWidth(110))
+    .addColumn(new Column("TipoDocumento").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(60))
+    .addColumn(new Column("NumeroCliente").setLabel("Número de Boleta").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(100))
+    //.addColumn(new Column("Numero").setLabel("N° Interno").setAlign(Align.center)
+    //    .setSortable(true)
+    //    .setWidth(50))
+    //.addColumn(new Column("FechaEmision").setLabel("Fecha Emisión")
+    //    .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y").setAlign(Align.center)
+    //    .setWidth(70))
+    //.addColumn(new Column("FechaVencimiento").setLabel("Fecha Vencimiento")
+    //    .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y").setAlign(Align.center)
+    //    .setWidth(70))
+    .addColumn(new Column("Final").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Estado").setLabel("Estado").setAlign(Align.left)
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("RutDeudor").setLabel("Rut Deudor")
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("NombreDeudor").setLabel("Nombre Deudor")
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("Rol").setLabel("Rol")
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Tribunal").setLabel("Tribunal")
+        .setSortable(true)
+        .setWidth(70))
+
+    // settings
+    .setCaption("Comprobantes")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("NombreFantasia")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerComprobante")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("ComprobanteSeleccionado(rowid)")
+    .Render()
+
+) 
+<br />
+          </div>
+</div>

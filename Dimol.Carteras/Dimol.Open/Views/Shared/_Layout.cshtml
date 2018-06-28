@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @RenderSection("scripts", required: false)
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css/menu")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/menu")
+
+    <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/ui.jqgrid.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    @*<script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>*@
+    <script src="@Url.Content("~/Scripts/jquery.jqGrid-4.4.1/i18n/grid.locale-es.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.jqGrid-4.4.1/jquery.jqGrid.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/site.js")" type="text/javascript"></script>
+
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div id="divBanner">
+                <div class="float-left">
+                    <p class="site-title">
+                        @Html.ActionLink(" ",
+                                        "Index",
+                                        "Open",
+                                        new { },
+                                        new { style = "background: url('" + Url.Content(ViewBag.RutaLogo) + "') no-repeat center left; display:block; height:180px; width:500px;" }
+                                        )
+
+                    </p>
+                </div>
+                
+               
+            </div>
+        </div>
+    </header>
+
+    <div id="body">
+
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+           
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="modalAjax" class="modal"><!-- Place at bottom of page --></div> 
+</body>
+</html>

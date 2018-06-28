@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Buscar Empleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Buscar Empleado</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@model Dimol.Empresa.Models.BuscarEmpleadoModel
+@using Mvc.HtmlHelpers
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "fnBuscarEmpleado" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Buscar Empleado</legend>
+
+        <div class="tabla">
+            <div class="fila">
+               <div class="col" style="width:160px">Rut</div>
+                <div class="col">@Html.TextBox("RutBuscar",null,new { @class= "textboxClass"})
+            @Html.ValidationMessageFor(model => model.Rut)</div>
+            <div class="fila">
+                <div class="col" style="width:160px">Nombre</div>
+                <div class="col">@Html.TextBox("NombreBuscar",null,new { @class= "textboxClass"})
+            @Html.ValidationMessageFor(model => model.Nombre)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:160px">Apellido Paterno</div>
+                <div class="col">@Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "textboxClassM"})
+            @Html.ValidationMessageFor(model => model.ApellidoPaterno)</div>
+             <div class="fila">
+                <div class="col" style="width:160px">Apellido Materno</div>
+                <div class="col">@Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "textboxClassM"})
+            @Html.ValidationMessageFor(model => model.ApellidoMaterno)</div>
+              <div class="fila">
+                @* <div class="col" style="width:160px">@Html.LabelFor(model => model.Estado)</div>*@
+                   <div class="col" style="width:160px">Estado</div>
+                 <div class="col">
+            @Html.DropDownList("TipoEstado", null, new { @class= "ComboboxClass"})
+               </div>
+            </div>
+            <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnBuscarEmpleado();" /></div>
+          </div>
+        </div>
+    </fieldset>
+}
+<br />
+@(Html.jqGrid("Empleado")
+    .addColumn(new Column("CodEmp").setLabel("CodEmp")
+        .setHidden(true)
+        .setWidth(50))
+     .addColumn(new Column("Id").setLabel("Id")
+        .setHidden(true)
+        .setWidth(50))
+     .addColumn(new Column("Foto").setLabel("Foto")
+        .setHidden(false)
+        .setCustomFormatter("imageFormat")
+        .setSortable(true)
+        . setAlign(Align.center)
+        .setWidth(100)
+        )
+  .addColumn(new Column("Rut").setLabel("Rut")
+        .setHidden(false)
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+         .setHidden(false)
+        .setSortable(true)
+        .setWidth(110))
+    .addColumn(new Column("ApellidoPaterno").setLabel("Apellido Paterno")
+        .setHidden(false)
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("ApellidoMaterno").setLabel("Apellido Materno")
+        .setHidden(false)
+        .setSortable(true)
+        .setWidth(100))
+   
+    .addColumn(new Column("Estado").setLabel("Estado")
+        .setHidden(true )
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("DescripcionEstado").setLabel("Estado")
+        .setHidden(false)
+        .setSortable(true)
+        .setWidth(100))
+    
+    .setCaption("Empleado")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Empresa/GetEmpleadoVacio")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerEmpleado")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    //.onSelectRow("BuscarEmpleadoSeleccionado(rowid)")
+    .Render()
+
+) 
+<br />
+

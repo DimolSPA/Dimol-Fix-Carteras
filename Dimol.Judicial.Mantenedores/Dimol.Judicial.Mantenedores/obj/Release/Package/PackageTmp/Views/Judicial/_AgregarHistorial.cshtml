@@ -1,0 +1,96 @@
+﻿<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#EstadoHistorialAuto").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Judicial/BuscarEstadoHistorial/",
+                    dataType: "json",
+                    data: {
+                        term: request.term,
+                        esjid: $("#MateriaHistorial").val()
+                    },
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                if (ui.item.desc == 'RO') {
+                    $("#EstadoHistorialAuto").attr('style',"color:red;width:530px");
+                } else {
+                    $("#EstadoHistorialAuto").attr('style', "color:black;width:530px");
+                }
+                $("#EstadoHistorial").val(ui.item.value);
+                $("#EstadoHistorialAuto").val(ui.item.label);
+                return false;
+            },
+            focus: function( event, ui ) {
+                $("#EstadoHistorialAuto").val(ui.item.label);
+                return false;
+            },
+        }).data('autocomplete')._renderItem = function (ul, item) {
+            if (item.desc == 'RO') {
+                return $("<li></li>")
+              .data("item.autocomplete", item)
+              .append("<a ><font style='color:red' >" + item.label + "</font></a>")
+              .appendTo(ul);
+            } else {
+                return $("<li></li>")
+              .data("item.autocomplete", item)
+              .append("<a >" + item.label + "</a>")
+              .appendTo(ul);
+            }
+            
+        };
+    });
+</script>
+@using Mvc.HtmlHelpers
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmGuardarGestion" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Demanda</legend>
+        <div class="tabla" id="divTabla">
+            <div class="fila">
+                <div class="col" style="width:100px">@Html.Label("Materia")</div>
+                <div class="col">
+                    @Html.DropDownList("MateriaHistorial", null, new { @onchange = "" })
+                </div>
+     
+                <div class="col" style="float:right"><input type="button" value="Grabar" onclick="fnGuardarGestionesJud();" /></div>
+            </div>
+            @*<div class="fila">
+                <div class="col" style="width:100px">@Html.Label("Estado")</div>
+                <div class="col">
+                    @Html.DropDownList("EstadoHistorial", null, new { @onchange = "" })
+                </div>
+            </div>*@   
+            <div class="fila">
+                <div class="col" style="width:100px">@Html.Label("Estado")</div>
+                <div class="col">
+                    @*@Html.JQueryUI().Autocomplete("EstadoHistorial2", Url.Action("BuscarRutNombreCliente"), null, "EstadoHistorial3", null, new { @class = "textboxRutNombre" }).MinLength(3)*@
+                    @Html.TextBox("EstadoHistorialAuto", null, new {@style="width:530px" })
+                    @Html.Hidden("EstadoHistorial")
+                </div>
+            </div>     
+            <div class="fila" id="divFechaHistorial" >
+                <div class="col" style="width:100px">@Html.Label("Fecha")</div>
+                <div class="col">
+                    @Html.JQueryUI().Datepicker("FechaHistorial").ShowButtonPanel(true).ShowWeek(false)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:100px">@Html.Label("Comentario")</div>
+                <div class="col">
+                    @Html.TextArea("ComentarioHistorial","", 3, 55, new { })
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+
+

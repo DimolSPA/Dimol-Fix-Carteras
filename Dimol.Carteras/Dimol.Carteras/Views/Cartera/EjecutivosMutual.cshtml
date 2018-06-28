@@ -1,0 +1,126 @@
+﻿@model Dimol.Carteras.Models.EjecutivosMutualModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+
+
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  <div class="ui-widget-header ui-corner-all">
+    <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Ejecutivo</span>
+
+   </div>
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEjecutivosMutual" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BuscarComprobante</legend>
+
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                <div class="col">
+                    @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                    @Html.ValidationMessageFor(model => model.NombreRutCliente)
+                </div>
+                <div class="col"><input type="button" id="btnSearch" value="Buscar" onclick="fnBuscarEjecutivo()" /></div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:120px"> @Html.LabelFor(model => model.NombreEjecutivo)</div>
+                <div class="col" style="width:250px" id="idDdEjec">
+                    @Html.DropDownList("Ejecutivos", null, new { @class = "ComboboxClassS", @onchange = "fnTraeEjecutivosCuentas(1, $('#frmEjecutivosMutual #Pclid').val())" })
+                    @Html.ValidationMessageFor(model => model.NombreEjecutivo)
+                </div>
+
+                <div class="col" style="width:250px;display:none;margin-right:60px" id="idTxtEjec">
+                    @Html.TextBoxFor(model => model.NombreEjecutivo, new { @class = "textboxClass" })
+                    @Html.ValidationMessageFor(model => model.NombreEjecutivo)
+                </div>
+
+                <div class="col"><input type="button" id="btnNuevo" value="Nuevo" onclick="fnVisualizaEjecutivos(1)" /></div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:120px"> @Html.LabelFor(model => model.NombreBanco)</div>
+                <div class="col" style="width:250px">
+                    @Html.DropDownList("TipoBanco", null, new { @class = "ComboboxClassS", @disabled = "disabled"})
+                    @Html.ValidationMessageFor(model => model.NombreBanco)
+                </div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:120px"> @Html.LabelFor(model => model.Cuenta)</div>
+                <div class="col" style="width:250px" id="idDDCta">
+                    @Html.DropDownList("CuentaBanco", null, new { @class = "ComboboxClassS", @onchange = "fnTraeEjecutivosCuentas(2, $('#frmEjecutivosMutual #Pclid').val())" })
+                    @Html.ValidationMessageFor(model => model.Cuenta)
+                </div>
+                <div class="col" style="width:250px;display:none;margin-right:60px" id="idTxtCta">
+                    @Html.TextBoxFor(model => model.Cuenta, new { @class = "textboxClass" })
+                    @Html.ValidationMessageFor(model => model.Cuenta)
+                </div>
+                <div class="col"><input type="button" id="btnAdd" value="Agregar" onclick="fnVisualizaEjecutivos(2)" /></div>
+                <div class="col" id="btnDel"><input type="button" value="Eliminar" onclick="fnEliminaCuentaEjecutivo()" /></div>
+                <div class="col" id="btnSave" style="display:none"><input type="button" value="Guardar" onclick="fnAgregaCuentaEjecutivo()" /></div>
+
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Email)</div>
+                <div class="col">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "textboxClass" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Oficina)</div>
+                <div class="col">
+                    @Html.TextBoxFor(model => model.Oficina, new { @class = "textboxClass" })
+                    @Html.ValidationMessageFor(model => model.Oficina)
+                </div>                
+            </div>
+
+            <div class="fila">
+                <div class="col"><input type="button" id="btnGuardar" value="Guardar" onclick="fnGuardarEjecutivoMutual()" /></div>
+                <div class="col"><input type="button" id="btnEliminar" value="Eliminar" onclick="fnEliminaEjecutivoMutual()" /></div>
+                
+            </div>
+
+        </div>
+
+    </fieldset>
+}
+
+
+          </div>
+</div>
+
+
+<script type="text/javascript">
+    
+    function fnBuscarEjecutivo() {
+        if ($('#Pclid').val() != '') {
+            fnTraeEjecutivos('frmEjecutivosMutual #Ejecutivos', $('#frmEjecutivosMutual #Pclid').val());
+            fnListarTipoBancos('frmEjecutivosMutual #TipoBanco', $('#Pclid').val());
+            fnTraeEjecutivosCuentas(1, $('#frmEjecutivosMutual #Pclid').val());            
+        }
+    }
+
+    /*$(document).ready(function () {
+        $('#NombreRutCliente').on('autocompletechange change', function () {
+            if ($('#Pclid').val() != '') {
+                fnTraeEjecutivos('frmEjecutivosMutual #Ejecutivos', $('#frmEjecutivosMutual #Pclid').val());
+                fnListarTipoBancos('frmEjecutivosMutual #TipoBanco', $('#Pclid').val());
+                fnTraeEjecutivosCuentas(1, $('#frmEjecutivosMutual #Pclid').val());                
+            }
+        }).change();
+    });*/
+    
+</script>

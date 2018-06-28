@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<BorradorJudicial xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Pclid>0</Pclid> 
+	<Ctcid>0</Ctcid> 
+	<Rolid>1477</Rolid> 
+	<Rol>709-2012</Rol> 
+	<Anio>2015</Anio> 
+	<Cliente>COOPEUCH LTDA</Cliente> 
+	<RutCliente>82.878.900-7</RutCliente> 
+	<RutDeudor>6.110.483-6</RutDeudor> 
+	<NombreDeudor>TERESA DEL CARMEN ASCENCIO PÉREZ</NombreDeudor> 
+	<PaisDeudor>CHILE</PaisDeudor> 
+	<RegionDeudor>X REGIÓN - LOS LAGOS</RegionDeudor> 
+	<CiudadDeudor>CHILOE</CiudadDeudor> 
+	<ComunaDeudor>CASTRO</ComunaDeudor> 
+	<CodigoPostalDeudor>0</CodigoPostalDeudor> 
+	<DireccionDeudor>PILOTO SAMUEL ULLOA Nº728</DireccionDeudor> 
+	<RutEmpleado>13.831.554-1</RutEmpleado> 
+	<NombreEmpleado>MAY CONZUELO</NombreEmpleado> 
+	<PaternoEmpleado>GUTIERREZ</PaternoEmpleado> 
+	<MaternoEmpleado>OTTO</MaternoEmpleado> 
+	<TelefonoEmpleado>29406000</TelefonoEmpleado> 
+	<MailEmpleado>may.gutierrez@dimol.cl</MailEmpleado> 
+	<Tribunal>JUZGADO DE LETRAS DE CASTRO</Tribunal> 
+	<Fecha>0001-01-01T00:00:00</Fecha> 
+	<Monto>69.751</Monto> 
+	<Cuotas>40</Cuotas> 
+	<MontoCuota>0</MontoCuota> 
+	<MontoPrimeraCuota>0</MontoPrimeraCuota> 
+	<MontoUltimaCuota>69751.00</MontoUltimaCuota> 
+	<FechaPrimeraCuota>6 - julio - 2012</FechaPrimeraCuota> 
+	<MesPrimeraCuota>julio - 2012</MesPrimeraCuota> 
+	<FechaUltimaCuota>6 - octubre - 2015</FechaUltimaCuota> 
+	<Interes>0.000</Interes> 
+	<PaisEmpresa>CHILE</PaisEmpresa> 
+	<RegionEmpresa>REGION METROPOLITANA</RegionEmpresa> 
+	<CiudadEmpresa>SANTIAGO</CiudadEmpresa> 
+	<ComunaEmpresa>SANTIAGO</ComunaEmpresa> 
+	<NombreFantasiaDeudor>TERESA DEL CARMEN ASCENCIO PÉREZ</NombreFantasiaDeudor> 
+	<PaternoDeudor>CARMEN</PaternoDeudor> 
+	<MaternoDeudor /> 
+	<NombreCliente>COOPERATIVA DEL PERSONAL DE LA UNIVERSIDAD DE CHILE LIMITADA</NombreCliente> 
+	<PaternoCliente /> 
+	<MaternoCliente /> 
+	<RepresentanteLegal>SIRIA JELDES CHANG</RepresentanteLegal> 
+	<RutRepresentanteLegal>6.373.247-8</RutRepresentanteLegal> 
+	<Numero>2011013840</Numero> 
+	<Saldo>2.281.171</Saldo> 
+	<DireccionEmpresa>COMPAÑIA 1390, OF. 1109</DireccionEmpresa> 
+	<TelefonoEmpresa>29406000</TelefonoEmpresa> 
+	<FechaVencimiento>5 - octubre - 2011</FechaVencimiento> 
+	<FechaRol>0001-01-01T00:00:00</FechaRol> 
+	<FechaDemanda>6 - julio - 2012</FechaDemanda> 
+	<MateriaJudicial>JUICIO EJECUTIVO</MateriaJudicial> 
+	<Estado>AVENIMIENTO</Estado> 
+	<TipoCausa>COBRO PAGARE</TipoCausa> 
+	<DiaPago>6</DiaPago> 
+	<MontoDemandaEscrito>SESENTA Y NUEVE MIL SETECIENTOS CINCUENTA Y UNO</MontoDemandaEscrito> 
+	<MontoPCuotaDemandaEscrito>CERO</MontoPCuotaDemandaEscrito> 
+	<MontoUCuotaDemandaEscrito>SESENTA Y NUEVE MIL SETECIENTOS CINCUENTA Y UNO</MontoUCuotaDemandaEscrito> 
+	<MontoSaldoDemandaEscrito>DOS MILLONES DOSCIENTOS OCHENTA Y UNO MIL CIENTO SETENTA Y UNO</MontoSaldoDemandaEscrito> 
+</BorradorJudicial>

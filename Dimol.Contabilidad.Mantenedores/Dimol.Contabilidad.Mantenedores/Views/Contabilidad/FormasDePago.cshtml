@@ -1,0 +1,106 @@
+﻿@model Dimol.Contabilidad.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "FormasDePago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    function getTrueFalse() {
+        var data = "true:false";
+        return data;
+    }
+
+    
+    
+</script>
+<br />
+<h2>Formas De Pago</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("FormasDePago")
+    .addColumn(new Column("Codemp").setLabel("Empresa")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+     
+    .addColumn(new Column("idioma").setLabel("Idioma")
+        .setHidden(true)
+        .setSortable(true)
+        .setEditable(true)
+        .setWidth(50))
+        
+    .addColumn(new Column("IdFP").setLabel("ID")
+        .setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(30))
+    .addColumn(new Column("nombre").setLabel("Nombre")
+        .setSortable(true)
+        .setAlign(Align.left)
+        .setEditable(true)
+        .setWidth(60))
+   .addColumn(new Column("DiasVenc").setLabel("DiasVenc")
+        .setHidden(true)
+        .setSortable(true)
+        .setEditRules("edithidden:true")
+        .setAlign(Align.left)
+        .setEditable(true)
+        .setWidth(20))
+   .addColumn(new Column("Tipo").setLabel("Tipo Doc. Caja")
+   
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditRules("edithidden:true")
+        .setEditOptions("value:\""+ViewBag.Tipo+"\"")
+        .setWidth(50))
+
+   .addColumn(new Column("IngFV").setLabel("Ingresar Fecha Vencimiento")
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setWidth(50)
+        .setHidden(true)
+        .setEditRules("edithidden:true")
+        .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+        .setEditOptions("value:getTrueFalse()"))
+   .addColumn(new Column("IngCuotas").setLabel("Cuotas")
+        .setEditable(true)
+        .setAlign(Align.center)
+        .setWidth(50)
+        .setHidden(true)
+        .setEditRules("edithidden:true")
+        .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+        .setEditOptions("value:getTrueFalse()"))           
+   
+      
+    // settings
+    
+    .setCaption("FormasDePago")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Contabilidad/GetFormasDePago/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerFormasDePago")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Contabilidad/OperFormasDePago")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Contabilidad/OperFormasDePago")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Contabilidad/OperFormasDePago")
+    .setExcelExport("/Contabilidad/ExportToExcel")
+    
+    .Render()
+
+)

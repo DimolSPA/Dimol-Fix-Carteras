@@ -1,0 +1,10 @@
+C:\Users\ext_rjgarrido\Documents\Dimol_Contabilidad\Dimol.Contabilidad.Mantenedores\Dimol.Contabilidad.Mantenedores.dto\bin\Debug\Dimol.Contabilidad.Mantenedores.dto.dll
+C:\Users\ext_rjgarrido\Documents\Dimol_Contabilidad\Dimol.Contabilidad.Mantenedores\Dimol.Contabilidad.Mantenedores.dto\bin\Debug\Dimol.Contabilidad.Mantenedores.dto.pdb
+C:\Users\ext_rjgarrido\Documents\Dimol_Contabilidad\Dimol.Contabilidad.Mantenedores\Dimol.Contabilidad.Mantenedores.dto\obj\Debug\Dimol.Contabilidad.Mantenedores.dto.csprojResolveAssemblyReference.cache
+C:\Users\ext_rjgarrido\Documents\Dimol_Contabilidad\Dimol.Contabilidad.Mantenedores\Dimol.Contabilidad.Mantenedores.dto\obj\Debug\Dimol.Contabilidad.Mantenedores.dto.dll
+C:\Users\ext_rjgarrido\Documents\Dimol_Contabilidad\Dimol.Contabilidad.Mantenedores\Dimol.Contabilidad.Mantenedores.dto\obj\Debug\Dimol.Contabilidad.Mantenedores.dto.pdb
+C:\Users\Rodrigo\Desktop\DIMOL\Dimol_Contabilidad\Dimol.Contabilidad.Mantenedores\Dimol.Contabilidad.Mantenedores.dto\bin\Debug\Dimol.Contabilidad.Mantenedores.dto.dll
+C:\Users\Rodrigo\Desktop\DIMOL\Dimol_Contabilidad\Dimol.Contabilidad.Mantenedores\Dimol.Contabilidad.Mantenedores.dto\bin\Debug\Dimol.Contabilidad.Mantenedores.dto.pdb
+C:\Users\Rodrigo\Desktop\DIMOL\Dimol_Contabilidad\Dimol.Contabilidad.Mantenedores\Dimol.Contabilidad.Mantenedores.dto\obj\Debug\Dimol.Contabilidad.Mantenedores.dto.csprojResolveAssemblyReference.cache
+C:\Users\Rodrigo\Desktop\DIMOL\Dimol_Contabilidad\Dimol.Contabilidad.Mantenedores\Dimol.Contabilidad.Mantenedores.dto\obj\Debug\Dimol.Contabilidad.Mantenedores.dto.dll
+C:\Users\Rodrigo\Desktop\DIMOL\Dimol_Contabilidad\Dimol.Contabilidad.Mantenedores\Dimol.Contabilidad.Mantenedores.dto\obj\Debug\Dimol.Contabilidad.Mantenedores.dto.pdb

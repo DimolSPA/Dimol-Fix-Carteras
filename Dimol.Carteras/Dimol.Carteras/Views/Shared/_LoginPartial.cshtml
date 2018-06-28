@@ -1,0 +1,61 @@
+﻿@if (Session["Usuario"] != null )
+{
+    <text>
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+            <div>
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col">
+                            <img alt="Fotografía" src="@ViewBag.UrlFoto" height="70px" width="70px" style="border-radius:4px;box-shadow: 5px 5px 5px grey;" />
+                        </div>
+                        <div class="col" style="width:150px;text-align:left;vertical-align:middle;padding-left:10px;">
+                            <div style="height:20px;vertical-align:middle">
+                                @ViewBag.UserName
+                            </div>
+                            <div style="height:20px;vertical-align:middle">
+                                @ViewBag.Cargo
+                            </div> 
+                            <div style="height:20px;vertical-align:middle">
+                                Mensajes
+                            </div>                               
+                        </div>
+                        <div class="col">
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        }
+    </text>
+} else
+{
+   @* <div>
+        <div class="tabla">
+            <div class="fila">
+                <div class="col">
+                    <img alt="Fotografía" src="~/Images/blank_avatar.jpg" height="70px" width="70px" style="border-radius: 4px; box-shadow: 5px 5px 5px grey;" />
+                </div>
+                <div class="col" style="width: 150px; text-align: left; vertical-align: middle; padding-left: 10px">
+                    <div style="height: 25px">
+                        Nombre
+                    </div>
+                    <div style="height: 25px">
+                        Cargo
+                    </div>
+                    <div style="height: 20px">
+                        Mensajes
+                    </div>
+                </div>
+                <div class="col">
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>*@
+  
+    <ul>
+        <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+   
+}

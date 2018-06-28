@@ -1,0 +1,233 @@
+﻿@{
+    ViewBag.Title = "TraspasoComercialDocumento";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+}
+<br />
+<h2>TraspasoComercialDocumento</h2>
+<style type="text/css" media="screen">
+    th.ui-th-column div {
+        white-space: normal !important;
+        height: auto !important;
+        padding: 2px;
+    }
+    .rowEnIngreso { background-color: #99ccff; border-color: #00264d; background-image: none; }
+</style>
+@using Mvc.HtmlHelpers
+<script>
+    $(document).ready(function () {
+        
+        $('#MtoAFacturar').val(formatfloat($('#MtoAFacturar').val(), 0));
+        $('#MtoAFacturar').keyup(function (event) {
+
+            // skip for arrow keys
+            if (event.which >= 37 && event.which <= 40) return;
+
+            // format number
+
+            $(this).val(function (index, value) {
+                return value
+                .replace(/^0+/, "")
+                .replace(/\D/g, "")
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                ;
+            });
+        });
+    });
+
+    window.onload = function () {
+        $("#t_gridTraspasoComercialDocumentos").append("<div align='right'><button type='button' onclick='fnTraspasoFinanzas();' title='Enviar a Finanzas'><i class='fa fa-mail-forward' style='font-size:15px;'></i></button></div>");
+
+        $("#gridTraspasoComercialDocumentos").jqGrid("setColProp", "Cliente",
+            {
+                searchoptions: {
+                    sopt: ['cn', 'nc', 'eq', 'ne'],
+                    defaultSearch: 'cn'
+                }
+            });
+
+    }
+</script>
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Documentos</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+
+      
+        <div class="tabla" style="display:none">
+            <div class="fila">
+                <div class="col">
+                   @*<input type="button" value="Enviar a Finanzas" onclick="fnTraspasoFinanzas();" />*@
+                    <button onclick="fnTraspasoFinanzas();" title="Enviar a Finanzas">
+                        <i class="fa fa-mail-forward" style="font-size:20px;"></i>
+                    </button>
+                </div>
+               
+            </div>
+        </div>
+        @(Html.jqGrid("gridTraspasoComercialDocumentos")
+                .addColumn(new Column("NumeroDocumento").setLabel("REC")
+                .setEditable(false).setSearch(false)
+                .setSortable(true)
+                .setWidth(50))
+                .addColumn(new Column("RutCliente").setLabel("Rut Cliente")
+                .setEditable(false).setSearch(false).setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(60))
+
+                .addColumn(new Column("Cliente").setLabel("Cliente")
+                .setSortable(true).setAlign(Align.left).setSearch(true).setEditable(false)
+                .setWidth(100))
+
+                .addColumn(new Column("RutDedor").setLabel("Rut Deudor")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true).setSearch(false)
+                .setWidth(60))
+                .addColumn(new Column("Deudor").setLabel("Deudor")
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(100))
+                .addColumn(new Column("RutAsegurado").setLabel("Rut Asegurado")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(70))
+                .addColumn(new Column("Asegurado").setLabel("Asegurado")
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(100))
+                .addColumn(new Column("FecIngreso").setLabel("Fecha Ingreso")
+                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(60))
+                .addColumn(new Column("Moneda").setLabel("Moneda")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(50))
+                .addColumn(new Column("ValorIngreso").setLabel("Valor").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(90))
+                .addColumn(new Column("MontoIngreso").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(90))
+                .addColumn(new Column("DocumentoId").setLabel(".")
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false).setHidden(true)
+                .setWidth(30))
+                .addColumn(new Column("pclid").setLabel(" ")
+                .setHidden(true)
+                .setEditable(true)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(30))
+                .addColumn(new Column("ctcid").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(30))
+                .addColumn(new Column("sbcid").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(30))
+                .addColumn(new Column("EstatusId").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(30))
+                .addColumn(new Column("CriterioId").setLabel("Criterio")
+                .setCustomFormatter("fnSelectCriterio").setSearch(false).setEditable(false)
+                .setAlign(Align.center)
+                .setWidth(80))
+                .addColumn(new Column("MontoFacturar").setLabel("Monto a Facturar").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false)
+                .setWidth(80))
+                .addColumn(new Column("Observaciones").setLabel("Observaciones")
+                .setEditable(false)
+                .setSortable(true)
+                .setSearch(false).setAlign(Align.center)
+                .setWidth(150))
+                // settings
+                .setCaption("Documentos")//.setWidth(800)
+                .setAutoWidth(true)
+                .setMultiSelect(true)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Caja/ListarCajaTraspasoComercialDocumentosGrilla/")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setRowNum(1000)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("DocumentoId")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerTraspasoDocumento")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .setAutoWidth(true)
+                .setShrinkToFit(false)
+                .setScroll(true)
+                .setHeight(400)
+                .onLoadComplete("fnOnLoadCompleteDocsComercial(this, xhr)").setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+                .Render()
+
+
+        )
+
+    </div>
+</div>
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAddMontoObservaciones" }).Draggable(true)
+        .AutoOpen(false)
+        .Modal(true)
+        .Title("Editar Criterio")
+        .CloseOnEscape(true)
+        .Width(350)
+        .Height(150)
+        ))
+{
+
+    <div class="tabla">
+        @Html.Hidden("DocumentoIdHidden")
+        @Html.Hidden("CriterioIdHidden")
+        <div class="fila" id="MontoEditable">
+            <div class="col" style="width:100px;">@Html.Label("Monto a Facturar")</div>
+            <div class="col">@Html.TextBox("MtoAFacturar", null, new { @class = "textboxClass", @style = "width: 80px" })</div>
+        </div>
+        <div class="fila" id="ObservacionesEditable">
+            <div class="col" style="width:100px;">@Html.Label("Observaciones")</div>
+            <div class="col">
+                <div id="reports">
+                    <label>
+                        <input type="radio" name="observacion" value="1" checked="checked"> Ya se encuentra Facturado
+                    </label>
+                    <label>
+                        <input type="radio" name="observacion" value="2"> No Corresponde Facturar
+                    </label>
+                   
+                </div>
+            </div>
+
+        </div>
+        <div class="fila">
+            <div class=" col" style="float:right"><input type="button" value="Aceptar" onclick="fnGuardarCriterioAlert();" /></div>
+        </div>
+    </div>
+}
+

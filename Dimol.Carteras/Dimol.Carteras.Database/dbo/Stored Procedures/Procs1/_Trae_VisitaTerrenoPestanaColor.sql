@@ -1,0 +1,49 @@
+﻿CREATE PROCEDURE [dbo].[_Trae_VisitaTerrenoPestanaColor](@ctcid int) 
+AS 
+BEGIN
+	SELECT VISITAS.COLOR , (select count(id_visita_detalle) 
+							from visita_terreno_detalle 
+							where ctcid = visitas.ctcid) CANT
+	FROM   (SELECT  top 1 'VERDE' COLOR, vt.ID_VISITA, vt.CTCID
+			FROM (SELECT TOP 1 WITH TIES 
+						SOLICITUD_ID, CTCID, FEC_CREACION, ID_ESTATUS
+					FROM 
+						VISITA_TERRENO_SOLICITUD 
+					WHERE ID_ESTATUS = 5 AND CTCID = @ctcid
+					ORDER BY
+						ROW_NUMBER() OVER(PARTITION BY CTCID ORDER BY FEC_CREACION DESC)) vts
+			JOIN VISITA_TERRENO vt
+			ON vts.SOLICITUD_ID = vt.SOLICITUD_ID
+			JOIN (select top 1 ID_VISITA_DETALLE, ID_VISITA, CTCID, VISITA 
+					from VISITA_TERRENO_DETALLE 
+					where  CTCID = @ctcid 
+					order by ID_VISITA_DETALLE desc) vtd
+			ON vt.ID_VISITA = vtd.ID_VISITA
+			AND vt.CTCID = vtd.CTCID
+			WHERE vtd.VISITA = 'P'
+			UNION
+			SELECT top 1 (CASE
+							WHEN vtgps.ID_VISITA IS NULL THEN 'ROJO'
+							ELSE 'NARANJA'
+							END) COLOR, vt.ID_VISITA, vt.CTCID
+			FROM (SELECT TOP 1 WITH TIES 
+						SOLICITUD_ID, CTCID, FEC_CREACION, ID_ESTATUS
+					FROM 
+						VISITA_TERRENO_SOLICITUD 
+					WHERE ID_ESTATUS = 5 AND CTCID = @ctcid
+					ORDER BY
+						ROW_NUMBER() OVER(PARTITION BY CTCID ORDER BY FEC_CREACION DESC)) vts
+			JOIN VISITA_TERRENO vt
+			ON vts.SOLICITUD_ID = vt.SOLICITUD_ID
+			JOIN (select top 1 ID_VISITA_DETALLE, ID_VISITA, CTCID, VISITA 
+					from VISITA_TERRENO_DETALLE 
+					where  CTCID = @ctcid 
+					order by ID_VISITA_DETALLE desc) vtd
+			ON vt.ID_VISITA = vtd.ID_VISITA
+			AND vt.CTCID = vtd.CTCID
+			LEFT JOIN VISITA_TERRENO_DETALLE_GPS vtgps
+			ON vtd.ID_VISITA_DETALLE = vtgps.ID_VISITA_DETALLE
+			AND vtd.ID_VISITA = vtgps.ID_VISITA
+			WHERE vtd.VISITA = 'N') VISITAS
+	
+END

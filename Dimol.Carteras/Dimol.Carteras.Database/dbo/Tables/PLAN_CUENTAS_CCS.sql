@@ -1,0 +1,19 @@
+﻿CREATE TABLE [dbo].[PLAN_CUENTAS_CCS] (
+    [PCC_CODEMP]     INT            NOT NULL,
+    [PCC_PCTID]      INT            NOT NULL,
+    [PCC_CCSID]      INT            NOT NULL,
+    [PCC_PORCENTAJE] DECIMAL (5, 2) NOT NULL,
+    CONSTRAINT [PK_PLAN_CUENTA_CC] PRIMARY KEY NONCLUSTERED ([PCC_CODEMP] ASC, [PCC_PCTID] ASC, [PCC_CCSID] ASC),
+    CONSTRAINT [FK_PLAN_CUE_CCS_PLACT_CENTRO_C] FOREIGN KEY ([PCC_CODEMP], [PCC_CCSID]) REFERENCES [dbo].[CENTRO_COSTOS] ([CCS_CODEMP], [CCS_CCSID]),
+    CONSTRAINT [FK_PLAN_CUE_PLACTAS_C_PLAN_CUE] FOREIGN KEY ([PCC_CODEMP], [PCC_PCTID]) REFERENCES [dbo].[PLAN_CUENTAS] ([PCT_CODEMP], [PCT_PCTID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[PLAN_CUENTAS_CCS]([PCC_CODEMP] ASC, [PCC_PCTID] ASC, [PCC_CCSID] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena las distintas cuentas, para los diferentes centros de costo', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'PLAN_CUENTAS_CCS';
+

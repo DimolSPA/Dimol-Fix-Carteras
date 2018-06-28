@@ -1,0 +1,86 @@
+﻿@using jqGrid.Sample.Models
+@model List<AccountDetail>
+@{
+    Layout = null;  
+}
+@foreach (AccountDetail detail in Model)
+{
+    <tr class="subGridRow">
+        <td>
+        </td>
+        <td colspan="7">
+            <a href="#" style="color: #0000FF">@detail.CLIENT_NAME</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        </td>
+        <td colspan="7">
+            <input type="checkbox" />
+             <b>Portfolio: @detail.PORTFOLIO_NAME</b>
+        </td>
+    </tr>
+    foreach (PortfolioDetail pd in detail.PortfolioDetails)
+    {
+        <tr>
+            <td>
+            </td>
+            <td colspan="3">
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <input type="checkbox" />
+                        </td>
+                        <td style="vertical-align: top; white-space: nowrap;">@pd.ACCOUNT_NAME</td>
+                        <td style="vertical-align: top; width: 50">@pd.ACCOUNT_TYPE
+                        </td>
+                        <td style="vertical-align: top; width: 50">@pd.PROGRAM
+                        </td>
+                        <td>
+                            <div style="white-space: nowrap; text-overflow: ellipsis; width: 15em; overflow: hidden;">@pd.INVESTMENT</div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td valign="top" align="right">
+                <a href="#" style="vertical-align: bottom; padding-right: 7px">@pd.TOTAL_ASSETS.ToString("c0")</a>
+            </td>
+            <td valign="top" align="right">
+                <a href="#" style="vertical-align: bottom; padding-right: 7px">@pd.CASH.ToString("c0")</a>
+            </td>
+            <td valign="top" align="right">
+                <a href="#" style="vertical-align: bottom; padding-right: 7px">@pd.MSG_FEES.ToString("c0")</a>
+            </td>
+            <td valign="top" align="right">
+                <a href="#" style="vertical-align: bottom; padding-right: 7px">@string.Format("{0:0.00%}", @pd.MSG_FEE_PCT / 100)</a>
+            </td>
+        </tr>
+    }
+    <tr class="subGridRow@(ViewData["RowId"])">
+        <td>
+        </td>
+        <td colspan="7">
+            <div style="padding-left: 32px">
+                <div style="float: left; padding-bottom: 3px; padding-top: 3px">@Html.DropDownList("ddlListItems", new SelectList(new[] { new AccountDetail() { CLIENT_NAME = "Test" } }))</div>
+                <div style="float:left">
+                    <span class="btnStyleLeft"></span>
+                    <div class="btnStyleCenter">
+                        <div style="margin-top: 5px! important">
+                            GO
+                        </div>
+                    </div>
+                    <span class="btnStyleRight"></span>
+                </div>
+            </div>
+        </td>
+    </tr>    
+}
+<tr class="subGridRow@(ViewData["RowId"])">
+    <td>
+    </td>
+    <td colspan="7">
+        <img width="12" height="12" src="@(Url.Content("~/Images/yield.png"))" /> Ineligible
+        security purchase
+    </td>
+</tr>
+

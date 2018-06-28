@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Criterios De Facturacion";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<br />
+<h2></h2>
+@using Mvc.HtmlHelpers
+<script type="text/javascript">
+
+    window.onload = function () {
+        $("#t_gridCriterioFacturacion").append("<div align='right'><button title='Ingresar Criterio' onclick='fnAgregarCriterioFacturacion();'> <i class='fa fa-plus-square' style='font-size:15px;'></i> </button></div>");
+
+
+    }
+</script>
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">@ViewBag.Title</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+
+
+        <br />
+
+        @(Html.jqGrid("gridCriterioFacturacion")
+
+        .addColumn(new Column("Pclid").setLabel("Pclid")
+        .setSortable(true).setHidden(true)
+        .setWidth(60))
+        .addColumn(new Column("CondicionId").setLabel("CondicionId")
+        .setSortable(true).setHidden(true)
+        .setWidth(60))
+
+        .addColumn(new Column("Cliente").setLabel("Cliente")
+        .setSortable(true)
+        .setWidth(200))
+
+        .addColumn(new Column("TipoFacturacion").setLabel("Tipo Facturacion").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(80))
+        .addColumn(new Column("NoAplicaFactura").setLabel("No Aplica Facturacion").setAlign(Align.center)
+        .setSortable(true).setFormatter(Formatters.checkbox)
+        .setWidth(80))
+        .addColumn(new Column("Imputable").setLabel("Imputable?").setAlign(Align.center)
+        .setSortable(true).setFormatter(Formatters.checkbox)
+        .setWidth(80))
+        .addColumn(new Column("Condicion").setLabel("Condicion").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(80))
+        .addColumn(new Column("AplicaRemesa").setLabel("Aplica Remesa?").setAlign(Align.center)
+        .setSortable(true).setFormatter(Formatters.checkbox)
+        .setWidth(80))
+      
+
+    // settings
+    .setCaption("Criterios")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Mantenedores/ListarCriteriosFacturacion")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 50, 100 })
+    .setViewRecords(true)
+    .setSortName("PCLID")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerCriterioImputacion")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+    .Render()
+
+        )
+    </div>
+</div>
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAddCriterioFacturacion" }).Draggable(true)
+            .AutoOpen(false)
+            .Modal(true)
+            .Title("Criterio Facturacion")
+            .CloseOnEscape(true)
+            .Width(600)
+            .Height(350)
+            ))
+{
+    @Html.Partial("_CriteriosFacturacionEdit")
+}

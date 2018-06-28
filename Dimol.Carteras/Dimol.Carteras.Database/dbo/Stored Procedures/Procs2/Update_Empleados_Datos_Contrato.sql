@@ -1,0 +1,40 @@
+﻿
+
+Create Procedure Update_Empleados_Datos_Contrato(@edc_codemp integer, @edc_emplid integer, @edc_carid integer, @edc_ticid integer,
+                                                                                         @edc_afpid integer, @edc_afp decimal (6,2), @edc_afc decimal (6,2), @edc_ispid integer,
+                                                                                         @edc_isapre decimal (6,2), @edc_ispmon char (1), @edc_codmon integer, @edc_valmon decimal (12,2),
+                                                                                         @edc_cjcid integer, @edc_caja decimal (6,2), @edc_fecing datetime, @edc_fecfin datetime,
+                                                                                         @edc_sueldobase decimal (12,1), @edc_horassemana decimal (10,2), @edc_horasdiarias decimal (10,2),
+                                                                                         @edc_horaent varchar (8), @edc_horasal varchar (8), @edc_diatra1 smallint, @edc_diatra2 smallint,
+                                                                                         @edc_diatra3 smallint, @edc_diatra4 smallint, @edc_diatra5 smallint, @edc_diatra6 smallint,
+                                                                                         @edc_diatra7 smallint, @edc_colacion decimal) as
+  UPDATE empleados_datos_contrato  
+     SET edc_carid = @edc_carid,   
+         edc_ticid = @edc_ticid,   
+         edc_afpid = @edc_afpid,   
+         edc_afp = @edc_afp,   
+         edc_afc = @edc_afc,   
+         edc_ispid = @edc_ispid,   
+         edc_isapre = @edc_isapre,   
+         edc_ispmon = @edc_ispmon,   
+         edc_codmon = @edc_codmon,   
+         edc_valmon = @edc_valmon,   
+         edc_cjcid = @edc_cjcid,   
+         edc_caja = @edc_caja,   
+         edc_fecing = @edc_fecing,   
+         edc_fecfin = @edc_fecfin,   
+         edc_sueldobase = @edc_sueldobase,   
+         edc_horassemana = @edc_horassemana,   
+         edc_horasdiarias = @edc_horasdiarias,   
+         edc_horaent = @edc_horaent,   
+         edc_horasal = @edc_horasal,   
+         edc_diatra1 = @edc_diatra1,   
+         edc_diatra2 = @edc_diatra2,   
+         edc_diatra3 = @edc_diatra3,   
+         edc_diatra4 = @edc_diatra4,   
+         edc_diatra5 = @edc_diatra5,   
+         edc_diatra6 = @edc_diatra6,   
+         edc_diatra7 = @edc_diatra7,   
+         edc_colacion = @edc_colacion  
+   WHERE ( empleados_datos_contrato.edc_codemp = @edc_codemp ) AND  
+         ( empleados_datos_contrato.edc_emplid = @edc_emplid )

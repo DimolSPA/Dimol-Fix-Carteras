@@ -1,0 +1,11 @@
+﻿CREATE PROCEDURE [dbo].[_Job_Marcar_Deudores] AS
+
+UPDATE [dbo].[DEUDORES] 
+SET [dbo].[DEUDORES].[CTC_QUIEBRA] = 'S'
+	FROM [dbo].[DEUDOR_QUIEBRA]
+		RIGHT JOIN [dbo].[DEUDORES]
+		ON [dbo].[DEUDOR_QUIEBRA].[RUT] = [dbo].[DEUDORES].[CTC_RUT]
+	WHERE [dbo].[DEUDORES].[CTC_QUIEBRA] = 'N'
+		AND [dbo].[DEUDOR_QUIEBRA].[CODEMP] = 1
+
+RETURN 0

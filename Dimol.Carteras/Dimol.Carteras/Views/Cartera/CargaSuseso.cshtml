@@ -1,0 +1,351 @@
+﻿@model Dimol.Carteras.Models.CargaSusesoModel
+
+@{
+    ViewBag.Title = "Carga de Suseso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>@ViewBag.Title</h2>
+
+@using Mvc.HtmlHelpers
+@using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabDocumento" })))
+{
+    t.Tab("Carga", "tab1");
+
+    using (t.BeginPanel())
+    {
+        using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCargaMasivaSuseso" }))
+        {
+            @Html.ValidationSummary(true)
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoT1)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoT1" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoT1)</div>
+                    <div class="col"><img id="imgSubirArchivoT1" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoT2)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoT2" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoT2)</div>
+                    <div class="col"><img id="imgSubirArchivoT2" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoT3)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoT3" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoT3)</div>
+                    <div class="col"><img id="imgSubirArchivoT3" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoT4)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoT4" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoT4)</div>
+                    <div class="col"><img id="imgSubirArchivoT4" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoT5)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoT5" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoT5)</div>
+                    <div class="col"><img id="imgSubirArchivoT5" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoT6)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoT6" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoT6)</div>
+                    <div class="col"><img id="imgSubirArchivoT6" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoT7)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoT7" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoT7)</div>
+                    <div class="col"><img id="imgSubirArchivoT7" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:183px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.ArchivoT8)</div>
+                    <div class="col" style="width:300px"><input id="subirArchivoT8" type="file" style="width:300px">@Html.HiddenFor(model => model.ArchivoT8)</div>
+                    <div class="col"><img id="imgSubirArchivoT8" src="~/Images/blank.png" class="" style="float:left" /></div>
+                </div>
+                
+                <div class="fila">
+                    <div class="col" style="width:183px"></div>
+                    <div class="col" style="width:300px"></div>
+                    <div class="col" style="float:right">
+                        @*<input type="button" value="Nuevo" onclick="fnLimpiarCargaSuseso()" />*@
+                        @*<input type="button" value="Procesar" onclick="fnProcesarCargaSuseso()" disabled="disabled" id="btnProcesar" />*@
+                        <input type="button" value="Cargar" onclick="fnCargarArchivosSuseso();" disabled="disabled" id="btnCargar" />
+                        <input type="submit" id="btnSubmit" value="Subir Archivos" />
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width: 950px; flex-align: center;">
+                        @(Html.jqGrid("grdCargaMasivaSusesoIntereses")
+                            .addColumn(new Column("FechaDocumento").setLabel("Fecha del Documento")
+                                //.setSortable(true).setAlign(Align.right)
+                                .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y").setAlign(Align.center)
+                                .setWidth(45))
+                            .addColumn(new Column("FechaPago").setLabel("Fecha de Pago")
+                                //.setSortable(true).setAlign(Align.right)
+                                .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y").setAlign(Align.center)
+                                .setWidth(45))
+                            .addColumn(new Column("TasaInteres").setLabel("Tasa de Interes")
+                                .setSortable(true).setAlign(Align.right)
+                                .setWidth(100))
+                            .addColumn(new Column("Error").setLabel("Error")
+                                .setSortable(true)
+                                .setWidth(155))
+
+                            // settings
+                            .setCaption("Resultado de Carga Archivo Intereses").setDataType(DataType.local).setData("")
+                            .setAltRows(true)
+                            .setAltClass("altGridRows")
+                            .setAutoWidth(true)
+                            .setRowNum(50)
+                            .setRowList(new int[] { 10, 30, 50 })
+                            .setViewRecords(true)
+                            //.setSortName("FechaDocumento")
+                            //.setSortOrder(SortOrder.desc)
+                            .setPager("pagerCargaMasivaIntereses")
+                            .setPagerPos(PagerPos.center)
+                            .setPgButtons(true)
+                            .setCellEdit(false)
+                            .setCellSubmit(CellSubmit.clientArray)
+                            .Render()
+                        )
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width: 950px; flex-align: center;">
+                        @(Html.jqGrid("grdCargaMasivaSusesoReajuste")
+                            .addColumn(new Column("FechaPago").setLabel("Fecha de Pago")
+                                .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y").setAlign(Align.center)
+                                .setWidth(45))
+                            .addColumn(new Column("Periodo").setLabel("Periodo")
+                                .setWidth(45))
+                            .addColumn(new Column("FechaInicial").setLabel("Fecha Inicial")
+                                .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y").setAlign(Align.center)
+                                .setWidth(45))
+                            .addColumn(new Column("FechaFinal").setLabel("Fecha Final")
+                                .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y").setAlign(Align.center)
+                                .setWidth(45))
+                            .addColumn(new Column("Reajuste").setLabel("Reajuste")
+                                .setSortable(true)
+                                .setWidth(155))
+                            .addColumn(new Column("Error").setLabel("Error")
+                                .setSortable(true)
+                                .setWidth(155))
+
+                            // settings
+                            .setCaption("Resultado de Carga Archivo Reajuste").setDataType(DataType.local).setData("")
+                            .setAltRows(true)
+                            .setAltClass("altGridRows")
+                            .setAutoWidth(true)
+                            .setRowNum(50)
+                            .setRowList(new int[] { 10, 30, 50 })
+                            .setViewRecords(true)
+                            .setPager("pagerCargaMasivaReajuste")
+                            .setPagerPos(PagerPos.center)
+                            .setPgButtons(true)
+                            .setCellEdit(false)
+                            .setCellSubmit(CellSubmit.clientArray)
+                            .Render()
+                        )
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        window.onload = function () {
+            document.getElementById('frmCargaMasivaSuseso').onsubmit = function () {
+                var formdata = new FormData(); //FormData object
+                
+                var fileInput1 = document.getElementById('subirArchivoT1');
+                var tieneArchivo1 = false;
+                for (i = 0; i < fileInput1.files.length; i++) {
+                    //if (fileInput1.files[i].name.contains("T1")) {
+                    //if (fileInput1.files[i].name.includes("T1")) {
+                    if (fileInput1.files[i].name.indexOf("T1") !== -1) {
+                        formdata.append(fileInput1.files[i].name, fileInput1.files[i]);
+                        tieneArchivo1 = true;
+                    } else {
+                        alert("Error al subir archivo T1");
+                        $("#imgSubirArchivoT1").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+
+                        return false;
+                    }
+                }
+
+                var fileInput2 = document.getElementById('subirArchivoT2');
+                var tieneArchivo2 = false;
+                for (i = 0; i < fileInput2.files.length; i++) {
+                    //if (fileInput2.files[i].name.contains("T2")) {
+                    //if (fileInput2.files[i].name.includes("T2")) {
+                    if (fileInput2.files[i].name.indexOf("T2") !== -1) {
+                        formdata.append(fileInput2.files[i].name, fileInput2.files[i]);
+                        tieneArchivo2 = true;
+                    } else {
+                        alert("Error al subir archivo T2");
+                        $("#imgsubirArchivoT2").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+
+                        return false;
+                    }
+                }
+
+                var fileInput3 = document.getElementById('subirArchivoT3');
+                var tieneArchivo3 = false;
+                for (i = 0; i < fileInput3.files.length; i++) {
+                    //if (fileInput3.files[i].name.contains("T3")) {
+                    //if (fileInput3.files[i].name.includes("T3")) {
+                    if (fileInput3.files[i].name.indexOf("T3") !== -1) {
+                        formdata.append(fileInput3.files[i].name, fileInput3.files[i]);
+                        tieneArchivo3 = true;
+                    } else {
+                        alert("Error al subir archivo T3");
+                        $("#imgsubirArchivoT3").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+
+                        return false;
+                    }
+                }
+
+                var fileInput4 = document.getElementById('subirArchivoT4');
+                var tieneArchivo4 = false;
+                for (i = 0; i < fileInput4.files.length; i++) {
+                    //if (fileInput4.files[i].name.contains("T4")) {
+                    //if (fileInput4.files[i].name.includes("T4")) {
+                    if (fileInput4.files[i].name.indexOf("T4") !== -1) {
+                        formdata.append(fileInput4.files[i].name, fileInput4.files[i]);
+                        tieneArchivo4 = true;
+                    } else {
+                        alert("Error al subir archivo T4");
+                        $("#imgsubirArchivoT4").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+
+                        return false;
+                    }
+                }
+
+                var fileInput5 = document.getElementById('subirArchivoT5');
+                var tieneArchivo5 = false;
+                for (i = 0; i < fileInput5.files.length; i++) {
+                    //if (fileInput5.files[i].name.contains("T5")) {
+                    //if (fileInput5.files[i].name.includes("T5")) {
+                    if (fileInput5.files[i].name.indexOf("T5") !== -1) {
+                        formdata.append(fileInput5.files[i].name, fileInput5.files[i]);
+                        tieneArchivo5 = true;
+                    } else {
+                        alert("Error al subir archivo T5");
+                        $("#imgsubirArchivoT5").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+
+                        return false;
+                    }
+                }
+
+                var fileInput6 = document.getElementById('subirArchivoT6');
+                var tieneArchivo6 = false;
+                for (i = 0; i < fileInput6.files.length; i++) {
+                    //if (fileInput6.files[i].name.contains("T6")) {
+                    //if (fileInput6.files[i].name.includes("T6")) {
+                    if (fileInput6.files[i].name.indexOf("T6") !== -1) {
+                        formdata.append(fileInput6.files[i].name, fileInput6.files[i]);
+                        tieneArchivo6 = true;
+                    } else {
+                        alert("Error al subir archivo T6");
+                        $("#imgsubirArchivoT6").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+
+                        return false;
+                    }
+                }
+
+                var fileInput7 = document.getElementById('subirArchivoT7');
+                var tieneArchivo7 = false;
+                for (i = 0; i < fileInput7.files.length; i++) {
+                    //if (fileInput7.files[i].name.contains("T7")) {
+                    //if (fileInput7.files[i].name.includes("T7")) {
+                    if (fileInput7.files[i].name.indexOf("T7") !== -1) {
+                        formdata.append(fileInput7.files[i].name, fileInput7.files[i]);
+                        tieneArchivo7 = true;
+                    } else {
+                        alert("Error al subir archivo T7");
+                        $("#imgsubirArchivoT7").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+
+                        return false;
+                    }
+                }
+
+                var fileInput8 = document.getElementById('subirArchivoT8');
+                var tieneArchivo8 = false;
+                for (i = 0; i < fileInput8.files.length; i++) {
+                    //if (fileInput8.files[i].name.contains("T8")) {
+                    //if (fileInput8.files[i].name.includes("T8")) {
+                    if (fileInput8.files[i].name.indexOf("T8") !== -1) {
+                        formdata.append(fileInput8.files[i].name, fileInput8.files[i]);
+                        tieneArchivo8 = true;
+                    } else {
+                        alert("Error al subir archivo T8");
+                        $("#imgsubirArchivoT8").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+
+                        return false;
+                    }
+                }
+
+                //Creating an XMLHttpRequest and sending
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/Cartera/Upload/?tipo=CargaSuseso');
+                xhr.send(formdata);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        //$('#Archivo').val(xhr.responseText.replace(/\"/g, ''));
+
+                        if (xhr.responseText == '""') {
+                            alert("Error al subir archivos al servidor");
+                            $("#imgSubirArchivoT1").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoT2").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoT3").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoT4").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoT5").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoT6").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoT7").removeClass("ok").addClass("error");
+                            $("#imgSubirArchivoT8").removeClass("ok").addClass("error");
+                            
+                            $("#btnCargar").attr("disabled", "disabled");
+                            $("#btnSubmit").removeAttr("disabled");
+                        } else {
+                            var archivos = xhr.responseText.split(';');
+                            var cantArchivos = archivos.length - 1;
+
+                            var i = 0;
+                            if (tieneArchivo1) { $('#ArchivoT1').val(archivos[i].replace(/\"/g, '')); i++; $("#imgSubirArchivoT1").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoT1").removeClass("ok").addClass("error"); }
+                            if (tieneArchivo2) { $('#ArchivoT2').val(archivos[i].replace(/\"/g, '')); i++; $("#imgSubirArchivoT2").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoT2").removeClass("ok").addClass("error"); }
+                            if (tieneArchivo3) { $('#ArchivoT3').val(archivos[i].replace(/\"/g, '')); i++; $("#imgSubirArchivoT3").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoT3").removeClass("ok").addClass("error"); }
+                            if (tieneArchivo4) { $('#ArchivoT4').val(archivos[i].replace(/\"/g, '')); i++; $("#imgSubirArchivoT4").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoT4").removeClass("ok").addClass("error"); }
+                            if (tieneArchivo5) { $('#ArchivoT5').val(archivos[i].replace(/\"/g, '')); i++; $("#imgSubirArchivoT5").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoT5").removeClass("ok").addClass("error"); }
+                            if (tieneArchivo6) { $('#ArchivoT6').val(archivos[i].replace(/\"/g, '')); i++; $("#imgSubirArchivoT6").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoT6").removeClass("ok").addClass("error"); }
+                            if (tieneArchivo7) { $('#ArchivoT7').val(archivos[i].replace(/\"/g, '')); i++; $("#imgSubirArchivoT7").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoT7").removeClass("ok").addClass("error"); }
+                            if (tieneArchivo8) { $('#ArchivoT8').val(archivos[i].replace(/\"/g, '')); i++; $("#imgSubirArchivoT8").removeClass("error").addClass("ok"); } else { $("#imgSubirArchivoT8").removeClass("ok").addClass("error"); }
+
+                            $("#btnCargar").removeAttr("disabled");
+                            //$("#btnSubmit").attr("disabled", "disabled");
+                        }
+                    }
+                }
+
+                return false;
+            }
+        }
+    </script>
+}

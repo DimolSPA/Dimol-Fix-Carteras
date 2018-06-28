@@ -1,0 +1,101 @@
+﻿@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+<script>
+    $(document).ready(function () {
+        function formatfloat(n, dp) {
+            var s = '' + (Math.floor(n)), d = n % 1, i = s.length, r = '';
+            while ((i -= 3) > 0) { r = '.' + s.substr(i, 3) + r; }
+            return s.substr(0, i + 3) + r +
+              (d ? ',' + Math.round(d * Math.pow(10, dp || 2)) : '');
+        };
+
+        $("#ppAddReparto").dialog({
+            autoOpen: false, modal: true, title: "Reparto"
+        });
+        $("#fecReparto").datepicker({ showButtonPanel: true, maxDate: 0 });
+        $('#MtoReparto').val(formatfloat($('#MtoReparto').val(), 0));
+        $('#MtoReparto').keyup(function (event) {
+
+            // skip for arrow keys
+            if (event.which >= 37 && event.which <= 40) return;
+
+            // format number
+
+            $(this).val(function (index, value) {
+                return value
+                .replace(/^0+/, "")
+                .replace(/\D/g, "")
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                ;
+            });
+        });
+    });
+</script>
+        <div class="tabla">
+            <div class="fila">
+               <div class="col" style="float: right">
+                    <input type="button" value="Agregar Reparto" onclick="fnMostrarIngresoReparto();" />
+                </div>
+            </div>
+           
+        </div>
+        @Html.Hidden("QuiebraIdHidden")
+        <br />
+        @(Html.jqGrid("gridRepartosPanelQuiebra")
+                    .addColumn(new Column("RepartoId").setLabel("RepartoId")
+                    .setSortable(true).setHidden(true)
+                    .setWidth(70))
+                    .addColumn(new Column("FecReparto").setLabel("Fecha").setAlign(Align.center)
+                    .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                    .setWidth(100))
+                    .addColumn(new Column("MtoReparto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+                    .setSortable(true)
+                    .setWidth(120))
+
+
+
+                    // settings
+                    .setCaption("Datos")
+                    .setRequestType(RequestType.get)
+                        .setUrl("~/Judicial/GetDummy")
+                    .setAltRows(true)
+                    .setAltClass("altGridRows")
+                    .setAutoWidth(false).setWidth(220)
+                    .setRowNum(500)
+                    .setRowList(new int[] { 500, 50, 100, 1000 })
+                    .setViewRecords(true)
+                    .setSortName("RepartoId")
+                    .setSortOrder(SortOrder.asc)
+                    .setPager("pagerRepartosPanelQuiebra")
+                    .setPagerPos(PagerPos.center)
+                    .setPgButtons(true)
+
+                    .Render()
+
+        )
+
+        @using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAddReparto" }).Draggable(true)
+        .AutoOpen(false)
+        .Modal(true)
+        .Title("Reparto")
+        .CloseOnEscape(true)
+        .Width(350)
+        .Height(150)
+        ))
+        {
+
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:100px;">@Html.Label("Fecha")</div>
+                    <div class="col">@Html.JQueryUI().Datepicker("fecReparto").ShowButtonPanel(true).ShowWeek(false)</div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:100px;">@Html.Label("Monto")</div>
+                    <div class="col">@Html.TextBox("MtoReparto", null, new { @class = "textboxClass", @style = "width: 80px" })</div>
+
+                </div>
+                <div class="fila">
+                    <div class=" col" style="float:right"><input type="button" value="Aceptar" onclick="fnGrabarPanelQuiebraReparto();" /></div>
+                </div>
+            </div>
+        }

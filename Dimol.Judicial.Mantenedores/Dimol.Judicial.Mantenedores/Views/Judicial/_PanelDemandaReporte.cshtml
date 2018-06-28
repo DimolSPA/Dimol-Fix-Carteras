@@ -1,0 +1,94 @@
+﻿@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+<style type="text/css">
+    span.cellWithoutBackground {
+        display: block;
+        background-image: none;
+        margin-right: -2px;
+        margin-left: -2px;
+        height: 14px;
+        padding: 4px;
+    }
+</style>
+
+
+<input type="hidden" id="TipoReportePanelDemanda"/>
+<button id="btnExport" style="display:none" onclick="fnExcelReport();"> Exportar a Excel </button>
+<a href="#" id="linkExport" class="buttonLink" onclick="javascript: fnExcelReport();">Exportar a Excel</a>
+<br />
+<br />
+@(Html.jqGrid("gridPanelDemandaReporte")
+.addColumn(new Column("PanelId").setLabel("PanelId")
+        .setHidden(true).setSortable(true)
+        .setWidth(50))
+.addColumn(new Column("Encargado").setLabel("Encargado")
+.setSortable(true).setAlign(Align.left)
+.setWidth(80))
+.addColumn(new Column("Cliente").setLabel("Cliente")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(250))
+.addColumn(new Column("RutDeudor").setLabel("Rut")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(70))        
+.addColumn(new Column("Deudor").setLabel("Deudor")
+        .setSortable(true).setAlign(Align.left)
+        .setWidth(250))
+.addColumn(new Column("Asegurado").setLabel("Asegurado")
+.setSortable(true).setAlign(Align.left)
+        .setWidth(200))
+.addColumn(new Column("FechaAsignacion").setLabel("Ingreso").setAlign(Align.center)
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(100))
+.addColumn(new Column("FechaAprobacionTraspaso").setLabel("Traspaso").setAlign(Align.center)
+.setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+.setWidth(100))
+.addColumn(new Column("IngresoJudicial").setLabel("Ingreso Judicial").setAlign(Align.center)
+.setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+.setWidth(100))
+.addColumn(new Column("FechaEnvio").setLabel("Fecha de Envío Confección").setAlign(Align.center)
+.setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+.setWidth(160))
+.addColumn(new Column("FechaEntrega").setLabel("Fecha de Entrega").setAlign(Align.center)
+.setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+.setWidth(130))
+.addColumn(new Column("FechaIngresoTribunal").setLabel("Fecha de Ingreso Tribunal").setAlign(Align.center)
+.setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+.setWidth(160))
+.addColumn(new Column("Correcciones").setLabel("Correcciones")
+.setSortable(true).setAlign(Align.left)
+.setWidth(80))
+.addColumn(new Column("CountCorrecciones").setLabel("Cant. Correcciones")
+.setSortable(true).setAlign(Align.left)
+.setWidth(110))
+.addColumn(new Column("DiasTranscurso").setLabel("Alerta")
+    .setSortable(true).setAlign(Align.left).setCustomFormatter("formatAlerta")
+.setWidth(50))
+.addColumn(new Column("DiasTranscurso2").setLabel("Alerta Tribunal")
+.setSortable(true).setAlign(Align.left)
+.setWidth(100))
+.addColumn(new Column("TrackingDemanda").setLabel("Tracking Demanda")
+.setSortable(true).setAlign(Align.left).setCustomFormatter("formatTrackingDemanda")
+.setWidth(110))
+.addColumn(new Column("Comentarios").setLabel("Comentarios")
+.setSortable(true).setAlign(Align.left)
+            .setWidth(110))   
+    // settings
+.setCaption("Demandas").setDataType(DataType.local).setData("")
+.setAltRows(true)
+.setAltClass("altGridRows")
+//.setAutoWidth(true)
+.setRowNum(10)
+.setRowList(new int[] { 10, 30, 50 })
+.setViewRecords(true)
+.setSortName("IngresoJudicial")
+.setSortOrder(SortOrder.asc)
+.setPager("pagerPanelDemandaReporte")
+.setPagerPos(PagerPos.center)
+.setPgButtons(true)
+    .setCellEdit(false)//.onAfterInsertRow("rowColor(this)")
+.setWidth(900).setShrinkToFit(false)
+.setCellSubmit(CellSubmit.clientArray)
+//.onLoadComplete("rowColor(this)")
+    .Render()
+
+)

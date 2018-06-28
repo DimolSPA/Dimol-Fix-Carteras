@@ -1,0 +1,47 @@
+﻿@model Dimol.ProveedorCliente.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "Giros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Giros</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("Giros")
+    .addColumn(new Column("Codemp").setLabel("codemp")
+        .setHidden(true)
+        .setWidth(50))
+     .addColumn(new Column("Id").setLabel("ID")
+        .setWidth(20))
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setEditable(true)
+        .setWidth(50))
+        
+    // settings
+    .setCaption("Giros")
+    .setRequestType(RequestType.get)
+    .setUrl("~/ProvCli/GetGiros/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerGiros")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/ProvCli/OperGiros")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/ProvCli/OperGiros")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/ProvCli/OperGiros")
+    .setExcelExport("/ProvCli/ExportToExcel")
+    .Render()
+
+)

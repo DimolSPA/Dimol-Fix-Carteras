@@ -1,0 +1,1048 @@
+﻿@model Dimol.Judicial.Mantenedores.Models.RolModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>@ViewBag.Title</h2>
+<br />
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["orgchart"] });
+</script>
+
+<input type="hidden" id="Prf" name="Prf" value="@ViewBag.Prf" />
+
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+<style>
+    .list-group{padding-left:0;margin-bottom:0px}
+    .list-group-item{position:relative;display:block;padding:5px 10px; margin-bottom:-1px;background-color:#fff;border:1px solid #ddd;font-size: 1.275em; height:26px}
+    .list-group-item:first-child{border-top-left-radius:4px;border-top-right-radius:4px}
+    .list-group-item:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}
+    .progressLoading {
+        position: absolute;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 9999999;
+        background-color: #000000;
+        opacity: 0.2;
+    }
+</style>
+
+@using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabGestionRol" }).Disabled(new int[] { ViewBag.IsLiquidacionRol })))
+{
+    t.Tab("Rol", "tab1");
+    t.Tab("Liquidación", "tab2");
+
+    using (t.BeginPanel())
+    {
+        using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmRol" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Rolid)
+
+            <div class="tabla">
+                <div class="fila" style="position:relative">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.Pclid, (string)ViewBag.UrlBuscarListaClientes, "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                        @Html.ValidationMessageFor(model => model.NombreRutCliente)
+                    </div>
+                    <div class="col" style="float:right; position: absolute; right:15px">
+                        <button class="search" id="btnBorradores" onclick="fnBtnBorradores(); return false;" title="Borradores"><img src="~/Images/botones/doc40.png" width="35px" height="40px" alt="Borradores" /> </button>
+                        <button class="search" id="btnRelacionados" onclick="fnBtnAsociados(); return false;" title="Asociados"><img src="~/Images/botones/related40.png" width="40px" height="38px" title="Asociados" alt="Asociados" /> </button>
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                        @Html.ValidationMessageFor(model => model.NombreRutDeudor)
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.Label("Bloqueo Rol")</div>
+                    <div class="col"><button type="button" class="@Model.CSSBloqueo" onclick="fnBloquearRolJ(this)"></button> @Html.HiddenFor(model => model.BloquearRol)</div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.TipoRol)</div>
+                    <div class="col">@Html.DropDownList("TipoRol", null, new { @class = "ComboboxClassM", onchange = "" })</div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.Rol)</div>
+                    <div class="col" style="width:300px; height:23px">@Html.TextBox("Rol", null, new { @class = "textboxClass" })</div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.Tribunal)</div>
+                    <div class="col">@Html.DropDownList("Tribunal", null, new { @class = "textboxRutNombre", onchange = "" })</div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.TipoCausa)</div>
+                    <div class="col">@Html.DropDownList("TipoCausa", null, new { @class = "textboxRutNombre", onchange = "" })</div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaIngreso)</div>
+                    <div class="col">@Html.JQueryUI().Datepicker("FechaIngreso").ShowButtonPanel(true).ShowWeek(false)</div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaRol)</div>
+                    <div class="col">@Html.JQueryUI().Datepicker("FechaRol").ShowButtonPanel(true).ShowWeek(false)</div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaDemanda)</div>
+                    <div class="col">@Html.JQueryUI().Datepicker("FechaDemanda").ShowButtonPanel(true).ShowWeek(false)</div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.MateriaJudicial)</div>
+                    <div class="col" style="width:300px; height:23px">@Html.TextBox("MateriaJudicial", null, new { @class = "textboxClass", @readonly = "readonly" })</div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.Estado)</div>
+                    <div class="col" style="width:300px; height:23px">@Html.TextBox("Estado", null, new { @class = "textboxClass", @readonly = "readonly" })</div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.EstAdm)</div>
+                    <div class="col" style="width:650px">
+                        @if (Model != null && Model.EstAdm == "Archivada")
+                        {
+                            <div class="col">@Html.Label("Archivada", new { id = "lblEstAdm", style = "font-weight:bold;color:#FF0033" })</div>
+                        }
+                        else if (Model != null && Model.EstAdm == "Sin archivar")
+                        {
+                            <div class="col">@Html.Label("Sin archivar", new { id = "lblEstAdm", style = "font-weight:normal" })</div>
+                        }
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.Comentario)</div>
+                    <div class="col" style="width:650px">@Html.TextAreaFor(model => model.Comentario, 3, 100, new { @class = "textboxClass", @style = "width: 650px" })</div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.Label("Quiebra")</div>
+                    <div class="col">@Html.DropDownList("ComboQuiebra", null, new { @class = "ComboboxClassS" })</div>
+                </div>
+
+                <div class="fila">
+                    <div class="col" style="width:260px"></div>
+                    @if (Model != null && Model.Quiebra)
+                    {
+                        <div class="col">@Html.Label("DEUDOR EN QUIEBRA", new { id = "lblQuiebra", style = "font-weight:bold;color:#FF0033" })</div>
+                    }
+                    else
+                    {
+                        <div class="col">@Html.Label("", new { id = "lblQuiebra", style = "font-weight:bold;color:#FF0033" })</div>
+                    }
+                </div>
+
+                <br />
+
+                @if (!Model.BloquearRol)
+                {
+                    <div class="col" style="float:right"><input type="button" value="Guardar" onclick="fnGuardarRol();" /></div>
+                }
+            </div>
+        }
+    
+    using (var trol = Html.JQueryUI().Begin(new Tabs(new { id = "tabRol", style = "" }).Disabled(new int[] { 3, 4 })))
+    {
+        trol.Tab("Documentos", "tab1");
+        trol.Tab("Estados", "tab2");
+        trol.Tab("Entes", "tab3");
+        trol.Tab("Demandados", "tab4");
+        trol.Tab("Informes", "tab5");
+        trol.Tab("Aven. / Deman.", "tab6");
+        trol.Tab("Asegurados", "tab7");
+        trol.Tab("Estampe", "tab8");
+        using (trol.BeginPanel())
+        {
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col">
+                        @if (ViewBag.EsPrevisional)
+                        {
+                            @* GRILLA gridDocSinAsignar PREVISIONAL *@
+                            @(Html.jqGrid("gridDocSinAsignarPrevisional")
+                                .addColumn(new Column("Resolucion").setLabel("Resolución")
+                                    .setEditable(false)
+                                    .setAlign(Align.center)
+                                    .setSortable(true)
+                                    .setWidth(80))
+                                .addColumn(new Column("FechaResolucion").setLabel("Fec. Resolución")
+                                    .setEditable(false).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                    .setSortable(true).setAlign(Align.center)
+                                    .setWidth(65))
+                                .addColumn(new Column("Monto").setLabel("Monto")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setAlign(Align.right).setFormatter(Formatters.number)
+                                    .setWidth(80))
+                                .addColumn(new Column("Saldo").setLabel("Saldo")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setAlign(Align.right).setFormatter(Formatters.number)
+                                    .setWidth(80))
+                                // settings
+                                .setCaption("Sin Asignar")
+                                .setWidth(700)
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Judicial/GetDocumentosPorAsignarPrevisional?Pclid=" + Model.Pclid + "&Ctcid=" + Model.Ctcid)
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setAutoWidth(false)
+                                .setRowNum(10)
+                                .setRowList(new int[] { 10, 30, 50 })
+                                .setViewRecords(true)
+                                .setSortName("FechaResolucion")
+                                .setSortOrder(SortOrder.desc)
+                                .setPager("pagerDocSinAsignarPrevisional")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .setMultiSelect(true)
+                                .setFooterRow(true)
+                                .onLoadComplete("var grid = $('#gridDocSinAsignarPrevisional'); grid.jqGrid('footerData','set', {Tipo: 'Total:', Monto: totalMontoPorAsignar , Saldo: totalSaldoPorAsignar });")
+                                .Render()
+                            )
+                        }
+                        else
+                        {
+                            @* GRILLA gridDocSinAsignar *@
+                            @(Html.jqGrid("gridDocSinAsignar")
+                                .addColumn(new Column("Tipo").setLabel("Tipo")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setWidth(70))
+                                .addColumn(new Column("Numero").setLabel("Número")
+                                    .setEditable(false).setAlign(Align.center)
+                                    .setSortable(true)
+                                    .setWidth(80))
+                                .addColumn(new Column("Monto").setLabel("Monto")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setAlign(Align.right).setFormatter(Formatters.number)
+                                    .setWidth(80))
+                                .addColumn(new Column("FechaVencimiento").setLabel("Fec. Venc.")
+                                    .setEditable(false).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                    .setSortable(true).setAlign(Align.center)
+                                    .setWidth(65))
+                                .addColumn(new Column("Moneda").setLabel("Moneda")
+                                    .setHidden(false)
+                                    .setEditable(false)
+                                    .setWidth(60))
+                                .addColumn(new Column("Saldo").setLabel("Saldo")
+                                    .setHidden(false)
+                                    .setEditable(false).setAlign(Align.right).setFormatter(Formatters.number)
+                                    .setWidth(80))
+
+                                // settings
+                                .setCaption("Sin Asignar")
+                                .setWidth(700)
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Judicial/GetDocumentosPorAsignar?Pclid=" + Model.Pclid + "&Ctcid=" + Model.Ctcid)
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setAutoWidth(false)
+                                .setRowNum(10)
+                                .setRowList(new int[] { 10, 30, 50 })
+                                .setViewRecords(true)
+                                .setSortName("Tipo")
+                                .setSortOrder(SortOrder.asc)
+                                .setPager("pagerDocSinAsignar")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .setMultiSelect(true)
+                                .setFooterRow(true)
+                                .onLoadComplete("var grid = $('#gridDocSinAsignar'); grid.jqGrid('footerData','set', {Tipo: 'Total:', Monto: totalMontoPorAsignar , Saldo: totalSaldoPorAsignar });")
+                                .Render()
+                            )
+                        }
+                    </div>
+
+                    <div class="col">
+                        @if (ViewBag.EsPrevisional)
+                        {
+                            @* GRILLA gridDocAsignado PREVISIONAL *@
+                            @(Html.jqGrid("gridDocAsignadoPrevisional")
+                                .addColumn(new Column("Resolucion").setLabel("Resolución")
+                                    .setEditable(false)
+                                    .setAlign(Align.center)
+                                    .setSortable(true)
+                                    .setWidth(80))
+                                .addColumn(new Column("FechaResolucion").setLabel("Fec. Resolución")
+                                    .setEditable(false).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                    .setSortable(true).setAlign(Align.center)
+                                    .setWidth(65))
+                                .addColumn(new Column("Monto").setLabel("Monto")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setAlign(Align.right).setFormatter(Formatters.number)
+                                    .setWidth(80))
+                                .addColumn(new Column("Saldo").setLabel("Saldo")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setAlign(Align.right).setFormatter(Formatters.number)
+                                    .setWidth(80))
+
+                                // settings
+                                .setCaption("Asignado")
+                                .setWidth(700)
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Judicial/GetDocumentosAsignadosPrevisional?Rolid=" + Model.Rolid)
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setAutoWidth(false)
+                                .setRowNum(10)
+                                .setRowList(new int[] { 10, 30, 50 })
+                                .setViewRecords(true)
+                                .setSortName("FechaResolucion")
+                                .setSortOrder(SortOrder.desc)
+                                .setPager("pagerDocAsignadoPrevisional")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .setMultiSelect(true)
+                                .setFooterRow(true)
+                                .onLoadComplete("var grid = $('#gridDocAsignadoPrevisional'); grid.jqGrid('footerData','set', {Tipo: 'Total:', Monto: totalMontoAsignado , Saldo: totalSaldoAsignado });")
+                                .Render()
+                            )
+                        }
+                        else
+                        {
+                            @* GRILLA gridDocAsignado *@
+                            @(Html.jqGrid("gridDocAsignado")
+                                .addColumn(new Column("Tipo").setLabel("Tipo")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setWidth(70))
+                                .addColumn(new Column("Numero").setLabel("Número")
+                                    .setEditable(false).setAlign(Align.center)
+                                    .setSortable(true)
+                                    .setWidth(80))
+                                .addColumn(new Column("Monto").setLabel("Monto")
+                                    .setEditable(false)
+                                    .setSortable(true)
+                                    .setAlign(Align.right).setFormatter(Formatters.number)
+                                    .setWidth(80))
+                                .addColumn(new Column("FechaVencimiento").setLabel("Fec. Venc.")
+                                    .setEditable(false).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                    .setSortable(true).setAlign(Align.center)
+                                    .setWidth(65))
+                                .addColumn(new Column("Moneda").setLabel("Moneda")
+                                    .setHidden(false)
+                                    .setEditable(false)
+                                    .setWidth(60))
+                                .addColumn(new Column("Saldo").setLabel("Saldo")
+                                    .setHidden(false)
+                                    .setEditable(false).setAlign(Align.right).setFormatter(Formatters.number)
+                                    .setWidth(80))
+
+                                // settings
+                                .setCaption("Asignado")
+                                .setWidth(700)
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Judicial/GetDocumentosAsignados?Rolid=" + Model.Rolid)
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setAutoWidth(false)
+                                .setRowNum(10)
+                                .setRowList(new int[] { 10, 30, 50 })
+                                .setViewRecords(true)
+                                .setSortName("Tipo")
+                                .setSortOrder(SortOrder.asc)
+                                .setPager("pagerDocAsignado")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .setMultiSelect(true)
+                                .setFooterRow(true)
+                                .onLoadComplete("var grid = $('#gridDocAsignado'); grid.jqGrid('footerData','set', {Tipo: 'Total:', Monto: totalMontoAsignado , Saldo: totalSaldoAsignado });")
+                                .Render()
+                            )
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        using (trol.BeginPanel())
+        {
+            if (Model.BloquearRol && ViewBag.Permiso <= 3)
+            {
+
+            }
+            else
+            {
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col"><button class="search" id="btnAgregarHistorial" onclick="$('#ppHistorial').dialog('open');" style="vertical-align:middle"><img src="~/Images/botones/Add20.png" width="20px" height="20px" title="Agregar" alt="Agregar" /></button>Agregar </div>
+
+                    </div>
+                </div>
+            }
+            @(Html.jqGrid("gridEstados")
+            .addColumn(new Column("Id").setLabel("Eliminar")
+            .setSortable(true).setCustomFormatter("fnBotonEliminarGestionRol")
+                .setWidth(60))
+            .addColumn(new Column("Materia").setLabel("Materia")
+                .setSortable(true)
+                .setWidth(120))
+            .addColumn(new Column("Cuaderno").setLabel("Cuaderno")
+                .setSortable(true)
+                .setWidth(120))
+            .addColumn(new Column("Estado").setLabel("Estado")
+                .setSortable(true)
+                .setWidth(120))
+            .addColumn(new Column("FechaJudicial").setLabel("Fecha")
+                .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(70))
+            .addColumn(new Column("Comentario").setLabel("Comentario")
+                .setSortable(true)
+                .setWidth(275))
+            .addColumn(new Column("Usuario").setLabel("Usuario")
+                .setSortable(true)
+                .setWidth(150))
+            .addColumn(new Column("Archivo").setLabel("Archivo")
+                .setSortable(true).setCustomFormatter("fnBotonesArchivo")
+                .setWidth(60))
+
+            // settings
+            .setCaption("Estados").setWidth(950)
+            .setRequestType(RequestType.get)
+            .setUrl("~/Judicial/GetEstados/?Rolid=" + Model.Rolid)
+            .setAltRows(true)
+            .setAltClass("altGridRows")
+            .setRowNum(10)
+            .setRowList(new int[] { 10, 30, 50 })
+            .setViewRecords(true)
+            .setSortName("FechaJudicial")
+            .setSortOrder(SortOrder.desc)
+            .setPager("pagerEstados")
+            .setPagerPos(PagerPos.center)
+            .setPgButtons(true)
+            .setCellEdit(false)
+            .setCellSubmit(CellSubmit.clientArray)
+            .setShrinkToFit(true)
+                        //.onCellSelect(ViewBag.Del ? "fnEliminarGestionRol(rowid,iCol)" : "")
+                        //.onSelectRow(ViewBag.Del ? "fnEliminarGestionRol(rowid)" : "")
+            .Render()
+
+            )
+
+        }
+        using (trol.BeginPanel())
+        {
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col">@Html.DropDownList("EnteJudicial", null, new { @class = "textboxRutNombre", onchange = "" })</div>
+                    @if (!Model.BloquearRol)
+                    {
+                        <div class="col"><input type="button" value="Grabar Entes" onclick="fnGuardarEnte();" /></div>}
+                </div>
+            </div>
+            @(Html.jqGrid("gridEnte")
+            .addColumn(new Column("Nombre").setLabel("Nombre")
+                .setSortable(true)
+                .setWidth(200))
+            .addColumn(new Column("Sindico").setLabel("Sindico")
+                .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+                .setAlign(Align.center)
+                .setWidth(80))
+            .addColumn(new Column("Abogado").setLabel("Abogado")
+                .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+                .setAlign(Align.center)
+                .setWidth(80))
+            .addColumn(new Column("Procurador").setLabel("Procurador")
+                .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+                .setAlign(Align.center)
+                .setWidth(80))
+            .addColumn(new Column("Receptor").setLabel("Receptor")
+                .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+                .setAlign(Align.center)
+                .setWidth(80))
+                .addColumn(new Column("AbogadoEncargado").setLabel("A. Encargado")
+                .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+                .setAlign(Align.center)
+                .setWidth(80))
+
+            .setCaption("Entes Judiciales")
+            .setRequestType(RequestType.get)
+            .setUrl("~/Judicial/GetRolEntes/?Rolid=" + Model.Rolid)
+            .setAltRows(true)
+            .setAltClass("altGridRows")
+            .setAutoWidth(true)
+            .setRowNum(10)
+            .setRowList(new int[] { 10, 30, 50 })
+            .setViewRecords(true)
+            .setSortName("Nombre")
+            .setSortOrder(SortOrder.asc)
+            .setPager("pagerEnte")
+            .setPagerPos(PagerPos.center)
+            .setPgButtons(true)
+            .setCellEdit(false)
+            .setCellSubmit(CellSubmit.clientArray)
+            .setMultiSelect(true)
+            .setNavEdit(false)
+            .Render()
+
+            )
+        }
+        using (trol.BeginPanel())
+        {
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.Label("Rut")</div>
+                    <div class="col">@Html.TextBox("DemandadoRut", null, new { @class = "textboxRut" })</div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.Label("Nombre")</div>
+                    <div class="col">@Html.TextBox("DemandadoNombre", null, new { @class = "textboxRutNombre", onchange = "" })</div>
+
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.Label("Representante Legal")</div>
+                    <div class="col">@Html.CheckBox("DemandadoRepresentanteLegal")</div>
+                    @if (!Model.BloquearRol)
+                    {
+                        <div class="col" style="float:right"><input type="button" value="Grabar Demandado" onclick="fnGuardarDemandado();" /></div>}
+                </div>
+            </div>
+            @(Html.jqGrid("gridDemandados")
+            .addColumn(new Column("Rut").setLabel("Rut")
+                .setSortable(true)
+                .setWidth(100))
+            .addColumn(new Column("Nombre").setLabel("Nombre")
+                .setEditType(EditType.select)
+                .setEditOptions("value:\"" + ViewBag.Provcli + "\"")
+                .setWidth(300))
+           .addColumn(new Column("RepresentanteLegal").setLabel("Rep. Legal")
+                .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+                .setAlign(Align.center)
+                .setWidth(80))
+            .setCaption("Demandados")
+            .setRequestType(RequestType.get)
+            .setUrl("~/Judicial/GetDemandados/?Rolid=" + Model.Rolid)
+            .setAltRows(true)
+            .setAltClass("altGridRows")
+            .setAutoWidth(true)
+            .setRowNum(10)
+            .setRowList(new int[] { 10, 30, 50 })
+            .setViewRecords(true)
+            .setSortName("Nombre")
+            .setSortOrder(SortOrder.asc)
+            .setPager("pagerDemandados")
+            .setPagerPos(PagerPos.center)
+            .setPgButtons(true)
+            .setCellEdit(false)
+            .setCellSubmit(CellSubmit.clientArray)
+            .setMultiSelect(true)
+            .setNavEdit(false)
+            .Render()
+
+            )
+        }
+        using (trol.BeginPanel())
+        {
+            using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDocumentosDeudor" }))
+            {
+                @Html.ValidationSummary(true)
+            }
+            <br />
+            @(Html.jqGrid("gridInforme")
+
+            .addColumn(new Column("Pclid").setLabel("Id Cliente")
+                .setHidden(true)
+                .setWidth(50))
+            .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                .setHidden(true)
+                .setWidth(50))
+            .addColumn(new Column("Dcdid").setLabel("Dcdid")
+                .setHidden(true)
+                .setWidth(50))
+            .addColumn(new Column("NombreCliente").setLabel("Cliente")
+                .setSortable(true)
+                .setWidth(110))
+            .addColumn(new Column("TipoDocumento").setLabel("Tipo")
+                .setSortable(true)
+                .setWidth(100))
+            .addColumn(new Column("Archivo").setLabel("Nombre")
+                .setSortable(true)
+                .setWidth(110))
+
+            // settings
+            .setCaption("Documentos Deudor")
+            .setRequestType(RequestType.get)
+                .setUrl("~/Judicial/GetDummy")
+            .setAltRows(true)
+            .setAltClass("altGridRows")
+            .setAutoWidth(true)
+            .setRowNum(10)
+            .setRowList(new int[] { 10, 30, 50 })
+            .setViewRecords(true)
+            .setSortName("NombreCliente,TipoDocumento")
+            .setSortOrder(SortOrder.asc)
+            .setPager("pagerInforme")
+            .setPagerPos(PagerPos.center)
+            .setPgButtons(true)
+            .onSelectRow("MostrarDocumento(rowid)")
+            .Render()
+
+            )
+        }
+
+        using (trol.BeginPanel())
+        {
+            <fieldset class="fieldset">
+                <legend class="legend">Avenimiento</legend>
+                <div class="tabla" style="border:solid 1px">
+                    <div class="fila">
+                        <div class="col" style="width:260px;margin-left:30px"><b>Avenimiento</b></div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaAvenimiento)</div>
+                        <div class="col">@Html.JQueryUI().Datepicker("FechaAvenimiento").ShowButtonPanel(true).ShowWeek(false)</div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.MontoAvenimiento)</div>
+                        <div class="col" style="width:300px; height:23px">@Html.TextBoxFor(model => model.MontoAvenimiento, null, new { @class = "textboxClassM", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);" })</div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.CuotasAvenimiento)</div>
+                        <div class="col" style="width:300px; height:23px">@Html.TextBox("CuotasAvenimiento", null, new { @class = "textboxClassM", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);" })</div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.MontoCuotaAvenimiento)</div>
+                        <div class="col" style="width:300px; height:23px">@Html.TextBox("MontoCuotaAvenimiento", null, new { @class = "textboxClassM", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);" })</div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.MontoUltimaCuotaAvenimiento)</div>
+                        <div class="col" style="width:300px; height:23px">@Html.TextBox("MontoUltimaCuotaAvenimiento", null, new { @class = "textboxClassM", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);" })</div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaPrimeraCuotaAvenimiento)</div>
+                        <div class="col">@Html.JQueryUI().Datepicker("FechaPrimeraCuotaAvenimiento").ShowButtonPanel(true).ShowWeek(false)</div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaUltimaCuotaAvenimiento)</div>
+                        <div class="col">@Html.JQueryUI().Datepicker("FechaUltimaCuotaAvenimiento").ShowButtonPanel(true).ShowWeek(false)</div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.InteresAvenimiento)</div>
+                        <div class="col" style="width:300px; height:23px; padding-bottom:30px">@Html.TextBox("InteresAvenimiento", null, new { @class = "textboxRut", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);" })</div>
+                    </div>
+                    <div class="fila">
+                        <div class="col" style="float:right"><input type="button" value="Traspasar Avenimiento" onclick="fnTraspasarAvenimiento(@(Model.Rolid));" /> </div>
+                    </div>
+                </div>
+            </fieldset>
+            <br />
+            <div class="tabla" style="border:solid 1px">
+                <div class="fila">
+                    <div class="col" style="width:260px;margin-left:30px"><b>Demanda</b></div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaDemandaAve)</div>
+                    <div class="col">@Html.JQueryUI().Datepicker("FechaDemandaAve").ShowButtonPanel(true).ShowWeek(false)</div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.MontoDemanda)</div>
+                    <div class="col" style="width:300px; height:23px">@Html.TextBoxFor(model => model.MontoDemanda, null, new { @class = "textboxClassM", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);" })</div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.CuotasDemanda)</div>
+                    <div class="col" style="width:300px; height:23px">@Html.TextBox("CuotasDemanda", null, new { @class = "textboxClassM", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);" })</div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.MontoCuotaDemanda)</div>
+                    <div class="col" style="width:300px; height:23px">@Html.TextBox("MontoCuotaDemanda", null, new { @class = "textboxClassM", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);" })</div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.MontoUltimaCuotaDemanda)</div>
+                    <div class="col" style="width:300px; height:23px">@Html.TextBox("MontoUltimaCuotaDemanda", null, new { @class = "textboxClassM", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);" })</div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaPrimeraCuotaDemanda)</div>
+                    <div class="col">@Html.JQueryUI().Datepicker("FechaPrimeraCuotaDemanda").ShowButtonPanel(true).ShowWeek(false)</div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.FechaUltimaCuotaDemanda)</div>
+                    <div class="col">@Html.JQueryUI().Datepicker("FechaUltimaCuotaDemanda").ShowButtonPanel(true).ShowWeek(false)</div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:260px">@Html.LabelFor(model => model.InteresDemanda)</div>
+                    <div class="col" style="width:300px; height:23p; padding-bottom:30px">@Html.TextBox("InteresDemanda", null, new { @class = "textboxRut", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);" })</div>
+                </div>
+            </div>
+        }
+
+        using (trol.BeginPanel())
+        {
+            @(Html.jqGrid("gridAsegurados")
+            .addColumn(new Column("Rut").setLabel("Rut")
+                .setSortable(true)
+                .setWidth(100))
+            .addColumn(new Column("Nombre").setLabel("Nombre")
+                .setSortable(true)
+                .setWidth(500))
+            .addColumn(new Column("Numero").setLabel("Número")
+                .setSortable(true)
+                .setWidth(100))
+            .setCaption("Asegurados")
+            .setRequestType(RequestType.get)
+            .setUrl("~/Judicial/GetAsegurados/?Rolid=" + Model.Rolid)
+            .setAltRows(true)
+            .setAltClass("altGridRows")
+            .setAutoWidth(true)
+            .setRowNum(10)
+            .setRowList(new int[] { 10, 30, 50 })
+            .setViewRecords(true)
+            .setSortName("Nombre")
+            .setSortOrder(SortOrder.asc)
+            .setPager("pagerAsegurados")
+            .setPagerPos(PagerPos.center)
+            .setPgButtons(true)
+            .setCellEdit(false)
+            .setCellSubmit(CellSubmit.clientArray)
+            .setMultiSelect(true)
+            .setNavEdit(false)
+            .Render())
+        }
+        using (trol.BeginPanel())
+        {
+            using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCargaEstampe" }))
+            {
+                @Html.ValidationSummary(true)
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col" style="width:130px;height:25px;margin-top: 5px;"> @Html.LabelFor(model => model.Archivo)</div>
+                        <div class="col" style="width:300px;"><input id="subirArchivo" type="file" style="width:300px">@Html.HiddenFor(model => model.Archivo)</div>
+                        <div class="col" style="margin-left:10px;"><input type="submit" id="btnSubmit" value="Subir Archivo" /></div>
+                        <div class="col"><img id="imgSubirArchivo" src="~/Images/blank.png" class="" style="float:left" /></div>
+
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:130px">@Html.Label("Fecha Accion Judicial")</div>
+                        <div class="col" style="width:150px">
+                            @Html.JQueryUI().Datepicker("FecAccionJud").ShowButtonPanel(true).ShowWeek(false)
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col">
+                            @(Html.jqGrid("gridEstampes")
+                                .addColumn(new Column("Ddeid").setLabel("Ddeid")
+                                    .setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(50))
+                                .addColumn(new Column("Pclid").setLabel("Pclid")
+                                    .setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(50))
+                                .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                                    .setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(50))
+                                .addColumn(new Column("Rolid").setLabel("Rolid")
+                                    .setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(50))
+                                .addColumn(new Column("Nomb").setLabel("Nomb")
+                                    .setHidden(true)
+                                    .setSortable(true)
+                                    .setWidth(50))
+                                .addColumn(new Column("FechaJudicial").setLabel("Fecha Acción Judicial")
+                                    .setSortable(true)
+                                    .setWidth(130).setAlign(Align.center))
+                                .addColumn(new Column("NombreInsumo").setLabel("Acción Judicial")
+                                    .setSortable(true)
+                                    .setWidth(250))
+                                .addColumn(new Column("Nombre").setLabel("Detalle Estampe")
+                                    .setSortable(true)
+                                    .setWidth(250))
+                                .addColumn(new Column("Usuario").setLabel("Usuario")
+                                    .setSortable(true)
+                                    .setWidth(100))
+                                .addColumn(new Column("D").setLabel(" ")
+                                    .setHidden(false)
+                                    .setEditable(false).setCustomFormatter("fnBotonEliminarEstampe")
+                                    .setWidth(30)
+                                    .setAlign(Align.center))
+
+                                .setCaption("Estampes")
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Judicial/GetEstampes/?Pclid=" + Model.Pclid + "&Ctcid=" + Model.Ctcid + "&Rolid=" + Model.Rolid)
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setAutoWidth(true)
+                                .setRowNum(10)
+                                .setRowList(new int[] { 10, 30, 50 })
+                                .setViewRecords(true)
+                                .setSortName("Nombre")
+                                .setSortOrder(SortOrder.asc)
+                                .setPager("pagerEstampes")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                    //.setMultiSelect(true)
+                                .setNavEdit(false)
+                                .Render())
+                        </div>
+                        <div class="col">
+                            <input type="button" title="Descargar todos los archivos" class="ui-icon ui-icon-arrowthickstop-1-s" style="height:18px;width:18px" onclick="comprimirEstampes();" />
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+
+    }
+    using (t.BeginPanel())
+    {
+        @*<p>Deudor: @Html.LabelFor(model => model.NombreRutDeudor)</p>*@
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="width:260px">@Html.LabelFor(model => model.Sindico)</div>
+            <div class="col" style="width:300px; height:23px">@Html.TextBox("Sindico", null, new { @class = "textboxClass"})</div>
+
+        </div>
+        <div class="fila">
+            <div class="col" style="width:260px">@Html.LabelFor(model => model.Veedor)</div>
+            <div class="col" style="width:300px; height:23px">@Html.TextBox("Veedor", null, new { @class = "textboxClass" })</div>
+
+        </div>
+        <div class="fila">
+            <div class="col" style="width:260px">@Html.LabelFor(model => model.Interventor)</div>
+            <div class="col" style="width:300px; height:23px">@Html.TextBox("Interventor", null, new { @class = "textboxClass" })</div>
+
+        </div>
+        <div class="fila" style="width:700px;">
+            <div class=" col" style="float:right"><input type="button" value="Guardar" onclick="fnGuardarPanelQuiebraSindico();" /></div>
+        </div>
+        <div class="fila">
+            <div class="col">
+                <div id="loadingmessage" style="display: none" class="progressLoading">
+                    <img src="~/Images/ajax-loader.gif" />
+                </div>
+                    @(Html.jqGrid("gridRolLiquidacionGrilla")
+                .addColumn(new Column("Quiebra_Id").setLabel("Detalle")
+                .setSortable(true).setCustomFormatter("formatRowQuiebra").setTitle(false)
+                .setWidth(50))
+                .addColumn(new Column("Rol").setLabel("Rol")
+                .setSortable(true)
+                .setWidth(150))
+                .addColumn(new Column("Nombre").setLabel("Asegurado")
+                .setSortable(true)
+                .setWidth(330))
+                .addColumn(new Column("Cuantia").setLabel("Cuantia").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(140))
+                .addColumn(new Column("Materia").setLabel("Materia")
+                .setSortable(true).setHidden(true)
+                .setWidth(50))
+                .setCaption("Roles")
+                .setRequestType(RequestType.get)
+                .setUrl("~/Judicial/ListarRolLiquidacionGrilla/?Rolid=" + Model.Rolid)
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setAutoWidth(true)
+                .setRowNum(20)
+                .setRowList(new int[] { 20, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("Nombre")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerRolLiquidacionGrilla")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+               .setNavEdit(false)
+
+               .Render())
+                </div>
+          
+        </div>
+    </div>
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jszip")
+
+    <script>
+        window.onload = function () {
+            if ($("#Rolid").val() != "0" && $("#Rolid").val() != '') {
+                $("#tabRol").show();
+            } else {
+                $("#tabRol").hide();
+            }
+            //fnCargarTotales();
+        }
+    </script>
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppHistorial" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Agregar Gestion")
+    .CloseOnEscape(true)
+    .Width(700)
+    .Height(250)
+    ))
+{
+    @Html.Partial("_AgregarHistorial")
+}
+
+@using (Html.JQueryUI().Begin(new JQueryUIHelpers.Dialog(new { id = "ppDocto" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Documento Deudor")
+    .CloseOnEscape(true)
+    .Width(900)
+    .Height(600)
+    //.TriggerClick("button")
+    ))
+{
+}
+
+@using (Html.JQueryUI().Begin(new JQueryUIHelpers.Dialog(new { id = "ppAsociados" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Roles Asociados")
+    .CloseOnEscape(true)
+    .Width(900)
+    .Height(600)
+    //.TriggerClick("button")
+    ))
+{
+    @Html.Partial("_Asociados")
+}
+
+@using (Html.JQueryUI().Begin(new JQueryUIHelpers.Dialog(new { id = "ppBorradores" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Borradores")
+    .CloseOnEscape(true)
+    .Width(900)
+    .Height(770)
+    //.TriggerClick("button")
+    .OnBeforeClose("MensajeCerrarBorradores")
+    ))
+{
+    @Html.Partial("_Borradores")
+}
+
+<script>
+    $('#DemandadoRut').Rut({
+        on_error: function () {
+            $('#DemandadoRut').removeClass("valid");
+            $('#DemandadoRut').addClass("input-validation-error");
+            $('#DemandadoRut').focus();
+        },
+        on_success: function() {
+            $('#DemandadoRut').removeClass("input-validation-error");
+            $('#DemandadoRut').addClass("valid");
+        },
+        format_on: 'keyup'
+    });
+
+    window.onload = function () {
+        document.getElementById('frmCargaEstampe').onsubmit = function () {
+            if ($("#NombreRutDeudor").val() != '') {
+                if ($("#subirArchivo").val() != '' && $("#FecAccionJud").val() != '') {
+                    var formdata = new FormData(); //FormData object
+                    var fileInput = document.getElementById('subirArchivo');
+                    //Iterating through each files selected in fileInput
+                    for (i = 0; i < fileInput.files.length; i++) {
+                        //Appending each file to FormData object
+                        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                    }
+                    //Creating an XMLHttpRequest and sending
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '/Judicial/Upload/?tipo=Estampe&rut=' + $("#NombreRutDeudor").val() + '&Ctcid=' + $("#Ctcid").val() + '&Pclid=' + $("#Pclid").val() + '&TipoDocumento=' + $("#TipoDocumento").val() + '&Rolid=' + $("#Rolid").val() + '&FecJud=' + $("#FecAccionJud").val());
+                    xhr.send(formdata);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            $('#Archivo').val(xhr.responseText.replace(/\"/g, ''))
+                            if (xhr.responseText == '""') {
+                                alert("Error al subir el archivo al servidor.");
+                                $("#imgSubirArchivo").removeClass("ok").addClass("error");
+                                //$("#btnGrabar").attr("disabled", "disabled");
+                                //$("#btnSubmit").removeAttr("disabled");
+                            } else if (xhr.responseText == '-1') {
+                                alert("El tipo de archivo no es válido, sólo se permiten archivos .doc, .docx, .odf o .pdf");
+                                $("#imgSubirArchivo").removeClass("ok").addClass("error");
+                                //$("#btnGrabar").attr("disabled", "disabled");
+                                //$("#btnSubmit").removeAttr("disabled");
+                            } else {
+                                alert("Archivos guardados con exito.");
+                                $("#imgSubirArchivo").removeClass("error").addClass("ok");
+                                $('#subirArchivo').val('');
+                                $("#FecAccionJud").val('');
+                                //$("#btnGrabar").removeAttr("disabled");
+                                //$("#btnSubmit").attr("disabled", "disabled");
+                                fnBuscarEstampes();
+                            }
+                        }
+                    }
+                    return false;
+                } else {
+                    alert("Debe ingresar una Fecha de Acción Judicial y seleccionar un archivo.");
+                    return false;
+                }
+            } else {
+                alert("Debe ingresar un deudor.");
+                return false;
+            }
+        }
+    }
+
+    $(document).ready(function () {
+        fnCargarAsociados();
+
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var tipoComp = url.searchParams.get("tipoComp");
+
+        //Muestra / Oculta columna "Resolución"
+        if (tipoComp != "P") {
+            jQuery("#gridDocSinAsignar").hideCol("Resolucion");
+            jQuery("#gridDocAsignado").hideCol("Resolucion");
+        }
+
+        fnCargarTotales();
+    })
+</script>
+
+<div id="loading-gif" style="display: none;">
+    <img id="loading-image-gif" src="~/Images/ajax-loader.gif" alt="Procesando..." />
+</div>

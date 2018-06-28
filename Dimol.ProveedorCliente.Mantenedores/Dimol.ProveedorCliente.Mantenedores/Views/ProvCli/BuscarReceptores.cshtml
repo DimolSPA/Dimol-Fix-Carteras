@@ -1,0 +1,115 @@
+﻿@model Dimol.ProveedorCliente.Mantenedores.Models.ProveedorClienteModel
+
+@{
+    ViewBag.Title = "BuscarReceptores";
+}
+<br />
+<br />
+<h2>Buscar Receptores</h2>
+<br />
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Receptor</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarReceptor" }))
+        {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>BuscarInsumos</legend>
+
+                <div class="tabla">
+
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.Rut)</div>
+                        <div class="col" style="height:23px">@Html.TextBox("Rut", null, new { @class = "textboxRut" })</div>
+
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.Nombre)</div>
+                        <div class="col" style="height:23px">@Html.TextBox("Nombre", null, new { @class = "textboxRut" })</div>
+
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.ApellidoPaterno)</div>
+                        <div class="col" style="height:23px">@Html.TextBox("ApellidoPaterno", null, new { @class = "textboxRut" })</div>
+
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:260px">@Html.LabelFor(model => model.ApellidoMaterno)</div>
+                        <div class="col" style="height:23px">@Html.TextBox("ApellidoMaterno", null, new { @class = "textboxRut" })</div>
+
+                    </div>
+
+                                     
+
+                    <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnBuscarReceptor();" /></div>
+                </div>
+            </fieldset>
+
+        }
+        <br />
+
+
+        @(Html.jqGrid("BuscarReceptor")
+    .addColumn(new Column("ID").setLabel("ID")
+        .setHidden(true)
+        .setWidth(50))
+                //.addColumn(new Column("Logo").setLabel("Logo")
+
+    //    .setWidth(25))
+
+    .addColumn(new Column("Rut").setLabel("Rut")
+        .setAlign(Align.center)
+        .setWidth(30))
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+
+        .setWidth(50))
+
+    .addColumn(new Column("NombreFantasia").setLabel("NombreFantasia")
+
+        .setWidth(50))
+   .addColumn(new Column("ApellidoPaterno").setLabel("ApellidoPaterno")
+
+        .setWidth(50))
+
+    // settings
+    .setCaption("Receptor")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDeudor")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("DeudorSeleccionado(rowid)")
+    .Render()
+
+        )
+        <br />
+        <script>
+    function fnBuscarReceptor() {
+        var newUrl = "/ProvCli/GetReceptores/?"
+        //alert("ESTADO" + $("#Estado").val())
+        newUrl += "&rut=" + $("#Rut").val()
+        newUrl += "&nombre=" + $("#Nombre").val()
+        newUrl += "&apellidoPaterno=" + $("#ApellidoPaterno").val()
+        newUrl += "&apellidoMaterno=" + $("#ApellidoMaterno").val()
+        
+
+        jQuery("#BuscarReceptor").jqGrid().setGridParam({ url: newUrl }).trigger('reloadGrid', [{ page: 1 }])
+    }
+
+
+        </script>

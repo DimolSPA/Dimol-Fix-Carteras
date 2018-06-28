@@ -1,0 +1,169 @@
+﻿@model Dimol.Carteras.Models.TortaDinamicaModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .panel {
+     margin-bottom: 20px;
+     background-color: #fff;
+     border: 1px solid #ddd;
+     border-radius: 4px;
+     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+     box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    }
+
+    .panel-heading {
+     padding: 10px 15px;
+     background-color: #f5f5f5;
+     border-bottom: 1px solid #ddd;
+     border-top-right-radius: 3px;
+     border-top-left-radius: 3px;
+    }
+
+    .panel-title {
+     margin-top: 0;
+     margin-bottom: 0;
+     font-size: 16px;
+    }
+
+    .panel-body {
+     padding: 15px;
+    }
+
+    .panel-primary {
+     border-color: #428bca;
+    }
+
+    .panel-primary>.panel-heading {
+     color: #fff;
+     background-color: #428bca;
+     border-color: #428bca;
+    }
+
+    table tr td {
+        border:1px solid grey;    
+    }
+
+    .badge {
+      padding: 1px 9px 2px;
+      font-size: 0.875em;
+      font-weight: bold;
+      white-space: nowrap;
+      color: #ffffff;
+      background-color: #999999;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+    }
+
+    .badge-info {
+      background-color: #3a87ad;
+    }
+
+    .list-group{padding-left:0;margin-bottom:0px}
+    .list-group-item{position:relative;display:block;padding:5px 10px; margin-bottom:-1px;background-color:#fff;border:1px solid #ddd;font-size: 0.875em;}
+    .list-group-item:first-child{border-top-left-radius:4px;border-top-right-radius:4px}
+    .list-group-item:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}
+    .list-group-item>.badge{float:right}
+    .list-group-item>.badge+.badge{margin-right:5px;}.nav-pills>li>a>.badge{margin-left:3px}
+
+    .progress{position: relative;height:20px;margin-top:2px; margin-bottom:5px;overflow:hidden;background-color:#f5f5f5;border-radius:4px;-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);box-shadow:inset 0 1px 2px rgba(0,0,0,.1)}.progress-bar{float:left;width:0;height:100%;font-size:0.875em;font-weight: bold;line-height:20px;color:#000;text-align:center;background-color:#337ab7;-webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,.15);box-shadow:inset 0 -1px 0 rgba(0,0,0,.15);-webkit-transition:width .6s ease;-o-transition:width .6s ease;transition:width .6s ease}
+    .progress span {
+        position: absolute;
+        display: block;
+        width: 100%;
+        color: black;
+    }
+    .progress-bar-success{background-color:#5cb85c}
+    .progress-bar-info{background-color:#5bc0de}
+    .progress-bar-warning{background-color:#f0ad4e}
+    .progress-bar-danger{background-color:#d9534f}
+</style>
+
+<br />
+<h2>@ViewBag.Title</h2>
+
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">>></span>
+    </div>
+
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmTortaDinamica" }))
+        {
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>BuscarComprobante</legend>
+
+                <div class="tabla">
+                    <div class="fila">
+                        <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("SeleccionaCliente")
+                            @Html.ValidationMessageFor(model => model.NombreRutCliente)
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width: 120px">@Html.LabelFor(model => model.TipoCartera)</div>
+                        <div class="col" style="width: 100px">
+                            @Html.DropDownListFor(model => model.TipoCartera, ViewBag.TipoCartera as List<SelectListItem>, new { })
+                            @Html.ValidationMessageFor(model => model.TipoCartera)
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width: 120px">@Html.LabelFor(model => model.EstadoDocumento)</div>
+                        <div class="col" style="width: 100px">
+                            @Html.DropDownListFor(model => model.EstadoDocumento, ViewBag.EstadoDocumento as List<SelectListItem>, new { })
+                            @Html.ValidationMessageFor(model => model.EstadoDocumento)
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width: 120px">@Html.LabelFor(model => model.CodigoCarga)</div>
+                        <div class="col">
+                            @Html.DropDownListFor(model => model.CodigoCarga, null, new { })
+                            @Html.ValidationMessageFor(model => model.CodigoCarga)
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width: 120px">@Html.LabelFor(model => model.Gestor)</div>
+                        <div class="col">
+                            @Html.DropDownList("Gestor", null, new { @class = "ComboboxClassL" })
+                            @Html.ValidationMessageFor(model => model.Gestor)
+                        </div>
+                        <div class="col" style="float:right"><input type="button" id="btnGenerar" value="Generar" onclick="fnGenerarTortaDinamica()" /></div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width: 120px">@Html.LabelFor(model => model.DocsVencidos)</div>
+                        <div class="col">
+                            @Html.RadioButtonFor(model => model.DocsVencidos, -1, new { style = "width: 15px;", Checked = "checked" }) Todos
+                            &nbsp;&nbsp;
+                            @Html.RadioButtonFor(model => model.DocsVencidos, 0, new { style = "width: 15px;" }) Solo Vencidos
+                            &nbsp;&nbsp;
+                            @Html.RadioButtonFor(model => model.DocsVencidos, 1, new { style = "width: 15px;" }) Vencidos de 0 a 30 días
+                            @Html.ValidationMessageFor(model => model.DocsVencidos)
+                        </div>
+                    </div>
+                </div>
+            </fieldset><br /><br />
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    function fnHideShow(obj) {
+        if (obj.is(":visible")) {
+            obj.hide();
+        } else {
+            obj.show();
+        }
+    }
+</script>

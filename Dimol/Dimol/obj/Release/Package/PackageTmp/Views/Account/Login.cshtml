@@ -1,0 +1,43 @@
+﻿@model Dimol.Models.LoginModel
+
+@{
+    ViewBag.Title = "Iniciar sesión";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<section id="loginForm">
+<h2>Utilice su cuenta para iniciar sesión.</h2>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="width:150px;text-align:left;vertical-align:text-bottom;margin: 5px 0 6px;">
+                @Html.LabelFor(m => m.UserName)
+            </div>
+            <div class="col">
+              @Html.TextBoxFor(m => m.UserName)
+            @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:150px;text-align:left;vertical-align:bottom;margin: 5px 0 6px;">
+                @Html.LabelFor(m => m.Password)
+            </div>
+            <div class="col">
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+        </div>
+    </div>
+        <input type="submit" value="Iniciar sesión" />
+
+}
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

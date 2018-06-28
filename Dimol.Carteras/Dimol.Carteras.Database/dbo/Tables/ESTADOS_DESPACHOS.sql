@@ -1,0 +1,24 @@
+﻿CREATE TABLE [dbo].[ESTADOS_DESPACHOS] (
+    [EDP_CODEMP] INT           NOT NULL,
+    [EDP_EDPID]  INT           NOT NULL,
+    [EDP_NOMBRE] VARCHAR (100) NOT NULL,
+    [EDP_TIPO]   SMALLINT      DEFAULT ((1)) NOT NULL,
+    CONSTRAINT [PK_ESTADOS_DESPACHOS] PRIMARY KEY CLUSTERED ([EDP_CODEMP] ASC, [EDP_EDPID] ASC),
+    CONSTRAINT [CKC_EDP_TIPO_ESTADOS_] CHECK ([EDP_TIPO]=(5) OR [EDP_TIPO]=(4) OR [EDP_TIPO]=(3) OR [EDP_TIPO]=(2) OR [EDP_TIPO]=(1)),
+    CONSTRAINT [FK_ESTADOS__EMPRESA_D_EMPRESA] FOREIGN KEY ([EDP_CODEMP]) REFERENCES [dbo].[EMPRESA] ([EMP_CODEMP])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[ESTADOS_DESPACHOS]([EDP_CODEMP] ASC, [EDP_EDPID] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_NOMBRE]
+    ON [dbo].[ESTADOS_DESPACHOS]([EDP_CODEMP] ASC, [EDP_NOMBRE] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena los distintos estados que tendra el despacho, para ir realizando los seguimientos', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'ESTADOS_DESPACHOS';
+

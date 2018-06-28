@@ -1,0 +1,283 @@
+﻿@{
+    ViewBag.Title = "PanelQuiebraDiagrama";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Reportes</h2>
+<br />
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["orgchart"] });
+    $(document).ready(function () {
+        fnCargarOrgChartPanelQuiebra();
+        CargarProyeccion();
+    })
+</script>
+<style>
+    table {
+        border-collapse: separate !important;
+    }
+
+    .ui-icon.green {
+        background-image: url('../../Content/themes/base/images/ui-icons_88a206_256x240.png');
+    }
+
+    .ui-icon.yellow {
+        background-image: url('../../Content/themes/base/images/ui-icons_ed9f26_256x240.png');
+    }
+
+    .panel {
+        margin-bottom: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+        box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    }
+
+    .panel-heading {
+        padding: 10px 15px;
+        background-color: #f5f5f5;
+        border-bottom: 1px solid #ddd;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+
+    .panel-title {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 16px;
+    }
+
+    .panel-body {
+        padding: 5px;
+    }
+
+    .panel-primary {
+        border-color: #428bca;
+    }
+
+        .panel-primary > .panel-heading {
+            color: #fff;
+            background-color: #428bca;
+            border-color: #428bca;
+        }
+
+
+    .badge {
+        padding: 1px 5px 2px;
+        font-size: 0.975em;
+        font-weight: bold;
+        white-space: nowrap;
+        color: #000;
+        background-color: #999999;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        border-radius: 7px;
+    }
+
+    .badge-info {
+        background-color: #3a87ad;
+    }
+
+    .list-group {
+        padding-left: 0;
+        margin-bottom: 0px;
+    }
+
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: 5px 10px;
+        margin-bottom: -1px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        font-size: 0.875em;
+    }
+
+        .list-group-item:first-child {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+
+        .list-group-item:last-child {
+            margin-bottom: 0;
+            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .list-group-item > .badge {
+            float: right;
+        }
+
+            .list-group-item > .badge + .badge {
+                margin-right: 5px;
+            }
+
+    .nav-pills > li > a > .badge {
+        margin-left: 3px;
+    }
+
+    .progress {
+        position: relative;
+        height: 20px;
+        margin-top: 2px;
+        margin-bottom: 5px;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+        box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    }
+
+    .progress-bar {
+        float: left;
+        width: 0;
+        height: 100%;
+        font-size: 0.875em;
+        font-weight: bold;
+        line-height: 20px;
+        color: #000;
+        text-align: center;
+        background-color: #337ab7;
+        -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+        box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+        -webkit-transition: width .6s ease;
+        -o-transition: width .6s ease;
+        transition: width .6s ease;
+    }
+
+    .progress span {
+        position: absolute;
+        display: block;
+        width: 100%;
+        color: black;
+    }
+</style>
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:53%">
+                    <div class=" panel panel-primary">
+                        <div class="panel-heading">Gráfica de Quiebras</div>
+                        <div class="panel-body">
+                            <div id="chartPanelQuiebra"></div>
+                            <br />
+                           
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col" style="width:45%">
+                    <div class=" panel panel-primary">
+                        <div class="panel-heading">Proyección</div>
+                        <div class="panel-body">
+                            <div class="tabla">
+                                <div class="fila">
+                                    <div class="col" style="float:right;width:300px" id="panelQuiebraProyeccion">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" panel panel-primary">
+                        <div class="panel-heading">Detalle Quiebras</div>
+                        <div class="panel-body">
+                            @(Html.jqGrid("gridQuiebraLiquidaciones")
+                                    .addColumn(new Column("Cliente").setLabel("Cliente")
+                                    .setSortable(true)
+                                    .setWidth(150))
+                                    .addColumn(new Column("Rut").setLabel("Rut")
+                                    .setSortable(true)
+                                    .setWidth(60))
+                                    .addColumn(new Column("Deudor").setLabel("Deudor")
+                                    .setSortable(true)
+                                    .setWidth(110))
+                                    .addColumn(new Column("Asegurado").setLabel("Asegurado")
+                                    .setSortable(true)
+                                    .setWidth(110))
+                                    .addColumn(new Column("FecPublicacion").setLabel("Publicación")
+                                    .setSortable(true).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                    .setWidth(70))
+                                    .addColumn(new Column("Dias").setLabel("Días")
+                                    .setSortable(true).setAlign(Align.center).setCustomFormatter("formatTrackingPublicacionLiquidacion")
+                                    .setWidth(40))
+                                        // settings
+                                    .setCaption("Liquidaciones")
+                                    .setRequestType(RequestType.get)
+                                    .setUrl("~/Judicial/ListarPanelQuiebraReporteLiquidaciones/")
+                                    .setAltRows(true)
+                                    .setAltClass("altGridRows")
+                                    .setAutoWidth(true)
+                                    .setRowNum(10)
+                                    .setRowList(new int[] { 10, 20, 100 })
+                                    .setViewRecords(true)
+                                    .setSortName("Deudor")
+                                    .setSortOrder(SortOrder.asc)
+                                    .setPager("pagerQuiebraLiquidaciones")
+                                    .setPagerPos(PagerPos.center)
+                                    .setPgButtons(true)
+                                    .setCellEdit(false)
+                                    .setCellSubmit(CellSubmit.clientArray)
+                                    .setShrinkToFit(false)
+                                    .setGrouping(true)
+                                    .setGroupingView("groupField: ['Cliente'],groupColumnShow: [false], groupText: ['<b>{0} - {1} Deudor(es)</b>'], groupCollapse: false, groupOrder: ['asc'],groupDataSorted: true")
+                                    .Render()
+                                )
+                            <br />
+                            @(Html.jqGrid("gridQuiebraReorganizaciones")
+                                    .addColumn(new Column("Cliente").setLabel("Cliente")
+                                    .setSortable(true)
+                                    .setWidth(150))
+                                    .addColumn(new Column("Rut").setLabel("Rut")
+                                    .setSortable(true)
+                                    .setWidth(60))
+                                    .addColumn(new Column("Deudor").setLabel("Deudor")
+                                    .setSortable(true)
+                                    .setWidth(110))
+                                    .addColumn(new Column("Asegurado").setLabel("Asegurado")
+                                    .setSortable(true)
+                                    .setWidth(110))
+                                    .addColumn(new Column("FecPublicacion").setLabel("Publicación")
+                                    .setSortable(true).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                    .setWidth(70))
+                                    .addColumn(new Column("Dias").setLabel("Días")
+                                    .setSortable(true).setAlign(Align.center).setCustomFormatter("formatTrackingPublicacionReorganizacion")
+                                    .setWidth(40))
+                                        // settings
+                                    .setCaption("Reorganizaciones")
+                                    .setRequestType(RequestType.get)
+                                    .setUrl("~/Judicial/ListarPanelQuiebraReporteReorganizaciones/")
+                                    .setAltRows(true)
+                                    .setAltClass("altGridRows")
+                                    .setAutoWidth(true)
+                                    .setRowNum(10)
+                                    .setRowList(new int[] { 10, 20, 100 })
+                                    .setViewRecords(true)
+                                    .setSortName("Deudor")
+                                    .setSortOrder(SortOrder.asc)
+                                    .setPager("pagerQuiebraReorganizacion")
+                                    .setPagerPos(PagerPos.center)
+                                    .setPgButtons(true)
+                                    .setCellEdit(false)
+                                    .setCellSubmit(CellSubmit.clientArray)
+                                    .setShrinkToFit(false)
+                                    .setGrouping(true)
+                                    .setGroupingView("groupField: ['Cliente'],groupColumnShow: [false], groupText: ['<b>{0} - {1} Deudor(es)</b>'], groupCollapse: false, groupOrder: ['asc'],groupDataSorted: true")
+                                    .Render()
+                                )
+                            <br />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

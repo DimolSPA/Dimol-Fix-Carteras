@@ -1,0 +1,120 @@
+﻿@model Dimol.Tesoreria.Models.BuscarCajaModel
+
+@{
+    ViewBag.Title = "Buscar Documentos Caja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  <div class="ui-widget-header ui-corner-all">
+    <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Deudor</span>
+
+   </div>
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarDeudor" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BuscarDeudor</legend>
+
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                @Html.ValidationMessageFor(model => model.NombreRutCliente)
+            </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3)
+            </div>
+            </div>
+           <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.Tipo)</div>
+                <div class="col">@Html.DropDownList("Tipo", null, new { @class= "ComboboxClassL", @onchange="TipoSeleccionado();"})
+            @Html.ValidationMessageFor(model => model.Tipo)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.TipoDocumento)</div>
+                <div class="col">@Html.DropDownList("TipoDocumento", null, new { @class= "ComboboxClassL"})
+            @Html.ValidationMessageFor(model => model.TipoDocumento)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.Empleado)</div>
+                <div class="col">@Html.DropDownList("Empleado", null, new { @class= "ComboboxClassL"})
+            @Html.ValidationMessageFor(model => model.Empleado)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.Numero)</div>
+                <div class="col">@Html.EditorFor(model => model.Numero)
+            @Html.ValidationMessageFor(model => model.Numero)</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.MontoDesde)</div>
+                <div class="col">@Html.EditorFor(model => model.MontoDesde)
+            @Html.ValidationMessageFor(model => model.MontoDesde)</div>
+                <div class="col" style="width:60px">@Html.LabelFor(model => model.MontoHasta)</div>
+                <div class="col">@Html.TextBoxFor(model => model.MontoHasta)
+            @Html.ValidationMessageFor(model => model.MontoHasta)</div>
+            </div>
+            <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnBuscarDocumentosCaja();" /></div>
+         </div>
+    </fieldset>
+}
+<br />
+@(Html.jqGrid("gridDocumentoCaja")
+    
+    .addColumn(new Column("Tipo").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("TipoDocumento").setLabel("Documento")
+        .setSortable(true)
+        .setWidth(110))
+    .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("NumeroCuenta").setLabel("Número").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("NombreCliente").setLabel("Cliente")
+        .setSortable(true)
+        .setWidth(150))
+    .addColumn(new Column("NombreDeudor").setLabel("Deudor")
+        .setSortable(true)
+        .setWidth(150))
+    .addColumn(new Column("Empleado").setLabel("Empleado")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Estado").setLabel("Estado")
+        .setSortable(true)
+        .setWidth(70))
+    
+    
+    // settings
+    .setCaption("Documentos Caja")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Tesoreria/GetDummy")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("TipoMovimiento, TipoDocumento, NumeroCuenta")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDocumentoCaja")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("DeudorCpbtSeleccionado(rowid)")
+    .Render()
+
+) 
+<br />
+          </div>
+</div>

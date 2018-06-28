@@ -1,0 +1,125 @@
+﻿@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+<style>
+    .progressLoading {
+        /*position:relative;*/
+        position: absolute;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 9999999;
+        background-color: #000000;
+        opacity: 0.2;
+    }
+</style>
+<div id="loadingmessage" style="display: none" class="progressLoading">
+    <img src="~/Images/ajax-loader.gif" />
+</div>
+<div class="tabla">
+    <div class="fila">
+        
+        <div class="col" style="float: right">
+            <input type="button" value="Aprobar" class="btn btn-info" onclick="fnAprobarAvenimiento();" />
+         
+        </div>
+    </div>
+
+</div>
+@Html.Hidden("RolIdHidden")
+@Html.Hidden("PclidHidden")
+@Html.Hidden("CtcidHidden")
+<fieldset class="fieldset">
+    <legend class="legend">Avenimiento</legend>
+    <div class="tabla" style="border:solid 1px">
+        <div class="fila">
+            <div class="col" style="width:260px;margin-left:10px"><b>Avenimiento</b></div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:260px">Fecha Avenimiento</div>
+            <div class="col">@Html.JQueryUI().Datepicker("FechaAvenimiento").ShowButtonPanel(true).ShowWeek(false).Disabled(true)</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:260px">Monto Avenimiento</div>
+            <div class="col" style="width:200px; height:23px">@Html.TextBox("MontoAvenimiento", null, new { @class = "textboxClassM", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);", @readonly = "readonly" })</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:260px">Cuotas Avenimiento</div>
+            <div class="col" style="width:200px; height:23px">@Html.TextBox("CuotasAvenimiento", null, new { @class = "textboxClassM", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);", @readonly = "readonly" })</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:260px">Monto Cuota Avenimiento</div>
+            <div class="col" style="width:200px; height:23px">@Html.TextBox("MontoCuotaAvenimiento", null, new { @class = "textboxClassM", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);", @readonly = "readonly" })</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:260px">Monto Ultima Cuota Avenimiento</div>
+            <div class="col" style="width:200px; height:23px">@Html.TextBox("MontoUltimaCuotaAvenimiento", null, new { @class = "textboxClassM", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);", @readonly = "readonly" })</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:260px">Fecha Primera Cuota Avenimiento</div>
+            <div class="col">@Html.JQueryUI().Datepicker("FechaPrimeraCuotaAvenimiento").ShowButtonPanel(true).ShowWeek(false).Disabled(true)</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:260px">Fecha Ultima Cuota Avenimiento</div>
+            <div class="col">@Html.JQueryUI().Datepicker("FechaUltimaCuotaAvenimiento").ShowButtonPanel(true).ShowWeek(false).Disabled(true)</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:260px">Interes</div>
+            <div class="col" style="width:200px; height:23px; padding-bottom:30px">@Html.TextBox("InteresAvenimiento", null, new { @class = "textboxRut", @style = "text-align:right", @onkeypress = "return CheckNumeric(event);", @onkeyup = "FormatCurrency(this,event);" })</div>
+        </div>
+       
+    </div>
+</fieldset>
+<br />
+                    @(Html.jqGrid("gridDocAvenimiento")
+                        .addColumn(new Column("Tipo").setLabel("Tipo")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(70))
+                        .addColumn(new Column("Numero").setLabel("Número")
+                        .setEditable(false).setAlign(Align.center)
+                                .setSortable(true)
+                                .setWidth(80))
+                        .addColumn(new Column("Monto").setLabel("Monto")
+                                .setEditable(false)
+                                .setSortable(true)
+                        .setAlign(Align.right).setFormatter(Formatters.number)
+                                .setWidth(80))
+                        .addColumn(new Column("FechaVencimiento").setLabel("Fec. Venc.")
+                                .setEditable(false).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                        .setSortable(true).setAlign(Align.center)
+                                .setWidth(65))
+                            .addColumn(new Column("Moneda").setLabel("Moneda")
+                                .setHidden(false)
+                                .setEditable(false)
+                                .setWidth(60))
+                            .addColumn(new Column("Saldo").setLabel("Saldo")
+                                .setHidden(false)
+                        .setEditable(false).setAlign(Align.right).setFormatter(Formatters.number)
+                                .setWidth(80))
+
+
+                        // settings
+                            .setCaption("Documentos")
+                            .setRequestType(RequestType.get)
+                            .setUrl("~/Cartera/GetDummy")
+                            .setAltRows(true)
+                            .setAltClass("altGridRows")
+                            .setAutoWidth(false)
+                            .setRowNum(10)
+                            .setRowList(new int[] { 10, 30, 50 })
+                            .setViewRecords(true)
+                            .setSortName("Tipo, Numero")
+                            .setSortOrder(SortOrder.asc)
+                            .setPager("pagerDocAsignado")
+                            .setPagerPos(PagerPos.center)
+                            .setPgButtons(true)
+                            .setCellEdit(false)
+                            .setCellSubmit(CellSubmit.clientArray)
+                            .setFooterRow(true)
+                            .onLoadComplete("var grid = $('#gridDocAsignado'); grid.jqGrid('footerData','set', {Tipo: 'Total:', Monto: totalMontoAsignado , Saldo: totalSaldoAsignado });")
+                            .Render()
+
+)

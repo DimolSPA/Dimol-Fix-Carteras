@@ -1,0 +1,106 @@
+﻿@model Dimol.Carteras.Models.MoverCarteraModel
+@{
+    ViewBag.Title = "Mover Cartera";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Documentos a Mover</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmMoverCartera" }))
+        {
+            @Html.ValidationSummary(true)
+        
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                <div class="col" style="width:400px">
+                    @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnActualizarMoverCartera")
+                    @Html.ValidationMessageFor(model => model.NombreRutCliente)
+                </div>
+                <div class="col" style="float: right">
+                    <input type="button" value="Mover Documentos" onclick="fnMoverDocumentos();" />
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+                <div class="col">
+                    @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnActualizarMoverCartera")
+                    @Html.ValidationMessageFor(model => model.NombreRutDeudor)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.Estado)</div>
+                <div class="col">@Html.DropDownList("Estado", null, new { @class = "ComboboxClass", onchange = "" })</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model => model.EstadoDocumento)</div>
+                <div class="col">
+                    @Html.JQueryUI().AutocompleteFor(model => model.EstadoDocumento, Url.Action("BuscarEstadoCartera"), "EstadoDocumentoDesc", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                    @Html.ValidationMessageFor(model => model.EstadoDocumento)
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:120px">@Html.LabelFor(model=> model.Comentario)</div>
+                <div class="col">@Html.TextArea("Comentario", "", 4, 55, new { })</div>
+            </div>
+        </div>
+        }
+        <br />
+        @(Html.jqGrid("gridMoverCartera")
+    .addColumn(new Column("Tipo").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(150))
+    .addColumn(new Column("Numero").setLabel("Número").setAlign(Align.right)
+        .setSortable(true)
+        .setWidth(70))
+            .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+            .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+            .addColumn(new Column("UltimoEstado").setLabel("Ult. Estado")
+        .setSortable(true)
+        .setWidth(150))
+   .addColumn(new Column("Estado").setLabel("Estado")
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("FechaVencimiento").setLabel("Fecha Venc.").setAlign(Align.center)
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(70))
+
+    // settings
+    .setCaption("Documentos")
+    .setRequestType(RequestType.get)
+    .setUrl("~/cartera/GetMoverCartera/?Pclid=0&Ctcid=0")
+    .setAltRows(true)
+    .setMultiSelect(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(100)
+    .setRowList(new int[] { 10, 50, 100, 500 })
+    .setViewRecords(true)
+    .setSortName("Estado")
+    .setSortOrder(SortOrder.desc)
+    .setPager("pagerMoverCartera")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("UpdateIdsOfSelectedRows(rowid, status)")
+    .onSelectAll("fnOnSelectAll(aRowids, status)")
+    .onLoadComplete("fnOnLoadComplete(this)")
+    .Render()
+
+        )
+        <br />
+    </div>
+</div>
+

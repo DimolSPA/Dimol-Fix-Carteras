@@ -1,0 +1,152 @@
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Debug\Dimol.Test.pdb
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\obj\Debug\Dimol.Test.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\obj\Debug\Dimol.Test.dll
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\obj\Debug\Dimol.Test.pdb
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Debug\Dimol.dto.dll
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Debug\Dimol.dto.pdb
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Debug\Dimol.dao.dll
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Debug\Dimol.dao.pdb
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Debug\CYPH.dll
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Debug\CYPH.pdb
+d:\documents\visual studio 2012\Projects\Dimol\Dimol.Test\bin\Debug\CYPH.xml
+D:\Documents\Visual Studio 2012\Projects\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.dll
+D:\Documents\Visual Studio 2012\Projects\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.pdb
+D:\Documents\Visual Studio 2012\Projects\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll.config
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll.config
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.Test.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.dao.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.dto.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\CYPH.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\HtmlAgilityPack.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.dao.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.dto.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\CYPH.pdb
+D:\_Codigo_Dimol\Dimol\Dimol.Test\bin\Debug\CYPH.xml
+D:\_Codigo_Dimol\Dimol\Dimol.Test\obj\Debug\Dimol.Test.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\Dimol\Dimol.Test\obj\Debug\Dimol.Test.dll
+D:\_Codigo_Dimol\Dimol\Dimol.Test\obj\Debug\Dimol.Test.pdb
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll.config
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\Dimol.Test.pdb
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.dll
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\Dimol.dao.dll
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\Dimol.dto.dll
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\CYPH.dll
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\HtmlAgilityPack.dll
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.pdb
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\Dimol.dao.pdb
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\Dimol.dto.pdb
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\CYPH.pdb
+D:\_REPO_DIMOL\Dimol\Dimol.Test\bin\Debug\CYPH.xml
+D:\_REPO_DIMOL\Dimol\Dimol.Test\obj\Debug\Dimol.Test.csprojResolveAssemblyReference.cache
+D:\_REPO_DIMOL\Dimol\Dimol.Test\obj\Debug\Dimol.Test.dll
+D:\_REPO_DIMOL\Dimol\Dimol.Test\obj\Debug\Dimol.Test.pdb
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll.config
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\Dimol.Test.pdb
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.dll
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\Dimol.dao.dll
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\Dimol.dto.dll
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\CYPH.dll
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\HtmlAgilityPack.dll
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.pdb
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\Dimol.dao.pdb
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\Dimol.dto.pdb
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\CYPH.pdb
+C:\DimolCodigoFuente\Dimol\Dimol.Test\bin\Debug\CYPH.xml
+C:\DimolCodigoFuente\Dimol\Dimol.Test\obj\Debug\Dimol.Test.dll
+C:\DimolCodigoFuente\Dimol\Dimol.Test\obj\Debug\Dimol.Test.pdb
+C:\DimolCodigoFuente\Dimol\Dimol.Test\obj\Debug\Dimol.Test.csprojResolveAssemblyReference.cache
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll.config
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\Dimol.Test.pdb
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.dll
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\Dimol.dao.dll
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\Dimol.dto.dll
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\CYPH.dll
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\HtmlAgilityPack.dll
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.pdb
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\Dimol.dao.pdb
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\Dimol.dto.pdb
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\CYPH.pdb
+D:\17-REL-01\Dimol\Dimol.Test\bin\Debug\CYPH.xml
+D:\17-REL-01\Dimol\Dimol.Test\obj\Debug\Dimol.Test.csprojResolveAssemblyReference.cache
+D:\17-REL-01\Dimol\Dimol.Test\obj\Debug\Dimol.Test.dll
+D:\17-REL-01\Dimol\Dimol.Test\obj\Debug\Dimol.Test.pdb
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll.config
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\Dimol.Test.pdb
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.dll
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\Dimol.dao.dll
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\Dimol.dto.dll
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\CYPH.dll
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\HtmlAgilityPack.dll
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.pdb
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\Dimol.dao.pdb
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\Dimol.dto.pdb
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\CYPH.pdb
+C:\FuentesDimol2017\Dimol\Dimol.Test\bin\Debug\CYPH.xml
+C:\FuentesDimol2017\Dimol\Dimol.Test\obj\Debug\Dimol.Test.csprojResolveAssemblyReference.cache
+C:\FuentesDimol2017\Dimol\Dimol.Test\obj\Debug\Dimol.Test.dll
+C:\FuentesDimol2017\Dimol\Dimol.Test\obj\Debug\Dimol.Test.pdb
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll.config
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.Test.pdb
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.dll
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.dao.dll
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.dto.dll
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\CYPH.dll
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.pdb
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.dao.pdb
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\Dimol.dto.pdb
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\CYPH.pdb
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\bin\Debug\CYPH.xml
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\obj\Debug\Dimol.Test.csprojResolveAssemblyReference.cache
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\obj\Debug\Dimol.Test.dll
+C:\Users\Maryury\Documents\Dimol\Dimol\Dimol.Test\obj\Debug\Dimol.Test.pdb
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll.config
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\Dimol.Test.pdb
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.dll
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\Dimol.dao.dll
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\Dimol.dto.dll
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\CYPH.dll
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\HtmlAgilityPack.dll
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.pdb
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\Dimol.dao.pdb
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\Dimol.dto.pdb
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\CYPH.pdb
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\CYPH.xml
+C:\FuentesDimol2018\Dimol\Dimol.Test\bin\Debug\es\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\FuentesDimol2018\Dimol\Dimol.Test\obj\Debug\Dimol.Test.csprojResolveAssemblyReference.cache
+C:\FuentesDimol2018\Dimol\Dimol.Test\obj\Debug\Dimol.Test.csproj.CoreCompileInputs.cache
+C:\FuentesDimol2018\Dimol\Dimol.Test\obj\Debug\Dimol.Test.dll
+C:\FuentesDimol2018\Dimol\Dimol.Test\obj\Debug\Dimol.Test.pdb
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll.config
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\Dimol.Test.dll
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\Dimol.Test.pdb
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.dll
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\Dimol.dao.dll
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\Dimol.dto.dll
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\CYPH.dll
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\HtmlAgilityPack.dll
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\Dimol.bcp.pdb
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\Dimol.dao.pdb
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\Dimol.dto.pdb
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\CYPH.pdb
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\CYPH.xml
+C:\DimolSoluciones\Dimol\Dimol.Test\bin\Debug\es\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\DimolSoluciones\Dimol\Dimol.Test\obj\Debug\Dimol.Test.csprojAssemblyReference.cache
+C:\DimolSoluciones\Dimol\Dimol.Test\obj\Debug\Dimol.Test.csproj.CoreCompileInputs.cache
+C:\DimolSoluciones\Dimol\Dimol.Test\obj\Debug\Dimol.Test.csproj.CopyComplete
+C:\DimolSoluciones\Dimol\Dimol.Test\obj\Debug\Dimol.Test.dll
+C:\DimolSoluciones\Dimol\Dimol.Test\obj\Debug\Dimol.Test.pdb

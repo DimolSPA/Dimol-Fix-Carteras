@@ -1,0 +1,257 @@
+﻿@model Dimol.Caja.Models.RemesaModel
+@{
+    ViewBag.Title = "Remesa";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+}
+
+<br />
+<h2>@ViewBag.Title</h2>
+@using Mvc.HtmlHelpers
+
+<style type="text/css" media="screen">
+    th.ui-th-column div {
+        white-space: normal !important;
+        height: auto !important;
+        padding: 2px;
+    }
+   
+</style>
+
+<script type="text/javascript">
+   window.onload = function () {
+       $("#t_gridMovimientosConciliadosAprobado").append("<div align='right'><input type='button' value='Calcular Remesa' id='btnVerRemesa' onclick='fnVerFormularioRemesa();' /></div>");
+
+    }
+</script>
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabRemesas" })))
+        {
+            t.Tab("Calculo Remesa", "tab1");
+            t.Tab("Remesas", "tab2");
+            using (t.BeginPanel())
+            {
+                using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmGridRemesas" }))
+                {
+                    @Html.HiddenFor(model => model.IdsConciliacion)
+                    @Html.HiddenFor(model => model.Pclid)
+                    <div class="tabla">
+                        <div class="fila">
+                            <div class="col" style="width:125px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                            <div class="col">
+                                @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnCargarGridConciliacionAprobados")
+
+                            </div>
+                            <div class="col" style="float:right; display:none">
+
+                                <input type="button" value="Calcular Remesa" id="btnVerRemesa" onclick="fnVerFormularioRemesa();" />
+
+                            </div>
+                        </div>
+                    </div>
+                    @(Html.jqGrid("gridMovimientosConciliadosAprobado")
+            .addColumn(new Column("FechaConciliacion").setLabel("Fecha Conciliación")
+            .setSortable(true).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+            .setWidth(80))
+            .addColumn(new Column("comprobante").setLabel("Comp")
+            .setCustomFormatter("fnBotonVerComprobanteGridRemesa")
+            .setEditable(false)
+            .setWidth(40)
+            .setAlign(Align.center))
+
+            .addColumn(new Column("ConciliacionId").setLabel("ConciliacionId")
+            .setEditable(false).setHidden(true)
+            .setSortable(true)
+            .setWidth(20))
+            .addColumn(new Column("MovimientoId").setLabel("MovimientoId")
+            .setEditable(false).setHidden(true)
+            .setSortable(true)
+            .setWidth(20))
+            .addColumn(new Column("CustodiaId").setLabel("CustodiaId")
+            .setEditable(false).setHidden(true)
+            .setSortable(true)
+            .setWidth(20))
+            .addColumn(new Column("Pclid").setLabel("Pclid")
+            .setEditable(false).setHidden(true)
+            .setSortable(true)
+            .setWidth(20))
+            .addColumn(new Column("Ctcid").setLabel("Ctcid")
+            .setEditable(false).setHidden(true)
+            .setSortable(true)
+            .setWidth(20))
+            .addColumn(new Column("GestorId").setLabel("GestorId")
+            .setEditable(false).setHidden(true)
+            .setSortable(true)
+            .setWidth(20))
+            .addColumn(new Column("NumComprobante").setLabel("Nº Comprobante")
+            .setEditable(false)
+            .setSortable(true)
+            .setWidth(80))
+            .addColumn(new Column("RutCliente").setLabel("Rut Cliente")
+            .setEditable(false)
+            .setSortable(true)
+            .setWidth(80))
+            .addColumn(new Column("Cliente").setLabel("Cliente")
+            .setEditable(false)
+            .setSortable(true)
+            .setWidth(100))
+            .addColumn(new Column("RutDeudor").setLabel("Rut Deudor")
+            .setSortable(true)
+            .setWidth(80))
+            .addColumn(new Column("Deudor").setLabel("Deudor")
+            .setEditable(false)
+            .setSortable(true)
+            .setWidth(200))
+            .addColumn(new Column("Capital").setLabel("Capital").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(80))
+            .addColumn(new Column("Interes").setLabel("Interes").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(80))
+            .addColumn(new Column("Honorarios").setLabel("Honorarios").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(80))
+            .addColumn(new Column("OtrosGastos").setLabel("Gastos Jud. y Pre").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(80))
+            .addColumn(new Column("MontoRecuperado").setLabel("Monto Recuperado").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(80))
+            // settings
+            .setCaption("Comprobantes Aprobados")//.setWidth(800)
+            .setAutoWidth(true)
+            .setMultiSelect(true)
+            .setRequestType(RequestType.get)
+            .setUrl("~/Tesoreria/ListarMovimientosConciliadoAprobadoGrilla/?pclid=")
+            .setAltRows(true)
+            .setAltClass("altGridRows")
+            .setRowNum(1000)
+            .setRowList(new int[] { 10, 30, 50 })
+            .setViewRecords(true)
+            .setSortName("ConciliacionId")
+            .setSortOrder(SortOrder.asc)
+            .setPager("pagerMovConciliadoApr")
+            .setPagerPos(PagerPos.center)
+            .setPgButtons(true)
+            .setCellEdit(false)
+            .setCellSubmit(CellSubmit.clientArray)
+            .setAutoWidth(true)
+            .setShrinkToFit(false)
+            .setScroll(true)
+            .setHeight(370)
+            .setGrouping(true)
+            .setGroupingView("groupField: ['Cliente'],groupColumnShow: [false], groupText: ['<b>{0} - {1} Comprobantes(s)</b>'], groupCollapse: false, groupOrder: ['desc'],groupDataSorted: true")
+            .onLoadComplete("fnOnLoadCompleteConciliaIds(this)")
+            .onSelectRow("UpdateidsOfSelectedRowsRemesas(rowid, status)")
+            .onSelectAll("fnOnSelectAllRemesas(aRowids, status)")
+            .setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+            .Render()
+
+                    )
+                }
+            }
+
+            using (t.BeginPanel())
+            {
+
+                @(Html.jqGrid("gridRemesasGeneradas")
+
+            .addColumn(new Column("informe").setLabel("Comp")
+            .setCustomFormatter("fnBotonVerComprobanteGridRemesa")
+            .setEditable(false)
+            .setWidth(40)
+            .setAlign(Align.center))
+
+            .addColumn(new Column("Id").setLabel("Nº Remesa")
+            .setEditable(false)
+            .setSortable(true)
+            .setWidth(50))
+            .addColumn(new Column("Cliente").setLabel("Cliente")
+            .setEditable(false)
+            .setSortable(true)
+            .setWidth(100))
+            .addColumn(new Column("CapitalRecuperado").setLabel("Capital Recuperado").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(80))
+            .addColumn(new Column("InteresRecuperado").setLabel("Interes Recuperado").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(80))
+            .addColumn(new Column("HonorarioRecuperado").setLabel("Honorario Recuperado").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(80))
+            .addColumn(new Column("Capital").setLabel("Capital").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(70))
+            .addColumn(new Column("Interes").setLabel("Interes").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(70))
+            .addColumn(new Column("Honorario").setLabel("Honorario").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(70))
+            .addColumn(new Column("TotalFactura").setLabel("Total Factura").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(80))
+            .addColumn(new Column("TotalDimol").setLabel("TotalDimol").setAlign(Align.right).setFormatter(Formatters.integer)
+            .setSortable(true)
+            .setWidth(80))
+             .addColumn(new Column("FechaRemesa").setLabel("Fecha Remesa")
+                .setSortable(true).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setWidth(70))
+            // settings
+            .setCaption("Remesas")//.setWidth(800)
+            .setAutoWidth(true)
+            .setRequestType(RequestType.get)
+            .setUrl("~/Tesoreria/ListarRemesasGeneradasGrilla")
+            .setAltRows(true)
+            .setAltClass("altGridRows")
+            .setRowNum(1000)
+            .setRowList(new int[] { 10, 30, 50 })
+            .setViewRecords(true)
+            .setSortName("Id")
+            .setSortOrder(SortOrder.asc)
+            .setPager("pagerRemesas")
+            .setPagerPos(PagerPos.center)
+            .setPgButtons(true)
+            .setCellEdit(false)
+            .setCellSubmit(CellSubmit.clientArray)
+            .setAutoWidth(true)
+            .setShrinkToFit(false)
+            .setScroll(true)
+            .setHeight(370)
+            .Render()
+
+                )
+
+            }
+        }
+
+
+    </div>
+</div>
+
+
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppFormCalculoRemesa" }).Draggable(true)
+        .AutoOpen(false)
+        .Modal(true)
+        .Title("Calculo Remesa")
+        .CloseOnEscape(true)
+        .Width(1000)
+        .Height(700)
+        ))
+{
+    <div id="loadingmessage" style="display: none" class="progressLoading">
+        <img src="~/Images/ajax-loader.gif" />
+    </div>
+}
+
+@Styles.Render("~/Content/caja")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

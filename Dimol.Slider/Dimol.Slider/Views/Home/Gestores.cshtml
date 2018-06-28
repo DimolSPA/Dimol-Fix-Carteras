@@ -1,0 +1,230 @@
+﻿@model Dimol.Slider.Models.GestorCentralModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Gestores</title>
+    @Styles.Render("~/Content/bootstrap.css")
+    <style>
+        #imgGestor:hover{
+            cursor: pointer;
+            opacity: 0.5;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            traeGestor();
+        }
+
+        function guardarGestor() {
+
+            if ($("#Anexo").val() != '' && $("#Nombre").val() != '' && $("#Cartera").val() != '' && $("#Sucursal").val() != ''){
+
+                var url = "/Home/GuardarGestor/?anexo=" + $("#Anexo").val() + "&Nombre=" + $("#Nombre").val() + "&Cartera=" + $("#Cartera").val() + "&Sucursal=" + $("#Sucursal").val() + "&Disponible=" + $("#Disponible").prop('checked');
+
+                $.ajax({
+                    type: 'POST',
+                    url: url, // we are calling json method
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                        if(data > 0){
+                            alert("Datos ingresados con éxito");
+                        }
+                        else {
+                            alert("Hubo un problema al cargar los datos");
+                        }
+                        resetGestor();
+                      
+                    }
+
+                });
+
+            }
+            else {
+                alert("Ingrese todos los datos solicitados");
+            }
+        }
+
+        function traeGestor() {
+
+            if ($("#Anexo").val() != '' && !isNaN($("#Anexo").val())) {
+                var url = "/Home/TraeGestor/?anexo=" + $("#Anexo").val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: url, // we are calling json method
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+
+                        if (data.Anexo != '') {
+
+                            $("#Anexo").val(data.Anexo);
+                            $("#Nombre").val(data.Nombre);
+                            $("#Cartera").val(data.Cartera);
+                            $("#Sucursal").val(data.Sucursal);
+
+                            if (data.Disponible == "ACTIVO") $("#Disponible").prop('checked', true);
+                            else $("#Disponible").prop('checked', false);
+                                                                 
+                            if (data.Existe) {
+                                $("#imgGestor").prop('src', '/Res/empleados/' + data.Anexo + '.jpg'); 
+                            }
+                            else {
+                                $("#imgGestor").prop('src', '/Res/blank-avatar.jpg');
+                            }
+
+                            $("#file").val('');
+                        }
+                        else {                            
+                            resetGestor();
+                        }
+                    }
+
+                });
+            }
+            else {
+                resetGestor();
+            }
+
+        }
+
+        function eliminarGestor() {
+
+            if ($("#Anexo").val() != '' && !isNaN($("#Anexo").val()) && confirm("¿Está seguro que desea eliminar?")) {
+                var url = "/Home/EliminarGestor/?anexo=" + $("#Anexo").val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: url, // we are calling json method
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+
+                        if (data > 0) {
+                            alert("Datos eliminados con éxito");
+                        }
+                        else {
+                            alert("Hubo un problema al eliminar los datos");
+                        }
+                        resetGestor();
+                        
+                    }
+
+                });
+            }
+        }
+        
+        function resetGestor() {
+            $("#Anexo").val('');
+            $("#Nombre").val('');
+            $("#Cartera").val('');
+            $("#Sucursal").val('');
+            $("#Disponible").prop('checked', false);
+            $("#imgGestor").prop('src', '/Res/blank-avatar.jpg');
+            $("#file").val('');
+        }
+
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm("Gestores", "Home", FormMethod.Post, new { id = "frmGestores", enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        
+        
+        <div class="container">
+                <div class="row">
+                    <h1>Anexos de Gestores</h1><br />
+                </div>
+                <div class="row">
+                    <div class="col-sm-1">@Html.LabelFor(model => model.Anexo)</div>
+                    <div class="col-sm-3">
+                        @Html.TextBox("Anexo", null, new { @class = "form-control" })
+                    </div>
+                    <div class="col">
+                        @Html.ValidationMessageFor(model => model.Anexo)
+                        <input type="button" value="Buscar" id="btnBuscar" onclick="traeGestor()" class="btn btn-primary" />
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-sm-1">
+                        @Html.LabelFor(model => model.Nombre)
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBox("Nombre", null, new { @class = "form-control" })
+                    </div>
+                    <div class="col">
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-sm-1">
+                        @Html.LabelFor(model => model.Cartera)
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBox("Cartera", null, new { @class = "form-control" })
+                    </div>
+                    <div class="col">
+                        @Html.ValidationMessageFor(model => model.Cartera)
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-sm-1">
+                        @Html.LabelFor(model => model.Sucursal)
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBox("Sucursal", null, new { @class = "form-control" })
+                    </div>
+                    <div class="col">
+                        @Html.ValidationMessageFor(model => model.Sucursal)
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-sm-2">
+                        @Html.LabelFor(model => model.Disponible)
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.CheckBox("Disponible", false, new { @class = "custom-control-input" })
+                    </div>
+                    <div class="col">
+                        @Html.ValidationMessageFor(model => model.Disponible)
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-sm-1">
+                        <label for="file">Imagen:</label>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="file" name="file" id="file" />
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="submit" value="Subir" />
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="/Res/blank-avatar.jpg" id="imgGestor" height="140px" width="100px" />
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input type="button" value="Grabar" id="btnGrabar" onclick="guardarGestor()" class="btn btn-primary" />
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="button" value="Eliminar" id="btnEliminar" onclick="eliminarGestor()" class="btn btn-primary" />
+                    </div>
+                </div>
+
+            </div>
+    }
+    
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

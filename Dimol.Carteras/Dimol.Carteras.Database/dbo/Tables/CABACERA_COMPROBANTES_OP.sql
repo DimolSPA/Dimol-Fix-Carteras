@@ -1,0 +1,59 @@
+﻿CREATE TABLE [dbo].[CABACERA_COMPROBANTES_OP] (
+    [CBO_CODEMP]     INT             NOT NULL,
+    [CBO_SUCID]      INT             NOT NULL,
+    [CBO_TPCID]      INT             NOT NULL,
+    [CBO_NUMERO]     NUMERIC (15)    NOT NULL,
+    [CBO_NUMPROVCLI] VARCHAR (20)    NULL,
+    [CBO_PCLID]      NUMERIC (15)    NULL,
+    [CBO_FECEMI]     DATETIME        NULL,
+    [CBO_FECCPBT]    DATETIME        NULL,
+    [CBO_FECVENC]    DATETIME        NULL,
+    [CBO_FECENT]     DATETIME        NULL,
+    [CBO_CODMON]     INT             NULL,
+    [CBO_TIPCAMBIO]  DECIMAL (15, 2) NULL,
+    [CBO_FRPID]      INT             NULL,
+    [CBO_ANIO]       SMALLINT        NULL,
+    [CBO_MES]        SMALLINT        NULL,
+    [CBO_GLOSA]      VARCHAR (250)   NULL,
+    [CBO_PORCDESC]   DECIMAL (8, 2)  NULL,
+    [CBO_NETO]       DECIMAL (12, 2) NULL,
+    [CBO_IMPUESTOS]  DECIMAL (12, 2) NULL,
+    [CBO_RETENIDO]   DECIMAL (12, 2) NULL,
+    [CBO_DESCUENTOS] DECIMAL (12, 2) NULL,
+    [CBO_FINAL]      DECIMAL (15, 2) NULL,
+    [CBO_SALFO]      DECIMAL (15, 2) NULL,
+    [CBO_ORDCOMP]    VARCHAR (20)    NULL,
+    [CBO_GASTJUD]    CHAR (1)        NULL,
+    [CBO_VDEID]      INT             NULL,
+    [CBO_ESTADO]     CHAR (1)        NULL,
+    [CBO_PCLRUT]     VARCHAR (20)    NULL,
+    [CBO_PCLNOMBRE]  VARCHAR (500)   NULL,
+    [CBO_PCLAPEPAT]  VARCHAR (200)   NULL,
+    [CBO_PCLAPEMAT]  VARCHAR (200)   NULL,
+    [CBO_PCLNOMFANT] VARCHAR (800)   NULL,
+    [CBO_FPINOMBRE]  VARCHAR (100)   NULL,
+    [CBO_TCINOMBRE]  VARCHAR (200)   NULL,
+    [CBO_IDINOMBRE]  VARCHAR (80)    NULL,
+    [CBO_MONNOMBRE]  VARCHAR (80)    NULL,
+    [CBO_IDID]       INT             NULL,
+    [CBO_TNTID]      INT             NULL,
+    [CBO_TGDID]      INT             NULL,
+    [CBO_TTLID]      INT             NULL,
+    [CBO_EXENTO]     DECIMAL (15, 2) NULL,
+    [CBO_PCSID]      INT             NULL,
+    [CBO_GIRID]      INT             NULL,
+    [CBO_FECCONT]    DATETIME        NULL,
+    [CBO_FECOC]      DATETIME        NULL,
+    CONSTRAINT [PK_CABACERA_COMPROBANTES_OP] PRIMARY KEY CLUSTERED ([CBO_CODEMP] ASC, [CBO_SUCID] ASC, [CBO_TPCID] ASC, [CBO_NUMERO] ASC),
+    CONSTRAINT [FK_CABACERA_CABCPBT_O_CABACERA] FOREIGN KEY ([CBO_CODEMP], [CBO_SUCID], [CBO_TPCID], [CBO_NUMERO]) REFERENCES [dbo].[CABACERA_COMPROBANTES] ([CBC_CODEMP], [CBC_SUCID], [CBC_TPCID], [CBC_NUMERO])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[CABACERA_COMPROBANTES_OP]([CBO_CODEMP] ASC, [CBO_SUCID] ASC, [CBO_TPCID] ASC, [CBO_NUMERO] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena los distintos datos de la cabecera pero de forma optimizada', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'CABACERA_COMPROBANTES_OP';
+

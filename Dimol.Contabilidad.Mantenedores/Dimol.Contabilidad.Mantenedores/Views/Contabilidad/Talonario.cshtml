@@ -1,0 +1,296 @@
+﻿@model Dimol.Contabilidad.Mantenedores.Models.TalonarioModel
+
+@{
+    ViewBag.Title = "Talonario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Talonario</h2>
+<br />
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmTalonario" }))
+{
+    @Html.ValidationSummary(true)
+            
+        <div class="tabla">
+
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Talonarios)</div>
+                <div class="col">@Html.DropDownList("Talonarios", null, new { @class= "ComboboxClassL",  onchange="fnBuscarTalonario()"})</div>
+                
+            </div>
+            
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Nombre)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("Nombre", null, new { @class = "textboxClass" })</div>
+
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.UltimoNumero)</div>
+                <div class="col" style="width:300px; height:23px">@Html.TextBox("UltimoNumero", null, new { @class = "textboxRut" })</div>
+
+            </div>
+
+        </div>
+       
+        <br />
+        <div class="tabla">
+                <div class="fila">
+                    <div class="col">
+                        @(Html.jqGrid("gridSinAsignar")
+                        .addColumn(new Column("CodEmp").setLabel("CodEmp")
+                            .setHidden(true)    
+                            .setSortable(true)
+                            .setWidth(50))
+                        .addColumn(new Column("tac_tacid").setLabel("Id")
+                            .setHidden(true)
+                            .setEditable(false)
+                            .setWidth(50))
+                        .addColumn(new Column("tac_nombre").setLabel("Nombre")
+                            .setHidden(false)
+                            .setEditable(false)
+                            .setWidth(150))
+                          .addColumn(new Column("tpc_talonario").setLabel("Seleccione")
+                            .setEditable(true)
+                            .setAlign(Align.center)
+                            .setWidth(20)
+                            //.setHidden(true)
+                            .setEditRules("edithidden:true")
+                            .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+                            .setEditOptions("value:getTrueFalse()")) 
+                          
+
+                        // settings
+                        .setCaption("Sin Asignar").setWidth(400)
+                        .setRequestType(RequestType.get)
+                        .setUrl("~/Contabilidad/GetSinAsignar/?id="+ ViewBag.idTalonario)
+                        .setAltRows(true)
+                        .setAltClass("altGridRows")
+                        .setAutoWidth(false)
+                        .setRowNum(10)
+                        .setRowList(new int[] { 10, 30, 50 })
+                        .setViewRecords(true)
+                        .setSortName("nombre")
+                        .setSortOrder(SortOrder.asc)
+                        .setPager("pagerGetConfiguracion")
+                        .setPagerPos(PagerPos.center)
+                        .setPgButtons(true)
+                        .setCellEdit(false)
+                        .setCellSubmit(CellSubmit.clientArray)
+                        .setNavEdit(ViewBag.Edit)
+                        .setEditUrl("/Empresa/OperEmpresaConfiguracion")
+                        .setNavAdd(ViewBag.Add)
+                        .setAddUrl("/Empresa/OperEmpresaConfiguracion")
+                        .setNavDel(ViewBag.Del)
+                        .setDelUrl("/Empresa/OperEmpresaConfiguracion")
+                        .setExcelExport("/Empresa/ExportToExcelConfiguracion")
+                        .Render()
+
+                    )
+
+                    </div>
+
+                    <div class="col">
+                        @(Html.jqGrid("gridAsignadas")
+                        .addColumn(new Column("CodEmp").setLabel("CodEmp")
+                            .setHidden(true)    
+                            .setSortable(true)
+                            .setWidth(50))
+                        .addColumn(new Column("tac_tacid").setLabel("Id")
+                            .setHidden(true)
+                            .setEditable(false)
+                            .setWidth(50))
+                        .addColumn(new Column("tac_nombre").setLabel("Nombre")
+                            .setHidden(false)
+                            .setEditable(false)
+                            .setWidth(150))
+                          .addColumn(new Column("tpc_talonario").setLabel("Seleccione")
+                            .setEditable(false)
+                            .setAlign(Align.center)
+                            .setEditable(true)
+                            .setWidth(20)
+                            //.setHidden(true)
+                            //.setEditRules("edithidden:true")
+                            .setEditType(EditType.checkbox).setFormatter(Formatters.checkbox)
+                            .setEditOptions("value:getTrueFalse()")) 
+                          
+
+                        // settings
+                        .setCaption("Asignadas").setWidth(400)
+                        .setRequestType(RequestType.get)
+                        .setUrl("~/Contabilidad/GetAsignados/?id="+ ViewBag.idTalonario)
+                        .setAltRows(true)
+                        .setAltClass("altGridRows")
+                        .setAutoWidth(false)
+                        .setRowNum(10)
+                        .setRowList(new int[] { 10, 30, 50 })
+                        .setViewRecords(true)
+                        .setSortName("nombre")
+                        .setSortOrder(SortOrder.asc)
+                        .setPager("pagerGetConfiguracion")
+                        .setPagerPos(PagerPos.center)
+                        .setPgButtons(true)
+                        .setCellEdit(false)
+                        .setCellSubmit(CellSubmit.clientArray)
+                        .setNavEdit(ViewBag.Edit)
+                        .setEditUrl("/Empresa/OperEmpresaConfiguracion")
+                        .setNavAdd(ViewBag.Add)
+                        .setAddUrl("/Empresa/OperEmpresaConfiguracion")
+                        .setNavDel(ViewBag.Del)
+                        .setDelUrl("/Empresa/OperEmpresaConfiguracion")
+                        .setExcelExport("/Empresa/ExportToExcelConfiguracion")
+                        .Render()
+
+                    )
+
+                    </div>
+                </div>
+            </div>  
+}
+       </div>
+    <div class="col" style="float:right"><input type="button" value="Guardar" onclick="fnGuardarTalonario();" /></div>
+    </div>
+    
+   
+<script>
+    function fnBuscarTalonario() {
+        var newUrl = "/Contabilidad/GetTalonario/?"
+        //alert("FUNCION SCRIPT")
+
+        newUrl += "&id=" + $("#Talonarios").val()
+        
+        
+        if ($('#Talonarios').val() == "" ) {
+
+            alert("Debe seleccionar Talonario.");
+        }
+        else {
+            $.ajax({
+                type: 'POST',
+                url: newUrl, // we are calling json method
+                dataType: 'json',
+                async: true,
+                success: function (data) {
+                    if (data != -1) {
+                        $("#Nombre").val(data.tac_nombre);
+                        $("#UltimoNumero").val(data.tac_numero);
+                    }
+                },
+                error: function (ex) {
+                    alert('Error al seleccionar Talonario.' + ex);
+                }
+
+            });
+        }
+
+        var newUrl1 = "/Contabilidad/GetSinAsignar/?"
+        newUrl1 += "&id=" + $("#Talonarios").val()
+
+        var newUrl2 = "/Contabilidad/GetAsignados/?"
+        newUrl2 += "&id=" + $("#Talonarios").val()
+
+        jQuery("#gridSinAsignar").jqGrid().setGridParam({ url: newUrl1 }).trigger('reloadGrid', [{ page: 1 }])
+        jQuery("#gridAsignadas").jqGrid().setGridParam({ url: newUrl2 }).trigger('reloadGrid', [{ page: 1 }])
+    }
+
+    function fnGuardarTalonario() {
+
+       /* var s;
+        s = idsOfSelectedRows;
+        //s = $("#gridSinAsignar").jqGrid('getGridParam', 'selarrrow');
+        var postData = { ids: s };
+        
+        if (s.length > 0) {
+            alert(postData);
+            $.ajax({
+                type: 'POST',
+
+                url: "/Contabilidad/GuardarTalonario/?id="+ $("#Talonarios").val() +"&nombre="+ $("#Nombre").val() +"&num="+ $("#UltimoNumero").val(), // we are calling json method
+                dataType: 'json',
+                traditional: true,
+                async: true,
+                data: postData,
+                success: function (data) {
+                    if (data != "" || data != null) {
+                        alert(data);
+                    }
+                },
+                error: function (ex) {
+                    alert('Error al aprobar la carga.' + ex);
+                }
+
+            });
+        }
+        */
+        
+        var newUrl = "/Contabilidad/GuardarTalonario/?"
+        
+       
+
+        if ($('#Talonarios').val() == "") {
+
+            newUrl += "&nombre=" + $("#Nombre").val()
+            newUrl += "&num=" + $("#UltimoNumero").val()
+            $.ajax({
+                type: 'POST',
+                url: newUrl, // we are calling json method
+                dataType: 'json',
+                async: true,
+                success: function (data) {
+                    if (data != -1) {
+                        alert('Talonario guardado exitosamente.' + ex);
+                    }
+                },
+                error: function (ex) {
+                    alert('Error al seleccionar Talonario.' + ex);
+                }
+
+            });
+        }
+        else {
+            newUrl += "&id=" + $("#Talonarios").val()
+            newUrl += "&nombre=" + $("#Nombre").val()
+            newUrl += "&num=" + $("#UltimoNumero").val()
+            $.ajax({
+                type: 'POST',
+                url: newUrl, // we are calling json method
+                dataType: 'json',
+                async: true,
+                success: function (data) {
+                    
+                    if (data == 1) {
+                        alert("Talonario guardado exitosamente.")
+                    }
+                    else {
+                        alert("Error al guardar Talonario.")
+                    }
+                },
+                error: function (ex) {
+                    alert('Error al guardar Talonario.' + ex)
+                }
+
+            });
+        }
+        
+        //jQuery("#gridSinAsignar").jqGrid().setGridParam({ url: newUrl1 }).trigger('reloadGrid', [{ page: 1 }])
+        //jQuery("#gridAsignadas").jqGrid().setGridParam({ url: newUrl2 }).trigger('reloadGrid', [{ page: 1 }])
+    }
+
+    function getTrueFalse() {
+        var data = "true:false";
+        return data;
+    }
+
+
+</script>
+

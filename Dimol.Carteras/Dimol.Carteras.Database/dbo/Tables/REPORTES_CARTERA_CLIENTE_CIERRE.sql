@@ -1,0 +1,18 @@
+﻿CREATE TABLE [dbo].[REPORTES_CARTERA_CLIENTE_CIERRE] (
+    [RCC_CODEMP]  INT           NOT NULL,
+    [RCC_PCLID]   NUMERIC (15)  NOT NULL,
+    [RCC_FECHA]   DATETIME      NOT NULL,
+    [RCC_REPORTE] VARCHAR (500) NOT NULL,
+    CONSTRAINT [PK_REPORTES_CARTERA_CLIENTE_CI] PRIMARY KEY CLUSTERED ([RCC_CODEMP] ASC, [RCC_PCLID] ASC, [RCC_FECHA] ASC, [RCC_REPORTE] ASC),
+    CONSTRAINT [FK_REPORTES_PROVCLI_R_PROVCLI] FOREIGN KEY ([RCC_CODEMP], [RCC_PCLID]) REFERENCES [dbo].[PROVCLI] ([PCL_CODEMP], [PCL_PCLID])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[REPORTES_CARTERA_CLIENTE_CIERRE]([RCC_CODEMP] ASC, [RCC_PCLID] ASC, [RCC_FECHA] ASC, [RCC_REPORTE] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena los distintos reportes que se generan durante el cierre de mes, para los distintos clientes.. ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'REPORTES_CARTERA_CLIENTE_CIERRE';
+

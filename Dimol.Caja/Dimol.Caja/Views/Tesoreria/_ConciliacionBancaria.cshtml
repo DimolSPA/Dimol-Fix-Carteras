@@ -1,0 +1,364 @@
+﻿@using Mvc.HtmlHelpers
+@Html.Hidden("NumCuentaHidden")
+@Html.Hidden("IdCuentaHidden")
+
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="float:right">
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col">
+                        <span class="badge badge-info"><label id="lblTipoCuenta"></label></span>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@using (var t = Html.JQueryUI().Begin(new Tabs(new { id = "tabGestionConciliacion" })))
+{
+    t.Tab("Conciliación Bancaria", "tab1");
+    t.Tab("Documentos en Custodia", "tab2");
+    t.Tab("Documentos Protestados", "tab3");
+    using (t.BeginPanel())
+    {
+        using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCargaCartola" }))
+        {
+            
+            @Html.ValidationSummary(true)
+            <div class="tabla">
+                <div class="fila" style="display:none">
+                    <div class="col">
+                        <button id="btnImportarArchivoCartola" onclick="fnMostrarImportarArchivoCartola(); return false;" title="Importar Archivo"><i class="fa fa-download" style="font-size:20px;"></i>  </button>
+                        <button id="btnMostrarCriterioBusqueda" style="display:none" onclick="fnMostrarCriterioBusquedaCarotalMovimientos(); return false;"> Búsqueda </button>
+                        <button id="btnExport" onclick="fnExportarMovimientosCartola(); return false;" title=" Exportar a Excel"><i class="fa fa-file-excel-o" style="font-size:20px;color:green;"></i> </button>
+                        <button id="btnProtestados"  style="display:none"  onclick="fnTraspasoPanelProtestado(); return false;" title="Enviar a Panel Protestados"><i class="fa fa-mail-forward" style="font-size:20px;"></i> </button>
+                        <input style="display:none" id="getSelected" type="button" value="Get Selected" onclick="fnTraspasoPanelProtestado(); return false;" />
+
+                    </div>
+                </div>
+                <div class="fila">
+                    <div id="loadingmessage" style="display: none" class="progressLoading">
+                        <img src="~/Images/ajax-loader.gif" />
+                    </div>
+                    <div class="col">
+                        @(Html.jqGrid("gridCartolaMovimientos")
+                                .addColumn(new Column("MovimientoId")
+                                .setEditable(false).setHidden(true)
+                                .setSortable(false)
+                                .setWidth(70))
+                                .addColumn(new Column("NumCuenta").setLabel("Nº Cuenta")
+                                .setEditable(false).setHidden(true)
+                                .setSortable(true)
+                                .setWidth(10))
+                                .addColumn(new Column("FecMovimiento").setLabel("Fecha")
+                                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                .setSortable(true)
+                                .setWidth(90))
+                                .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+                                .setSortable(true)
+                                .setWidth(80))
+                                .addColumn(new Column("Motivo").setLabel("Motivo")
+                                .setEditable(false).setCustomFormatter("fnBotonesGridCartolaMovimientos")
+                                .setSortable(true)
+                                .setWidth(300))
+                                .addColumn(new Column("Sucursal").setLabel("Sucursal")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(80))
+                                .addColumn(new Column("Movimiento").setLabel("Movimiento")
+                                .setEditable(false).setAlign(Align.center)
+                                .setSortable(true)
+                                .setWidth(80))
+                                .addColumn(new Column("MotivoSistema").setLabel("Motivo Sistema")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(150))
+                                .addColumn(new Column("Estado").setLabel("Estado")
+                                .setEditable(false).setCustomFormatter("fnSelectEstado")
+                                .setSortable(true)
+                                .setWidth(80))
+                                .addColumn(new Column("MotivoSistemaId").setLabel("MotivoSistemaId")
+                                .setEditable(false).setHidden(true)
+                                .setSortable(true)
+                                .setWidth(10))
+                                .addColumn(new Column("EstadoId").setLabel("EstadoId")
+                                .setEditable(false).setHidden(true)
+                                .setSortable(true)
+                                .setWidth(10))
+                                .addColumn(new Column("Observacion").setLabel("Observación")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(80))
+                                .addColumn(new Column("CuentaId")
+                                .setEditable(false).setHidden(true)
+                                .setSortable(false)
+                                .setWidth(70))
+                        // settings
+                                .setCaption("Movimientos")//.setWidth(800)
+                                .setAutoWidth(true)
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Tesoreria/GetDummy/")
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setRowNum(500)
+                                .setRowList(new int[] { 50, 100, 500 })
+                                .setViewRecords(true)
+                                .setSortName("FecMovimiento")
+                                .setSortOrder(SortOrder.asc)
+                                .setPager("pagerCartolaMovimientos")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .setScroll(true)
+                                .setHeight(400)
+                                .setMultiSelect(true)
+                                .onLoadComplete("fnOnLoadCompleteConciliacion(this)")
+                                .onSelectAll("fnOnSelectAllConciliacion(aRowids, status)")
+                                .onSelectRow("SelectSoloPendiente(rowid, status)")
+                                .setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+                                .Render()
+
+
+                        )
+                    </div>
+                </div>
+
+            </div>
+        }
+    }
+    
+    using (t.BeginPanel())
+    {
+        using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCargaCustodia" }))
+        {
+            <div class="tabla">
+                <div class="fila" style="display:none">
+                    <div class="col">
+                        <input type="button" value="Ingresar Efectivo" style="display:none" onclick="fnAbrirFormularioEfectivoCustodia();" />&nbsp;
+                        <button onclick="fnAbrirFormularioDocumentoCustodia(); return false;" title="Ingresar Documento">
+                            <i class="fa fa-plus-square" style="font-size:19px;"></i>
+                        </button>
+                        @*<input type="button" value="Ingresar Documentos" onclick="fnAbrirFormularioDocumentoCustodia();"  />*@
+                    </div>
+                </div>
+                <div class="fila">
+                    <div id="loadingmessageCustodiados" style="display: none" class="progressLoading">
+                        <img src="~/Images/ajax-loader.gif" />
+                    </div>
+                    <div class="col">
+                        @(Html.jqGrid("gridDocumentosCustodiados")
+                                .addColumn(new Column("CustodiaId")
+                                .setEditable(false).setHidden(true)
+                                .setSortable(false)
+                                .setWidth(70))
+                               
+                                .addColumn(new Column("FecDoc").setLabel("Fecha Documento")
+                                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                .setSortable(true)
+                                .setWidth(90))
+                                .addColumn(new Column("RutCliente").setLabel("RutCliente")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(80))
+                                .addColumn(new Column("Cliente").setLabel("Cliente")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(100))
+                                .addColumn(new Column("RutDeudor").setLabel("Rut Deudor")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(80))
+                                .addColumn(new Column("Deudor").setLabel("Deudor")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(150))
+                                .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+                                .setSortable(true)
+                                .setWidth(80))
+                               
+                                .addColumn(new Column("Gestor").setLabel("Gestor")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(80))
+                                .addColumn(new Column("GiradoA").setLabel("Girado A")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(80))
+                                .addColumn(new Column("TipoBanco").setLabel("Tipo Banco")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(80))
+                                .addColumn(new Column("NumDocumento").setLabel("Numero Documento")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(80))
+                                .addColumn(new Column("Estado").setLabel("Estado")
+                                .setEditable(false)
+                                .setSortable(true)
+                                .setWidth(80))
+                                .addColumn(new Column("FecProrroga").setLabel("Fecha Prorroga")
+                                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                                .setSortable(true)
+                                .setWidth(70))
+                                .addColumn(new Column("Pclid").setLabel("Pclid")
+                                .setEditable(false).setHidden(true)
+                                .setSortable(true)
+                                .setWidth(10))
+                                .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                                .setEditable(false).setHidden(true)
+                                .setSortable(true)
+                                .setWidth(10))
+                                .addColumn(new Column("GestorId").setLabel("GestorId")
+                                .setEditable(false).setHidden(true)
+                                .setSortable(true)
+                                .setWidth(10))
+                                .addColumn(new Column("EstadoId").setLabel("EstadoId")
+                                .setEditable(false).setHidden(true)
+                                .setSortable(true)
+                                .setWidth(10))
+                                // settings
+                                .setCaption("Documentos en Custodia")//.setWidth(800)
+                                .setAutoWidth(true)
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Tesoreria/GetDummy/")
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setRowNum(500)
+                                .setRowList(new int[] { 50, 100, 500 })
+                                .setViewRecords(true)
+                                .setSortName("CustodiaId")
+                                .setSortOrder(SortOrder.asc)
+                                .setPager("pagerDocumentosCustodias")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .setScroll(true)
+                                .setHeight(400)
+                                .setShrinkToFit(false)
+                                .onDblClickRow("fnDoubleClickDocumentoCustodia(rowid)")
+                                .setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+                                .Render()
+
+
+                        )
+                    </div>
+                </div>
+
+            </div>
+        }
+    }
+
+    using (t.BeginPanel())
+    {
+        using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDocProtestados" }))
+        {
+            @Html.ValidationSummary(true)
+            <div class="tabla">
+               
+                <div class="fila">
+                    
+                    <div class="col">
+                        @(Html.jqGrid("gridMovimientosProtestados")
+                       .addColumn(new Column("CustodiaId")
+                        .setEditable(false).setHidden(true)
+                        .setSortable(false)
+                        .setWidth(70))
+
+                        .addColumn(new Column("FecDoc").setLabel("Fecha Documento")
+                        .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                        .setSortable(true)
+                        .setWidth(90))
+                        .addColumn(new Column("RutCliente").setLabel("RutCliente")
+                        .setEditable(false)
+                        .setSortable(true)
+                        .setWidth(80))
+                        .addColumn(new Column("Cliente").setLabel("Cliente")
+                        .setEditable(false)
+                        .setSortable(true)
+                        .setWidth(100))
+                        .addColumn(new Column("RutDeudor").setLabel("Rut Deudor")
+                        .setEditable(false)
+                        .setSortable(true)
+                        .setWidth(80))
+                        .addColumn(new Column("Deudor").setLabel("Deudor")
+                        .setEditable(false)
+                        .setSortable(true)
+                        .setWidth(150))
+                        .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+                        .setSortable(true)
+                        .setWidth(80))
+
+                        .addColumn(new Column("Gestor").setLabel("Gestor")
+                        .setEditable(false)
+                        .setSortable(true)
+                        .setWidth(80))
+                        .addColumn(new Column("GiradoA").setLabel("Girado A")
+                        .setEditable(false)
+                        .setSortable(true)
+                        .setWidth(80))
+                        .addColumn(new Column("TipoBanco").setLabel("Banco")
+                        .setEditable(false)
+                        .setSortable(true)
+                        .setWidth(80))
+                        .addColumn(new Column("NumDocumento").setLabel("Numero Documento")
+                        .setEditable(false)
+                        .setSortable(true)
+                        .setWidth(80))
+                        .addColumn(new Column("Estado").setLabel("Estado")
+                        .setEditable(false)
+                        .setSortable(true)
+                        .setWidth(80))
+                        .addColumn(new Column("FecProrroga").setLabel("Fecha Prorroga")
+                        .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                        .setSortable(true)
+                        .setWidth(70))
+                        .addColumn(new Column("Pclid").setLabel("Pclid")
+                        .setEditable(false).setHidden(true)
+                        .setSortable(true)
+                        .setWidth(10))
+                        .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                        .setEditable(false).setHidden(true)
+                        .setSortable(true)
+                        .setWidth(10))
+                        .addColumn(new Column("GestorId").setLabel("GestorId")
+                        .setEditable(false).setHidden(true)
+                        .setSortable(true)
+                        .setWidth(10))
+                       
+                // settings
+                                .setCaption("Documentos")//.setWidth(800)
+                                .setAutoWidth(true)
+                                .setRequestType(RequestType.get)
+                                .setUrl("~/Tesoreria/GetDummy/")
+                                .setAltRows(true)
+                                .setAltClass("altGridRows")
+                                .setRowNum(500)
+                                .setRowList(new int[] { 50, 100, 500 })
+                                .setViewRecords(true)
+                                .setSortName("CustodiaId")
+                                .setSortOrder(SortOrder.asc)
+                                .setPager("pagerMovimientosProtestados")
+                                .setPagerPos(PagerPos.center)
+                                .setPgButtons(true)
+                                .setCellEdit(false)
+                                .setCellSubmit(CellSubmit.clientArray)
+                                .setScroll(true)
+                                .setHeight(400)
+                                .Render()
+
+
+                        )
+                    </div>
+                </div>
+
+            </div>
+        }
+    }
+}
+

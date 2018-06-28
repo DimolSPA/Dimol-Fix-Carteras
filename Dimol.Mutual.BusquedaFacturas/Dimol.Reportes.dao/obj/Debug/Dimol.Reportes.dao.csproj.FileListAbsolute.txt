@@ -1,0 +1,155 @@
+D:\Documents\Visual Studio 2012\Projects\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dao.dll
+D:\Documents\Visual Studio 2012\Projects\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dao.pdb
+D:\Documents\Visual Studio 2012\Projects\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.dao.dll
+D:\Documents\Visual Studio 2012\Projects\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.dto.dll
+D:\Documents\Visual Studio 2012\Projects\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\CYPH.dll
+D:\Documents\Visual Studio 2012\Projects\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.dao.pdb
+D:\Documents\Visual Studio 2012\Projects\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.dto.pdb
+D:\Documents\Visual Studio 2012\Projects\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\CYPH.pdb
+D:\Documents\Visual Studio 2012\Projects\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\CYPH.xml
+D:\Documents\Visual Studio 2012\Projects\Dimol.Carteras\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.csprojResolveAssemblyReference.cache
+D:\Documents\Visual Studio 2012\Projects\Dimol.Carteras\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.dll
+D:\Documents\Visual Studio 2012\Projects\Dimol.Carteras\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.pdb
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dao.dll
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dao.pdb
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.bcp.dll
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.ConvertidorImagenes.dll
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.dao.dll
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.dto.dll
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dto.dll
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\CYPH.dll
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\HtmlAgilityPack.dll
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.bcp.pdb
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.dao.pdb
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.dto.pdb
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.ConvertidorImagenes.pdb
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dto.pdb
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\CYPH.pdb
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\CYPH.xml
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.csprojResolveAssemblyReference.cache
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.dll
+D:\_Codigo_Dimol\Dimol.Carteras\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.pdb
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dao.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dao.pdb
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.bcp.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.ConvertidorImagenes.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.dao.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.dto.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.PDF.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dto.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\CYPH.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\HtmlAgilityPack.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\fop.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.Runtime.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Security.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Media.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Beans.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Naming.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.Runtime.JNI.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Management.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.AWT.WinForms.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Misc.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Remoting.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Corba.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dto.pdb
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.bcp.pdb
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.ConvertidorImagenes.pdb
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.dao.pdb
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.dto.pdb
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\Dimol.PDF.pdb
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\CYPH.pdb
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\bin\Debug\CYPH.xml
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.csprojResolveAssemblyReference.cache
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.csproj.ResolveComReference.cache
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.dll
+C:\Codigos Fuente_2\Dimol.Carteras\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.pdb
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dao.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dao.pdb
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.bcp.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.ConvertidorImagenes.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.dao.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.dto.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.PDF.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dto.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\CYPH.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\HtmlAgilityPack.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\fop.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.Runtime.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Security.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Media.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Beans.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Naming.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.Runtime.JNI.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Management.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.AWT.WinForms.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Misc.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Remoting.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Corba.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dto.pdb
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.bcp.pdb
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.ConvertidorImagenes.pdb
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.dao.pdb
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.dto.pdb
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.PDF.pdb
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\CYPH.pdb
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\CYPH.xml
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.csprojResolveAssemblyReference.cache
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.csproj.ResolveComReference.cache
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.dll
+C:\FuentesDimol2017\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.pdb
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dao.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dao.pdb
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.bcp.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.ConvertidorImagenes.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.dao.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.dto.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.PDF.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dto.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\CYPH.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\HtmlAgilityPack.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\fop.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.Runtime.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Security.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Media.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Beans.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Naming.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.Runtime.JNI.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Management.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.AWT.WinForms.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Misc.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Remoting.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\IKVM.OpenJDK.Corba.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.Reportes.dto.pdb
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.bcp.pdb
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.ConvertidorImagenes.pdb
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.dao.pdb
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.dto.pdb
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\Dimol.PDF.pdb
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\CYPH.pdb
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\bin\Debug\CYPH.xml
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.csprojResolveAssemblyReference.cache
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.csproj.ResolveComReference.cache
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.csproj.CoreCompileInputs.cache
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.dll
+C:\FuentesDimol2018\Dimol.Mutual.BusquedaFacturas\Dimol.Reportes.dao\obj\Debug\Dimol.Reportes.dao.pdb

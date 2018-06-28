@@ -1,0 +1,52 @@
+﻿@model Dimol.Empresa.Models.GridModel
+@{
+    ViewBag.Title = "Idiomas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Idiomas</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+@(Html.jqGrid("Idiomas")
+   
+    .addColumn(new Column("Id").setLabel("Id")
+        .setSortable(true)
+        .setWidth(80))
+ 
+    .addColumn(new Column("Nombre").setLabel("Nombre")
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(250))
+    .addColumn(new Column("Recurso").setLabel("Recurso")
+        .setHidden(false)
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(80))
+   
+      
+    .setCaption("Idioma")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Empresa/GetIdioma/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("Nombre")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerIdioma")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Empresa/OperIdioma")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Empresa/OperIdioma")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Empresa/OperIdioma")
+    .setExcelExport("/Empresa/ExportToExcelIdioma")
+    .Render()
+
+)

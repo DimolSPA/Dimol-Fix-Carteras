@@ -1,0 +1,118 @@
+﻿@model Dimol.Reportes.Models.CarteraModel
+@{
+    ViewBag.Title = "Reportes Cartera";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  <div class="ui-widget-header ui-corner-all">
+    <span id="ui-dialog-title-dialog" class="ui-dialog-title">  >></span>
+
+   </div>
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDocumentosDeudor" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BuscarDeudor</legend>
+
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:183px">@Html.LabelFor(model =>model.Reporte)</div>
+                <div class="col">@Html.DropDownList("Reporte", null, new { @class = "ComboboxClassL", @onchange = "fnReporteSeleccionado()" })
+                @Html.ValidationMessageFor(model =>model.Reporte)</div>
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+            <div class="col" >@Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                @Html.ValidationMessageFor(model => model.NombreRutCliente)
+            </div>
+            </div>
+            <div class="fila" id="xdivDeudor" style="display:none">
+                <div class="col" style="width:183px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+                <div class="col">
+                    @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnBuscarDocumentosDeudor")
+                    @Html.ValidationMessageFor(model => model.NombreRutDeudor)
+                </div>
+            </div>
+            <div class="fila" id="xdivTipoCartera" style="display:none">
+                <div class="col" style="width: 183px">@Html.LabelFor(model => model.TipoCartera)</div>
+                <div class="col" style="width: 100px">
+                    @Html.DropDownListFor(model => model.TipoCartera, ViewBag.TipoCartera as List<SelectListItem>, new {  })
+                    @Html.ValidationMessageFor(model => model.TipoCartera)
+                </div>
+            </div>
+            <div class="fila" id="xdivCodigoCarga" style="display:none">
+                <div class="col" style="width: 183px">@Html.LabelFor(model => model.CodigoCarga)</div>
+                <div class="col">
+                    @Html.DropDownListFor(model => model.CodigoCarga, null, new { })
+                @Html.ValidationMessageFor(model => model.CodigoCarga)
+            </div>
+        </div>
+    
+            <div class="fila" id="xdivRangoFecha" style="display:none">
+                <div class="col" style="width: 183px">@Html.LabelFor(model => model.FechaDesde) </div>
+                <div class="col">
+                    @Html.JQueryUI().Datepicker("FechaDesde").ShowButtonPanel(true).ShowWeek(false)
+                    @Html.ValidationMessageFor(model => model.FechaDesde)
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.FechaHasta)    @Html.JQueryUI().Datepicker("FechaHasta").ShowButtonPanel(true).ShowWeek(false)
+                    @Html.ValidationMessageFor(model => model.FechaHasta)
+                </div>
+            </div>
+            <div class="fila" id="xdivAgrupa" style="display:none">
+                <div class="col" style="width: 183px">@Html.LabelFor(model => model.Agrupa)</div>
+                <div class="col">
+                    @Html.DropDownList("Agrupa", null, new { @class = "ComboboxClassL", @onchange = "EstadoSeleccionado" })
+                    @Html.ValidationMessageFor(model => model.Agrupa)
+                </div>
+            </div>
+            <div class="fila" id="xdivEstado" style="display:none">
+                <div class="col" style="width: 183px">@Html.LabelFor(model => model.Estado)</div>
+                <div class="col">
+                    @Html.DropDownList("Estado", null, new { @class = "ComboboxClassL", @onchange = "EstadoSeleccionado" })
+                    @Html.ValidationMessageFor(model => model.Estado)
+                </div>
+            </div>
+                    
+            <div class="fila">
+                <div class="col" style="float:right">
+                    @Html.Hidden("Codemp")
+                    <input type="button" value="Generar" id="btnBuscar" onclick="fnDescargarReporte();" />
+                    @*<input type="button" value="Grabar" id="btnGrabar" disabled="disabled" onclick="fnGrabarDocumentoDeudor();" />*@
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+}
+
+          </div>
+</div>
+
+
+
+@section Scripts {
+    
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+ 
+}
+
+@using (Html.JQueryUI().Begin(new JQueryUIHelpers.Dialog(new { id = "ppReporte" }).Draggable(true)
+    .AutoOpen(false)
+    .Modal(true)
+    .Title("Documento Deudor")
+    .CloseOnEscape(true)
+    .Width(900)
+    .Height(600)
+    //.TriggerClick("button")
+    ))
+{
+}

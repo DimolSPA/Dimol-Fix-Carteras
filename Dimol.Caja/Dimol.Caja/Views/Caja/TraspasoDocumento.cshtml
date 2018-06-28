@@ -1,0 +1,230 @@
+﻿@{
+    ViewBag.Title = "TraspasoDocumento";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+}
+<br />
+<h2>TraspasoDocumento</h2>
+@using Mvc.HtmlHelpers
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+
+        fnEventsfrmRecepcionDocumento();
+    });
+
+    window.onload = function () {
+        $("#t_gridTraspasoDocumentos").append("<div align='right'><button type='button' onclick='fnTraspasoComercial();' title='Enviar a Comercial'><i class='fa fa-share-square-o' style='font-size:15px;'></i></button><button onclick='fnAbrirFormCargaMasiva();' title='Cargar Documentos'><i class='fa fa-download' style='font-size:15px;'></i> </button><button onclick='fnExcelDocumentosCargaMasiva();' title='Exportar a Excel'><i class='fa fa-file-excel-o' style='font-size:15px;color:green;'></i></button></div>");
+        $("#gridTraspasoDocumentos").jqGrid("setColProp", "Cliente",
+            {
+                searchoptions: {
+                    sopt: ['cn', 'nc', 'eq', 'ne'],
+                    defaultSearch: 'cn'
+                }
+            });
+        $("#gridTraspasoDocumentos").jqGrid("setColProp", "Estatus",
+            {
+                //sorttype: 'number',
+                //stype: 'select',
+                // show search options
+                searchoptions: {
+                    sopt: ['cn', 'nc', 'eq', 'ne'],
+                    defaultSearch: 'cn'
+                }
+
+            });
+
+        document.getElementById('frmCargaMasiva').onsubmit = function () {
+            var formdata = new FormData(); //FormData object
+            var fileInput = document.getElementById('subirArchivo');
+            //Iterating through each files selected in fileInput
+            for (i = 0; i < fileInput.files.length; i++) {
+                //Appending each file to FormData object
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+            //Creating an XMLHttpRequest and sending
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/Caja/Upload/?tipo=Carga');
+            xhr.send(formdata);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    $('#Archivo').val(xhr.responseText.replace(/\"/g, ''))
+                    if (xhr.responseText == '""') {
+                        alert("Error al subir el archivo al servidor");
+                        $("#imgSubirArchivo").removeClass("ok").addClass("error");
+                        $("#btnCargar").attr("disabled", "disabled");
+                        $("#btnSubmit").removeAttr("disabled");
+                    } else {
+                        alert("Archivo listo para ser procesado");
+                        $("#imgSubirArchivo").removeClass("error").addClass("ok");
+                        $("#btnCargar").removeAttr("disabled");
+                        $("#btnSubmit").attr("disabled", "disabled");
+                    }
+                }
+            }
+            return false;
+        }
+    }
+</script>
+<style type="text/css" media="screen">
+    th.ui-th-column div {
+        white-space: normal !important;
+        height: auto !important;
+        padding: 2px;
+    }
+</style>
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Documentos</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+
+       
+        <div class="tabla" style="display:none">
+            <div class="fila">
+                <div class="col">
+                    @*<button class="search" id="btnAgregarGestor" onclick="fnAgregarGestor();" style="vertical-align:middle"><img src="~/Images/botones/Add20.png" width="20px" height="20px" title="Agregar" alt="Agregar" /></button>Agregar*@
+                    <input type="button" style="display:none" value="Enviar a Comercial" onclick="fnTraspasoComercialIngresado();" />
+                    <button onclick="fnTraspasoComercial();" title="Traspasar">
+                        <i class="fa fa-share-square-o" style="font-size:20px;"></i>
+                    </button>
+                    <button onclick="fnAbrirFormCargaMasiva();" title="Cargar Documentos">
+                        <i class="fa fa-download" style="font-size:20px;"></i>
+                    </button>
+                    <button onclick="fnExcelDocumentosCargaMasiva();" title="Exportar a Excel">
+                        <i class="fa fa-file-excel-o" style="font-size:20px;color:green;"></i>
+                    </button>
+                    @*<input type="button" value="Exportar Excel" onclick="j();" />*@
+                </div>
+            </div>
+        </div>
+        @(Html.jqGrid("gridTraspasoDocumentos")
+                .addColumn(new Column("NumeroDocumento").setLabel("Numero")
+                .setEditable(false).setSearch(false)
+                .setSortable(true)
+                .setWidth(50))
+                .addColumn(new Column("RutCliente").setLabel("Rut Cliente")
+                .setEditable(false).setSearch(false).setAlign(Align.center)
+                .setSortable(true)
+                .setWidth(60))
+
+                .addColumn(new Column("Cliente").setLabel("Cliente")
+                .setEditable(false).setSortable(true).setAlign(Align.left).setSearch(true)
+                .setWidth(80))
+
+                .addColumn(new Column("RutDedor").setLabel("Rut Deudor")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true).setSearch(false)
+                .setWidth(60))
+                .addColumn(new Column("Deudor").setLabel("Deudor")
+                .setEditable(false).setSearch(false)
+                .setSortable(true)
+                .setWidth(120))
+                .addColumn(new Column("RutAsegurado").setLabel("Rut Asegurado")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true).setSearch(false)
+                .setWidth(70))
+                .addColumn(new Column("Asegurado").setLabel("Asegurado")
+                .setEditable(false).setSearch(false)
+                .setSortable(true)
+                .setWidth(100))
+                .addColumn(new Column("FecIngreso").setLabel("Fecha Ingreso")
+                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setSortable(true).setSearch(false)
+                .setWidth(60))
+                .addColumn(new Column("FecStatusProceso").setLabel("Fecha Traspaso")
+                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setSortable(true).setSearch(false)
+                .setWidth(60))
+                .addColumn(new Column("Moneda").setLabel("Moneda")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true).setSearch(false)
+                .setWidth(50))
+                .addColumn(new Column("ValorIngreso").setLabel("Valor").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setEditable(false).setSortable(true).setSearch(false)
+                .setWidth(90))
+                .addColumn(new Column("MontoIngreso").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true).setEditable(false).setSearch(false)
+                .setWidth(100))
+                .addColumn(new Column("DocumentoId").setLabel(".")
+                .setHidden(false).setSearch(false)
+                .setEditable(false).setSortable(false).setCustomFormatter("fnBotonesTraspasoDocumentos")
+                .setWidth(35))
+                .addColumn(new Column("pclid").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false).setSortable(true)
+                .setWidth(30))
+                .addColumn(new Column("ctcid").setLabel(" ")
+                .setHidden(true).setEditable(true).setSortable(true).setSearch(true)
+                .setWidth(30))
+                .addColumn(new Column("sbcid").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false).setSortable(true)
+                .setWidth(30))
+                .addColumn(new Column("Codmon").setLabel(" ")
+                .setHidden(true)
+                .setEditable(false).setSortable(true)
+                .setWidth(30))
+                .addColumn(new Column("Estatus").setLabel("Estatus")
+                .setEditable(false).setAlign(Align.center)
+                .setSortable(true).setSearch(true)
+                .setWidth(80))
+                
+                // settings
+                .setCaption("Documentos")//.setWidth(800)
+                .setAutoWidth(true)
+                .setMultiSelect(true)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Caja/ListarCajaTraspasoDocumentosGrilla/")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setRowNum(1000)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("DocumentoId")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerTraspasoDocumento")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray)
+                .setScroll(true)
+                .setShrinkToFit(false)
+                .setHeight(400)
+                .setGrouping(false)
+                .setGroupingView("groupField: ['Cliente'],groupColumnShow: [false], groupText : ['<input type=\"checkbox\" class=\"groupHeader\" onchange=\"change_checkboxTraspasoDocumentos(this)\" /><b> {0} - {1} Documento(s)</b>'], groupCollapse: false, groupOrder: ['asc'],groupDataSorted: true")
+                .onSelectAll("fnOnSelectAllRowsGrid(aRowids, status)")
+                .onLoadComplete("fnloadCompleteGridTraspasoCtrlGestion(this)").setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+                .Render()
+
+
+        )
+
+    </div>
+</div>
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppDocumento" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Ingreso de Documento")
+                .CloseOnEscape(true)
+                .Width(600)
+                .Height(300)
+
+                ))
+{
+    @Html.Partial("_ModificarDocumentoContrlGestion")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppCarga" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Carga Documento")
+                .CloseOnEscape(true)
+                .Width(1000)
+                .Height(500)
+
+                ))
+{
+    @Html.Partial("_CargaMasivaDocumentos")
+}
+
+@Styles.Render("~/Content/caja")

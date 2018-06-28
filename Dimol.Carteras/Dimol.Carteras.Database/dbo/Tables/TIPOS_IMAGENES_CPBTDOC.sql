@@ -1,0 +1,22 @@
+﻿CREATE TABLE [dbo].[TIPOS_IMAGENES_CPBTDOC] (
+    [TPC_CODEMP] INT           NOT NULL,
+    [TPC_TPCID]  INT           NOT NULL,
+    [TPC_NOMBRE] VARCHAR (100) NOT NULL,
+    CONSTRAINT [PK_TIPOS_IMAGENES_CPBTDOC] PRIMARY KEY CLUSTERED ([TPC_CODEMP] ASC, [TPC_TPCID] ASC),
+    CONSTRAINT [FK_TIPOS_IM_REFERENCE_EMPRESA] FOREIGN KEY ([TPC_CODEMP]) REFERENCES [dbo].[EMPRESA] ([EMP_CODEMP])
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_PRI1]
+    ON [dbo].[TIPOS_IMAGENES_CPBTDOC]([TPC_CODEMP] ASC, [TPC_TPCID] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [INDEX_NOMBRE]
+    ON [dbo].[TIPOS_IMAGENES_CPBTDOC]([TPC_CODEMP] ASC, [TPC_NOMBRE] ASC);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Esta tabla almacena los distintos tipos de imagenes que seran asociados a los documentos o comprobantes', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'TIPOS_IMAGENES_CPBTDOC';
+

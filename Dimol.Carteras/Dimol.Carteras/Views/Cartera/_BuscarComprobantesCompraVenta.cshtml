@@ -1,0 +1,101 @@
+﻿@model Dimol.Carteras.Models.BuscarComprobanteModel 
+
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="width: 160px">@Html.LabelFor(model => model.RutCliente)</div>
+        <div class="col" style="width: 400px">@Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "RutNombreCliente", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("OnSelectClienteComprobante")
+            @Html.ValidationMessageFor(model => model.RutCliente)
+            @Html.HiddenFor(model => model.RutCliente)@Html.HiddenFor(model => model.NombreCliente)
+            @Html.HiddenFor(model => model.Tipo)@Html.HiddenFor(model => model.Cartera)
+        </div>
+    </div>
+    <div class="fila">
+        <div class="col" style="width: 160px">@Html.LabelFor(model => model.TipoDocumento)</div>
+        <div class="col">@Html.DropDownList("TipoDocumento", null, new { @class = "ComboboxClassL", @onchange = "EstadoSeleccionado" })
+            @Html.ValidationMessageFor(model => model.TipoDocumento)
+        </div>
+    </div>
+    <div class="fila">
+        <div class="col" style="width: 160px">@Html.LabelFor(model => model.Numero)</div>
+        <div class="col">@Html.EditorFor(model => model.Numero)
+            @Html.ValidationMessageFor(model => model.Numero)
+        </div>
+    </div>
+    <!--<div class="fila">
+        <div class="col" style="width: 160px">@Html.LabelFor(model => model.NumeroInterno)</div>
+        <div class="col">@Html.EditorFor(model => model.NumeroInterno)
+            @Html.ValidationMessageFor(model => model.NumeroInterno)
+        </div>
+    </div>-->
+    <div class="fila">
+        <div class="col" style="width: 160px">@Html.LabelFor(model => model.Estado)</div>
+        <div class="col">@Html.DropDownList("Estado", null, new { @class = "ComboboxClassL", @onchange = "EstadoSeleccionado" })
+            @Html.ValidationMessageFor(model => model.Estado)
+        </div>
+    </div>
+    <!--<div class="fila">
+        <div class="col" style="width: 160px">@Html.LabelFor(model => model.Moneda) </div>
+        <div class="col">@Html.DropDownListFor(model => model.Moneda, ViewBag.Moneda as List<SelectListItem>, new { })</div>
+    </div>-->
+    <div class="fila">
+        <div class="col" style="width: 160px">Fecha Emisión Boleta </div>
+        <div class="col">@Html.LabelFor(model => model.FechaEmisionDesde)    @Html.JQueryUI().Datepicker("FechaEmisionDesde").ShowButtonPanel(true).ShowWeek(false)
+            @Html.ValidationMessageFor(model => model.FechaEmisionDesde)
+        </div>
+        <div class="col">@Html.LabelFor(model => model.FechaEmisionHasta)    @Html.JQueryUI().Datepicker("FechaEmisionHasta").ShowButtonPanel(true).ShowWeek(false)
+            @Html.ValidationMessageFor(model => model.FechaEmisionHasta)
+        </div>
+    </div>
+    <div class="fila">
+        <div class="col" style="width:160px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+        <div class="col">
+            @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3)
+            @Html.ValidationMessageFor(model => model.NombreRutDeudor)
+        </div>
+    </div>
+    <div class="fila">
+        <div class="col" style="width:160px">@Html.LabelFor(model => model.Rol)</div>        
+        <div class="col">@Html.TextBox("Rol", null, new { @class = "textboxRut", @onkeypress = "" })</div>        
+    </div>
+    <div class="fila">
+        <div class="col" style="width:160px">@Html.LabelFor(model => model.Tribunal)</div>
+        <div class="col">
+            @Html.JQueryUI().AutocompleteFor(model => model.Tribunal, Url.Action("BuscarTribunal"), "NombreTribunal", null, new { @class = "textboxRutNombre" }).MinLength(3)
+            @Html.ValidationMessageFor(model => model.RutCliente)
+        </div>      
+    </div>
+    <!--<div class="fila">
+        <div class="col" style="width: 160px">Fecha Vencimiento </div>
+        <div class="col">@Html.LabelFor(model => model.FechaVencimientoDesde)    @Html.JQueryUI().Datepicker("FechaVencimientoDesde").ShowButtonPanel(true).ShowWeek(false)
+            @Html.ValidationMessageFor(model => model.FechaVencimientoDesde)
+        </div>
+        <div class="col">@Html.LabelFor(model => model.FechaVencimientoHasta)    @Html.JQueryUI().Datepicker("FechaVencimientoHasta").ShowButtonPanel(true).ShowWeek(false)
+            @Html.ValidationMessageFor(model => model.FechaVencimientoHasta)
+        </div>
+    </div>
+
+    <div class="fila">
+        <div class="col" style="width: 160px">Monto </div>
+        <div class="col">@Html.LabelFor(model => model.MontoDesde)    @Html.EditorFor(model => model.MontoDesde)
+            @Html.ValidationMessageFor(model => model.MontoDesde)
+        </div>
+        <div class="col">@Html.LabelFor(model => model.MontoHasta)    @Html.EditorFor(model => model.MontoHasta)
+            @Html.ValidationMessageFor(model => model.MontoHasta)
+        </div>
+    </div>
+    <div class="fila">
+        <div class="col" style="width: 160px">@Html.LabelFor(model => model.Producto)</div>
+        <div class="col">@Html.TextBoxFor(model => model.Producto, new { @class = "textboxClass" })
+            @Html.ValidationMessageFor(model => model.Producto)
+        </div>
+    </div>-->
+    <div class="fila">
+        <!--<div class="col" style="width: 160px">@Html.LabelFor(model => model.Comentario)</div>
+        <div class="col">@Html.TextBox("Comentario", null, new { @class = "textboxClass" })
+            @Html.ValidationMessageFor(model => model.Comentario)
+        </div>-->
+        <div class="col" style="float: right">
+            <input type="button" value="Buscar" onclick="fnBuscarComprobantes();" /></div>
+    </div>
+
+</div>

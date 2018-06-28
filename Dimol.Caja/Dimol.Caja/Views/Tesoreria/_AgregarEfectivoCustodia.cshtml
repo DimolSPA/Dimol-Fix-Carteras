@@ -1,0 +1,76 @@
+﻿@model Dimol.Caja.Models.EfectivoCustodiaModel
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmIngresoEfectivo" }))
+{
+
+    @Html.ValidationSummary(true)
+    <div class=" panel panel-primary">
+        <div class="panel-heading">Datos de Cartera</div>
+        <div class="panel-body">
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:70px">@Html.LabelFor(model => model.NombreRutClienteEfectivo)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.PclidEfectivo, Url.Action("BuscarRutNombreCliente"), "NombreRutClienteCustodia", null, new { @class = "textboxRutNombre" }).MinLength(3)
+
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:70px">@Html.LabelFor(model => model.NombreRutDeudorEfectivo)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.CtcidEfectivo, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudorEfectivo", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnCargarGestorAddEfectivo")
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:70px">@Html.LabelFor(model => model.NombreRutGestorEfectivo)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.GesidEfectivo, Url.Action("BuscarNombreGestor"), "NombreRutGestorEfectivo", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width: 70px">@Html.LabelFor(model => model.FechaIngreso)</div>
+                    <div class="col">
+                        @Html.JQueryUI().Datepicker("FechaIngreso", DateTime.Today, new { @style = "z-index:9" }).ShowButtonPanel(true).ShowWeek(false).Disabled(true)
+                        @Html.ValidationMessageFor(model => model.FechaIngreso)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:70px">@Html.LabelFor(model => model.MontoIngreso)</div>
+                    <div class="col">
+                        @Html.TextBox("MontoIngreso", null, new { @class = "textboxClass", @style = "width: 80px" })
+
+                    </div>
+                </div>
+                <div class="fila">
+
+                    <div class="col" style="float:right">
+                        <input type="button" value="Guardar" id="btnCargarEfectivoCustodia" onclick="fnIngresarEfectivoCustodia();" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" panel panel-primary" style="display:none">
+        <div class="panel-heading">Datos Bancarios</div>
+        <div class="panel-body">
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:70px">@Html.Label("Tipo de Banco")</div>
+                    <div class="col">
+                        @Html.DropDownList("Banco", null, new { @class = "textboxClass" })
+
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:70px">@Html.Label("Girado a")</div>
+                    <div class="col">
+                        @Html.TextBox("Recibe", "Dimol SpA", new { @class = "textboxClass", @style = "width: 80px" })
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

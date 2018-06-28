@@ -1,0 +1,52 @@
+﻿@model Dimol.Caja.Models.PagoManualViewModel
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmPagoManual" }))
+{
+    <div class=" panel panel-primary">
+        <div class="panel-heading">Datos de Cartera</div>
+        <div class="panel-body">
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:140px">@Html.LabelFor(model => model.NombreRutClientePM)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.PclidPM, Url.Action("BuscarRutNombreCliente"), "NombreRutClientePM", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:140px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:140px">@Html.LabelFor(model => model.Fecha)</div>
+                    <div class="col">
+                        @Html.JQueryUI().Datepicker("Fecha").ShowButtonPanel(true).ShowWeek(false)
+                        @Html.ValidationMessageFor(model => model.Fecha)
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:140px">@Html.LabelFor(model => model.Monto)</div>
+                    <div class="col">
+                        @Html.TextBox("Monto", null, new { @class = "textboxClass", @style = "width: 80px" })
+
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:140px">@Html.LabelFor(model => model.TipoConciliacion)</div>
+                    <div class="col">
+                        @Html.DropDownList("TipoConciliacion", null, new { })
+                        @Html.ValidationMessageFor(model => model.TipoConciliacion)
+                    </div>
+                   
+                </div>
+                <div class="fila">
+                    <div class="col" style="float:right">
+                        <input type="button" value="Guardar" id="btnCargarPagoManual"  onclick="fnInsertarPagoManualReportado();" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

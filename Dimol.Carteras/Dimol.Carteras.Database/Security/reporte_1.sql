@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [reporte]
+    WITH PASSWORD = N'Guenel0xpgxvlgyfz3bYqgw0msFT7_&#$!~< f9gfgjowsnh', SID = 0x1D2BFC019CB79248BD7E848A83A40656, DEFAULT_DATABASE = [Iluvatar_Test_20170405], DEFAULT_LANGUAGE = [us_english], CHECK_POLICY = OFF;
+

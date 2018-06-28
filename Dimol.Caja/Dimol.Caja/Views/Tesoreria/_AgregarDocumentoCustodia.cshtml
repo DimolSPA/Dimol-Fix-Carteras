@@ -1,0 +1,187 @@
+﻿@model Dimol.Caja.Models.DocumentoCustodiaModel
+
+@using Mvc.HtmlHelpers
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+
+        $('#gridDocumentosIngreso').jqGrid('setGridParam', {
+            onSelectRow: function (rowid) {
+                var $self = $(this), i,
+                   // savedRows array is not empty if some row is in inline editing mode
+                   savedRows = $self.jqGrid("getGridParam", "savedRow");
+
+                for (i = 0; i < savedRows.length; i++) {
+                    if (savedRows[i].id !== rowid) {
+                        // save currently editing row
+                        // one can replace saveRow to restoreRow in the next line
+                        $self.jqGrid("restoreRow", savedRows[i].id);
+                    }
+                }
+                $self.jqGrid("editRow", rowid, {
+                    keys: true,
+                    aftersavefunc: function (rowid) {
+                        //var rowData = jQuery(this).getRowData(rowid);
+                        alert("Documento ingresado");
+                    }
+                });
+            },
+            ondblClickRow: function (rowid) {
+                //var row_id = $(this).getGridParam('selrow');
+                //$(this).editRow(row_id, true);
+                $(this).jqGrid('editRow', rowid, true);
+                return;
+
+            },
+            beforeSelectRow: function (rowid) {
+                // allow selection if saving successful
+                var $self = $(this), i,
+                    savedRows = $self.jqGrid("getGridParam", "savedRow");
+
+                for (i = 0; i < savedRows.length; i++) {
+                    if (rowid !== savedRows[i].id) {
+                        $self.jqGrid("saveRow", savedRows[i].id);
+                        //if (allowSaving.call(this, savedRows[i].id)) {
+                        //    $self.jqGrid("saveRow", savedRows[i].id);
+                        //} else {
+                        //    $self.jqGrid("restoreRow", savedRows[i].id);
+                        //}
+                    }
+                }
+                return true;
+            }
+        });
+
+    });
+
+
+</script>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmIngresoDocumento" }))
+{
+
+    @Html.ValidationSummary(true)
+    <div class=" panel panel-primary">
+        <div class="panel-heading">Datos de Cartera</div>
+        <div class="panel-body">
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:70px">@Html.LabelFor(model => model.NombreRutClienteCustodia)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.PclidCustodia, Url.Action("BuscarRutNombreCliente"), "NombreRutClienteCustodia", null, new { @class = "textboxRutNombre" }).MinLength(3)
+
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:70px">@Html.LabelFor(model => model.NombreRutDeudorCustodia)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.CtcidCustodia, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudorCustodia", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnCargarGestorAddCustodia")
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:70px">@Html.LabelFor(model => model.NombreRutGestorCustodia)</div>
+                    <div class="col">
+                        @Html.JQueryUI().AutocompleteFor(model => model.GesidCustodia, Url.Action("BuscarNombreGestor"), "NombreRutGestorCustodia", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" panel panel-primary">
+        <div class="panel-heading">Datos Bancarios</div>
+        <div class="panel-body">
+            <div class="tabla">
+                <div class="fila">
+                    <div class="col" style="width:70px">@Html.Label("Tipo de Banco")</div>
+                    <div class="col">
+                        @Html.DropDownList("Banco", null, new { @class = "textboxClass" })
+
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col" style="width:70px">@Html.Label("Girado a")</div>
+                    <div class="col">
+                        @Html.TextBox("Recibe", "Dimol SpA", new { @class = "textboxClass", @style = "width: 80px" })
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="tabla">
+    <div class="fila">
+        <div class="col" style="width:150px"><label id="lblNumDoc">Nº de Documentos</label></div>
+        <div class="col">
+            <input type="text" maxlength="2" id="CantDocumentos" onkeyup="fnAddNumDocumentos(event);" onkeypress="OnlyNumber(event);" onblur="blurCantDocumento();" onclick="selectAllFocus();" />
+            <div class="error-message error-block"></div>
+        </div>
+    </div>
+</div>
+
+<br />
+@(Html.jqGrid("gridDocumentosIngreso")
+    .addColumn(new Column("AID").setLabel("AID")
+    .setEditable(false).setHidden(true)
+    .setSortable(true)
+    .setWidth(80))
+    .addColumn(new Column("NumDoc").setLabel("Nº Doc")
+    .setEditable(true).setEditType(EditType.text)
+        //.setEditRules("custom: true, custom_func: function (val, colname, colId){if (val.slice(0, val.length) === 'test') {return [true];}else {useCustomDialog = true; $('#1_NumDoc').focus(); return [false, 'The name have to start with test text!'];}}")
+    .setEditRules("custom: true, custom_func: val1")
+    .setSortable(true)
+    .setWidth(150))
+    .addColumn(new Column("MontoDoc").setLabel("Monto")
+    .setEditable(true).setEditType(EditType.text).setEditOptions("dataInit:eventAmountCustom")
+    .setEditRules("custom: true, custom_func: val1")
+    .setSortable(true)
+    .setWidth(100))
+    .addColumn(new Column("FechaDoc").setLabel("Fecha Doc")
+    .setEditable(true)
+    .setAlign(Align.center)
+    .setFormatter(Formatters.date).setDateFmt("d-m-Y")
+    .setEditOptions("dataInit: initDateSearch")
+    .setEditRules("custom: true, custom_func: val1")
+        //.setEditRules("date: true")
+    .setSortable(true)
+    .setWidth(100))
+    .addColumn(new Column("FechaProDoc").setLabel("Fecha Prorroga")
+    .setEditable(false).setAlign(Align.center)
+    .setEditOptions("dataInit: initDateSearch")
+        //.setEditOptions("dataInit: function(el) { setTimeout(function() { $(el).datepicker(); }, 200); } ")
+    .setFormatter(Formatters.date).setDateFmt("d-m-Y")
+    .setSortable(true)
+    .setWidth(100))
+        // settings
+    .setCaption("Documento")//.setWidth(800)
+    .setAutoWidth(true)
+    .setDataType(DataType.local)
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+
+    .setRowNum(500)
+    .setRowList(new int[] { 50, 100, 500 })
+    .setViewRecords(true)
+    .setSortName("NumDoc")
+    .setSortOrder(SortOrder.asc)
+        //.setPager("pagerDocumentosIngreso")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(false)
+    .setCellSubmit(CellSubmit.clientArray)
+        //.onSelectRow("UpdateDocumentosEnCustodia(rowid, status)")
+    .setUrl("~/Tesoreria/GetDummy/")
+    .setEditUrl("~/Tesoreria/SaveGridUpdate/")
+    .Render()
+)
+<div class="tabla">
+
+    <div class="fila">
+        
+        <div class="col" style="float:right">
+            <input type="button" value="Guardar" id="btnCargarDocCustodia" onclick="fnIngresarDoumentosCustodia();" />
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,80 @@
+﻿@using Mvc.HtmlHelpers
+@(
+    Html.jqGrid("CustomTree")
+    // columns
+    .addColumn(new Column("Name").setLabel("Organization").setWidth(350))
+    .addColumn(new Column("AssetAllocation").setLabel("Asset Allocation"))
+    .addColumn(new Column("ClientReview").setLabel("Client Review"))
+    .addColumn(new Column("IneligibleActivity").setLabel("Ineligible Activity"))
+    .addColumn(new Column("InvestmentGuideline").setLabel("Investment Guideline"))
+    .addColumn(new Column("BillableAssets").setLabel("Billable Assets"))
+    .addColumn(new Column("NonEarnedPcs").setLabel("Non-Earned PCs"))
+ 
+    // settings
+    .setRequestType(RequestType.get)
+    .setUrl("~/Home/CustomTree")
+    .setHeight(600)
+ 
+    .setPager("CustomTreePager")
+    .setLoadText("")
+ 
+    .setCustomGrid(
+        new Grid("CustomTreeLevel")
+        .setUrl("~/Home/CustomTreeLevel?rowId='+row_id+'")
+        .setSubGridOptions("{plusicon : 'ui-icon-plus', minusicon : 'ui-icon-minus', openicon:'ui-icon-carat-1-sw'}")
+    )
+ 
+    
+    // render grid
+    .Render()
+)
+<script type="text/javascript">
+    function toggleExpCol(elementId, row_id) {
+        var iconElement = $('#' + elementId);
+
+        if (iconElement.hasClass('ui-icon-plus')) {
+            iconElement.removeClass('ui-icon-plus');
+            iconElement.addClass('ui-icon-minus');
+
+            $.ajax(
+            {
+                type: 'get',
+                contentType: 'application/json; charset=utf-8',
+                url: "@Url.Content("~/Home/CustomTreeLevel?rowId=")" + row_id + '',
+                success: function (data, textStatus) {
+                    var newTr = $(data);
+                    $(newTr).each(function (i) {
+                        $(this).attr('isExpanded', false);
+                        $(this).attr('parent', row_id);
+                    });
+                    $($('#CustomTree tr#' + row_id)).attr('isExpanded', true);
+                    $($('#CustomTree tr#' + row_id)).after(newTr);
+                }
+            });
+        }
+        else {
+            iconElement.removeClass('ui-icon-minus');
+            iconElement.addClass('ui-icon-plus');
+            var grid = $("#CustomTree").jqGrid();
+
+            var getChildrenNode = function (row_id) {
+                var result = [];
+                var children = $(grid).find('tr[parent=' + row_id + ']');
+                $(children).each(function (i) {
+                    if ($(this).attr("isExpanded") == "true") {
+                        var chl = getChildrenNode(this.id);
+                        $(chl).each(function (i) {
+                            result.push(this);
+                        });
+                    }
+                    result.push(this);
+                });
+                return result;
+            };
+
+            var childern = getChildrenNode(row_id);
+            $.each(childern, function (index, value) { $(value).remove(); });
+        }
+    }
+</script>
+

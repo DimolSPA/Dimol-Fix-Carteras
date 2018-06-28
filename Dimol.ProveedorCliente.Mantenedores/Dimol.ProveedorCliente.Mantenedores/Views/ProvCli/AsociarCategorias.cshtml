@@ -1,0 +1,26 @@
+﻿@model Dimol.ProveedorCliente.Mantenedores.Models.GridModel
+
+@{
+    ViewBag.Title = "AsociarCategorias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Asociar Super y Categorias</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@Html.DropDownList("Nombre", new SelectList(ViewBag.Nombre, "Id", "Nombre"))
+<div class="tabla">
+            <div class="fila">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+            </div>
+            <div class="fila">
+                <div class="col"> </div>
+                <div class="col"></div>
+            </div>
+        </div>
+</div>

@@ -1,0 +1,114 @@
+﻿@model Dimol.Contabilidad.Mantenedores.Models.GridModel
+@{
+    ViewBag.Title = "TiposReporte";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Tipos Reporte</h2>
+<br /><br />
+@using Mvc.HtmlHelpers
+
+@(Html.jqGrid("TiposReporte")
+
+    
+.addColumn(new Column("Agrupa").setLabel("Tipo Comprobante")
+   
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditRules("edithidden:true")
+        .setEditOptions("value:\""+ViewBag.Agrupa+"\"")
+        .setWidth(50))
+
+    .addColumn(new Column("Codemp").setLabel("Empresa")
+        .setHidden(true)
+        .setEditable(true)
+        .setWidth(50))
+     
+    .addColumn(new Column("idioma").setLabel("Idioma")
+        .setHidden(true)
+        .setSortable(true)
+        .setEditable(true)
+        .setWidth(50))
+        
+    .addColumn(new Column("codigo").setLabel("Codigo")
+        .setSortable(true)
+        .setAlign(Align.center)
+        //.setEditable(true)
+        .setWidth(50))
+     .addColumn(new Column("tipo").setLabel("Tipo")
+        .setSortable(true)
+        .setAlign(Align.center)
+        //.setEditable(true)
+        .setWidth(50))
+   
+        .addColumn(new Column("nombre").setLabel("Nombre")
+        .setSortable(true)
+        .setAlign(Align.left)
+        .setEditable(true)
+        //.setEditType(EditType.select)
+        //.setEditOptions("value:\""+ViewBag.nombre+"\"")
+        .setWidth(50)) 
+        
+   .addColumn(new Column("reporte").setLabel("Reporte")
+        .setSortable(true)
+        .setAlign(Align.left)
+        .setEditable(true)
+        .setWidth(50))
+   
+   .addColumn(new Column("ReportePadre").setLabel("Reporte Padre")
+   
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setEditType(EditType.select)
+        .setEditRules("edithidden:true")
+        .setEditOptions("value:\""+ViewBag.ReportePadre+"\"")
+        .setWidth(50))
+     
+        
+   .addColumn(new Column("Id").setLabel("ID Tipo")
+   
+        .setHidden(true)
+        .setEditable(true)
+        .setSortable(true)
+        .setWidth(50))
+                
+   .addColumn(new Column("IdTiposReporte").setLabel("Id TiposReporte")
+   
+        .setHidden(true)
+        
+        .setWidth(50))
+      
+    // settings
+    
+    .setCaption("TiposReporte")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Contabilidad/GetTiposReporte/")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("codigo")
+    
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerTiposReporte")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .setCellEdit(false)
+    .setCellSubmit(CellSubmit.clientArray)
+    .setNavEdit(ViewBag.Edit)
+    .setEditUrl("/Contabilidad/OperTiposReporte")
+    .setNavAdd(ViewBag.Add)
+    .setAddUrl("/Contabilidad/OperTiposReporte")
+    .setNavDel(ViewBag.Del)
+    .setDelUrl("/Contabilidad/OperTiposReporte")
+    .setExcelExport("/Contabilidad/ExportToExcel")
+    
+    .Render()
+
+)

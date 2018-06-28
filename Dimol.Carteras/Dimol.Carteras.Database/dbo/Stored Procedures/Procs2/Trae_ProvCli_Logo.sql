@@ -1,0 +1,1 @@
+﻿create Procedure Trae_ProvCli_Logo(@pcl_codemp integer, @pcl_pclid integer) as    SELECT provcli.pcl_logo      FROM provcli       WHERE ( provcli.pcl_codemp = @pcl_codemp ) AND             ( provcli.pcl_pclid = @pcl_pclid )   

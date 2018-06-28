@@ -1,0 +1,286 @@
+﻿
+@{
+    ViewBag.Title = "Conciliacion Banco";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+@using Mvc.HtmlHelpers
+
+<style type="text/css" media="screen">
+    th.ui-th-column div {
+        white-space: normal !important;
+        height: auto !important;
+        padding: 2px;
+    }
+</style>
+<script>
+    window.onload = function () {
+        $("#t_gridCuentasBancarias").append("<div align='right'><button onclick='fnAgregarCuentaBancaria();' title='Ingresar Cuenta'> <i class='fa fa-plus-square' style='font-size:15px;'></i> </button></div>");
+        $("#t_gridCartolaMovimientos").append("<div align='right'><button id='btnImportarArchivoCartola' onclick='fnMostrarImportarArchivoCartola(); return false;' title='Importar Archivo'><i class='fa fa-download' style='font-size:15px;'></i>  </button> <button id='btnExport' onclick='fnExportarMovimientosCartola(); return false;' title=' Exportar a Excel'><i class='fa fa-file-excel-o' style='font-size:15px;color:green;'></i> </button></div>");
+        $("#t_gridDocumentosCustodiados").append("<div align='left'><button onclick='fnAbrirFormularioDocumentoCustodia(); return false;' title='Ingresar Documento'> <i class='fa fa-plus-square' style='font-size:15px;'></i> </button></div>");
+
+        document.getElementById('frmCargaComprobante').onsubmit = function () {
+            var formdata = new FormData(); //FormData object
+            var fileInput = document.getElementById('subirArchivoComprobante');
+            //Iterating through each files selected in fileInput
+            for (i = 0; i < fileInput.files.length; i++) {
+                //Appending each file to FormData object
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+            //Creating an XMLHttpRequest and sending
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/Tesoreria/Upload/?tipo=CargaArchivoComprobante');
+            xhr.send(formdata);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    $('#ArchivoComprobante').val(xhr.responseText.replace(/\"/g, ''))
+                    if (xhr.responseText == '""') {
+                        alert("Error al subir el archivo al servidor");
+                        $("#imgSubirArchivoComprobante").removeClass("ok").addClass("error");
+                        $("#btnCargarConciliacion").attr("disabled", "disabled");
+                        $("#btnSubmitComprobante").removeAttr("disabled");
+                    } else {
+                        alert("Archivo listo para ser procesado");
+                        $("#imgSubirArchivoComprobante").removeClass("error").addClass("ok");
+                        $("#btnCargarConciliacion").removeAttr("disabled");
+                        $("#btnSubmitComprobante").attr("disabled", "disabled");
+                    }
+                }
+            }
+            return false;
+        }
+
+        document.getElementById('frmCargaCartolaBanco').onsubmit = function () {
+            var formdata = new FormData(); //FormData object
+            var fileInput = document.getElementById('subirArchivoCartola');
+            //Iterating through each files selected in fileInput
+            for (i = 0; i < fileInput.files.length; i++) {
+                //Appending each file to FormData object
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+            //Creating an XMLHttpRequest and sending
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/Tesoreria/Upload/?tipo=CargaCartola');
+            xhr.send(formdata);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    $('#ArchivoCartola').val(xhr.responseText.replace(/\"/g, ''))
+                    if (xhr.responseText == '""') {
+                        alert("Error al subir el archivo al servidor");
+                        $("#imgSubirArchivoCartola").removeClass("ok").addClass("error");
+                        $("#btnCargarCartola").attr("disabled", "disabled");
+                        $("#btnSubmitCartola").removeAttr("disabled");
+                    } else {
+                        alert("Archivo listo para ser procesado");
+                        $("#imgSubirArchivoCartola").removeClass("error").addClass("ok");
+                        $("#btnCargarCartola").removeAttr("disabled");
+                        $("#btnSubmitCartola").attr("disabled", "disabled");
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
+</script>
+
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+   
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+
+        @*<input type="button" value="Ingresar Cuenta" onclick="fnAgregarCuentaBancaria();" />*@
+        <button onclick="fnAgregarCuentaBancaria();" title="Ingresar Cuenta" style="display:none">
+            <i class="fa fa-plus-square" style="font-size:19px;"></i>
+        </button>
+        @(Html.jqGrid("gridCuentasBancarias")
+                .addColumn(new Column("NumCuenta").setLabel("Nº Cuenta")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(200))
+                .addColumn(new Column("TipoCuenta").setLabel("Tipo de Cuenta")
+                .setEditable(false)
+                .setSortable(true)
+                .setWidth(200))
+
+                .addColumn(new Column("Banco").setLabel("Banco")
+                .setSortable(true).setAlign(Align.left)
+                .setWidth(200))
+                .addColumn(new Column("MontoConciliar").setLabel("Pendiente por Conciliar").setAlign(Align.right).setFormatter(Formatters.integer)
+                .setSortable(true)
+                .setWidth(130))
+                .addColumn(new Column("CuentaId").setLabel("CuentaId")
+                .setEditable(false).setHidden(true)
+                .setSortable(true)
+                .setWidth(200))
+                .addColumn(new Column("Accion").setLabel("Proceso").setCustomFormatter("fnBotonesGridCuentaConciliar")
+                .setWidth(110)
+                .setAlign(Align.center))
+                // settings
+                .setCaption("Cuentas Bancarias")//.setWidth(800)
+                .setAutoWidth(true)
+                .setRequestType(RequestType.get)
+                .setUrl("~/Tesoreria/ListarTesoreriaCuentasBancariasGrilla/")
+                .setAltRows(true)
+                .setAltClass("altGridRows")
+                .setRowNum(10)
+                .setRowList(new int[] { 10, 30, 50 })
+                .setViewRecords(true)
+                .setSortName("Banco")
+                .setSortOrder(SortOrder.asc)
+                .setPager("pagerCuentasBancarias")
+                .setPagerPos(PagerPos.center)
+                .setPgButtons(true)
+                .setCellEdit(false)
+                .setCellSubmit(CellSubmit.clientArray).setToolbar(true).setToolbarPosition(ToolbarPosition.top)
+                .Render()
+
+
+        )
+
+    </div>
+</div>
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppCuentaBancaria" }).Draggable(true)
+        .AutoOpen(false)
+        .Modal(true)
+        .Title("Ingresar Cuenta Bancaria")
+        .CloseOnEscape(true)
+        .Width(500)
+        .Height(200)
+        ))
+{
+    @Html.Partial("_CrearCuentaBancaria")
+
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppFormularioConciliacion" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Conciliación Bancaria")
+                .CloseOnEscape(true)
+                .Width(1000)
+                .Height(700)
+
+                ))
+{
+    @Html.Partial("_ConciliacionBancaria")
+}
+
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAddDocumentoCustodia" }).Draggable(true)
+        .AutoOpen(false)
+        .Modal(true)
+        .Title("Documento en Custodia")
+        .CloseOnEscape(true)
+        .Width(530)
+        .Height(600)
+        ))
+{
+    @Html.Partial("_AgregarDocumentoCustodia")
+}
+
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppConciliacionCustodia" }).Draggable(true)
+        .AutoOpen(false).OnClose("fnUpdateFormularioConciliacionCustodia")
+        .Modal(true)
+        .Title("Documentos en Custodia")
+        .CloseOnEscape(true)
+        .Width(620)
+        .Height(620)
+        ))
+{
+    @Html.Partial("_ConciliacionCustodia")
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAddConciliacionMovimiento" }).Draggable(true)
+        .AutoOpen(false)
+        .Modal(true)
+        .Title("Conciliación de Movimiento")
+        .CloseOnEscape(true)
+        .Width(530)
+        .Height(470)
+        ))
+{
+    @Html.Partial("_ConciliacionMovimiento")
+
+}
+
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAddArchivoCartola" }).Draggable(true)
+        .AutoOpen(false)
+        .Modal(true)
+        .Title(".")
+        .CloseOnEscape(true)
+        .Width(500)
+        .Height(500)
+        ))
+{
+    @Html.Partial("_ImportarArchivoCartola")
+
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppBusquedaMovimientosCartola" }).Draggable(true)
+        .AutoOpen(false)
+        .Modal(true)
+        .Title(".")
+        .CloseOnEscape(true)
+        .Width(350)
+        .Height(150)
+        ))
+{
+    <div class=" panel panel-primary">
+        <div class="panel-heading">Criterio de búsqueda</div>
+        <div class="panel-body">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCriterioBusquedaCartola" }))
+            {
+                @Html.ValidationSummary(true)
+                <div id="Cartola">EN desarrollo</div>
+            }
+        </div>
+    </div>
+
+}
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAddObservacion" }).Draggable(true)
+        .AutoOpen(false)
+        .Modal(true)
+        .Title("Ingreso Observacion")
+        .CloseOnEscape(true)
+        .Width(350)
+        .Height(200)
+        ))
+{
+
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="width:100px;">@Html.Label("Observaciones")</div>
+            <div class="col">@Html.TextArea("ObservacionMovimiento", null, new { @class = "textboxClass", @style = "width: 200px" })</div>
+        </div>
+        <div class="fila">
+            @Html.Hidden("MovimientoSelectId")
+            @Html.Hidden("EstadoSelectId")
+            @Html.Hidden("CuentaSelectId")
+            <div class=" col" style="float:right"><input type="button" value="Aceptar" onclick="fnGuardarObservacion();" /></div>
+        </div>
+    </div>
+}
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppDoctoCustodia" }).Draggable(true)
+            .AutoOpen(false)
+            .Modal(true)
+            .Title("Documentos en Custodia")
+            .CloseOnEscape(true)
+            .Width(900)
+            .Height(600)
+
+            ))
+{
+}
+@Styles.Render("~/Content/caja")
+
+@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+
+

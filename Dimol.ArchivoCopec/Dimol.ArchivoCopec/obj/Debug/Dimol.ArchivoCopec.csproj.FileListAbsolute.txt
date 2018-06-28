@@ -1,0 +1,27 @@
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.ArchivoCopec.exe.config
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.ArchivoCopec.exe
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.ArchivoCopec.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.ArchivoCopec.bcp.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.ArchivoCopec.dto.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.bcp.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.ArchivoCopec.dao.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.dao.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\CYPH.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.dto.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\HtmlAgilityPack.dll
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.ArchivoCopec.bcp.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.ArchivoCopec.dto.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.bcp.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.ArchivoCopec.dao.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.dao.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\CYPH.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\CYPH.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.dto.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\HtmlAgilityPack.xml
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\obj\Debug\Dimol.ArchivoCopec.csprojResolveAssemblyReference.cache
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\obj\Debug\Dimol.ArchivoCopec.exe
+C:\Users\operaciones\Documents\Visual Studio 2015\Projects\Dimol.ArchivoCopec\Dimol.ArchivoCopec\obj\Debug\Dimol.ArchivoCopec.pdb
+C:\FuentesDimol2017\Dimol.ArchivoCopec\Dimol.ArchivoCopec\bin\Debug\Dimol.ArchivoCopec.exe.config
+C:\FuentesDimol2017\Dimol.ArchivoCopec\Dimol.ArchivoCopec\obj\Debug\Dimol.ArchivoCopec.exe
+C:\FuentesDimol2017\Dimol.ArchivoCopec\Dimol.ArchivoCopec\obj\Debug\Dimol.ArchivoCopec.pdb

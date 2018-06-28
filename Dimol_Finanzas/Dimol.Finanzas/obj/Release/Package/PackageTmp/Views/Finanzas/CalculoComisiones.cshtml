@@ -1,0 +1,116 @@
+﻿@model Dimol.Finanzas.Models.ComisionModel
+
+@{
+    ViewBag.Title = "Calculo Comisiones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Calculo Comisiones</h2>
+<br />
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+  <div class="ui-widget-header ui-corner-all">
+    <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Comision</span>
+
+   </div>
+   <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarComisiones" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>BuscarInsumos</legend>
+
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Anio)</div>
+                <div class="col">@Html.DropDownList("Anio", null, new { @class= "ComboboxClass",  onchange=""})</div>
+                
+            </div>
+            <div class="fila">
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Mes)</div>
+                <div class="col">@Html.DropDownList("Mes", null, new { @class= "ComboboxClass",  onchange=""})</div>
+                
+            </div>
+            
+            <div class="col" style="float:right"><input type="button" value="Buscar" onclick="fnBuscarComisiones();" /></div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Desde)</div>
+                <div class="col">@Html.JQueryUI().Datepicker("Desde").ShowButtonPanel(true).ShowWeek(false)</div>
+            </div>
+
+            <div class="fila" >
+                <div class="col" style="width:260px">@Html.LabelFor(model => model.Hasta)</div>
+                <div class="col">@Html.JQueryUI().Datepicker("Hasta").ShowButtonPanel(true).ShowWeek(false)</div>
+            </div>
+
+            <div class="col" style="float:right"><input type="button" value="Guardar" onclick="fnGuardarComisiones();" /></div>
+        </div>
+    </fieldset>
+    
+}
+<br />
+
+  
+@(Html.jqGrid("BuscarComisiones")
+    .addColumn(new Column("pcl_nomfant").setLabel("Cliente")
+        .setWidth(70))
+    .addColumn(new Column("ctc_rut").setLabel("Rut")
+        .setWidth(30))
+   .addColumn(new Column("ctc_nomfant").setLabel("Deudor")
+        .setWidth(70))
+   .addColumn(new Column("tci_nombre").setLabel("Documento")
+        .setWidth(80))
+   .addColumn(new Column("ddi_numcta").setLabel("Cuenta")
+        .setWidth(40)) 
+   .addColumn(new Column("FecCanc").setLabel("Fec.Pago")
+        .setWidth(50)) 
+   .addColumn(new Column("Capital").setLabel("Capital")
+        .setWidth(50))
+   .addColumn(new Column("Interes").setLabel("Interes")
+        .setWidth(50))
+   .addColumn(new Column("Honorario").setLabel("Honorario")
+        .setWidth(50))
+   .addColumn(new Column("Total").setLabel("Total")
+        .setWidth(50))
+   .addColumn(new Column("PorFact").setLabel("%Facturacion")
+        .setWidth(50))
+   .addColumn(new Column("ges_nombre").setLabel("Gestor")
+        .setWidth(70))
+   .addColumn(new Column("ComTotal").setLabel("Comision")
+        .setWidth(50))
+    // settings
+    .setCaption("CalculoComisiones")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDummy")
+    .setAltRows(true)
+    .setScrollRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(10)
+    .setRowList(new int[] { 10, 30, 50 })
+    .setViewRecords(true)
+    .setSortName("ctc_rut")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerCalculoComisiones")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .onSelectRow("DeudorSeleccionado(rowid)")
+    .Render()
+
+) 
+<br />
+<script>
+    function fnBuscarComisiones() {
+        var newUrl = "/Finanzas/GetComisiones/?"
+        //alert("ESTADO" + $("#Estado").val())
+        newUrl += "&Anio=" + $("#Anio").val()
+        newUrl += "&Mes=" + $("#Mes").val()
+        
+        jQuery("#BuscarComisiones").jqGrid().setGridParam({ url: newUrl }).trigger('reloadGrid', [{ page: 1 }])
+    }
+
+
+</script>

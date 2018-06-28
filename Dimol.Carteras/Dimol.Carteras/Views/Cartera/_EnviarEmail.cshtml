@@ -1,0 +1,229 @@
+﻿@model Dimol.Carteras.Models.EmailCochaModel
+@{
+    ViewBag.Title = "Envío de Email";
+    
+}
+<br />
+<h2>@ViewBag.Title</h2>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+   
+    <div style="height: auto; min-height: 150px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmail" }))
+        {
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>BuscarDeudor</legend>
+
+                <div class="tabla">                                     
+
+                    <div class="fila">
+                        <div class="col" style="width:100px">@Html.LabelFor(model => model.NombreRutCliente)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente"), "NombreRutCliente", null, new { @class = "textboxRutNombre", @readonly = "readonly" }).MinLength(3)<!--.OnSelect("fnBuscarDeudoresCpbtCocha")-->
+                            @Html.ValidationMessageFor(model => model.NombreRutCliente)
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:100px;padding-bottom:20px">@Html.LabelFor(model => model.NombreRutDeudor)</div>
+                        <div class="col">
+                            @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre", @readonly = "readonly" }).MinLength(3)<!--.OnSelect("fnBuscarDeudoresCpbtCocha")-->
+                            @Html.ValidationMessageFor(model => model.NombreRutDeudor)
+                        </div>
+                    </div>
+                    <!--<div class="fila">
+                        <div class="col" style="width:100px;padding-bottom:20px">@Html.LabelFor(model => model.Email)</div>
+                        <div class="col">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "textboxRutNombre", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
+                    -->
+
+                    <div class="fila">
+                        <div class="col" style="text-align:center;background-color:#005F9D;font-family: 'PT Sans', sans-serif; color:white; width: 95%;">Nota de Crédito</div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:120px"> @Html.LabelFor(model => model.Cuenta)</div>
+                        <div class="col" style="width:250px">
+                            @Html.TextBoxFor(model => model.Cuenta, null, new { @readonly="readonly" })
+                            @Html.ValidationMessageFor(model => model.Cuenta)
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:120px"> @Html.LabelFor(model => model.Monto)</div>
+                        <div class="col" style="width:250px">
+                            @Html.TextBoxFor(model => model.Monto, null, new { @onkeyup = "FormatCurrency(this,event);" })
+                            <!--@Html.ValidationMessageFor(model => model.Monto)-->
+                        </div>
+
+                        <div class="col" style="width:120px"> @Html.LabelFor(model => model.Saldo)</div>
+                        <div class="col" style="width:250px">
+                            @Html.TextBoxFor(model => model.Saldo, null, new { @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.Saldo)
+                        </div>
+
+                    </div>
+
+                    <div class="fila">
+                        <div class="col" style="width:120px"> @Html.LabelFor(model => model.MontoDolar)</div>
+                        <div class="col" style="width:250px">
+                            @Html.TextBoxFor(model => model.MontoDolar, null, new { @onkeyup = "FormatCurrency(this,event);" })
+                            <!--@Html.ValidationMessageFor(model => model.MontoDolar)-->
+                        </div>
+
+                        <div class="col" style="width:120px"> @Html.LabelFor(model => model.SaldoDolar)</div>
+                        <div class="col" style="width:250px">
+                            @Html.TextBoxFor(model => model.SaldoDolar, null, new { @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.SaldoDolar)
+                        </div>
+
+                    </div>
+
+
+                    <div class="fila" style="padding-bottom:30px">
+                        <div class="col" style="width:120px"> @Html.LabelFor(model => model.Banco)</div>
+                        <div class="col" style="width:250px">
+                            <!--@Html.TextBoxFor(model => model.Banco, null, new { })-->
+                            @Html.DropDownList("Banco", null, new { @class = "ComboboxClassS", @onchange = "TraeCuentaProvcliBanco()" })
+                            @Html.ValidationMessageFor(model => model.Banco)
+                        </div>
+
+                    </div>
+
+                    <div class="fila" style="padding-bottom:30px">
+                        <div class="col" style="width:120px"> @Html.LabelFor(model => model.FechaMail)</div>
+                        <div class="col" style="width:250px">
+                            @Html.JQueryUI().Datepicker("FechaMail").ShowButtonPanel(true).ShowWeek(false).MaxDate(0)
+                            @Html.ValidationMessageFor(model => model.FechaMail)
+                        </div>
+
+                    </div>
+                    
+                    <div class="fila">
+                        <div class="col" style="width:100px">@Html.LabelFor(model => model.CheckNotaCredito)</div>
+                        <div class="col">
+                            @Html.CheckBoxFor(model => model.CheckNotaCredito, new { @onchange = "fnMostrarNotaCredito()" })
+                            @Html.ValidationMessageFor(model => model.CheckNotaCredito)
+                        </div>
+
+                        <div id="divNotaCredito" style="display:none">
+                            <div class="col" style="width:120px"> @Html.LabelFor(model => model.NotaCredito)</div>
+                            <div class="col" style="width:126px">
+                                @Html.TextBoxFor(model => model.NotaCredito, null, new { @onkeyup = "FormatCurrency(this,event);" })
+                                <!--@Html.ValidationMessageFor(model => model.NotaCredito)-->
+                            </div>
+
+                            <div class="col" style="width:120px">@Html.LabelFor(model => model.ComentarioMail)</div>
+                            <div class="col">
+                                @Html.TextAreaFor(model => model.ComentarioMail, 3, 55, new { })
+                                @Html.ValidationMessageFor(model => model.ComentarioMail)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fila">
+                        <!--<div class="col" style="float:left">
+                            <input type="button" value="Buscar" id="btnBuscar" onclick="fnBuscarDeudoresCpbtCocha();" />
+                        </div>-->
+                        <div class="col" style="float:right">
+                            @Html.Hidden("Codemp")
+                            <input type="button" value="Generar" id="btnGenerar" onclick="fnEnviarEmailCocha();" />
+
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+        }
+
+    </div>
+    <div class="tabla">
+        <div class="fila">
+
+
+            <div class="col" style="width:85%;margin-left:20px">
+                @(Html.jqGrid("gridDeudorCpbt")
+
+    .addColumn(new Column("Pclid").setLabel("Id Cliente")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("Ctcid").setLabel("Ctcid")
+        .setHidden(true)
+        .setWidth(50))
+    .addColumn(new Column("Ccbid").setLabel("Ccbid")
+        .setHidden(true)
+        .setWidth(50))
+    //.addColumn(new Column("RutCliente").setLabel("Rut")
+    //    .setSortable(true)
+    //    .setWidth(50))
+    //.addColumn(new Column("NombreFantasia").setLabel("Nombre Fantasía")
+    //    .setSortable(true)
+    //    .setWidth(110))
+    .addColumn(new Column("TipoDocumento").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("Numero").setLabel("Número").setAlign(Align.center)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+    .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)//.setEditable(true)
+        .setWidth(70))
+    .addColumn(new Column("Moneda").setLabel("Moneda")
+        //.setEditable(true)
+        .setEditType(EditType.select)
+        .setEditOptions("value:\"" + ViewBag.Moneda + "\"")
+        .setWidth(100))
+    .addColumn(new Column("Estado").setLabel("Estado Cartera")
+        .setSortable(true)
+        .setWidth(150))
+    .addColumn(new Column("EstadoCpbt").setLabel("Estado")
+        .setSortable(true)
+        .setWidth(50))
+    .addColumn(new Column("Carga").setLabel("Carga")
+        .setSortable(true)
+        .setWidth(150))
+
+    // settings
+    .setCaption("Documentos Deudor").setMultiSelect(true)
+    .setRequestType(RequestType.get)
+    .setUrl("~/Cartera/GetDeudoresMailCochaCpbt/?Ctcid=10071&Pclid=22")
+    .setAltRows(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(500)
+    .setRowList(new int[] { 10, 30, 50, 500 })
+    .setViewRecords(true)
+    .setSortName("NombreFantasia")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerDeudorCpbt")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    //.setNavAdd(ViewBag.Add)
+    //.setCellEdit(true)
+    .onSelectRow("UpdateSaldoOfSelectedRows(rowid, status)")
+    .onSelectAll("fnOnSelectAllCocha(aRowids, status)")
+    .onLoadComplete("fnOnLoadCompleteDolares(this);")
+    //.onSelectRow("DeudorCpbtSeleccionado(rowid)")
+    .Render()
+
+                )
+
+
+
+            </div>
+        </div>
+    </div>
+    <br />
+</div>

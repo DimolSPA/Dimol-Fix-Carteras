@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "PanelAvenimiento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Panel Traspasos de Avenimiento</h2>
+<style>
+    .btn{display:inline-block;font-weight:400;line-height:1.25;text-align:center;white-space:nowrap;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;border:1px solid transparent;padding:.5rem 1rem;font-size:1rem;border-radius:.25rem;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
+    .btn:focus,
+    .btn:hover{text-decoration:none}
+    .btn.focus,
+    .btn:focus{outline:0;-webkit-box-shadow:0 0 0 2px rgba(2,117,216,.25);box-shadow:0 0 0 2px rgba(2,117,216,.25)}
+    .btn-info{font-weight: bold;color:#000;background-color:#5bc0de;border-color:#5bc0de}
+    .btn-info:hover{font-weight: bold;color:#000;background-color:#31b0d5;border-color:#2aabd2}
+    .btn-info.focus,.btn-info:focus{-webkit-box-shadow:0 0 0 2px rgba(91,192,222,.5);box-shadow:0 0 0 2px rgba(91,192,222,.5)}
+    .btn-info.disabled,.btn-info:disabled{background-color:#5bc0de;border-color:#5bc0de}
+    .btn-sm{padding:.25rem .5rem;font-size:.875rem;border-radius:.2rem}
+</style>
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Traspasos</span>
+
+    </div>
+    <div class="col" style="float: right">
+        <input type="button" value="Exportar a Excel" onclick="" />
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+
+        <br />
+
+        @(Html.jqGrid("gridPanelAvenimiento")
+                .addColumn(new Column("Rol").setLabel("Rol")
+                .setAlign(Align.left)
+                .setWidth(120))
+                .addColumn(new Column("Cliente").setLabel("Cliente")
+                .setAlign(Align.left)
+                .setWidth(3000))
+                .addColumn(new Column("Deudor").setLabel("Deudor")
+                .setEditable(false).setSearch(true)
+                .setSortable(true)
+                .setWidth(300))
+                .addColumn(new Column("Tribunal").setLabel("Tribunal")
+                .setEditable(false).setSearch(true)
+                .setSortable(true)
+                .setWidth(250))
+                .addColumn(new Column("FechaTraspasoAvenimiento").setLabel("Fec. Traspaso Avenimiento")
+                .setEditable(false).setAlign(Align.center).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                .setSortable(true)
+                .setWidth(150))
+                .addColumn(new Column("Pclid").setLabel("Pclid")
+                .setEditable(false).setHidden(true)
+                .setWidth(50))
+                .addColumn(new Column("Ctcid").setLabel("Ctcid")
+                .setEditable(false).setHidden(true)
+                .setWidth(50))
+                .addColumn(new Column("RolId").setLabel("Aprobación").setCustomFormatter("fnBotonesGridPanelAvenimiento")
+                .setWidth(120)
+                .setAlign(Align.center))
+              
+                // settings
+            .setCaption("Panel de Avenimiento")
+            .setRequestType(RequestType.get)
+            .setUrl("~/Judicial/ListarPanelAvenimientoGrilla/")
+            .setAltRows(true)
+            .setAltClass("altGridRows")
+            .setAutoWidth(true)
+            .setRowNum(100)
+            .setRowList(new int[] { 100, 200, 500 })
+            .setViewRecords(true)
+            .setSortName("FechaTraspasoAvenimiento")
+            .setSortOrder(SortOrder.asc)
+            .setPager("pagerPanelAvenimiento")
+            .setPagerPos(PagerPos.center)
+            .setPgButtons(true)
+            .setCellEdit(false)
+            .setCellSubmit(CellSubmit.clientArray)
+            //.setExcelExport("/Judicial/ExportToExcelPanelQuiebras")
+            .setShrinkToFit(false)
+            .setGrouping(true)
+            .setGroupingView("groupField: ['Cliente'],groupColumnShow: [false], groupText: ['<b>{0} - {1} Avenimientos(s)</b>'], groupCollapse: false, groupOrder: ['asc'],groupDataSorted: true")
+            .Render()
+
+
+
+        )
+
+    </div>
+</div>
+
+@using (Html.JQueryUI().Begin(new Dialog(new { id = "ppAprobarPanelAvenimiento" }).Draggable(true)
+                .AutoOpen(false)
+                .Modal(true)
+                .Title("Datos de Avenimiento")
+                .CloseOnEscape(true)
+                .Width(600)
+                .Height(600)
+
+                ))
+{
+    @Html.Partial("_AprobarPanelAvenimiento")
+}

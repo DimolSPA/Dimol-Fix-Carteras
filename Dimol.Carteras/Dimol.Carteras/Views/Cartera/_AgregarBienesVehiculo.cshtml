@@ -1,0 +1,93 @@
+﻿@model Dimol.Carteras.dto.BienVehiculo
+@using Mvc.HtmlHelpers
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBienVehiculo" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.Hidden("VehiculoId")
+    <div class="tabla">
+        
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Patente)</div>
+            <div class="col">
+
+                @Html.TextBoxFor(model => model.Patente, null, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.Patente)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.MarcaId)</div>
+            <div class="col">
+                @Html.DropDownListFor(model => model.MarcaId, null, "-- Seleccione Marca --", new { @class = "ComboboxClass", onchange = "fnMarcaSeleccionada(this, 'ModeloId' )" })
+                @Html.ValidationMessageFor(model => model.MarcaId)
+            </div>
+        </div>
+        
+        
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.ModeloId)</div>
+            <div class="col">
+                @Html.DropDownListFor(model => model.ModeloId, null, new { @class = "ComboboxClass" })
+                @Html.ValidationMessageFor(model => model.ModeloId)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Anio)</div>
+            <div class="col">
+
+                @Html.TextBoxFor(model => model.Anio, null, new { @class = "textboxClass" })
+                @Html.ValidationMessageFor(model => model.Anio)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Propietario)</div>
+            <div class="col">
+                @Html.CheckBoxFor(model => model.Propietario)
+               
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Prenda)</div>
+            <div class="col">
+                @Html.CheckBoxFor(model => model.Prenda)
+            
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:160px">@Html.LabelFor(model => model.Embargo)</div>
+            <div class="col">
+                @Html.CheckBoxFor(model => model.Embargo)
+               
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col">
+                
+                    <div class="tabla">
+                        <div class="fila">
+                            <div class="col" style="width:70px;height:25px;margin-top: 5px;"> Archivo</div>
+                            <div class="col" style="width:300px"><input id="subirArchivoComprobante" type="file" style="width:300px"><input type="hidden" name="ArchivoComprobante" id="ArchivoComprobante"></div>
+                            <div class="col"><input type="submit" id="btnSubmitComprobante" value="Subir Archivo" /></div>
+                            <div class="col"><img id="imgSubirArchivoComprobante" src="~/Images/blank.png" class="" style="float:left" /></div>
+                            <div class="col"><input type="button" value="Nuevo" onclick="fnLimpiarCargaComprobante();" /></div>
+                        </div>
+                        <div class="fila">
+
+                            <div class="col" style="float:right">
+                            <input type="button" style="display:none" value="Cargar" disabled="disabled" id="btnCargarComprobante" />
+
+                            </div>
+
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="float:right">
+                <input type="button" value="Guardar" id="btnGuardar" onclick="fnGuardarBienVehiculo();" />
+
+            </div>
+        </div>
+    </div>
+
+}

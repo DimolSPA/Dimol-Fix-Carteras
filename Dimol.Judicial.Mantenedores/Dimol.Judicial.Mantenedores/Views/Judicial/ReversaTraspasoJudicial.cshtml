@@ -1,0 +1,169 @@
+﻿@model Dimol.Judicial.Mantenedores.Models.RolModel
+@{
+    ViewBag.Title = "Reversa Traspaso Judicial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+@using Mvc.HtmlHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div class="ui-widget-header ui-corner-all">
+        <span id="ui-dialog-title-dialog" class="ui-dialog-title">Datos Reversa Traspaso</span>
+
+    </div>
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBuscarComprobante" }))
+        {
+            @Html.ValidationSummary(true)
+
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="width:120px">@Html.Label("Deudor")</div>
+            <div class="col">
+               
+                @Html.JQueryUI().AutocompleteFor(model => model.Ctcid, Url.Action("BuscarRutNombreDeudor"), "NombreRutDeudor", null, new { @class = "textboxRutNombre" }).MinLength(3).OnClose("fnBuscarDocsDeudorTraspasados")
+                @Html.ValidationMessageFor(model => model.NombreRutDeudor)
+
+            </div>
+        </div>
+    </div>
+
+
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:130px; display:none;">@Html.Label("Fecha Desde")</div>
+                <div class="col" style="display:none;">
+                    @Html.JQueryUI().Datepicker("FechaDesde", null, new { @readonly = "readonly" }).ShowButtonPanel(true).ShowWeek(false).OnSelect("fnCargarTraspasosPendientes").DateFormat("dd-MM-yyyy")
+                </div>
+                <div class="col" style="width:30px; display:none;"></div>
+                <div class="col" style="width:130px; display:none;">@Html.Label("Fecha Hasta")</div>
+                <div class="col" style="display:none;">
+                    @Html.JQueryUI().Datepicker("FechaHasta", null, new { @readonly = "readonly" }).ShowButtonPanel(true).ShowWeek(false).OnSelect("fnCargarTraspasosPendientes").DateFormat("dd-MM-yyyy")
+                </div>
+                <div class="col" style="float: right">
+                    @*<input type="button" value="Exportar a Excel" onclick="fnExcelTraspasosPendientes();" />*@
+                    <input type="button" value="Revertir Traspaso" onclick="fnRevertirTraspasos();" />
+                </div>
+            </div>
+
+        </div>
+        }
+        @(Html.jqGrid("gridPorRevertir")
+                    .addColumn(new Column("Cliente").setLabel("Cliente")
+                        .setSortable(true)
+                        .setWidth(200))
+                    .addColumn(new Column("RutDeudor").setLabel("Rut Deudor")
+                        .setSortable(true).setAlign(Align.right).setHidden(true)
+                        .setWidth(70))
+                    .addColumn(new Column("Deudor").setLabel("Deudor")
+                        .setSortable(true)
+                        .setWidth(200))
+                    .addColumn(new Column("Tipo").setLabel("Tipo").setAlign(Align.center)
+                        .setSortable(true)
+                        .setWidth(100))
+                    .addColumn(new Column("Numero").setLabel("Número").setAlign(Align.center)
+                        .setSortable(true)
+                        .setWidth(100))
+                    .addColumn(new Column("FechaAsignacion").setLabel("Fecha Asig.").setAlign(Align.center)
+                        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                        .setWidth(72))
+                    .addColumn(new Column("FechaVencimiento").setLabel("Fecha Venc.").setAlign(Align.center)
+                        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+                        .setWidth(72))
+                    .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+                        .setSortable(true)
+                        .setWidth(70))
+                    .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.number)
+                        .setSortable(true)
+                        .setWidth(70))
+                    .addColumn(new Column("Estado").setLabel("Estado").setAlign(Align.center)
+                        .setSortable(true)
+                        .setWidth(100))
+                    .addColumn(new Column("EstadoCpbt").setLabel("EstadoCpbt")
+                        .setSortable(true).setHidden(true)
+                        .setWidth(100))
+                    .addColumn(new Column("Fecha").setLabel("Fecha")
+                        .setSortable(true).setAlign(Align.center)
+                        .setWidth(70))
+
+    // settings
+    .setCaption("Traspasos Realizados")
+            .setRequestType(RequestType.get)
+                    .setUrl("~/Judicial/GetTraspasoJudicialHecho")
+            .setAltRows(true)
+            .setMultiSelect(true)
+            .setAltClass("altGridRows")
+            .setAutoWidth(true)
+            .setRowNum(100)
+            .setRowList(new int[] { 10, 50, 100, 500 })
+            .setViewRecords(true)
+            .setSortName("Cliente,Deudor,Fecha")
+            .setSortOrder(SortOrder.asc)
+            .setPager("pagerPorRevertir")
+            .setPagerPos(PagerPos.center)
+            .setPgButtons(true)
+            .setGrouping(true)
+                //.setShrinkToFit(false)
+            .setGroupingView("groupField: ['Deudor'],groupColumnShow: [false], groupText: ['<b>{0} - {1} Documento(s)</b>'], groupCollapse: true, groupOrder: ['asc'],groupDataSorted: true")
+            .Render()
+
+        )
+        <br />
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:200px">@Html.Label("Estado")</div>
+                <div class="col">@Html.DropDownList("Estado", null, new {})</div>
+            </div>
+            <div class="fila">
+                <div class="col" style="width:200px">@Html.Label("Comentario")</div>
+                <div class="col">@Html.TextArea("Comentario","",4,55, new { })</div>
+            </div>
+        </div>
+            @*@(Html.jqGrid("gridPorRevertir")
+    .addColumn(new Column("Tipo").setLabel("Tipo")
+        .setSortable(true)
+        .setWidth(150))
+    .addColumn(new Column("Numero").setLabel("Número").setAlign(Align.right)
+        .setSortable(true)
+        .setWidth(70))
+            .addColumn(new Column("Monto").setLabel("Monto").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+            .addColumn(new Column("Saldo").setLabel("Saldo").setAlign(Align.right).setFormatter(Formatters.number)
+        .setSortable(true)
+        .setWidth(70))
+            .addColumn(new Column("UltimoEstado").setLabel("Ult. Estado")
+        .setSortable(true)
+        .setWidth(150))
+   .addColumn(new Column("Estado").setLabel("Estado")
+        .setSortable(true)
+        .setWidth(100))
+    .addColumn(new Column("FechaVencimiento").setLabel("Fecha Venc.").setAlign(Align.center)
+        .setSortable(true).setFormatter(Formatters.date).setDateFmt("d-m-Y")
+        .setWidth(70))
+
+    // settings
+    .setCaption("Documentos a Revertir")
+    .setRequestType(RequestType.get)
+    .setUrl("~/Judicial/GetDocumentosReversaTraspasoJudicial/?pclid=0&ctcid=0")
+    .setAltRows(true)
+    .setMultiSelect(true)
+    .setAltClass("altGridRows")
+    .setAutoWidth(true)
+    .setRowNum(100)
+    .setRowList(new int[] { 10, 50, 100, 500 })
+    .setViewRecords(true)
+    .setSortName("Numero")
+    .setSortOrder(SortOrder.asc)
+    .setPager("pagerPorRevertir")
+    .setPagerPos(PagerPos.center)
+    .setPgButtons(true)
+    .Render()
+
+            )*@
+            <br />
+        </div>
+</div>

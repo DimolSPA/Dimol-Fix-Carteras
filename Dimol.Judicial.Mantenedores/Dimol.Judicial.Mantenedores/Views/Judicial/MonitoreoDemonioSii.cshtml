@@ -1,0 +1,226 @@
+﻿@{
+    ViewBag.Title = "MonitoreoDemonioSii";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Monitoreo Demonio Sii</h2>
+<br />
+<style>
+    .badge {
+        padding: 1px 9px 2px;
+        font-size: 0.875em;
+        font-weight: bold;
+        white-space: nowrap;
+        color: #ffffff;
+        background-color: #999999;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    .badge-info {
+        background-color: #3a87ad;
+    }
+
+    .list-group {
+        padding-left: 0;
+        margin-bottom: 0px;
+    }
+
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: 5px 10px;
+        margin-bottom: -1px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        font-size: 0.875em;
+    }
+
+        .list-group-item:first-child {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+
+        .list-group-item:last-child {
+            margin-bottom: 0;
+            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .list-group-item > .badge {
+            float: right;
+        }
+
+            .list-group-item > .badge + .badge {
+                margin-right: 5px;
+            }
+
+    .nav-pills > li > a > .badge {
+        margin-left: 3px;
+    }
+
+    .progress {
+        position: relative;
+        height: 20px;
+        margin-top: 2px;
+        margin-bottom: 5px;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+        box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    }
+
+    .progress-bar {
+        float: left;
+        width: 0;
+        height: 100%;
+        font-size: 0.875em;
+        font-weight: bold;
+        line-height: 20px;
+        color: #000;
+        text-align: center;
+        background-color: #337ab7;
+        -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+        box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+        -webkit-transition: width .6s ease;
+        -o-transition: width .6s ease;
+        transition: width .6s ease;
+    }
+
+    .progress span {
+        position: absolute;
+        display: block;
+        width: 100%;
+        color: black;
+    }
+
+    .progress-bar-success {
+        background-color: #5cb85c;
+    }
+
+    .progress-bar-info {
+        background-color: #5bc0de;
+    }
+
+    .progress-bar-warning {
+        background-color: #f0ad4e;
+    }
+
+    .progress-bar-danger {
+        background-color: #d9534f;
+    }
+</style>
+
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+<div class="ui-widget ui-widget-content ui-corner-all" style="outline: 0px none;">
+    <div style="height: auto; min-height: 300px; width: auto; margin: 10px;border:none" class="ui-widget-content">
+        <div class="tabla">
+            <div class="fila">
+                <div class="col" style="width:45%">
+                    <div class="tabla">
+                        <div class="fila">
+                            <div class="col" style="float:left;width:300px">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+
+                                        @Html.Label("Recolectó Día Anterior")
+                                        <span class="badge badge-info">@ViewBag.Recolecto</span>
+                                    </li>
+                                    <li class="list-group-item">
+
+                                        @Html.Label("Nº de Rut Recolectados")
+                                        <span class="badge badge-info">@ViewBag.CantRut</span>
+                                    </li>
+                                    <li class="list-group-item">
+
+                                        @Html.Label("Nº de Rut Recolectados Acumulativo")
+                                        <span class="badge badge-info">@ViewBag.Acumulativas</span>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col" style="width:45%">
+                    <div class="tabla">
+                        <div class="fila">
+                            <div class="col" style="float:right;width:300px">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+
+                                        @Html.Label("Fecha Actualización")
+                                        <span class="badge badge-info">@ViewBag.FecUtimaActualizacion</span>
+                                    </li>
+                                    <li class="list-group-item">
+
+                                        @Html.Label("Fecha próxima Actualización")
+                                        <span class="badge badge-info">@ViewBag.FecProximaActualizacion</span>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+        <br />
+        @(Html.jqGrid("gridMonitoreoSiiDemandas")
+                    .addColumn(new Column("Cliente").setLabel("Cliente")
+                    .setSortable(true)
+                    .setWidth(182))
+                    .addColumn(new Column("SaldoCartera").setLabel("Saldo Cartera")
+                    .setSortable(true).setAlign(Align.right).setFormatter(Formatters.number)
+                    .setWidth(116))
+                    .addColumn(new Column("SaldoVerde").setLabel("<img src=/Images/green_check.png width=20px height=20px />")
+                    .setSortable(true).setAlign(Align.right).setFormatter(Formatters.number)
+                    .setWidth(111))
+                    .addColumn(new Column("PorSaldoVerde").setLabel("<img src=/Images/green_check.png width=20px height=20px />")
+                    .setSortable(true).setAlign(Align.center).setCustomFormatter("formatPercentage")
+                    .setWidth(100))
+                    .addColumn(new Column("SaldoAmarillo").setLabel("<img src=/Images/yellow-ex.png width=20px height=20px />")
+                    .setSortable(true).setAlign(Align.right).setFormatter(Formatters.number)
+                    .setWidth(114))
+                    .addColumn(new Column("PorSaldoAmarillo").setLabel("<img src=/Images/yellow-ex.png width=20px height=20px />")
+                    .setSortable(true).setAlign(Align.center).setCustomFormatter("formatPercentage")
+                    .setWidth(100))
+                    .addColumn(new Column("SaldoRojo").setLabel("<img src=/Images/red-x.png width=20px height=20px />")
+                    .setSortable(true).setAlign(Align.right).setFormatter(Formatters.number)
+                    .setWidth(118))
+                    .addColumn(new Column("PorSaldoRojo").setLabel("<img src=/Images/red-x.png width=20px height=20px />")
+                    .setSortable(true).setAlign(Align.center).setCustomFormatter("formatPercentage")
+                    .setWidth(90))
+                // settings
+                    .setCaption("Cartera Clientes")
+                    .setRequestType(RequestType.get)
+                    .setUrl("~/Judicial/ListarPanelMonitoreoSiiClientes/")
+                    .setAltRows(true)
+                    .setAltClass("altGridRows")
+                    .setAutoWidth(true)
+                    .setRowNum(10)
+                    .setRowList(new int[] { 10, 20, 100 })
+                    .setViewRecords(true)
+                    .setSortName("Cliente")
+                    .setSortOrder(SortOrder.asc)
+                    .setPager("pagerSiiDemandas")
+                    .setPagerPos(PagerPos.center)
+                    .setPgButtons(true)
+                    .setCellEdit(false)
+                    .setCellSubmit(CellSubmit.clientArray)
+                    .setShrinkToFit(false)
+                    .setFooterRow(true)
+                    .onLoadComplete("fnOnLoadCompleteSiiClientes(this, xhr)")
+                    .Render()
+        )
+        <br />
+
+    </div>
+</div>

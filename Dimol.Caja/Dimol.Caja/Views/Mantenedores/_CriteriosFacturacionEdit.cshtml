@@ -1,0 +1,81 @@
+﻿@model Dimol.Caja.Models.CriterioFacturacionViewModel
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCriterioFacturacion" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Pclid)
+    <div class="tabla">
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.NombreRutCliente) </div>
+            <div class="col" style="width:250px">
+                @Html.JQueryUI().AutocompleteFor(model => model.Pclid, Url.Action("BuscarRutNombreCliente", "Tesoreria"), "NombreRutCliente", null, new { @class = "textboxRutNombre" }).MinLength(3)
+                @Html.ValidationMessageFor(model => model.NombreRutCliente)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.Descripcion)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.Descripcion)
+                @Html.ValidationMessageFor(model => model.Descripcion)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.NoAplicaFactura)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.NoAplicaFactura)
+                @Html.ValidationMessageFor(model => model.NoAplicaFactura)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.AplicaAprobacion)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.AplicaAprobacion)
+                @Html.ValidationMessageFor(model => model.AplicaAprobacion)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.AplicaCriterio)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.AplicaCriterio)
+                @Html.ValidationMessageFor(model => model.AplicaCriterio)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.CriterioAplicaSimbolo)</div>
+            <div class="col"> @Html.DropDownListFor(model => model.CriterioAplicaSimbolo, null)</div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.ValorCriterio)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.ValorCriterio)
+                @Html.ValidationMessageFor(model => model.ValorCriterio)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.Condicion)</div>
+            <div class="col"> @Html.DropDownListFor(model => model.Condicion, null, "-- Seleccione Condicion --")</div>
+        </div>
+        
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.Imputable)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.Imputable)
+                @Html.ValidationMessageFor(model => model.Imputable)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="width:170px">@Html.LabelFor(model => model.AplicaRemesa)</div>
+            <div class="col">
+                @Html.EditorFor(model => model.AplicaRemesa)
+                @Html.ValidationMessageFor(model => model.AplicaRemesa)
+            </div>
+        </div>
+        <div class="fila">
+            <div class="col" style="float:right">
+                <input type="button" value="Guardar" id="btnGuardar" />
+
+            </div>
+        </div>
+    </div>
+
+}

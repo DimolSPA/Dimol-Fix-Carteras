@@ -1,0 +1,639 @@
+﻿@model Dimol.Slider.Models.TareaModel
+
+@{
+    Layout = null;
+}
+
+@using Mvc.HtmlHelpers
+@using JQueryUIHelpers
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tareas</title>
+    
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/jquery.jqGrid/ui.jqgrid.css")" />
+    <style type="text/css">
+        button.proceso-on {
+            width: 32px;
+            height: 20px;
+            background: url(../../Images/Tareas/green.png);
+            padding: 0;
+            border: none;
+        }
+        button.proceso-off {
+            width: 32px;
+            height: 20px;
+            background: url(../../Images/Tareas/red.png);
+            padding: 0;
+            border: none;
+        }
+
+        .panel {
+         margin-bottom: 20px;
+         background-color: #fff;
+         border: 1px solid #ddd;
+         border-radius: 4px;
+         -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+         box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+        }
+
+        .panel-heading {
+         padding: 10px 15px;
+         background-color: #f5f5f5;
+         border-bottom: 1px solid #ddd;
+         border-top-right-radius: 3px;
+         border-top-left-radius: 3px;
+        }
+
+        .panel-title {
+         margin-top: 0;
+         margin-bottom: 0;
+         font-size: 16px;
+        }
+
+        .panel-body {
+         padding: 15px;
+        }
+
+        .panel-primary {
+         border-color: #819FF7;
+        }
+
+        .panel-primary>.panel-heading {
+         color: #fff;
+         background-color: #819FF7;
+         border-color: #819FF7;
+        }
+
+        table tr td {
+            border:1px solid grey;    
+        }
+
+        .badge {
+          padding: 1px 9px 2px;
+          font-size: 0.875em;
+          font-weight: bold;
+          white-space: nowrap;
+          color: #ffffff;
+          background-color: #999999;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+          border-radius: 10px;
+        }
+
+        .badge-info {
+          background-color: #3a87ad;
+        }
+
+        .list-group{padding-left:0;margin-bottom:0px}
+        .list-group-item{position:relative;display:block;padding:5px 10px; margin-bottom:-1px;background-color:#fff;border:1px solid #ddd;font-size: 0.875em;}
+        .list-group-item:first-child{border-top-left-radius:4px;border-top-right-radius:4px}
+        .list-group-item:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}
+        .list-group-item>.badge{float:right}
+        .list-group-item>.badge+.badge{margin-right:5px;}.nav-pills>li>a>.badge{margin-left:3px}
+
+        .progress{position: relative;height:20px;margin-top:2px; margin-bottom:5px;overflow:hidden;background-color:#f5f5f5;border-radius:4px;-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);box-shadow:inset 0 1px 2px rgba(0,0,0,.1)}.progress-bar{float:left;width:0;height:100%;font-size:0.875em;font-weight: bold;line-height:20px;color:#000;text-align:center;background-color:#337ab7;-webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,.15);box-shadow:inset 0 -1px 0 rgba(0,0,0,.15);-webkit-transition:width .6s ease;-o-transition:width .6s ease;transition:width .6s ease}
+        .progress span {
+            position: absolute;
+            display: block;
+            width: 100%;
+            color: black;
+        }
+        .progress-bar-success{background-color:#5cb85c}
+        .progress-bar-info{background-color:#5bc0de}
+        .progress-bar-warning{background-color:#f0ad4e}
+        .progress-bar-danger{background-color:#d9534f}
+
+        .ui-datepicker, .ui-state-default, .ui-state-hover, .ui-state-active
+        {
+            font-size:11px;
+        }
+    </style>
+
+    @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/bundles/modernizr")
+    
+    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+    <script src="~/Scripts/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/i18n/grid.locale-es.js"></script>
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script type="text/javascript">
+
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '< Ant',
+            nextText: 'Sig >',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+
+        $(function () {
+            $("#FecTarea").datepicker({ minDate: 0 });
+        });
+
+        $(function () {
+            $("#dialog").dialog({
+                autoOpen: false,
+                width: 350,
+                height: 550,
+                modal: true,
+                show: {
+                    effect: "puff",
+                    duration: 500
+                },
+                hide: {
+                    effect: "puff",
+                    duration: 500
+                }
+            });
+        });
+
+        $(function () {
+            $("#dlgExpl").dialog({
+                autoOpen: false,
+                width: 350,
+                height: 200,
+                modal: true,
+                show: {
+                    effect: "puff",
+                    duration: 500
+                },
+                hide: {
+                    effect: "puff",
+                    duration: 500
+                },
+                close: function () {
+
+                    if ($("#Explicacion").val() != '') {
+                        alert("Debe ingresar una explicación si desea marcar la tarea atrasada como completada");
+                        $("#Explicacion").val('');
+                    }
+                    
+                }
+            });
+        });
+        
+        function fnTareaCompletada(cellvalue, options, rowobject) {                      
+            
+            var button = '';
+            if (cellvalue == 1) {                
+                button = '<button type="button" class="proceso-off" onclick="fnCompletarTarea(\'' + rowobject + '\')" ></button>';
+            } else {                
+                button = '<button type="button" class="proceso-on" onclick="fnCompletarTarea(\'' + rowobject + '\')" ></button>';
+            }
+            return button;
+        }
+
+        function fnCompletarTarea(rowobject) {
+            
+            var datos = rowobject.split(',');
+
+            var completa = datos[4] == 1 ? 0 : 1;
+            
+            if (completa == 0) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: "/Home/ValidarTareaCumplida", // we are calling json method
+                    dataType: 'json',
+                    async: false,
+                    data: { idTarea: datos[0] },
+                    success: function (data) {
+                        if (data > 0) {
+                            $("#IdTareas").val(datos[0]);
+                            $('#dlgExpl').dialog('open');
+                        }
+                        else {
+                            fnActualizarTarea(datos[0], completa);
+                        }
+                    },
+                    error: function (ex) {
+                        alert('Error al completar la tarea.');
+                    }
+
+                });
+                
+            }
+            
+            else
+            {
+                fnActualizarTarea(datos[0], completa);
+            }
+        }
+
+        function fnActualizarTarea(id, completa) {
+
+            $.ajax({
+                type: 'POST',
+                url: "/Home/CompletarTarea", // we are calling json method
+                dataType: 'json',
+                async: false,
+                data: { IdTarea: id, Completa: completa }, // $('#Explicacion').val()
+                success: function (data) {
+                    if (data > 0) {
+                        fnCargarTareas();
+                    }
+                },
+                error: function (ex) {
+                    alert('Error al completar la tarea.');
+                }
+
+            });
+
+        }
+
+        function fnCargarTareas() {
+            var newUrl = "/Home/GetTareas/"
+
+            jQuery("#gridTareas").jqGrid().setGridParam({ url: newUrl }).trigger('reloadGrid', [{ page: 1 }]);
+        }
+
+        function fnTareaDesactivada(cellvalue, options, rowobject) {
+
+            var button = '';
+            if (cellvalue == 1) {
+                button = '<button type="button" class="proceso-off"  onclick="fnDesactivarTarea(\'' + rowobject + '\')" ></button>';
+            } else {
+                button = '<button type="button" class="proceso-on" onclick="fnDesactivarTarea(\'' + rowobject + '\')" ></button>';
+            }
+            return button;
+        }
+
+        function fnDesactivarTarea(rowobject) {
+            var dato = rowobject.split(',');
+            
+            if(confirm("¿Está seguro?, esta tarea ya no será visible")){
+                $.ajax({
+                    type: 'POST',
+                    url: "/Home/DesactivarTarea", // we are calling json method
+                    dataType: 'json',
+                    async: false,
+                    data: { nombre: dato[1] },
+                    success: function (data) {
+                        if (data > 0) {
+                            alert("Tarea desactivada con éxito");
+                            fnCargarTareas();                            
+                        }
+                    },
+                    error: function (ex) {
+                        alert('Error al desactivar la tarea.');
+                    }
+
+                });
+            }
+        }
+
+        function fnAgregarTarea() {
+            $('#ppAgregarTarea').dialog('open');
+            $('#dialog').dialog('option', 'title', 'Agregar Nueva Tarea');
+            $('#dialog').dialog('open');
+            $("#IdTareas").val(0);
+            $("#Nombre").val('');
+            $("#Observaciones").val('');
+            $("#FecTarea").val('');
+
+            $("#Lunes").prop('checked', false);
+            $("#Martes").prop('checked', false);
+            $("#Miercoles").prop('checked', false);
+            $("#Jueves").prop('checked', false);
+            $("#Viernes").prop('checked', false);
+            //alert("a");
+        }
+
+        function fnGuardarTarea() {
+            $('#ppAgregarTarea').dialog('close');
+
+            var dias = ($("#Lunes").is(':checked') ? 0 : 1) + '|' + ($("#Martes").is(':checked') ? 0 : 1) + '|' + ($("#Miercoles").is(':checked') ? 0 : 1) + '|' + ($("#Jueves").is(':checked') ? 0 : 1) + '|' + ($("#Viernes").is(':checked') ? 0 : 1)
+            
+            $.ajax({
+                type: 'POST',
+                url: "/Home/ValidarFechaTarea", // we are calling json method
+                dataType: 'json',
+                async: false,
+                data: { fechaActual: $("#FecTarea").val() },
+                success: function (data) {
+                    if (data > 0) {
+                        if ($("#Nombre").val() != '' && $("#FecTarea").val() != '') {
+                            $.ajax({
+                                type: 'POST',
+                                url: "/Home/GuardarTarea", // we are calling json method
+                                dataType: 'json',
+                                async: false,
+                                data: { id: $("#IdTareas").val(), nombre: $("#Nombre").val(), obs: $("#Observaciones").val(), fechaTarea: $("#FecTarea").val(), dias: dias },
+                                success: function (data) {
+                                    if (data > 0) {
+
+                                        if ($("#IdTareas").val() != 0) {
+                                            alert("Tarea actualizada con éxito");
+                                        }
+                                        else {
+                                            alert("Tarea guardada con éxito");
+                                        }
+
+                                        $("#IdTareas").val(0);
+                                        $("#Nombre").val('');
+                                        $("#Observaciones").val('');
+                                        $("#FecTarea").val('');
+
+                                        $("#Lunes").prop('checked', false);
+                                        $("#Martes").prop('checked', false);
+                                        $("#Miercoles").prop('checked', false);
+                                        $("#Jueves").prop('checked', false);
+                                        $("#Viernes").prop('checked', false);
+
+                                        $('#dialog').dialog('close');
+                                        fnCargarTareas();
+                                    }
+                                },
+                                error: function (ex) {
+                                    alert('Error al guardar la tarea.');
+                                }
+
+                            });
+                        }
+                        else {
+                            alert("Ingrese Nombre y Fecha de la tarea");
+                        }
+                    }
+                    else {
+                        alert("La fecha seleccionada debe ser mayor o igual a la fecha actual");
+                    }
+                },
+                error: function (ex) {
+                    alert('Error al ingresar la tarea.');
+                }
+
+            });
+            /*
+            if ($("#FecTarea").val() >= (d.getDate() + '-' + d.getMonth() + '-' + d.getFullYear())) {
+                if ($("#Nombre").val() != '' && $("#FecTarea").val() != '') {
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Home/GuardarTarea", // we are calling json method
+                        dataType: 'json',
+                        async: false,
+                        data: { id: $("#IdTareas").val(), nombre: $("#Nombre").val(), obs: $("#Observaciones").val(), fechaTarea: $("#FecTarea").val(), dias: dias },
+                        success: function (data) {
+                            if (data > 0) {
+
+                                if ($("#IdTareas").val() != 0) {
+                                    alert("Tarea actualizada con éxito");
+                                }
+                                else {
+                                    alert("Tarea guardada con éxito");
+                                }
+
+                                $("#IdTareas").val(0);
+                                $("#Nombre").val('');
+                                $("#Observaciones").val('');
+                                $("#FecTarea").val('');
+
+                                $("#Lunes").prop('checked', false);
+                                $("#Martes").prop('checked', false);
+                                $("#Miercoles").prop('checked', false);
+                                $("#Jueves").prop('checked', false);
+                                $("#Viernes").prop('checked', false);
+
+                                $('#dialog').dialog('close');
+                                fnCargarTareas();
+                            }
+                        },
+                        error: function (ex) {
+                            alert('Error al guardar la tarea.');
+                        }
+
+                    });
+                }
+                else {
+                    alert("Ingrese Nombre y Fecha de la tarea");
+                }
+            }
+            else {
+                alert("La fecha seleccionada debe ser mayor o igual a la fecha actual");
+            }*/
+        }
+
+        function fnEnviarEmailTareas() {
+            $.ajax({
+                type: 'POST',
+                url: "/Home/EnviarEmailTareas", // we are calling json method
+                dataType: 'json',
+                async: false,
+                //data: { nombre: dato[1] },
+                success: function (data) {
+                    if (data == false) {
+                        alert("Mail enviado con éxito");
+                    }
+                    else {
+                        alert("Mail no enviado");
+                    }
+                },
+                error: function (ex) {
+                    alert('Error al enviar mail.');
+                }
+
+            });
+        }
+
+        function DetalleTareaSeleccionada(rowid) {
+            //function DetalleTareaSeleccionada(rowid, status) {
+        
+            var row = $("#gridTareas").getRowData(rowid);
+            var ids = rowid.split('|');
+               
+            //if ($(e.target).is('input[type="button"]')) {
+           // if ($(e.target).is('button')) {
+                $("#IdTareas").val(ids[0]);
+                $("#Nombre").val(row.Nombre);
+                $("#Observaciones").val(row.Observacion);
+                $("#FecTarea").val(row.FechaTarea);
+                
+                row.Lunes == 0 ? $("#Lunes").prop('checked', true) : $("#Lunes").prop('checked', false);
+                row.Martes == 0 ? $("#Martes").prop('checked', true) : $("#Martes").prop('checked', false);
+                row.Miercoles == 0 ? $("#Miercoles").prop('checked', true) : $("#Miercoles").prop('checked', false);
+                row.Jueves == 0 ? $("#Jueves").prop('checked', true) : $("#Jueves").prop('checked', false);
+                row.Viernes == 0 ? $("#Viernes").prop('checked', true) : $("#Viernes").prop('checked', false);
+
+                $('#dialog').dialog('option', 'title', 'Modificar Tarea');
+                $('#dialog').dialog('open');
+           // }
+
+        }
+
+        function TareaSeleccionada(rowid, e) {
+            var iCol = $.jgrid.getCellIndex(e.target);
+            if (iCol != 4 && iCol != 5) {
+               // alert("rowid=" + rowid + "\nrowIndex=" + $(e.target).closest("tr.jqgrow")[0].rowIndex);
+                //alert(iCol);
+                DetalleTareaSeleccionada(rowid);
+            }
+            // prevent row selection if one click on the button
+            return (iCol == 4 || iCol == 5) ? true : false;
+        }
+
+        function fnGuardarExplicacion() {
+            if ($("#Explicacion").val() != '') {
+                alert("Tarea atrasada completada con éxito");
+                $("#Explicacion").val('');
+                $("#dlgExpl").dialog('close');
+                fnActualizarTarea($("#IdTareas").val(), 0);
+            }
+            else {
+                alert("Debe ingresar explicación");
+            }
+        }
+
+        function fnVerificarTareasSemanales() {
+            $.ajax({
+                type: 'POST',
+                url: "/Home/VerificarTareasSemanales", // we are calling json method
+                dataType: 'json',
+                async: false,
+                //data: { IdTarea: dato[0] },
+                success: function (data) {
+                    if (data > 0) {
+                        //alert("Tarea desactivada con éxito");
+                        fnCargarTareas();
+                    }
+                },
+                error: function (ex) {
+                    //alert('Error al desactivar la tarea.');
+                }
+
+            });
+        }
+
+        setInterval(fnVerificarTareasSemanales, 3600000); // cada 1 hr
+
+        window.onload = function () {
+            fnVerificarTareasSemanales();
+        }
+
+    </script>
+</head>
+<body>
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="font-family:Verdana;text-align:center">
+            <h2>Listado diario de Tareas</h2>
+        </div>
+        <div class="panel-primary">
+
+            @(Html.jqGrid("gridTareas")
+                            .addColumn(new Column("Id").setLabel("Id")
+                                .setHidden(true)
+                                .setSortable(false)
+                                .setWidth(50))
+                            .addColumn(new Column("Nombre").setLabel("Nombre Tarea")
+                               .setSortable(false)
+                               .setWidth(80))
+                            .addColumn(new Column("Observacion").setLabel("Observacion")
+                               .setSortable(false)
+                               .setWidth(80))
+                            .addColumn(new Column("FechaTarea").setLabel("Fecha").setDateFmt("d-m-Y")
+                               .setSortable(false).setAlign(Align.center)
+                               .setWidth(30))
+                            .addColumn(new Column("Completa").setLabel("¿Tarea Completada?").setCustomFormatter("fnTareaCompletada")
+                               .setSortable(false).setAlign(Align.center)
+                               .setWidth(50))
+                            .addColumn(new Column("Activa").setLabel("¿Desactivar Tarea?").setCustomFormatter("fnTareaDesactivada")
+                               .setSortable(false).setAlign(Align.center)
+                               .setWidth(50))
+                            .addColumn(new Column("Lunes").setLabel("Lunes").setHidden(true)
+                               .setSortable(false).setAlign(Align.center)
+                               .setWidth(50))
+                            .addColumn(new Column("Martes").setLabel("Martes").setHidden(true)
+                               .setSortable(false).setAlign(Align.center)
+                               .setWidth(50))
+                            .addColumn(new Column("Miercoles").setLabel("Miercoles").setHidden(true)
+                               .setSortable(false).setAlign(Align.center)
+                               .setWidth(50))
+                            .addColumn(new Column("Jueves").setLabel("Jueves").setHidden(true)
+                               .setSortable(false).setAlign(Align.center)
+                               .setWidth(50))
+                            .addColumn(new Column("Viernes").setLabel("Viernes").setHidden(true)
+                               .setSortable(false).setAlign(Align.center)
+                               .setWidth(50))
+                            .setCaption("Tareas").setMultiSelect(false)
+                            .setRequestType(RequestType.get)
+                            .setUrl("~/Home/GetTareas/")
+                            .setAltRows(true)
+                            .setAltClass("altGridRows")
+                            .setAutoWidth(true)
+                            .setRowNum(100)
+                            .setRowList(new int[] { 100 })
+                            .setViewRecords(true)
+                            .setSortName("Fecha_Tarea")
+                            .setSortOrder(SortOrder.asc)
+                            .setPager("pagerTareas")
+                            .setPagerPos(PagerPos.center)
+                            .setPgButtons(true)
+                            .setCellEdit(false)
+                            .setCellSubmit(CellSubmit.clientArray)
+                            //.onSelectRow("DetalleTareaSeleccionada(rowid, status)")
+                            .onBeforeSelectRow("TareaSeleccionada(rowid, e)")
+                            .Render()
+
+
+            )
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-info" onclick="fnAgregarTarea();">Agregar Tarea</button>
+        <button class="btn btn-info" style="float:right;" onclick="fnEnviarEmailTareas();">Enviar Tareas</button>
+    </div>
+    
+    <div id="dialog" title="Agregar Nueva Tarea">
+       <!-- <div class="container">
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="font-family:Verdana"><h4>Agregar Nueva Tarea</h4></div>
+                <div class="panel-body">-->
+            <div class="panel panel-primary">
+                <div class="panel-heading">@Html.Label("Datos")</div>
+                <div class="panel-body">
+                    <div><div>@Html.Label("Nombre de Tarea")</div><div>@Html.TextBox("Nombre", null, new { @style = "width: 250px;" })</div></div>
+                    <div><div>@Html.Label("Observaciones")</div><div>@Html.TextArea("Observaciones", null, new { @style = "width: 250px;" })</div></div>
+                    <div><div>@Html.Label("Fecha de Tarea")</div><div><input type="text" id="FecTarea" style="width: 250px;"></div><!--<div>@Html.JQueryUI().Datepicker("FecTarea").ShowButtonPanel(true).ShowWeek(false)</div>--></div>
+                                        
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">@Html.Label("Frecuencia")</div>
+                <div class="panel-body">
+                    <div style="font-size:12px">L M M &nbsp;J V</div>
+                    <div>@Html.CheckBox("Lunes")@Html.CheckBox("Martes")@Html.CheckBox("Miercoles")@Html.CheckBox("Jueves")@Html.CheckBox("Viernes")</div>
+                </div>
+            </div>
+
+            @Html.Hidden("IdTareas")
+            <div><button class="btn btn-info" onclick="fnGuardarTarea()">Guardar Tarea</button></div>
+            <!--     </div>
+            </div>
+        </div>-->
+        </div>
+    
+    <div id="dlgExpl" title="Explicación tarea con atraso">
+        <div><div>@Html.Label("Explicación")</div><div>@Html.TextArea("Explicacion", null, new { @style = "width: 300px;" })</div></div>
+        <div><button class="btn btn-info" onclick="fnGuardarExplicacion()">Guardar</button></div>
+    </div>
+
+</body>
+</html>
